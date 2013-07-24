@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+    <body>
+
+        <div id="container">
+        </div>
+	</body>
+        
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script type="text/javascript"src="three.js"></script>
+	<script type="text/javascript"src="GameScreen.js"></script>
+        <script type="text/javascript"src="MainMenuScreen.js"></script>
+        <script type="text/javascript"src="Game.js"></script>
+        <script type="text/javascript"src="Application.js"></script>
+
+	<script type="text/javascript">
+
+	var $container = $('#container');
+        
+        var VIEW_ANGLE = 45,
+		ASPECT = 420 / 680,
+		NEAR = 0.1,
+		FAR = 10000;
+        var camera = new THREE.PerspectiveCamera(  VIEW_ANGLE,
+	                                ASPECT,
+	                                NEAR,
+	                                FAR  );
+        var game = new Game ( camera );
+	var application = new Application ( game, "Game Test", 420, 680 );
+        
+        var loop = function ( )
+        {
+            requestAnimationFrame( loop );
+            application.loop( );
+        };
+        loop ( this );
+	
+	</script>
+</html>
