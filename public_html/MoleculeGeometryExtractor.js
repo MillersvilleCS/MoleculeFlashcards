@@ -24,16 +24,19 @@ MoleculeGeometryExtractor.prototype =
             return;
         }
         var atomCount = parseInt(lines[3].substr(0, 3));
+        
         if (isNaN(atomCount) || atomCount <= 0)
         {
             return;
         }
         var bondCount = parseInt(lines[3].substr(3, 3));
         var offset = 4;
+        
         if (lines.length < 4 + atomCount + bondCount)
         {
             return;
         }
+        
         for (var i = 1; i <= atomCount; i++)
         {
            var line = lines[offset];
@@ -49,6 +52,7 @@ MoleculeGeometryExtractor.prototype =
            atom.bondOrder = [];
            atoms[i] = atom;
         }
+        
         for (i = 1; i <= bondCount; i++) 
         {
            var line = lines[offset];

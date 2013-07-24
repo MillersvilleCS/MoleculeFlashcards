@@ -8,6 +8,7 @@
         
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 	<script type="text/javascript"src="three.js"></script>
+        <script type="text/javascript"src="Map.js"></script>
 	<script type="text/javascript"src="GameScreen.js"></script>
         <script type="text/javascript"src="MainMenuScreen.js"></script>
         <script type="text/javascript"src="Game.js"></script>
@@ -27,6 +28,8 @@
 	                                FAR  );
         var game = new Game ( camera );
 	var application = new Application ( game, "Game Test", 420, 680 );
+        document.addEventListener ("mousedown", application.onMouseDown, false);
+        document.addEventListener ("mouseup", application.onMouseUp, false);
         
         var loop = function ( )
         {
