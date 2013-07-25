@@ -4,38 +4,36 @@
  */
 
 
-MouseManager = function ( camera )
+function MouseManager ( )
 {
     
-    return this;
 };
 
-MouseManager.prototype =
+MouseManager.leftPressed = false,
+MouseManager.rightPressed = false,
+
+//The mouse button standard values
+MouseManager.LEFT_STD_BUTTON = 0;
+MouseManager.MIDDLE_STD_BUTTON = 1;
+MouseManager.RIGHT_STD_BUTTON = 2;
+
+//Microsofts values
+MouseManager.LEFT_WIN_BUTTON = 1;
+MouseManager.MIDDLE_WIN_BUTTON = 4;
+MouseManager.RIGHT_WIN_BUTTON = 2;
+
+MouseManager.onMouseDown = function ( event )
 {
-    constructor: MouseManager,
-    
-    m_camera: undefined,
-    m_screen: undefined,
-    
-    init: function ( )
+    if ( !event )
     {
-        this.m_screen.init( ); 
-        this.m_camera.position.z = 5;
-    },
-            
-    update: function ( )
-    {
-        this.m_screen.update ( 0 );
-    },
-    getCamera: function ( )
-    {
-        return this.m_camera;
-    },
-            
-    getCurrentScene: function ( )
-    {
-        return this.m_screen.getScene ( );
+        event = window.event;
     }
-    
-    
+};
+
+MouseManager.onMouseUp = function ( event )
+{
+    if ( !event )
+    {
+        event = window.event;
+    }
 };

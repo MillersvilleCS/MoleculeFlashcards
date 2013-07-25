@@ -7,9 +7,12 @@
 Application = function ( game, title, width, height )
 {
     this.m_game = game;
+    this.m_game.init ( );
+    
     this.m_renderer =  new THREE.WebGLRenderer( );
     this.m_renderer.setSize(width, height);
-    this.init ( );
+    
+    this.m_MouseManager = new MouseManger ( );
     
     $container.append( this.m_renderer.domElement );
     
@@ -22,11 +25,7 @@ Application.prototype =
     
     m_game: undefined,
     m_renderer: undefined,
-    
-    init: function ( )
-    {
-        this.m_game.init ( );
-    },
+    m_MouseManager: undefined,
             
     loop: function ( )
     {
@@ -37,15 +36,5 @@ Application.prototype =
     exit: function ( )
     {
         
-    },
-    
-    onMouseDown: function ( )
-    {
-        alert("Mouse Down");
-    },
-            
-    onMouseUp: function ( )
-    {
-        alert("Mouse Up");
     }
 };
