@@ -14,6 +14,7 @@ Application = function ( game, title, width, height )
     
     this.m_MouseManager = new MouseManager ( );
     
+    var $container = $('#container');
     $container.append( this.m_renderer.domElement );
     
     return this;

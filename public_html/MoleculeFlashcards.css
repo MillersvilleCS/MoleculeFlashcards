@@ -4,3 +4,8 @@ canvas
     border-width: 5px;
     border-color: black;
 }
+
+#container
+{
+    text-align: center;
+}

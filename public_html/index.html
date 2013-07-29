@@ -20,32 +20,34 @@
 
         <script type="text/javascript">
 
-            var $container = $('#container');
-            
-            var VIEW_ANGLE = 45,
-            ASPECT = 420 / 680,
-            NEAR = 0.1,
-            FAR = 10000;
-            var camera = new THREE.PerspectiveCamera(  VIEW_ANGLE,
-                                        ASPECT,
-                                        NEAR,
-                                        FAR  );
-            var game = new Game ( camera );
-            var application = new Application ( game, "Game Test", 420, 680 );
-            document.addEventListener ("mousedown", application.onMouseDown, false);
-            document.addEventListener ("mouseup", application.onMouseUp, false);
-            
-            var loop = function ( )
+            function start()
             {
-                requestAnimationFrame( loop );
-                application.loop( );
-            };
-            loop ( this );
+                var VIEW_ANGLE = 45,
+                ASPECT = 420 / 680,
+                NEAR = 0.1,
+                FAR = 10000;
+
+                var camera = new THREE.PerspectiveCamera(  VIEW_ANGLE,
+                                            ASPECT,
+                                            NEAR,
+                                            FAR  );
+                var game = new Game ( camera );
+                var application = new Application ( game, "Game Test", 420, 680 );
+                document.addEventListener ("mousedown", application.onMouseDown, false);
+                document.addEventListener ("mouseup", application.onMouseUp, false);
+                
+                var loop = function ( )
+                {
+                    requestAnimationFrame( loop );
+                    application.loop( );
+                };
+                loop ( this );
+            }
         
         </script>
     </head>
-    <body>
-        <div id="container">
+    <body onload = "start()">
+        <div id = "container">
         </div>
 	</body>
 </html>
