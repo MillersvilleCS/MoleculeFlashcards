@@ -80,11 +80,11 @@ MouseManager.onMouseUp = function ( event )
 {
     if ( event.button === MouseManager.LEFT_STD_BUTTON )
     {
-        MouseManager.leftButton.press ( event );
+        MouseManager.leftButton.release ( event );
     }
     else if ( event.button === MouseManager.RIGHT_STD_BUTTON )
     {
-        MouseManager.rightButton.press ( event );
+        MouseManager.rightButton.release ( event );
     }
 };
 
