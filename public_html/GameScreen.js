@@ -119,8 +119,8 @@ GameScreen.prototype =
     {
         if ( MouseManager.leftButton.isPressed )
         {
-            this.molMesh.rotation.x += (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
-           // this.molMesh.rotation.y += (MouseManager.currentY - MouseManager.leftButton.pressedY) / 1000;
+           this.molMesh.rotation.x += (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
+            //this.molMesh.rotation.z += (MouseManager.currentY - MouseManager.leftButton.pressedY) / 1000;
         }
     },
     
