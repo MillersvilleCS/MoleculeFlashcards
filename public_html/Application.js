@@ -12,7 +12,7 @@ Application = function ( game, title, width, height )
     this.m_renderer =  new THREE.WebGLRenderer( );
     this.m_renderer.setSize(width, height);
     
-    this.m_MouseManager = new MouseManger ( );
+    this.m_MouseManager = new MouseManager ( );
     
     $container.append( this.m_renderer.domElement );
     
