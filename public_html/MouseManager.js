@@ -3,14 +3,53 @@
  * and open the template in the editor.
  */
 
+/*
+ * Mouse Button
+ */
+
+MouseButton = function ( )
+{
+    
+};
+
+MouseButton.prototype =
+{
+    constructor: MouseButton,
+            
+    isPressed: false, 
+    pressedX: 0, 
+    pressedY: 0,
+    pressedShift: false,
+    
+    press: function ( event )
+    {
+        this.isPressed = true;
+        this.pressedShift = event.shiftKey;
+        this.pressedX = event.screenX;
+        this.pressedY = event.screenY;
+    },
+    
+    release: function ( event )
+    {
+        this.isPressed = false;
+        this.pressedX = event.screenX;
+        this.pressedY = event.screenY;
+    }
+};
+
+
+
+/*
+ *MOUSE MANAGER
+ */
 
 function MouseManager ( )
 {
     
 };
 
-MouseManager.leftPressed = false,
-MouseManager.rightPressed = false,
+MouseManager.leftButton = new MouseButton ( ),
+MouseManager.rightPressed = new MouseButton ( ),
 
 //The mouse button standard values
 MouseManager.LEFT_STD_BUTTON = 0;
@@ -26,11 +65,11 @@ MouseManager.onMouseDown = function ( event )
 {
     if ( event.button === MouseManager.LEFT_STD_BUTTON )
     {
-        MouseManager.leftPressed = true;
+        MouseManager.leftButton.press ( event );
     }
     else if ( event.button === MouseManager.RIGHT_STD_BUTTON )
     {
-        MouseManager.rightPressed = true;
+        MouseManager.rightButton.press ( event );
     }
 };
 
@@ -38,10 +77,10 @@ MouseManager.onMouseUp = function ( event )
 {
     if ( event.button === MouseManager.LEFT_STD_BUTTON )
     {
-        MouseManager.leftPressed = false;
+        MouseManager.leftButton.press ( event );
     }
     else if ( event.button === MouseManager.RIGHT_STD_BUTTON )
     {
-        MouseManager.rightPressed = false;
+        MouseManager.rightButton.press ( event );
     }
 };
