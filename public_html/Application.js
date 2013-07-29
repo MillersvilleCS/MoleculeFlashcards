@@ -9,8 +9,8 @@ Application = function ( game, title, width, height )
     this.m_game = game;
     this.m_game.init ( );
     
-    this.m_renderer =  new THREE.WebGLRenderer( );
-    this.m_renderer.setSize(width, height);
+    this.m_renderer =  new THREE.WebGLRenderer ( );
+    this.m_renderer.setSize ( width, height );
     
     this.m_MouseManager = new MouseManager ( );
     

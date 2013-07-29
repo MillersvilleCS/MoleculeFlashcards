@@ -24,16 +24,24 @@ MouseManager.RIGHT_WIN_BUTTON = 2;
 
 MouseManager.onMouseDown = function ( event )
 {
-    if ( !event )
+    if ( event.button === MouseManager.LEFT_STD_BUTTON )
     {
-        event = window.event;
+        MouseManager.leftPressed = true;
+    }
+    else if ( event.button === MouseManager.RIGHT_STD_BUTTON )
+    {
+        MouseManager.rightPressed = true;
     }
 };
 
 MouseManager.onMouseUp = function ( event )
 {
-    if ( !event )
+    if ( event.button === MouseManager.LEFT_STD_BUTTON )
     {
-        event = window.event;
+        MouseManager.leftPressed = false;
+    }
+    else if ( event.button === MouseManager.RIGHT_STD_BUTTON )
+    {
+        MouseManager.rightPressed = false;
     }
 };
