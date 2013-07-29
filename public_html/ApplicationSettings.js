@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 
+//hi connor
 var ApplicationSettings;
 
 ApplicationSettings.getWidth
