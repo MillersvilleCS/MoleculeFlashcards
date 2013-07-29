@@ -20,8 +20,12 @@ Game.prototype =
     
     init: function ( )
     {
-        this.m_screen.init( ); 
+        this.m_screen.init( );
+        //temporary
+        this.m_camera.position.y = 7;
         this.m_camera.position.z = 5;
+        this.m_camera.position.x = 3;
+        this.m_camera.lookAt(new THREE.Vector3(0,0,0));
     },
             
     update: function ( )

@@ -357,8 +357,8 @@ MoleculeGeometryExtractor.prototype =
            var atom = atoms[atomlist[i]];
            if (atom == undefined) continue;
 
-           //var sphereMaterial = new THREE.MeshLambertMaterial({color: atom.color});
-           var sphere = new THREE.Mesh(sphereGeometry, this.material);
+           var sphereMaterial = new THREE.MeshLambertMaterial({color: atom.color});
+           var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
            group.add(sphere);
            var r = (!forceDefault && this.vdwRadii[atom.elem] != undefined) ? this.vdwRadii[atom.elem] : defaultRadius;
            if (!forceDefault && scale) r *= scale;
@@ -402,10 +402,10 @@ MoleculeGeometryExtractor.prototype =
 
         for (var i = 0; i < points.length; i++) {
            geo.vertices.push(points[i]);
-           //geo.colors.push(new TCo(colors[(i == 0) ? 0 : Math.round((i - 1) / div)]));
+           geo.colors.push(new THREE.Color(colors[(i == 0) ? 0 : Math.round((i - 1) / div)]));
        }
        var lineMaterial = new THREE.LineBasicMaterial({linewidth: width});
-       //lineMaterial.vertexColors = true;
+       lineMaterial.vertexColors = true;
        var line = new THREE.Line(geo, lineMaterial);
        line.type = THREE.LineStrip;
        group.add(line);
