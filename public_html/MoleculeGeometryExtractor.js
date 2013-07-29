@@ -30,14 +30,12 @@ MoleculeGeometryExtractor = function()
 MoleculeGeometryExtractor.prototype =
 {
     constructor: MoleculeGeometryExtractor,
-            
-    material: new THREE.MeshBasicMaterial({
-        wireframe: true,
-        color: 'blue'
-      }),
+
     load: function( source )
     {
-        var sphereRadius = 1.5;
+        var sphereRadius = 0.5;//orig 1.5
+        var forceDefaultRadius = false;
+        var atomScale = 0.3;//had to be turned way down, underlying issue?
         var curveWidth = 3;
         var modelGroup = new THREE.Object3D();
         var protein = {sheet: [], helix: [], biomtChains: '', biomtMatrices: [], symMat: [], pdbID: '', title: ''};
@@ -49,13 +47,15 @@ MoleculeGeometryExtractor.prototype =
         var all = this.serializeAtoms ( atoms );
         var hetatm = this.removeSolvents ( this.getHetatms ( all, atoms ), atoms );
         
-        this.colorByAtom ( all, { }, atoms );
-        this.colorByChain ( all,{}, atoms );
+        this.colorByAtom ( all, {}, atoms );
+        this.colorByChain ( all, {}, atoms );
 
-        this.drawAtomsAsSphere ( modelGroup, hetatm, sphereRadius, {},{} , atoms ); 
-        this.drawMainchainCurve ( modelGroup, all, curveWidth, 'P', {}, {}, atoms );
-        this.drawCartoon ( modelGroup, all, curveWidth, {}, atoms );
-        
+        this.drawAtomsAsSphere ( modelGroup, hetatm, sphereRadius, forceDefaultRadius, atomScale, atoms );
+        this.drawMainchainCurve ( modelGroup, all, curveWidth, 'P', {}/*div?*/, atoms );
+        this.drawCartoon ( modelGroup, all, false, curveWidth, {}, atoms );
+        //this.drawStrand (group, atomlist, num, div, fill, coilWidth, helixSheetWidth, doNotSmoothen, thickness, atoms)
+        //this.drawStrand (modelGroup, all, 12, undefined, true, 0.3, 1.3, false, 5, atoms)
+
         return modelGroup;
     },
     parseSDF: function( str, atoms, protein )
@@ -377,7 +377,6 @@ MoleculeGeometryExtractor.prototype =
         for (var i in atomlist) {
            var atom = atoms[atomlist[i]];
            if (atom == undefined) continue;
-
            if ((atom.atom == atomName) && !atom.hetflag) {
               if (currentChain != atom.chain || currentResi + 1 != atom.resi) {
                  this.drawSmoothCurve(group, points, curveWidth, colors, div);
@@ -437,7 +436,7 @@ MoleculeGeometryExtractor.prototype =
               if (atom.atom == 'CA') {
                  if (currentChain != atom.chain || currentResi + 1 != atom.resi) {
                     for (var j = 0; !thickness && j < num; j++)
-                       this.drawSmoothCurve(group, points[j], 1 ,colors, div);
+                        this.drawSmoothCurve(group, points[j], 1 ,colors, div);
                     if (fill) this.drawStrip(group, points[0], points[num - 1], colors, div, thickness);
                     var points = []; for (var k = 0; k < num; k++) points[k] = [];
                     colors = [];
@@ -465,14 +464,16 @@ MoleculeGeometryExtractor.prototype =
               }
            }
         }
-        for (var j = 0; !thickness && j < num; j++)
+        for (var j = 0; !thickness && j < num; j++) {
            this.drawSmoothCurve(group, points[j], 1 ,colors, div);
+        }
         if (fill) this.drawStrip(group, points[0], points[num - 1], colors, div, thickness);
      },
     drawStrip: function(group, p1, p2, colors, div, thickness) {
         var axisDIV = 5;
+        console.log(p1);
         if ((p1.length) < 2) return;
-        div = div || this.axisDIV;
+        div = div || axisDIV;
         p1 = this.subdivide(p1, div);
         p2 = this.subdivide(p2, div);
         if (!thickness) return this.drawThinStrip(group, p1, p2, colors, div);
@@ -510,9 +511,9 @@ MoleculeGeometryExtractor.prototype =
         fs.push(new THREE.Face4(vsize + 1, vsize + 5, vsize + 7, vsize + 3, undefined, fs[fs.length - 3].color));
         geo.computeFaceNormals();
         geo.computeVertexNormals(false);
-       // var material =  new THREE.MeshLambertMaterial();
-       // material.vertexColors = THREE.FaceColors;
-        var mesh = new THREE.Mesh(geo, this.material);
+        var material =  new THREE.MeshLambertMaterial();
+        material.vertexColors = THREE.FaceColors;
+        var mesh = new THREE.Mesh(geo, material);
         mesh.doubleSided = true;
         group.add(mesh);
      },
@@ -553,26 +554,22 @@ MoleculeGeometryExtractor.prototype =
      },
 
     drawThinStrip: function(group, p1, p2, colors, div) {
-       var geo = new THREE.Geometry();
-       for (var i = 0, lim = p1.length; i < lim; i++) {
-          geo.vertices.push(p1[i]); // 2i
-          geo.vertices.push(p2[i]); // 2i + 1
-       }
-       for (var i = 1, lim = p1.length; i < lim; i++) {
-          var f = new THREE.Face4(2 * i, 2 * i + 1, 2 * i - 1, 2 * i - 2);
-         // f.color = new TCo(colors[Math.round((i - 1)/ div)]);
-          geo.faces.push(f);
-       }
-       geo.computeFaceNormals();
-       geo.computeVertexNormals(false);
-       //var material =  new THREE.MeshLambertMaterial();
-      // material.vertexColors = THREE.FaceColors;
-       var mesh = new THREE.Mesh(geo, this.material);
-       mesh.doubleSided = true;
-       group.add(mesh);
+        var geo = new THREE.Geometry();
+        for (var i = 0, lim = p1.length; i < lim; i++) {
+            geo.vertices.push(p1[i]); // 2i
+            geo.vertices.push(p2[i]); // 2i + 1
+        }
+        for (var i = 1, lim = p1.length; i < lim; i++) {
+            var f = new THREE.Face4(2 * i, 2 * i + 1, 2 * i - 1, 2 * i - 2);
+            f.color = new TCo(colors[Math.round((i - 1)/ div)]);
+            geo.faces.push(f);
+        }
+        geo.computeFaceNormals();
+        geo.computeVertexNormals(false);
+        var material =  new THREE.MeshLambertMaterial();
+        material.vertexColors = THREE.FaceColors;
+        var mesh = new THREE.Mesh(geo, this.material);
+        mesh.doubleSided = true;
+        group.add(mesh);
     }
 };
-
-
-
-

@@ -101,13 +101,13 @@ GameScreen.prototype =
         molModel.scale.y = .25;
         molModel.scale.z = .25;
         this.m_scene.add ( molModel );
-        this.m_scene.add ( cube );//temp for location reference
+        //this.m_scene.add ( cube );//temp for location reference
         
         var pointLight = new THREE.PointLight( 0xFFFFFF );
 
     	// set its position
-    	pointLight.position.x = 10;
-    	pointLight.position.y = 50;
+    	pointLight.position.x = 0;
+    	pointLight.position.y = 0;
     	pointLight.position.z = 130;
 
     	// add to the scene
