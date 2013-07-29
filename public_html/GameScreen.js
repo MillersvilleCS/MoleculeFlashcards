@@ -20,13 +20,10 @@ GameScreen.prototype =
     
     init: function ( )
     {
-<<<<<<< HEAD
         var extractor = new MoleculeGeometryExtractor ();
-=======
         var geometry = new THREE.CubeGeometry( 1, 1, 1 );
         var material = new THREE.MeshBasicMaterial( {color: 0xCC0000} );
         var cube = new THREE.Mesh( geometry, material );
->>>>>>> 5f8a52817db7a1088ff4b18fe0aaad531785a304
         var molStr = 'HETATM    1  C                  -3.450  -0.135   0.363' +
         'HETATM    2  C                  -2.116  -0.033  -0.019 \n' +
         'HETATM    3  C                  -1.805   0.087  -1.347 \n' +
@@ -98,7 +95,7 @@ GameScreen.prototype =
         'CONECT   34   30 \n' +
         'CONECT   35   30 \n' +
         'END';
-        this.molMesh = MoleculeGeometryExtractor.load(molStr);
+        this.molMesh = extractor.load(molStr);
         this.molMesh.scale.x = .25;
         this.molMesh.scale.y = .25;
         this.molMesh.scale.z = .25;
