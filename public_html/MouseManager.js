@@ -51,6 +51,9 @@ function MouseManager ( )
 MouseManager.leftButton = new MouseButton ( ),
 MouseManager.rightPressed = new MouseButton ( ),
 
+MouseManager.currentX = 0;
+MouseManager.cuttentY = 0;
+
 //The mouse button standard values
 MouseManager.LEFT_STD_BUTTON = 0;
 MouseManager.MIDDLE_STD_BUTTON = 1;
@@ -83,4 +86,10 @@ MouseManager.onMouseUp = function ( event )
     {
         MouseManager.rightButton.press ( event );
     }
+};
+
+MouseManager.onMouseMove = function ( event )
+{
+    MouseManager.currentX = event.screenX;
+    MouseManager.currentY = event.screenY;
 };

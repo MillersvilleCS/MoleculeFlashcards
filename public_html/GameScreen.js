@@ -15,9 +15,8 @@ GameScreen.prototype =
 {
     constructor: GameScreen,
             
-    m_scene: undefined,
+    m_scene: undefined, molMesh: undefined,
     
-   
     
     init: function ( )
     {
@@ -96,11 +95,11 @@ GameScreen.prototype =
         'CONECT   34   30 \n' +
         'CONECT   35   30 \n' +
         'END';
-        var molModel = extractor.load(molStr);
-        molModel.scale.x = .25;
-        molModel.scale.y = .25;
-        molModel.scale.z = .25;
-        this.m_scene.add ( molModel );
+        this.molMesh = extractor.load(molStr);
+        this.molMesh.scale.x = .25;
+        this.molMesh.scale.y = .25;
+        this.molMesh.scale.z = .25;
+        this.m_scene.add ( this.molMesh );
         //this.m_scene.add ( cube );//temp for location reference
         
         var pointLight = new THREE.PointLight( 0xFFFFFF );
@@ -117,7 +116,11 @@ GameScreen.prototype =
             
     update: function ( delta )
     {
-        
+        if ( MouseManager.leftButton.isPressed )
+        {
+            this.molMesh.rotation.x += (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
+            this.molMesh.rotation.y += (MouseManager.currentY - MouseManager.leftButton.pressedY) / 1000;
+        }
     },
     
     pause: function ( )
