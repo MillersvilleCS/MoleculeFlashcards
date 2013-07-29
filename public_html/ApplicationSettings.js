@@ -6,3 +6,6 @@
 var ApplicationSettings;
 
 ApplicationSettings.getWidth
+
+
+/* HI */
