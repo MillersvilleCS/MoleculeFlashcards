@@ -35,7 +35,7 @@ MoleculeGeometryExtractor.prototype =
     {
         var sphereRadius = 0.5;//orig 1.5
         var forceDefaultRadius = false;
-        var atomScale = 0.3;//had to be turned way down, underlying issue?
+        var atomScale = 0.25;//had to be turned way down, underlying issue?
         var curveWidth = 3;
         var modelGroup = new THREE.Object3D();
         var protein = {sheet: [], helix: [], biomtChains: '', biomtMatrices: [], symMat: [], pdbID: '', title: ''};
@@ -50,11 +50,11 @@ MoleculeGeometryExtractor.prototype =
         this.colorByAtom ( all, {}, atoms );
         this.colorByChain ( all, {}, atoms );
 
+        this.drawBondsAsLine (modelGroup, all, curveWidth, atoms);
+
         this.drawAtomsAsSphere ( modelGroup, hetatm, sphereRadius, forceDefaultRadius, atomScale, atoms );
         this.drawMainchainCurve ( modelGroup, all, curveWidth, 'P', {}/*div?*/, atoms );
         this.drawCartoon ( modelGroup, all, false, curveWidth, {}, atoms );
-        //this.drawStrand (group, atomlist, num, div, fill, coilWidth, helixSheetWidth, doNotSmoothen, thickness, atoms)
-        //this.drawStrand (modelGroup, all, 12, undefined, true, 0.3, 1.3, false, 5, atoms)
 
         return modelGroup;
     },
@@ -389,7 +389,7 @@ MoleculeGeometryExtractor.prototype =
               currentResi = atom.resi;
            }
         }
-         this.drawSmoothCurve(group, points, curveWidth, colors, div);
+        this.drawSmoothCurve(group, points, curveWidth, colors, div);
      },
      drawSmoothCurve: function(group, _points, width, colors, div) {
         if (_points.length == 0) return;
@@ -471,7 +471,6 @@ MoleculeGeometryExtractor.prototype =
      },
     drawStrip: function(group, p1, p2, colors, div, thickness) {
         var axisDIV = 5;
-        console.log(p1);
         if ((p1.length) < 2) return;
         div = div || axisDIV;
         p1 = this.subdivide(p1, div);
@@ -571,5 +570,85 @@ MoleculeGeometryExtractor.prototype =
         var mesh = new THREE.Mesh(geo, this.material);
         mesh.doubleSided = true;
         group.add(mesh);
+    },
+
+    /* Trying */
+
+    drawBondsAsLineSub: function(geo, atom1, atom2, order) {
+        var delta, tmp, vs = geo.vertices, cs = geo.colors;
+        if (order > 1) delta = this.calcBondDelta(atom1, atom2, 0.15);
+        var p1 = new TV3(atom1.x, atom1.y, atom1.z);
+        var p2 = new TV3(atom2.x, atom2.y, atom2.z);
+        var mp = p1.clone().add(p2).multiplyScalar(0.5);
+
+        var c1 = new TCo(atom1.color), c2 = new TCo(atom2.color);
+        if (order == 1 || order == 3) {
+            vs.push(p1); cs.push(c1); vs.push(mp); cs.push(c1);
+            vs.push(p2); cs.push(c2); vs.push(mp); cs.push(c2);
+        }
+        if (order > 1) {
+            vs.push(p1.clone().addSelf(delta)); cs.push(c1);
+            vs.push(tmp = mp.clone().addSelf(delta)); cs.push(c1);
+            vs.push(p2.clone().addSelf(delta)); cs.push(c2);
+            vs.push(tmp); cs.push(c2);
+            vs.push(p1.clone().subSelf(delta)); cs.push(c1);
+            vs.push(tmp = mp.clone().subSelf(delta)); cs.push(c1);
+            vs.push(p2.clone().subSelf(delta)); cs.push(c2);
+            vs.push(tmp); cs.push(c2);
+        }
+    },
+
+    isConnected: function(atom1, atom2) {
+        var s = atom1.bonds.indexOf(atom2.serial);
+        if (s != -1) return atom1.bondOrder[s];
+
+        if ((atom1.hetflag || atom2.hetflag)) return 0; // CHECK: or should I ? - this.protein.smallMolecule && 
+
+        var distSquared = (atom1.x - atom2.x) * (atom1.x - atom2.x) + 
+            (atom1.y - atom2.y) * (atom1.y - atom2.y) + 
+            (atom1.z - atom2.z) * (atom1.z - atom2.z);
+
+        //   if (atom1.altLoc != atom2.altLoc) return false;
+        if (isNaN(distSquared)) return 0;
+        if (distSquared < 0.5) return 0; // maybe duplicate position.
+
+        if (distSquared > 1.3 && (atom1.elem == 'H' || atom2.elem == 'H' || atom1.elem == 'D' || atom2.elem == 'D')) return 0;
+        if (distSquared < 3.42 && (atom1.elem == 'S' || atom2.elem == 'S')) return 1;
+        if (distSquared > 2.78) return 0;
+        return 1;
+    },
+
+    drawBondsAsLine: function(group, atomlist, lineWidth, atoms) {
+        var geo = new THREE.Geometry();   
+        var nAtoms = atomlist.length;
+
+        for (var _i = 0; _i < nAtoms; _i++) {
+            var i = atomlist[_i];
+            var  atom1 = atoms[i];
+            if (atom1 == undefined) continue;
+            for (var _j = _i + 1; _j < _i + 30 && _j < nAtoms; _j++) {
+                var j = atomlist[_j];
+                var atom2 = atoms[j];
+                if (atom2 == undefined) continue;
+                var order = this.isConnected(atom1, atom2);
+                if (order == 0) continue;
+
+                this.drawBondsAsLineSub(geo, atom1, atom2, order);
+            }
+            for (var _j = 0; _j < atom1.bonds.length; _j++) {
+                var j = atom1.bonds[_j];
+                if (j < i + 30) continue; // be conservative!
+                if (atomlist.indexOf(j) == -1) continue;
+                var atom2 = atoms[j];
+                if (atom2 == undefined) continue;
+                this.drawBondsAsLineSub(geo, atom1, atom2, atom1.bondOrder[_j]);
+            }
+        }
+        var lineMaterial = new THREE.LineBasicMaterial({linewidth: lineWidth});
+        lineMaterial.vertexColors = true;
+
+        var line = new THREE.Line(geo, lineMaterial);
+        line.type = THREE.LinePieces;
+        group.add(line);
     }
 };
