@@ -20,7 +20,7 @@
 
         <script type="text/javascript">
 
-            function start()
+            function start ( )
             {
                 var VIEW_ANGLE = 45,
                 ASPECT = 420 / 680,
@@ -33,21 +33,23 @@
                                             FAR  );
                 var game = new Game ( camera );
                 var application = new Application ( game, "Game Test", 420, 680 );
-                document.addEventListener ("mousedown", application.onMouseDown, false);
-                document.addEventListener ("mouseup", application.onMouseUp, false);
+                document.addEventListener ( "mousedown", application.onMouseDown, false );
+                document.addEventListener ( "mouseup", application.onMouseUp, false );
                 
                 var loop = function ( )
                 {
                     requestAnimationFrame( loop );
-                    application.loop( );
+                    application.loop ( );
                 };
                 loop ( this );
             }
         
         </script>
     </head>
-    <body onload = "start()">
-        <div id = "container">
+    <body onload = "start ( )">
+        <div id = "container"
+              onmousedown="MouseManager.onMouseDown ( event )"
+              onmouseup="MouseManager.onMouseUp ( event )" >
         </div>
 	</body>
 </html>
