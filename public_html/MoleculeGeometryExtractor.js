@@ -50,11 +50,10 @@ MoleculeGeometryExtractor.prototype =
         this.colorByAtom ( all, {}, atoms );
         this.colorByChain ( all, {}, atoms );
 
-        this.drawBondsAsLine (modelGroup, all, curveWidth, atoms);
-
         this.drawAtomsAsSphere ( modelGroup, hetatm, sphereRadius, forceDefaultRadius, atomScale, atoms );
-        this.drawMainchainCurve ( modelGroup, all, curveWidth, 'P', {}/*div?*/, atoms );
-        this.drawCartoon ( modelGroup, all, false, curveWidth, {}, atoms );
+        this.drawBondsAsLine (modelGroup, all, curveWidth, atoms);
+        //this.drawBondsAsStick ( modelGroup, all, sphereRadius / 6/* bond radius */, sphereRadius, true, true, atomScale, atoms);
+        /* Problem with rotations, do not use. Documented further below in drawCylinder() */
 
         return modelGroup;
     },
@@ -368,211 +367,6 @@ MoleculeGeometryExtractor.prototype =
            sphere.position.z = atom.z;
         }
      },
-     
-     drawMainchainCurve: function(group, atomlist, curveWidth, atomName, div, atoms) {
-        var points = [], colors = [];
-        var currentChain, currentResi;
-        if (div == undefined) div = 5;
-
-        for (var i in atomlist) {
-           var atom = atoms[atomlist[i]];
-           if (atom == undefined) continue;
-           if ((atom.atom == atomName) && !atom.hetflag) {
-              if (currentChain != atom.chain || currentResi + 1 != atom.resi) {
-                 this.drawSmoothCurve(group, points, curveWidth, colors, div);
-                 points = [];
-                 colors = [];
-              }
-              points.push(new TV3(atom.x, atom.y, atom.z));
-              colors.push(atom.color);
-              currentChain = atom.chain;
-              currentResi = atom.resi;
-           }
-        }
-        this.drawSmoothCurve(group, points, curveWidth, colors, div);
-     },
-     drawSmoothCurve: function(group, _points, width, colors, div) {
-        if (_points.length == 0) return;
-
-        div = (div == undefined) ? 5 : div;
-
-        var geo = new THREE.Geometry();
-        var points = this.subdivide(_points, div);
-
-        for (var i = 0; i < points.length; i++) {
-           geo.vertices.push(points[i]);
-           geo.colors.push(new THREE.Color(colors[(i == 0) ? 0 : Math.round((i - 1) / div)]));
-       }
-       var lineMaterial = new THREE.LineBasicMaterial({linewidth: width});
-       lineMaterial.vertexColors = true;
-       var line = new THREE.Line(geo, lineMaterial);
-       line.type = THREE.LineStrip;
-       group.add(line);
-     },
-     drawCartoon: function(group, atomlist, doNotSmoothen, thickness, atoms) {
-        this.drawStrand(group, atomlist, 2, undefined, true, undefined, undefined, doNotSmoothen, thickness, atoms);
-    },
-    
-    drawStrand: function(group, atomlist, num, div, fill, coilWidth, helixSheetWidth, doNotSmoothen, thickness, atoms) {
-        var strandDIV = 6;
-        var axisDIV = 5;
-        var helixSheetWidth = 1.3;
-        var coilWidth = 0.3;
-        num = num || strandDIV;
-        div = div || axisDIV;
-        coilWidth = coilWidth || coilWidth;
-        doNotSmoothen == (doNotSmoothen == undefined) ? false : doNotSmoothen;
-        helixSheetWidth = helixSheetWidth || helixSheetWidth;
-        var points = []; for (var k = 0; k < num; k++) points[k] = [];
-        var colors = [];
-        var currentChain, currentResi, currentCA;
-        var prevCO = null, ss=null, ssborder = false;
-
-        for (var i in atomlist) {
-           var atom = atoms[atomlist[i]];
-           if (atom == undefined) continue;
-
-           if ((atom.atom == 'O' || atom.atom == 'CA') && !atom.hetflag) {
-              if (atom.atom == 'CA') {
-                 if (currentChain != atom.chain || currentResi + 1 != atom.resi) {
-                    for (var j = 0; !thickness && j < num; j++)
-                        this.drawSmoothCurve(group, points[j], 1 ,colors, div);
-                    if (fill) this.drawStrip(group, points[0], points[num - 1], colors, div, thickness);
-                    var points = []; for (var k = 0; k < num; k++) points[k] = [];
-                    colors = [];
-                    prevCO = null; ss = null; ssborder = false;
-                 }
-                 currentCA = new TV3(atom.x, atom.y, atom.z);
-                 currentChain = atom.chain;
-                 currentResi = atom.resi;
-                 ss = atom.ss; ssborder = atom.ssstart || atom.ssend;
-                 colors.push(atom.color);
-              } else { // O
-                 var O = new TV3(atom.x, atom.y, atom.z);
-                 O.subSelf(currentCA);
-                 O.normalize(); // can be omitted for performance
-                 O.multiplyScalar((ss == 'c') ? coilWidth : helixSheetWidth); 
-                 if (prevCO != undefined && O.dot(prevCO) < 0) O.negate();
-                 prevCO = O;
-                 for (var j = 0; j < num; j++) {
-                    var delta = -1 + 2 / (num - 1) * j;
-                    var v = new TV3(currentCA.x + prevCO.x * delta, 
-                                    currentCA.y + prevCO.y * delta, currentCA.z + prevCO.z * delta);
-                    if (!doNotSmoothen && ss == 's') v.smoothen = true;
-                    points[j].push(v);
-                 }                         
-              }
-           }
-        }
-        for (var j = 0; !thickness && j < num; j++) {
-           this.drawSmoothCurve(group, points[j], 1 ,colors, div);
-        }
-        if (fill) this.drawStrip(group, points[0], points[num - 1], colors, div, thickness);
-     },
-    drawStrip: function(group, p1, p2, colors, div, thickness) {
-        var axisDIV = 5;
-        if ((p1.length) < 2) return;
-        div = div || axisDIV;
-        p1 = this.subdivide(p1, div);
-        p2 = this.subdivide(p2, div);
-        if (!thickness) return this.drawThinStrip(group, p1, p2, colors, div);
-
-        var geo = new THREE.Geometry();
-        var vs = geo.vertices, fs = geo.faces;
-        var axis, p1v, p2v, a1v, a2v;
-        for (var i = 0, lim = p1.length; i < lim; i++) {
-           vs.push(p1v = p1[i]); // 0
-           vs.push(p1v); // 1
-           vs.push(p2v = p2[i]); // 2
-           vs.push(p2v); // 3
-           if (i < lim - 1) {
-              var toNext = p1[i + 1].clone().subSelf(p1[i]);
-              var toSide = p2[i].clone().subSelf(p1[i]);
-              axis = toSide.crossSelf(toNext).normalize().multiplyScalar(thickness);
-           }
-           vs.push(a1v = p1[i].clone().addSelf(axis)); // 4
-           vs.push(a1v); // 5
-           vs.push(a2v = p2[i].clone().addSelf(axis)); // 6
-           vs.push(a2v); // 7
-        }
-        var faces = [[0, 2, -6, -8], [-4, -2, 6, 4], [7, 3, -5, -1], [-3, -7, 1, 5]];
-        for (var i = 1, lim = p1.length; i < lim; i++) {
-           var offset = 8 * i, color = new TCo(colors[Math.round((i - 1)/ div)]);
-           for (var j = 0; j < 4; j++) {
-              var f = new THREE.Face4(offset + faces[j][0], offset + faces[j][1], offset + faces[j][2], offset + faces[j][3], undefined, color);
-              fs.push(f);
-           }
-        }
-        var vsize = vs.length - 8; // Cap
-        for (var i = 0; i < 4; i++) {vs.push(vs[i * 2]); vs.push(vs[vsize + i * 2])};
-        vsize += 8;
-        fs.push(new THREE.Face4(vsize, vsize + 2, vsize + 6, vsize + 4, undefined, fs[0].color));
-        fs.push(new THREE.Face4(vsize + 1, vsize + 5, vsize + 7, vsize + 3, undefined, fs[fs.length - 3].color));
-        geo.computeFaceNormals();
-        geo.computeVertexNormals(false);
-        var material =  new THREE.MeshLambertMaterial();
-        material.vertexColors = THREE.FaceColors;
-        var mesh = new THREE.Mesh(geo, material);
-        mesh.doubleSided = true;
-        group.add(mesh);
-     },
-     subdivide: function(_points, DIV) { // points as Vector3
-        var ret = [];
-        var points = _points;
-        points = new Array(); // Smoothing test
-        points.push(_points[0]);
-        for (var i = 1, lim = _points.length - 1; i < lim; i++) {
-           var p1 = _points[i], p2 = _points[i + 1];
-           if (p1.smoothen) points.push(new TV3((p1.x + p2.x) / 2, (p1.y + p2.y) / 2, (p1.z + p2.z) / 2));
-           else points.push(p1);
-        }
-        points.push(_points[_points.length - 1]);
-
-        for (var i = -1, size = points.length; i <= size - 3; i++) {
-           var p0 = points[(i == -1) ? 0 : i];
-           var p1 = points[i + 1], p2 = points[i + 2];
-           var p3 = points[(i == size - 3) ? size - 1 : i + 3];
-           var v0 = new TV3().sub(p2, p0).multiplyScalar(0.5);
-           var v1 = new TV3().sub(p3, p1).multiplyScalar(0.5);
-           for (var j = 0; j < DIV; j++) {
-              var t = 1.0 / DIV * j;
-              var x = p1.x + t * v0.x 
-                       + t * t * (-3 * p1.x + 3 * p2.x - 2 * v0.x - v1.x)
-                       + t * t * t * (2 * p1.x - 2 * p2.x + v0.x + v1.x);
-              var y = p1.y + t * v0.y 
-                       + t * t * (-3 * p1.y + 3 * p2.y - 2 * v0.y - v1.y)
-                       + t * t * t * (2 * p1.y - 2 * p2.y + v0.y + v1.y);
-              var z = p1.z + t * v0.z 
-                       + t * t * (-3 * p1.z + 3 * p2.z - 2 * v0.z - v1.z)
-                       + t * t * t * (2 * p1.z - 2 * p2.z + v0.z + v1.z);
-              ret.push(new TV3(x, y, z));
-           }
-        }
-        ret.push(points[points.length - 1]);
-        return ret;
-     },
-
-    drawThinStrip: function(group, p1, p2, colors, div) {
-        var geo = new THREE.Geometry();
-        for (var i = 0, lim = p1.length; i < lim; i++) {
-            geo.vertices.push(p1[i]); // 2i
-            geo.vertices.push(p2[i]); // 2i + 1
-        }
-        for (var i = 1, lim = p1.length; i < lim; i++) {
-            var f = new THREE.Face4(2 * i, 2 * i + 1, 2 * i - 1, 2 * i - 2);
-            f.color = new TCo(colors[Math.round((i - 1)/ div)]);
-            geo.faces.push(f);
-        }
-        geo.computeFaceNormals();
-        geo.computeVertexNormals(false);
-        var material =  new THREE.MeshLambertMaterial();
-        material.vertexColors = THREE.FaceColors;
-        var mesh = new THREE.Mesh(geo, this.material);
-        mesh.doubleSided = true;
-        group.add(mesh);
-    },
-
-    /* Trying */
 
     drawBondsAsLineSub: function(geo, atom1, atom2, order) {
         var delta, tmp, vs = geo.vertices, cs = geo.colors;
@@ -650,5 +444,87 @@ MoleculeGeometryExtractor.prototype =
         var line = new THREE.Line(geo, lineMaterial);
         line.type = THREE.LinePieces;
         group.add(line);
+    },
+
+    drawCylinder: function(group, from, to, radius, color, cap) {
+        if (!from || !to) return;
+
+        var midpoint = new TV3().addVectors(from, to).multiplyScalar(0.5);
+        var color = new TCo(color);
+
+        if (!this.cylinderGeometry) {
+            this.cylinderGeometry = new THREE.CylinderGeometry(1, 1, 1, this.cylinderQuality, 1, !cap);
+            this.cylinderGeometry.faceUvs = [];
+            this.faceVertexUvs = [];
+        }
+        var cylinderMaterial = new THREE.MeshLambertMaterial({color: color.getHex()});
+        var cylinder = new THREE.Mesh(this.cylinderGeometry, cylinderMaterial);
+        cylinder.position = midpoint;
+        cylinder.lookAt(from);
+        cylinder.updateMatrix();
+        cylinder.matrixAutoUpdate = false;
+        var m = new THREE.Matrix4().makeScale(radius, radius, from.distanceTo(to));
+        //m.makeRotationX(Math.PI / 2); 
+        /* 
+            was originally .rotateX, which is deprecated
+            currently, makes bonds huge
+            without this, they are flat
+        */
+        cylinder.matrix.multiply(m);
+        group.add(cylinder);
+    },
+
+    drawBondAsStickSub: function(group, atom1, atom2, bondR, order) {
+        var delta, tmp;
+        if (order > 1) delta = this.calcBondDelta(atom1, atom2, bondR * 2.3);
+        var p1 = new TV3(atom1.x, atom1.y, atom1.z);
+        var p2 = new TV3(atom2.x, atom2.y, atom2.z);
+        var mp = p1.clone().add(p2).multiplyScalar(0.5);
+
+        var c1 = new TCo(atom1.color), c2 = new TCo(atom2.color);
+        if (order == 1 || order == 3) {
+            this.drawCylinder(group, p1, mp, bondR, atom1.color);
+            this.drawCylinder(group, p2, mp, bondR, atom2.color);
+        }
+        if (order > 1) {
+            tmp = mp.clone().add(delta);
+            this.drawCylinder(group, p1.clone().add(delta), tmp, bondR, atom1.color);
+            this.drawCylinder(group, p2.clone().add(delta), tmp, bondR, atom2.color);
+            tmp = mp.clone().sub(delta);
+            this.drawCylinder(group, p1.clone().sub(delta), tmp, bondR, atom1.color);
+            this.drawCylinder(group, p2.clone().sub(delta), tmp, bondR, atom2.color);
+        }
+    },
+
+    drawBondsAsStick: function(group, atomlist, bondR, atomR, ignoreNonbonded, multipleBonds, scale, atoms) {
+        var sphereGeometry = new THREE.SphereGeometry(1, this.sphereQuality, this.sphereQuality);
+        var nAtoms = atomlist.length, mp;
+        var forSpheres = [];
+        if (!!multipleBonds) bondR /= 2.5;
+        for (var _i = 0; _i < nAtoms; _i++) {
+            var i = atomlist[_i];
+            var atom1 = atoms[i];
+            if (atom1 == undefined) continue;
+            for (var _j = _i + 1; _j < _i + 30 && _j < nAtoms; _j++) {
+                var j = atomlist[_j];
+                var atom2 = atoms[j];
+                if (atom2 == undefined) continue;
+                var order = this.isConnected(atom1, atom2);
+                if (order == 0) continue;
+                atom1.connected = atom2.connected = true;
+                this.drawBondAsStickSub(group, atom1, atom2, bondR, (!!multipleBonds) ? order : 1);
+            }
+            for (var _j = 0; _j < atom1.bonds.length; _j++) {
+                var j = atom1.bonds[_j];
+                if (j < i + 30) continue; // be conservative!
+                if (atomlist.indexOf(j) == -1) continue;
+                var atom2 = this.atoms[j];
+                if (atom2 == undefined) continue;
+                atom1.connected = atom2.connected = true;
+                this.drawBondAsStickSub(group, atom1, atom2, bondR, (!!multipleBonds) ? atom1.bondOrder[_j] : 1);
+            }
+            if (atom1.connected) forSpheres.push(i);
+        }
+        this.drawAtomsAsSphere(group, forSpheres, atomR, !scale, scale, atoms);
     }
 };
