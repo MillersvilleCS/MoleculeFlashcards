@@ -6,7 +6,7 @@
 
 GameScreen = function ( )
 {
-    this.m_scene = new THREE.Scene ( );
+    this.scene = new THREE.Scene ( );
     
     return this;
 };
@@ -15,11 +15,12 @@ GameScreen.prototype =
 {
     constructor: GameScreen,
             
-    m_scene: undefined, molMesh: undefined,
+    scene: undefined, molMesh: undefined,
     
     
     init: function ( )
     {
+        var button = new Button ( "Hey" );
         var extractor = new MoleculeGeometryExtractor ();
         var geometry = new THREE.CubeGeometry( 1, 1, 1 );
         var material = new THREE.MeshBasicMaterial( {color: 0xCC0000} );
@@ -100,7 +101,7 @@ GameScreen.prototype =
         this.molMesh.scale.x = .25;
         this.molMesh.scale.y = .25;
         this.molMesh.scale.z = .25;
-        this.m_scene.add ( this.molMesh );
+        this.scene.add ( this.molMesh );
         
         //this.m_scene.add ( cube );//temp for location reference
         
@@ -112,7 +113,7 @@ GameScreen.prototype =
     	pointLight.position.z = 130;
 
     	// add to the scene
-    	this.m_scene.add(pointLight);
+    	this.scene.add(pointLight);
 
     },
             
@@ -138,10 +139,5 @@ GameScreen.prototype =
     onResume: function ( )
     {
         
-    },
-    
-    getScene: function ( )
-    {
-        return this.m_scene;
     }
 };

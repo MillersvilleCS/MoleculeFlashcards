@@ -10,6 +10,8 @@
         <link rel = 'stylesheet' type = 'text/css' href = 'MoleculeFlashcards.css'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
         <script type="text/javascript"src="three.js"></script>
+        <script type="text/javascript"src="JQuery.js"></script>
+        <script type="text/javascript"src="Button.js"></script>
         <script type="text/javascript"src="Map.js"></script>
         <script type="text/javascript"src="MoleculeGeometryExtractor.js"></script>
         <script type="text/javascript"src="GameScreen.js"></script>
@@ -31,6 +33,10 @@
                                             ASPECT,
                                             NEAR,
                                             FAR  );
+                camera.position.y = 7;
+                camera.position.z = 5;
+                camera.position.x = 3;
+                camera.lookAt(new THREE.Vector3(0,0,0));
                 var game = new Game ( camera );
                 var application = new Application ( game, "Game Test", 420, 680 );
                 document.addEventListener ( "mousedown", application.onMouseDown, false );

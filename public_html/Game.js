@@ -5,8 +5,8 @@
 
 Game = function ( camera )
 {
-    this.m_camera = camera;
-    this.m_screen = new GameScreen ( );
+    this.camera = camera;
+    this.screen = new GameScreen ( );
     
     return this;
 };
@@ -15,31 +15,26 @@ Game.prototype =
 {
     constructor: Game,
     
-    m_camera: undefined,
-    m_screen: undefined,
+    camera: undefined,
+    screen: undefined,
     
     init: function ( )
     {
-        this.m_screen.init( );
-        //temporary
-        this.m_camera.position.y = 7;
-        this.m_camera.position.z = 5;
-        this.m_camera.position.x = 3;
-        this.m_camera.lookAt(new THREE.Vector3(0,0,0));
+        this.screen.init( );
     },
             
     update: function ( )
     {
-        this.m_screen.update ( 0 );
+        this.screen.update ( 0 );
     },
     getCamera: function ( )
     {
-        return this.m_camera;
+        return this.camera;
     },
             
     getCurrentScene: function ( )
     {
-        return this.m_screen.getScene ( );
+        return this.screen.scene;
     }
     
     
