@@ -40,10 +40,8 @@
                 camera.position.z = 5;
                 camera.position.x = 3;
                 camera.lookAt(new THREE.Vector3(0,0,0));
-                var game = new Game ( camera );
-                var application = new Application ( game, "Game Test", width, height );
-                document.addEventListener ( "mousedown", application.onMouseDown, false );
-                document.addEventListener ( "mouseup", application.onMouseUp, false );
+                var game = new Game ( );
+                var application = new Application ( game, camera, "Game Test", width, height );
                 
                 var loop = function ( )
                 {

@@ -3,9 +3,8 @@
  * and open the template in the editor.
  */
 
-Game = function ( camera )
+Game = function ( )
 {
-    this.camera = camera;
     this.screen = new GameScreen ( );
     
     return this;
@@ -14,14 +13,6 @@ Game = function ( camera )
 Game.prototype =
 {
     constructor: Game,
-    
-    camera: undefined,
-    screen: undefined,
-    
-    init: function ( )
-    {
-        this.screen.init( );
-    },
             
     update: function ( delta )
     {
@@ -31,7 +22,14 @@ Game.prototype =
     getCurrentScene: function ( )
     {
         return this.screen.scene;
-    }   
+    },
+            
+    swapScreens: function ( screen )
+    {
+        this.game.screen.onLeave ( );
+        this.game.screen = screen;
+        this.game.screen.onResume ( );
+    }
 };
 
 
