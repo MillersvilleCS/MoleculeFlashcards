@@ -20,11 +20,7 @@ GameScreen.prototype =
     
     init: function ( )
     {
-        var button = new Button ( "Hey" );
         var extractor = new MoleculeGeometryExtractor ();
-        var geometry = new THREE.CubeGeometry( 1, 1, 1 );
-        var material = new THREE.MeshBasicMaterial( {color: 0xCC0000} );
-        var cube = new THREE.Mesh( geometry, material );
         var molStr = 
         'HETATM    1  C                  -3.450  -0.135   0.363 \n' +
         'HETATM    2  C                  -2.116  -0.033  -0.019 \n' +
