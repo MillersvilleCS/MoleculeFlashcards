@@ -56,6 +56,13 @@
 
                 */
             }
+
+            function test()
+            {
+                /* testing animation between menu screens - what function should this be in? */
+                $('#mainMenuUI').css('display', 'none');
+                $('#gameUI').fadeIn(500);
+            }
         
         </script>
     </head>
@@ -66,6 +73,10 @@
                   onmouseup="MouseManager.onMouseUp ( event )" 
                   onmousemove="MouseManager.onMouseMove ( event )">
                   <!-- canvas goes here -->
+
+                <div id = "mainMenuUI" onclick = "test()">
+                    PRESS ME TO GET TO GAME SCREEN.
+                </div>
 
                 <div id = "gameUI">
                     <div id = "menu">
@@ -99,6 +110,10 @@
                             Option 4
                         </div>
                     </div>
+                </div>
+
+                <div id = "highScoreUI">
+
                 </div>
             </div>
         </div>

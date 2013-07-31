@@ -51,12 +51,25 @@ div.button:active
     margin: auto;
 }
 
+#mainMenuUI
+{
+    position: absolute;
+    min-width: 810px;
+    min-height: 610px;
+    z-index: 2;
+    background-color: gray;
+    border: 5px;
+    border-style: solid;
+    border-color: black;
+}
+
 #gameUI
 {
     position: absolute;
     min-width: 810px;
     min-height: 610px;
     z-index: 2;
+    display: none;
 }
 
 #menu
