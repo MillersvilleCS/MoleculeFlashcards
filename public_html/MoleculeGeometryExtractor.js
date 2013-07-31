@@ -453,7 +453,7 @@ MoleculeGeometryExtractor.prototype =
         var color = new TCo(color);
 
         if (!this.cylinderGeometry) {
-            this.cylinderGeometry = new THREE.CylinderGeometry(1, 1, 1, this.cylinderQuality, 1, !cap);
+            this.cylinderGeometry = new THREE.CylinderGeometry(0.25, 0.25, 1, this.cylinderQuality, 1, !cap);//changed from size 1 - CM
             this.cylinderGeometry.faceUvs = [];
             this.faceVertexUvs = [];
         }
@@ -463,8 +463,9 @@ MoleculeGeometryExtractor.prototype =
         cylinder.lookAt(from);
         cylinder.updateMatrix();
         cylinder.matrixAutoUpdate = false;
-        var m = new THREE.Matrix4().makeScale(radius, radius, from.distanceTo(to));
-        //m.makeRotationX(Math.PI / 2); 
+        var m = new THREE.Matrix4().scale(radius, radius, from.distanceTo(to));
+        m.makeRotationAxis(to, 2 * Math.PI);
+        //m.makeRotationX(2 * Math.PI); 
         /* 
             was originally .rotateX, which is deprecated
             currently, makes bonds huge
