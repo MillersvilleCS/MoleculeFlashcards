@@ -3,6 +3,7 @@ body
     margin: 0px;
     padding: 20px;
     background-color: #3D3D3D;
+    font-family: "Times New Roman", Arial;
 }
 
 canvas
@@ -75,14 +76,19 @@ div.button:active
 
 #menuButton
 {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     overflow: hidden;
     background-color: white;
     opacity: 0.2;
-    transition-property: width, height, opacity;
-    transition-duration: 0.5s, 0.5s, 0.5s;
-    transition-delay: 0s, 0s, 0s;
+    border: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+    border-color: black;
+    border-style: solid;
+    transition-property: width, height, opacity, border-right-width, border-bottom-width;
+    transition-duration: 0.5s, 0.5s, 0.5s, 0.5s, 0.5s;
+    transition-delay: 0s, 0s, 0s, 0s, 0s;
 }
 
 #menuButton:hover
@@ -90,6 +96,11 @@ div.button:active
     opacity: 1.0;
     height: 200px;
     width: 300px;
+    border: 0px;
+    border-right: 5px;
+    border-bottom: 5px;
+    border-color: black;
+    border-style: solid;
 }
 
 #radioButtons
@@ -107,6 +118,10 @@ div.button:active
     width: 300px;
     height: 600px;
     background-color: #F2F2F2;
+    border: 0px;
+    border-left: 5px;
+    border-color: black;
+    border-style: solid;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
