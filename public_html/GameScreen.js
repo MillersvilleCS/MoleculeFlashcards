@@ -95,9 +95,9 @@ GameScreen.prototype =
         'END';
 
         this.molMesh = extractor.load(molStr);
-        this.molMesh.scale.x = .25;
-        this.molMesh.scale.y = .25;
-        this.molMesh.scale.z = .25;
+        this.molMesh.scale.x = .5;
+        this.molMesh.scale.y = .5;
+        this.molMesh.scale.z = .5;
         
         this.molMesh.position.x = -2.5;
         this.scene.add ( this.molMesh );
