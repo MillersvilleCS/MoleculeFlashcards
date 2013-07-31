@@ -98,6 +98,8 @@ GameScreen.prototype =
         this.molMesh.scale.x = .25;
         this.molMesh.scale.y = .25;
         this.molMesh.scale.z = .25;
+        
+        this.molMesh.position.x = -2.5;
         this.scene.add ( this.molMesh );
         
         //this.m_scene.add ( cube );//temp for location reference
