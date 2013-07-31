@@ -1,6 +1,8 @@
 body
 {
     margin: 0px;
+    padding: 20px;
+    background-color: #3D3D3D;
 }
 
 canvas
@@ -15,9 +17,21 @@ canvas
 div.button
 {
     text-align: center;
-    background-color: blue;
+    background-color: #000099;
     margin: 20px;
     padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+div.button:hover
+{
+    background-color: gray;
+}
+
+div.button:active
+{
+    background-color: purple;
 }
 
 #game
@@ -50,5 +64,31 @@ div.button
     font-size: 34px;
     width: 300px;
     height: 600px;
-    background-color: yellow;
+    background-color: #F2F2F2;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#timeAndScore
+{
+    background-color: black;
+    color: white;
+    margin: 20px;
+    padding: 5px;
+    margin-bottom: 110px;
+    font-size: 32px;
+    text-align: left;
+    border-radius: 5px;
+}
+
+#time
+{
+    float: right;
+}
+
+#score
+{
+    float: right;
 }
