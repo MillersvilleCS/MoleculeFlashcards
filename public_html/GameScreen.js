@@ -97,6 +97,7 @@ GameScreen.prototype =
         'CONECT   34   30 \n' +
         'CONECT   35   30 \n' +
         'END';
+
         this.molMesh = extractor.load(molStr);
         this.molMesh.scale.x = .25;
         this.molMesh.scale.y = .25;

@@ -23,11 +23,13 @@ Application.prototype =
     
     game: undefined,
     renderer: undefined,
+    frameTimer: new Timer ( ),
             
     loop: function ( )
-    {
-         this.game.update ( );
-         this.renderer.render ( this.game.getCurrentScene ( ), this.game.getCamera ( ));
+    {  
+        this.game.update ( this.frameTimer.getElapsedTimeMili ( ) );
+        this.frameTimer.reset ( );
+        this.renderer.render ( this.game.getCurrentScene ( ), this.game.camera);
     },
             
     exit: function ( )
