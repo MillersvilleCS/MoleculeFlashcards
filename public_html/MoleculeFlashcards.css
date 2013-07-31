@@ -28,7 +28,7 @@ div.button:hover
 {
     background-color: gray;
     transition-property: background-color;
-    transition-duration: 0.5s;
+    transition-duration: 0.3s;
     transition-delay: 0s;
 }
 
@@ -63,8 +63,8 @@ div.button:active
     position: relative;
     float: left;
     margin: 5px;
-    text-align: left;
-    font-size: 34px;
+    text-align: center;
+    font-size: 30px;
     width: 300px;
     height: 40px;
     user-select: none;
@@ -75,19 +75,26 @@ div.button:active
 
 #menuButton
 {
-    width: 40px;
+    width: 30px;
+    height: 30px;
     overflow: hidden;
-    background-color: yellow;
+    background-color: white;
     opacity: 0.2;
-    transition-property: width, opacity;
-    transition-duration: 0.5s, 0.5s;
-    transition-delay: 0s, 0s;
+    transition-property: width, height, opacity;
+    transition-duration: 0.5s, 0.5s, 0.5s;
+    transition-delay: 0s, 0s, 0s;
 }
 
 #menuButton:hover
 {
     opacity: 1.0;
+    height: 200px;
     width: 300px;
+}
+
+#radioButtons
+{
+    font-size: 14px;
 }
 
 #rightPanel
