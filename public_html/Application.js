@@ -4,13 +4,16 @@
  */
 
 
-Application = function ( game, title, width, height )
+Application = function ( game, camera, title, width, height )
 {
     this.game = game;
-    this.game.init ( );
+    this.camera = camera;
     
     this.renderer =  new THREE.WebGLRenderer ( );
     this.renderer.setSize ( width, height );
+    
+    this.frameTimer = new Timer ( );
+    this.frameTimer.start ( );
     
     $('#container').append( this.renderer.domElement );
     
@@ -20,16 +23,13 @@ Application = function ( game, title, width, height )
 Application.prototype =
 {
     constructor: Application,
-    
-    game: undefined,
-    renderer: undefined,
-    frameTimer: new Timer ( ),
             
     loop: function ( )
-    {  
+    {
+        
         this.game.update ( this.frameTimer.getElapsedTimeMili ( ) );
         this.frameTimer.reset ( );
-        this.renderer.render ( this.game.getCurrentScene ( ), this.game.camera);
+        this.renderer.render ( this.game.getCurrentScene ( ), this.camera);
     },
             
     exit: function ( )

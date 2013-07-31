@@ -1,13 +1,11 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+
+/*
+ * The timer class can be used to grab elapsed time in miliseconds
  */
-
-
 
 Timer = function ( )
 {
-    this.start ( );
+    
 };
 
 Timer.date = new Date ( );
