@@ -23,21 +23,15 @@ Game.prototype =
         this.screen.init( );
     },
             
-    update: function ( )
+    update: function ( delta )
     {
-        this.screen.update ( 0 );
-    },
-    getCamera: function ( )
-    {
-        return this.camera;
+        this.screen.update ( delta );
     },
             
     getCurrentScene: function ( )
     {
         return this.screen.scene;
-    }
-    
-    
+    }   
 };
 
 
