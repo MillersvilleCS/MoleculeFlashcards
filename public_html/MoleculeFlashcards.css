@@ -27,6 +27,9 @@ div.button
 div.button:hover
 {
     background-color: gray;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    transition-delay: 0s;
 }
 
 div.button:active
@@ -55,6 +58,38 @@ div.button:active
     z-index: 2;
 }
 
+#menu
+{
+    position: relative;
+    float: left;
+    margin: 5px;
+    text-align: left;
+    font-size: 34px;
+    width: 300px;
+    height: 40px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#menuButton
+{
+    width: 40px;
+    overflow: hidden;
+    background-color: yellow;
+    opacity: 0.2;
+    transition-property: width, opacity;
+    transition-duration: 0.5s, 0.5s;
+    transition-delay: 0s, 0s;
+}
+
+#menuButton:hover
+{
+    opacity: 1.0;
+    width: 300px;
+}
+
 #rightPanel
 {
     position: relative;
@@ -77,7 +112,7 @@ div.button:active
     color: white;
     margin: 20px;
     padding: 5px;
-    margin-bottom: 110px;
+    margin-bottom: 70px;
     font-size: 32px;
     text-align: left;
     border-radius: 5px;
