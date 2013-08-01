@@ -12,5 +12,5 @@ MoleculeGame.prototype = new Game ( );
 
 MoleculeGame.prototype.update = function ( delta )
 {
-    this.screen.update ( delta );
+    this.screen.onUpdate ( delta );
 };

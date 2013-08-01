@@ -9,8 +9,8 @@
 
         <link rel = 'stylesheet' type = 'text/css' href = 'MoleculeFlashcards.css'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-        <script type="text/javascript"src="three.js"></script>
-        <script type="text/javascript"src="JQuery.js"></script>
+        <script type="text/javascript"src="lib/three.js"></script>
+        <script type="text/javascript"src="lib/jQuery.js"></script>
         
         <script type="text/javascript"src="framework/Application.js"></script>
         <script type="text/javascript"src="framework/Exceptions.js"></script>
@@ -32,18 +32,18 @@
                 var width = 800;
                 var height = 600;
                 var VIEW_ANGLE = 45,
-                ASPECT = width / height,
-                NEAR = 0.1,
-                FAR = 10000;
+                    ASPECT = width / height,
+                    NEAR = 0.1,
+                    FAR = 10000;
 
-                var camera = new THREE.PerspectiveCamera(  VIEW_ANGLE,
+                var camera = new THREE.PerspectiveCamera( VIEW_ANGLE,
                                             ASPECT,
                                             NEAR,
                                             FAR  );
                 camera.position.y = 7;
                 camera.position.z = 5;
                 camera.position.x = 3;
-                camera.lookAt(new THREE.Vector3(0,0,0));
+                camera.lookAt( new THREE.Vector3(0,0,0) );
                 var game = new MoleculeGame ( );
                 var application = new Application ( game, camera, "Game Test", width, height );
                 
@@ -57,7 +57,6 @@
                 /* 
                     Launch CSS Transition with JavaScript:
                     http://www.impressivewebs.com/css3-transitions-javascript/ 
-
                 */
             }
 

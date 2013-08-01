@@ -106,7 +106,7 @@ GameScreen = function ( )
 
 GameScreen.prototype = new Screen ( );
             
-GameScreen.prototype.update = function ( delta )
+GameScreen.prototype.onUpdate = function ( delta )
 {
     if ( MouseManager.leftButton.isPressed )
     {
@@ -115,7 +115,7 @@ GameScreen.prototype.update = function ( delta )
     }
 };
 
-GameScreen.prototype.pause = function ( )
+GameScreen.prototype.onPause = function ( )
 {
 
 };

@@ -7,7 +7,6 @@
 
 Map = function ( camera )
 {
-    
     return this;
 };
 
