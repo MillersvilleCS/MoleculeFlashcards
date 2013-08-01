@@ -5,18 +5,18 @@
 
 Game = function ( )
 {
-    this.screen = new GameScreen ( );
-    
-    return this;
+
 };
 
 Game.prototype =
 {
     constructor: Game,
             
+    screne: undefined,
+            
     update: function ( delta )
     {
-        this.screen.update ( delta );
+       throw new UnimplementedFunctionException ( "update" );
     },
             
     getCurrentScene: function ( )

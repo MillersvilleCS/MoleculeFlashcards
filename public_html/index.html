@@ -11,15 +11,19 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
         <script type="text/javascript"src="three.js"></script>
         <script type="text/javascript"src="JQuery.js"></script>
-        <script type="text/javascript"src="Timer.js"></script>
-        <script type="text/javascript"src="Button.js"></script>
-        <script type="text/javascript"src="Map.js"></script>
-        <script type="text/javascript"src="MoleculeGeometryExtractor.js"></script>
+        
+        <script type="text/javascript"src="framework/Application.js"></script>
+        <script type="text/javascript"src="framework/Exceptions.js"></script>
+        <script type="text/javascript"src="framework/Game.js"></script>
+        <script type="text/javascript"src="framework/Map.js"></script>
+        <script type="text/javascript"src="framework/MouseManager.js"></script>
+        <script type="text/javascript"src="framework/Timer.js"></script>  
+        <script type="text/javascript"src="framework/Screen.js"></script>
+        
         <script type="text/javascript"src="GameScreen.js"></script>
         <script type="text/javascript"src="MainMenuScreen.js"></script>
-        <script type="text/javascript"src="MouseManager.js"></script>
-        <script type="text/javascript"src="Game.js"></script>
-        <script type="text/javascript"src="Application.js"></script>
+        <script type="text/javascript"src="MoleculeGame.js"></script>
+        <script type="text/javascript"src="MoleculeGeometryExtractor.js"></script> 
 
         <script type="text/javascript">
 
@@ -40,7 +44,7 @@
                 camera.position.z = 5;
                 camera.position.x = 3;
                 camera.lookAt(new THREE.Vector3(0,0,0));
-                var game = new Game ( );
+                var game = new MoleculeGame ( );
                 var application = new Application ( game, camera, "Game Test", width, height );
                 
                 var loop = function ( )

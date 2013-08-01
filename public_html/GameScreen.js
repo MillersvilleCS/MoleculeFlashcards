@@ -102,34 +102,30 @@ GameScreen = function ( )
     // add to the scene
     this.scene.add(pointLight);
 
-    return this;
 };
 
-GameScreen.prototype =
+GameScreen.prototype = new Screen ( );
+            
+GameScreen.prototype.update = function ( delta )
 {
-    constructor: GameScreen,
-            
-    update: function ( delta )
+    if ( MouseManager.leftButton.isPressed )
     {
-        if ( MouseManager.leftButton.isPressed )
-        {
-           this.molMesh.rotation.x += (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
-            //this.molMesh.rotation.z += (MouseManager.currentY - MouseManager.leftButton.pressedY) / 1000;
-        }
-    },
-    
-    pause: function ( )
-    {
-        
-    },
-            
-    onLeave: function ( )
-    {
-        
-    },
-            
-    onResume: function ( )
-    {
-        
+       this.molMesh.rotation.x += (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
+        //this.molMesh.rotation.z += (MouseManager.currentY - MouseManager.leftButton.pressedY) / 1000;
     }
+};
+
+GameScreen.prototype.pause = function ( )
+{
+
+};
+
+GameScreen.prototype.onLeave = function ( )
+{
+
+};
+
+GameScreen.prototype.onResume = function ( )
+{
+
 };
