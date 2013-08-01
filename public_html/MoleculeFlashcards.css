@@ -1,3 +1,5 @@
+/* Classes */
+
 body
 {
     margin: 0px;
@@ -18,25 +20,27 @@ canvas
 div.button
 {
     text-align: center;
-    background-color: #000099;
+    background-color: #1414FF;
     margin: 20px;
     padding: 5px;
     border-radius: 5px;
     cursor: pointer;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
 }
 
 div.button:hover
 {
-    background-color: gray;
-    transition-property: background-color;
-    transition-duration: 0.3s;
-    transition-delay: 0s;
+    background-color: #0000C7;
 }
 
 div.button:active
 {
     background-color: purple;
 }
+
+/* Parent Div Elements */
 
 #game
 {
@@ -51,17 +55,114 @@ div.button:active
     margin: auto;
 }
 
+/* Main Menu UI Components */
+
 #mainMenuUI
 {
     position: absolute;
-    min-width: 810px;
-    min-height: 610px;
-    z-index: 2;
+    min-width: 495px;
+    min-height: 600px;
+    max-width: 495px;
+    max-height: 600px;
+    z-index: 3;
     background-color: gray;
     border: 5px;
     border-style: solid;
     border-color: black;
 }
+
+#mainMenuTitle
+{
+    color: #F2F2F2;
+    font-size: 80px;
+    text-align: center;
+    text-shadow: -1px -1px 0 #000000,
+                  1px -1px 0 #000000,
+                 -1px  1px 0 #000000,
+                  1px  1px 0 #000000;
+}
+
+#mainMenuStart
+{
+    background-color: #00A300;
+    color: #F2F2F2;
+    font-size: 50px;
+    margin: 100px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+#mainMenuStart:hover
+{
+    background-color: #007000;
+}
+
+#mainMenuStart:active
+{
+    background-color: purple;
+}
+
+#mainMenuTutorial
+{
+    background-color: #E60000;
+    color: #F2F2F2;
+    font-size: 50px;
+    margin: 100px;
+    margin-top: 10px;
+}
+
+#mainMenuTutorial:hover
+{
+    background-color: #B30000;
+}
+
+#mainMenuTutorial:active
+{
+    background-color: purple;
+}
+
+#mainMenuTutorial
+{
+    background-color: #E60000;
+    color: #F2F2F2;
+    font-size: 50px;
+    margin: 100px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+#mainMenuTutorial:hover
+{
+    background-color: #B30000;
+}
+
+#mainMenuTutorial:active
+{
+    background-color: purple;
+}
+
+#mainMenuHighScore
+{
+    background-color: #B300B3;
+    color: #F2F2F2;
+    font-size: 40px;
+    margin: 100px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    height: 50px;
+}
+
+#mainMenuHighScore:hover
+{
+    background-color: #800080;
+}
+
+#mainMenuHighScore:active
+{
+    background-color: yellow;
+}
+
+/* Game UI Components */
 
 #gameUI
 {
@@ -69,7 +170,6 @@ div.button:active
     min-width: 810px;
     min-height: 610px;
     z-index: 2;
-    display: none;
 }
 
 #menu
@@ -161,4 +261,62 @@ div.button:active
 #score
 {
     float: right;
+}
+
+/* High Score UI Components */
+
+#highScoreUI
+{
+    position: absolute;
+    min-width: 800px;
+    min-height: 600px;
+    max-width: 800px;
+    max-height: 600px;
+    z-index: 2;
+    background-color: gray;
+    border: 5px;
+    border-style: solid;
+    border-color: black;
+    display: none;
+}
+
+#highScoreUI
+{
+    color: #F2F2F2;
+    font-size: 50px;
+    text-align: center;
+    text-shadow: -1px -1px 0 #000000,
+                  1px -1px 0 #000000,
+                 -1px  1px 0 #000000,
+                  1px  1px 0 #000000;
+}
+
+#highScoreContainer
+{
+    padding-left: 200px;
+    padding-right: 200px;
+    padding-top: 35px;
+    font-size: 40px;
+    text-shadow: none;
+    white-space: nowrap;
+}
+
+#names
+{
+    padding: 0px;
+    text-align: left;
+    float: left;
+    width: 200px;
+    height: 450px;
+    overflow: hidden;
+}
+
+#scores
+{
+    padding: 0px;
+    text-align: right;
+    float: right;
+    width: 200px;
+    height: 450px;
+    overflow: hidden;
 }

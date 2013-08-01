@@ -64,8 +64,16 @@
             function test()
             {
                 /* testing animation between menu screens - what function should this be in? */
-                $('#mainMenuUI').css('display', 'none');
-                $('#gameUI').fadeIn(500);
+                $('#mainMenuUI').fadeOut(500);
+            }
+
+            function test2()
+            {
+                $('canvas').css('display', 'none');
+                $('#mainMenuUI').fadeOut(500);
+                $('#gameUI').fadeOut(500);
+                $('#highScoreUI').fadeIn(500);
+                $('canvas').delay(500).fadeIn(1);
             }
         
         </script>
@@ -76,10 +84,21 @@
                   onmousedown="MouseManager.onMouseDown ( event )"
                   onmouseup="MouseManager.onMouseUp ( event )" 
                   onmousemove="MouseManager.onMouseMove ( event )">
-                  <!-- canvas goes here -->
+                <!-- canvas goes here -->
 
-                <div id = "mainMenuUI" onclick = "test()">
-                    PRESS ME TO GET TO GAME SCREEN.
+                <div id = "mainMenuUI">
+                    <div id = "mainMenuTitle">
+                        <b>Molecule Flashcards!</b>
+                    </div>
+                    <div class = "button" id = "mainMenuStart" onclick = "test()">
+                        START
+                    </div>
+                    <div class = "button" id = "mainMenuTutorial" onclick = "alert('Add tutorial')">
+                        TUTORIAL
+                    </div>
+                    <div class = "button" id = "mainMenuHighScore" onclick = "test2()">
+                        HIGH SCORES
+                    </div>
                 </div>
 
                 <div id = "gameUI">
@@ -117,7 +136,36 @@
                 </div>
 
                 <div id = "highScoreUI">
+                    <div id = "highScoreTitle">
+                        High Scores!
+                    </div>
+                    <div id = "highScoreContainer">
+                        <div id = "names">
+                            John <br />
+                            Bobby <br />
+                            Zoltar <br />
+                            Katy <br />
+                            Zeus <br />
+                            God <br />
+                            Zoppetti <br />
+                            HAL 9000 <br />
+                            Billy <br />
+                            Homer Simpson <br />
+                        </div>
 
+                        <div id = "scores">
+                            1023874632874327 <br />
+                            9 <br />
+                            8 <br />
+                            7 <br />
+                            6 <br />
+                            5 <br />
+                            4 <br />
+                            3 <br />
+                            2 <br />
+                            1 <br />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
