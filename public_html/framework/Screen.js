@@ -12,12 +12,12 @@ Screen.prototype =
 {
     constructor: Screen,
             
-    update: function ( delta )
+    onUpdate: function ( delta )
     {
-        throw new UnimplementedFunctionException ( "update" );
+        throw new UnimplementedFunctionException ( "onUpdate" );
     },
 
-    pause: function ( )
+    onPause: function ( )
     {
          throw new UnimplementedFunctionException ( "onPause" );
     },

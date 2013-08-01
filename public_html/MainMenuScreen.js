@@ -19,12 +19,12 @@ Screen.prototype =
         
     },
         
-    update: function ( delta )
+    onUpdate: function ( delta )
     {
         
     },
     
-    pause: function ( )
+    onPause: function ( )
     {
         
     },
