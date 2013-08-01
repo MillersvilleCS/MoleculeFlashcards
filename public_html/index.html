@@ -53,6 +53,19 @@
                     application.loop ( );
                 };
                 loop ( this );
+
+                /* 
+                    Launch CSS Transition with JavaScript:
+                    http://www.impressivewebs.com/css3-transitions-javascript/ 
+
+                */
+            }
+
+            function test()
+            {
+                /* testing animation between menu screens - what function should this be in? */
+                $('#mainMenuUI').css('display', 'none');
+                $('#gameUI').fadeIn(500);
             }
         
         </script>
@@ -65,10 +78,22 @@
                   onmousemove="MouseManager.onMouseMove ( event )">
                   <!-- canvas goes here -->
 
+                <div id = "mainMenuUI" onclick = "test()">
+                    PRESS ME TO GET TO GAME SCREEN.
+                </div>
+
                 <div id = "gameUI">
                     <div id = "menu">
                         <div id = "menuButton">
-                            Placeholder
+                            ? <br />
+                            Anti-Aliasing <br />
+                            <div id = "radioButtons">
+                                ON<input type="radio" name="aaSet" value="ON" checked>
+                                OFF<input type="radio" name="aaSet" value="OFF"> <br />
+                            </div>
+
+                            Quality <br />
+                            <input type="range" min = "0" max = "10" value = "10" step = "1" />
                         </div>
                     </div>
                     <div id = "rightPanel">
@@ -89,6 +114,10 @@
                             Option 4
                         </div>
                     </div>
+                </div>
+
+                <div id = "highScoreUI">
+
                 </div>
             </div>
         </div>
