@@ -25,7 +25,9 @@ FileLoader.loadText = function ( url )
         if ( textfile.readyState === FileLoader.FILE_READY && 
                 textfile.status === FileLoader.FILE_FOUND )
         {
-                
+           allText = textfile.responseText;
+           lines = txtFile.responseText.split("\n");
         }    
-    }
+    };
+    textfile.send( null );
 };

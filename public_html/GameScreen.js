@@ -83,6 +83,7 @@ GameScreen = function ( )
     'END';
 
     this.molMesh = extractor.load(molStr);
+    this.molMesh.useQuaternion = true;
     this.molMesh.scale.x = .5;
     this.molMesh.scale.y = .5;
     this.molMesh.scale.z = .5;
