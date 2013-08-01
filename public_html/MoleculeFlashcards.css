@@ -37,7 +37,7 @@ div.button:hover
 
 div.button:active
 {
-    background-color: purple;
+    background-color: #0000C7;
 }
 
 /* Parent Div Elements */
@@ -64,7 +64,7 @@ div.button:active
     min-height: 600px;
     max-width: 495px;
     max-height: 600px;
-    z-index: 3;
+    z-index: 4;
     background-color: gray;
     border: 5px;
     border-style: solid;
@@ -99,7 +99,7 @@ div.button:active
 
 #mainMenuStart:active
 {
-    background-color: purple;
+    background-color: #007000;
 }
 
 #mainMenuTutorial
@@ -118,7 +118,7 @@ div.button:active
 
 #mainMenuTutorial:active
 {
-    background-color: purple;
+    background-color: #B30000;
 }
 
 #mainMenuTutorial
@@ -138,7 +138,7 @@ div.button:active
 
 #mainMenuTutorial:active
 {
-    background-color: purple;
+    background-color: #B30000;
 }
 
 #mainMenuHighScore
@@ -159,7 +159,7 @@ div.button:active
 
 #mainMenuHighScore:active
 {
-    background-color: yellow;
+    background-color: #800080;
 }
 
 /* Game UI Components */
@@ -169,7 +169,7 @@ div.button:active
     position: absolute;
     min-width: 810px;
     min-height: 610px;
-    z-index: 2;
+    z-index: 3;
 }
 
 #menu
@@ -277,10 +277,12 @@ div.button:active
     border: 5px;
     border-style: solid;
     border-color: black;
+    color: #F2F2F2;
+    text-align: center;
     display: none;
 }
 
-#highScoreUI
+#highScoreTitle
 {
     color: #F2F2F2;
     font-size: 50px;
@@ -296,9 +298,10 @@ div.button:active
     padding-left: 200px;
     padding-right: 200px;
     padding-top: 35px;
+    padding-bottom: 0px;
     font-size: 40px;
-    text-shadow: none;
     white-space: nowrap;
+    line-height: 40px;
 }
 
 #names
@@ -319,4 +322,15 @@ div.button:active
     width: 200px;
     height: 450px;
     overflow: hidden;
+}
+
+#highScoreReturnButton
+{
+    margin-top: 450px;
+    margin-bottom: 30px;
+    margin-left: 300px;
+    padding: 0px;
+    font-size: 30px;
+    height: 40px;
+    width: 200px;
 }

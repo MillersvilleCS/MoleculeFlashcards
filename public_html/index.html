@@ -27,6 +27,8 @@
 
         <script type="text/javascript">
 
+            var game; // temporary global?
+
             function start ( )
             {
                 var width = 800;
@@ -44,7 +46,7 @@
                 camera.position.z = 5;
                 camera.position.x = 3;
                 camera.lookAt( new THREE.Vector3(0,0,0) );
-                var game = new MoleculeGame ( );
+                game = new MoleculeGame ( );
                 var application = new Application ( game, camera, "Game Test", width, height );
                 
                 var loop = function ( )
@@ -60,20 +62,10 @@
                 */
             }
 
-            function test()
-            {
-                /* testing animation between menu screens - what function should this be in? */
-                $('#mainMenuUI').fadeOut(500);
-            }
+            /* testing animation between menu screens - what function should this be in? 
 
-            function test2()
-            {
-                $('canvas').css('display', 'none');
-                $('#mainMenuUI').fadeOut(500);
-                $('#gameUI').fadeOut(500);
-                $('#highScoreUI').fadeIn(500);
-                $('canvas').delay(500).fadeIn(1);
-            }
+                Will be moved to application function
+            */
         
         </script>
     </head>
@@ -89,13 +81,13 @@
                     <div id = "mainMenuTitle">
                         <b>Molecule Flashcards!</b>
                     </div>
-                    <div class = "button" id = "mainMenuStart" onclick = "test()">
+                    <div class = "button" id = "mainMenuStart" onclick = "game.buttonLogic('START');">
                         START
                     </div>
-                    <div class = "button" id = "mainMenuTutorial" onclick = "alert('Add tutorial')">
+                    <div class = "button" id = "mainMenuTutorial" onclick = "game.buttonLogic('TUTORIAL');">
                         TUTORIAL
                     </div>
-                    <div class = "button" id = "mainMenuHighScore" onclick = "test2()">
+                    <div class = "button" id = "mainMenuHighScore" onclick = "game.buttonLogic('HIGH SCORES');">
                         HIGH SCORES
                     </div>
                 </div>
@@ -119,16 +111,16 @@
                             Time Left: <div id = "time">2:00</div><br />
                             Score: <div id = "score">0</div><br />
                         </div>
-                        <div class = "button" onclick = "alert('Put function here')">
+                        <div class = "button" onclick = "game.buttonLogic('Option 1');">
                             Option 1
                         </div>
-                        <div class = "button" onclick = "alert('Put function here')">
+                        <div class = "button" onclick = "game.buttonLogic('Option 2');">
                             Option 2
                         </div>
-                        <div class = "button" onclick = "alert('Put function here')">
+                        <div class = "button" onclick = "game.buttonLogic('Option 3');">
                             Option 3
                         </div>
-                        <div class = "button" onclick = "alert('Put function here')">
+                        <div class = "button" onclick = "game.buttonLogic('Option 4');">
                             Option 4
                         </div>
                     </div>
@@ -164,6 +156,9 @@
                             2 <br />
                             1 <br />
                         </div>
+                    </div>
+                    <div class = "button" id = "highScoreReturnButton" onclick = "game.buttonLogic('Main Menu');">
+                        Main Menu
                     </div>
                 </div>
             </div>
