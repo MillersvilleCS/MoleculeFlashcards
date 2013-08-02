@@ -5,16 +5,16 @@
 
 
 
-Map = function ( camera )
+Map = function ( )
 {
-    return this;
+    
 };
 
 Map.prototype =
 {
     constructor: Map,
             
-    var: size = 0,
+    size: 0,
     
     put: function ( key , value )
     {

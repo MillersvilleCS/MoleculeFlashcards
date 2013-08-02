@@ -5,7 +5,8 @@
 
 Game = function ( )
 {
-
+    this.screenMap = new Map ( )
+    this.screenID = undefined;
 };
 
 Game.prototype =
@@ -19,14 +20,19 @@ Game.prototype =
             
     getCurrentScene: function ( )
     {
-        return this.screen.scene;
+        return this.getCurrentScreen ( ).scene;
     },
             
-    swapScreens: function ( screen )
+    getCurrentScreen: function ( )
     {
-        this.screen.onLeave ( );
-        this.screen = screen;
-        this.screen.onResume ( );
+        return this.screenMap.get ( this.screenID );
+    },
+            
+    swapScreens: function ( screenID )
+    {
+        this.getCurrentScreen ( ).onLeave ( );
+        this.screenID = screenID;
+        this.getCurrentScreen ( ).onResume ( );
     }
 };
 

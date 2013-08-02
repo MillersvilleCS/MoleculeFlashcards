@@ -5,16 +5,20 @@
 
 MoleculeGame = function ( )
 {
-    this.gameScreen = new GameScreen ( );
-    this.menuScreen = new MenuScreen ( );
-    this.screen = this.menuScreen;
+    var gameScreen = new GameScreen ( );
+    var menuScreen = new MenuScreen ( );
+    
+    this.screenMap.put ( 'game', gameScreen );
+    this.screenMap.put ( 'menu', menuScreen );
+    
+    this.screenID = 'menu';
 };
 
 MoleculeGame.prototype = new Game ( );   
 
 MoleculeGame.prototype.update = function ( delta )
 {
-    this.screen.onUpdate ( delta );
+    this.getCurrentScreen ( ).onUpdate ( delta );
 };
 
 /*
@@ -23,27 +27,9 @@ MoleculeGame.prototype.update = function ( delta )
 */
 MoleculeGame.prototype.buttonLogic = function( button )
 {
-    var screenID = this.screen.buttonLogic ( button );
-    this.changeScreen ( screenID );
-};
-
-MoleculeGame.prototype.changeScreen = function ( screenID )
-{
-    switch ( screenID )
+    var screenID = this.getCurrentScreen ( ).buttonLogic ( button );
+    if ( screenID !== undefined )
     {
-        case undefined:
-            return;
-        
-        case 'game':
-            this.swapScreens ( this.gameScreen );
-            break;
-            
-        case 'menu':
-            this.swapScreens ( this.menuScreen );
-            break;
-            
-        default:
-            alert( 'No such Screen!' );
-            
+        this.swapScreens ( screenID );
     }
 };
