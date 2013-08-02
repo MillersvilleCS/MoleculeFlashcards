@@ -23,17 +23,20 @@ Timer.prototype =
         this.running = true;
         this.startTime = Timer.date.getTime ( );
     },
+            
     stop: function ( )
     {
         this.running = false;
         this.stopTime = Timer.date.getTime ( );
     },
+            
     reset: function ( )
     {
         var time = Timer.date.getTime ( );
         this.startTime = time;
         this.stopTime = time;
     },
+            
     getElapsedTimeMili: function ( )
     {
         if ( this.running )

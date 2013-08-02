@@ -26,9 +26,10 @@ Application.prototype =
             
     loop: function ( )
     {
-        
-        this.game.update ( this.frameTimer.getElapsedTimeMili ( ) );
+        var delta = this.frameTimer.getElapsedTimeMili ( );
         this.frameTimer.reset ( );
+        
+        this.game.update ( delta );
         this.renderer.render ( this.game.getCurrentScene ( ), this.camera);
     },
             
