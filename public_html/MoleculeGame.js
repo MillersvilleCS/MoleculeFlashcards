@@ -24,23 +24,24 @@ MoleculeGame.prototype.buttonLogic = function( button )
     switch ( button )
     {
         case 'START':
-            $('#mainMenuUI').fadeOut(500);
+            $( '#mainMenuUI' ).fadeOut ( 500 );
             break;
 
         case 'HIGH SCORES':
-            $('canvas').css('display', 'none');
-            $('#mainMenuUI').fadeOut(500);
-            $('#gameUI').fadeOut(500);
-            $('#highScoreUI').css('display', 'block');
+            $( 'canvas' ).css('display', 'none' );
+            $( '#mainMenuUI' ).fadeOut ( 500 );
+            $( '#gameUI' ).fadeOut ( 500 );
+            $( '#highScoreUI' ).css ( 'display', 'block' );
             break;
             
         case 'Main Menu':
-            $('#mainMenuUI').fadeIn(500);
-            $('#gameUI').fadeIn(500);
-            $('#highScoreUI').delay(500).fadeOut(1);
-            $('canvas').delay(500).fadeIn(1);
+            $( '#mainMenuUI' ).fadeIn ( 500 );
+            $( '#gameUI' ).fadeIn ( 500 );
+            $( '#highScoreUI' ).delay ( 500 ).fadeOut ( 1 );
+            $( 'canvas' ).delay ( 500 ).fadeIn ( 1 );
             break;
+            
         default:
-            alert('Not Yet Implemented!');
+            alert( 'Not Yet Implemented!' );
     }
 };

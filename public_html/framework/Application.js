@@ -34,6 +34,6 @@ Application.prototype =
             
     exit: function ( )
     {
-        
+        alert("worked");
     }
 };

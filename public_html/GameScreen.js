@@ -105,6 +105,16 @@ GameScreen = function ( )
 };
 
 GameScreen.prototype = new Screen ( );
+
+GameScreen.prototype.answer = undefined;
+
+GameScreen.prototype.giveAnswer = function ( buttonNumber )
+{
+    if ( buttonNumber ===  this.answer )
+    {
+        
+    }
+};
             
 GameScreen.prototype.onUpdate = function ( delta )
 {

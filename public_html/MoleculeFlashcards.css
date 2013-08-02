@@ -4,26 +4,26 @@ body
 {
     margin: 0px;
     padding: 20px;
-    background-color: #3D3D3D;
+    background-color: #F8F8FE;
     font-family: "Times New Roman", Arial;
 }
 
 canvas
 {
     border-style: solid;
-    border-width: 5px;
-    border-color: black;
+    border-width: 2px;
+    border-color: #010120;
     margin: 0px;
-    background: gray;
+    background: #E3E3FE;
 }
 
 div.button
 {
     text-align: center;
-    background-color: #1414FF;
+    background-color: #4D4D62;
     margin: 20px;
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 2px;
     cursor: pointer;
     transition-property: background-color;
     transition-duration: 0.3s;
@@ -32,26 +32,26 @@ div.button
 
 div.button:hover
 {
-    background-color: #0000C7;
+    background-color: #E3E3FE;
 }
 
 div.button:active
 {
-    background-color: #0000C7;
+    background-color: #EFE1FE;
 }
 
 /* Parent Div Elements */
 
 #game
 {
-    min-width: 810px;
-    min-height: 610px;
+    min-width: 804px;
+    min-height: 64px;
 }
 
 #container
 {
-    max-width: 810px;
-    max-height: 610px;
+    max-width: 804px;
+    max-height: 604px;
     margin: auto;
 }
 
@@ -60,90 +60,69 @@ div.button:active
 #mainMenuUI
 {
     position: absolute;
-    min-width: 495px;
+    min-width: 536px;
     min-height: 600px;
-    max-width: 495px;
+    max-width: 536px;
     max-height: 600px;
     z-index: 4;
-    background-color: gray;
-    border: 5px;
+    background-color: #E3E3FE;
+    border: 2px;
     border-style: solid;
-    border-color: black;
+    border-color: #010120;
 }
 
 #mainMenuTitle
 {
-    color: #F2F2F2;
-    font-size: 80px;
+    color: #10011F;
+    font-size: 55px;
+    margin-top: 34px;
     text-align: center;
-    text-shadow: -1px -1px 0 #000000,
-                  1px -1px 0 #000000,
-                 -1px  1px 0 #000000,
-                  1px  1px 0 #000000;
+    
 }
 
 #mainMenuStart
 {
-    background-color: #00A300;
+    background-color: #2E2B31;
     color: #F2F2F2;
     font-size: 50px;
-    margin: 100px;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 89px;
+    margin-left: 144px;
+    margin-right: 144px;
+    margin-bottom: 34px;
 }
 
 #mainMenuStart:hover
 {
-    background-color: #007000;
+    background-color: #53495E;
 }
 
 #mainMenuStart:active
 {
-    background-color: #007000;
+    background-color: #EFE1FE;
 }
 
 #mainMenuTutorial
 {
-    background-color: #E60000;
+    background-color: #2E2B31;
     color: #F2F2F2;
     font-size: 50px;
-    margin: 100px;
-    margin-top: 10px;
+    margin-left: 144px;
+    margin-right: 144px;
 }
 
 #mainMenuTutorial:hover
 {
-    background-color: #B30000;
+    background-color: #53495E;
 }
 
 #mainMenuTutorial:active
 {
-    background-color: #B30000;
-}
-
-#mainMenuTutorial
-{
-    background-color: #E60000;
-    color: #F2F2F2;
-    font-size: 50px;
-    margin: 100px;
-    margin-top: 10px;
-    margin-bottom: 40px;
-}
-
-#mainMenuTutorial:hover
-{
-    background-color: #B30000;
-}
-
-#mainMenuTutorial:active
-{
-    background-color: #B30000;
+    background-color: #EFE1FE;
 }
 
 #mainMenuHighScore
 {
-    background-color: #B300B3;
+    background-color: #4D4D62;
     color: #F2F2F2;
     font-size: 40px;
     margin: 100px;
@@ -154,12 +133,12 @@ div.button:active
 
 #mainMenuHighScore:hover
 {
-    background-color: #800080;
+    background-color: #53495E;
 }
 
 #mainMenuHighScore:active
 {
-    background-color: #800080;
+    background-color: #EFE1FE;
 }
 
 /* Game UI Components */
@@ -225,15 +204,16 @@ div.button:active
 {
     position: relative;
     float: right;
-    margin: 5px;
+    margin: 2px;
     text-align: right;
     font-size: 34px;
-    width: 300px;
+    width: 266px;
     height: 600px;
     background-color: #F2F2F2;
     border: 0px;
-    border-left: 5px;
-    border-color: black;
+    border-left: 2px;
+    border-right: 2px;
+    border-color: #010120;
     border-style: solid;
     user-select: none;
     -moz-user-select: none;
@@ -268,15 +248,15 @@ div.button:active
 #highScoreUI
 {
     position: absolute;
-    min-width: 800px;
+    min-width: 810px;
     min-height: 600px;
-    max-width: 800px;
+    max-width: 810px;
     max-height: 600px;
     z-index: 2;
     background-color: gray;
-    border: 5px;
+    border: 2px;
     border-style: solid;
-    border-color: black;
+    border-color: #010120;
     color: #F2F2F2;
     text-align: center;
     display: none;
