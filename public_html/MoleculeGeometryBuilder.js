@@ -5,31 +5,31 @@
 
 var TV3 = THREE.Vector3, TF3 = THREE.Face3, TCo = THREE.Color;
 
-MoleculeGeometryExtractor = function()
+MoleculeGeometryBuilder = function()
 {
     this.Nucleotides = ['  G', '  A', '  T', '  C', '  U', ' DG', ' DA', ' DT', ' DC', ' DU'];
     this.ElementColors =
-            {
-                "H": 0xCCCCCC, "C": 0xAAAAAA, "O": 0xCC0000,
-                "N": 0x0000CC, "S": 0xCCCC00, "P": 0x6622CC,
-                "F": 0x00CC00, "CL": 0x00CC00, "BR": 0x882200,
-                "I": 0x6600AA, "FE": 0xCC6600, "CA": 0x8888AA
-            };
+    {
+        "H": 0xCCCCCC, "C": 0xAAAAAA, "O": 0xCC0000,
+        "N": 0x0000CC, "S": 0xCCCC00, "P": 0x6622CC,
+        "F": 0x00CC00, "CL": 0x00CC00, "BR": 0x882200,
+        "I": 0x6600AA, "FE": 0xCC6600, "CA": 0x8888AA
+    };
 
     this.vdwRadii =
-            {
-                "H": 1.2, "Li": 1.82, "Na": 2.27,
-                "K": 2.75, "C": 1.7, "N": 1.55,
-                "O": 1.52, "F": 1.47, "P": 1.80,
-                "S": 1.80, "CL": 1.75, "BR": 1.85,
-                "SE": 1.90, "ZN": 1.39, "CU": 1.4,
-                "NI": 1.63
-            };
+    {
+        "H": 1.2, "Li": 1.82, "Na": 2.27,
+        "K": 2.75, "C": 1.7, "N": 1.55,
+        "O": 1.52, "F": 1.47, "P": 1.80,
+        "S": 1.80, "CL": 1.75, "BR": 1.85,
+        "SE": 1.90, "ZN": 1.39, "CU": 1.4,
+        "NI": 1.63
+    };
 };
 
-MoleculeGeometryExtractor.prototype =
+MoleculeGeometryBuilder.prototype =
 {
-    constructor: MoleculeGeometryExtractor,
+    constructor: MoleculeGeometryBuilder,
 
     load: function( source )
     {

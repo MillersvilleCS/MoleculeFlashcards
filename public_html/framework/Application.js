@@ -15,7 +15,7 @@ Application = function ( game, camera, title, width, height )
     this.frameTimer = new Timer ( );
     this.frameTimer.start ( );
     
-    $('#container').append( this.renderer.domElement );
+    $( '#container' ).append( this.renderer.domElement );
     
     return this;
 };
@@ -35,6 +35,6 @@ Application.prototype =
             
     exit: function ( )
     {
-        alert("worked");
+        alert ( "worked" );
     }
 };

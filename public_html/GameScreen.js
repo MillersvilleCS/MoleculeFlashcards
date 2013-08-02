@@ -8,7 +8,7 @@ GameScreen = function ( )
 {
     this.scene = new THREE.Scene ( );
     
-    var extractor = new MoleculeGeometryExtractor ();
+    var extractor = new MoleculeGeometryBuilder ( );
     var molStr = 
     'HETATM    1  C                  -3.450  -0.135   0.363 \n' +
     'HETATM    2  C                  -2.116  -0.033  -0.019 \n' +
@@ -107,14 +107,6 @@ GameScreen = function ( )
 GameScreen.prototype = new Screen ( );
 
 GameScreen.prototype.answer = undefined;
-
-GameScreen.prototype.giveAnswer = function ( buttonNumber )
-{
-    if ( buttonNumber ===  this.answer )
-    {
-        
-    }
-};
             
 GameScreen.prototype.onUpdate = function ( delta )
 {

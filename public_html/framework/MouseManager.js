@@ -49,7 +49,7 @@ function MouseManager ( )
 };
 
 MouseManager.leftButton = new MouseButton ( ),
-MouseManager.rightPressed = new MouseButton ( ),
+MouseManager.rightButton = new MouseButton ( ),
 
 MouseManager.currentX = 0;
 MouseManager.cuttentY = 0;

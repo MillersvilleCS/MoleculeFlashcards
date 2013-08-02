@@ -5,7 +5,9 @@
 
 MoleculeGame = function ( )
 {
-    this.screen = new GameScreen ( );
+    this.gameScreen = new GameScreen ( );
+    this.menuScreen = new MenuScreen ( );
+    this.screen = this.menuScreen;
 };
 
 MoleculeGame.prototype = new Game ( );   
@@ -21,27 +23,27 @@ MoleculeGame.prototype.update = function ( delta )
 */
 MoleculeGame.prototype.buttonLogic = function( button )
 {
-    switch ( button )
-    {
-        case 'START':
-            $( '#mainMenuUI' ).fadeOut ( 500 );
-            break;
+    var screenID = this.screen.buttonLogic ( button );
+    this.changeScreen ( screenID );
+};
 
-        case 'HIGH SCORES':
-            $( 'canvas' ).css('display', 'none' );
-            $( '#mainMenuUI' ).fadeOut ( 500 );
-            $( '#gameUI' ).fadeOut ( 500 );
-            $( '#highScoreUI' ).css ( 'display', 'block' );
+MoleculeGame.prototype.changeScreen = function ( screenID )
+{
+    switch ( screenID )
+    {
+        case undefined:
+            return;
+        
+        case 'game':
+            this.swapScreens ( this.gameScreen );
             break;
             
-        case 'Main Menu':
-            $( '#mainMenuUI' ).fadeIn ( 500 );
-            $( '#gameUI' ).fadeIn ( 500 );
-            $( '#highScoreUI' ).delay ( 500 ).fadeOut ( 1 );
-            $( 'canvas' ).delay ( 500 ).fadeIn ( 1 );
+        case 'menu':
+            this.swapScreens ( this.menuScreen );
             break;
             
         default:
-            alert( 'Not Yet Implemented!' );
+            alert( 'No such Screen!' );
+            
     }
 };

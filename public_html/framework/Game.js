@@ -12,8 +12,6 @@ Game.prototype =
 {
     constructor: Game,
             
-    screne: undefined,
-            
     update: function ( delta )
     {
        throw new UnimplementedFunctionException ( "update" );
@@ -26,9 +24,9 @@ Game.prototype =
             
     swapScreens: function ( screen )
     {
-        this.game.screen.onLeave ( );
-        this.game.screen = screen;
-        this.game.screen.onResume ( );
+        this.screen.onLeave ( );
+        this.screen = screen;
+        this.screen.onResume ( );
     }
 };
 
