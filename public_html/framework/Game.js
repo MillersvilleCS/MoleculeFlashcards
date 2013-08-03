@@ -28,6 +28,11 @@ Game.prototype =
         return this.screenMap.get ( this.screenID );
     },
             
+    hasScreen: function ( screenID )
+    {
+        return this.screenMap.contains ( screenID );
+    },
+            
     swapScreens: function ( screenID )
     {
         this.getCurrentScreen ( ).onLeave ( );

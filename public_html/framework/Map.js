@@ -32,6 +32,11 @@ Map.prototype =
         this[ key ] = undefined;
         --this.size;
     },
+            
+    contains: function ( key )
+    {
+        return this[ key ] !== undefined;
+    },
     
     getNumberOfElements: function ( )
     {

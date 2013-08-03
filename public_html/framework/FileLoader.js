@@ -26,7 +26,7 @@ FileLoader.loadText = function ( url )
                 textfile.status === FileLoader.FILE_FOUND )
         {
            allText = textfile.responseText;
-           lines = txtFile.responseText.split("\n");
+           lines = txtFile.responseText.split ( "\n" );
         }    
     };
     textfile.send( null );

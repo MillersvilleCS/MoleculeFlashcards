@@ -40,8 +40,12 @@ Timer.prototype =
     getElapsedTimeMili: function ( )
     {
         if ( this.running )
+        {
             return Timer.date.getTime ( ) - this.startTime;
+        }
         else
+        {
             return this.stopTime - this.startTime;
+        }
     } 
 };

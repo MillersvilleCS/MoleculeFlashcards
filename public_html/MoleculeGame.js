@@ -21,14 +21,10 @@ MoleculeGame.prototype.update = function ( delta )
     this.getCurrentScreen ( ).onUpdate ( delta );
 };
 
-/*
-    Handles game-to-game logic for buttons. Can be moved to another
-    class if you need to.
-*/
 MoleculeGame.prototype.buttonLogic = function( button )
 {
     var screenID = this.getCurrentScreen ( ).buttonLogic ( button );
-    if ( screenID !== undefined )
+    if ( this.hasScreen ( screenID ) )
     {
         this.swapScreens ( screenID );
     }

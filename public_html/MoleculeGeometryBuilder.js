@@ -5,7 +5,7 @@
 
 var TV3 = THREE.Vector3, TF3 = THREE.Face3, TCo = THREE.Color;
 
-MoleculeGeometryBuilder = function()
+MoleculeGeometryBuilder = function ( )
 {
     this.Nucleotides = ['  G', '  A', '  T', '  C', '  U', ' DG', ' DA', ' DT', ' DC', ' DU'];
     this.ElementColors =
@@ -51,26 +51,29 @@ MoleculeGeometryBuilder.prototype =
         this.colorByChain ( all, {}, atoms );
 
         this.drawAtomsAsSphere ( modelGroup, hetatm, sphereRadius, forceDefaultRadius, atomScale, atoms );
-        this.drawBondsAsLine (modelGroup, all, curveWidth, atoms);
+        this.drawBondsAsLine ( modelGroup, all, curveWidth, atoms );
         //this.drawBondsAsStick ( modelGroup, all, sphereRadius / 6/* bond radius */, sphereRadius, true, true, atomScale, atoms);
         /* Problem with rotations, do not use. Documented further below in drawCylinder() */
 
         return modelGroup;
     },
-    parseSDF: function( str, atoms, protein )
+            
+    parseSDF: function ( str, atoms, protein )
     {
-        var lines = str.split("\n");
-        if (lines.length < 4)
+        var lines = str.split( "\n" );
+        
+        if ( lines.length < 4 )
         {
             return;
         }
-        var atomCount = parseInt(lines[3].substr(0, 3));
+        var atomCount = parseInt ( lines[3].substr ( 0, 3 ) );
 
-        if (isNaN(atomCount) || atomCount <= 0)
+        if ( isNaN(atomCount) || atomCount <= 0 )
         {
             return;
         }
-        var bondCount = parseInt(lines[3].substr(3, 3));
+        
+        var bondCount = parseInt ( lines[3].substr ( 3, 3 ) );
         var offset = 4;
 
         if (lines.length < 4 + atomCount + bondCount)
@@ -78,7 +81,7 @@ MoleculeGeometryBuilder.prototype =
             return;
         }
 
-        for (var i = 1; i <= atomCount; i++)
+        for ( var i = 1; i <= atomCount; i++ )
         {
             var line = lines[offset];
             offset++;
@@ -94,7 +97,7 @@ MoleculeGeometryBuilder.prototype =
             atoms[i] = atom;
         }
 
-        for (i = 1; i <= bondCount; i++)
+        for ( i = 1; i <= bondCount; i++ )
         {
             var line = lines[offset];
             offset++;
@@ -110,12 +113,12 @@ MoleculeGeometryBuilder.prototype =
         protein.smallMolecule = true;
         return true;
     },
-    parseXYZ: function(str, atoms, protein) {
+    parseXYZ: function ( str, atoms, protein ) {
 
-        var lines = str.split("\n");
-        if (lines.length < 3)
+        var lines = str.split( "\n" );
+        if ( lines.length < 3 )
             return;
-        var atomCount = parseInt(lines[0].substr(0, 3));
+        var atomCount = parseInt ( lines[0].substr ( 0, 3 ) );
         if (isNaN(atomCount) || atomCount <= 0)
             return;
         if (lines.length < atomCount + 2)
@@ -149,19 +152,16 @@ MoleculeGeometryBuilder.prototype =
     },
     parsePDB2: function ( str, atoms, protein )
     {
-        var molID;
-
-        var atoms_cnt = 0;
         var lines = str.split("\n");
         for (var i = 0; i < lines.length; i++)
         {
             line = lines[i].replace(/^\s*/, ''); // remove indent
             var recordName = line.substr(0, 6);
-            if (recordName == 'ATOM  ' || recordName == 'HETATM')
+            if (recordName === 'ATOM  ' || recordName === 'HETATM')
             {
                 var atom, resn, chain, resi, x, y, z, hetflag, elem, serial, altLoc, b;
                 altLoc = line.substr(16, 1);
-                if (altLoc != ' ' && altLoc != 'A')
+                if (altLoc !== ' ' && altLoc !== 'A')
                     continue; // FIXME: ad hoc
                 serial = parseInt(line.substr(6, 5));
                 atom = line.substr(12, 4).replace(/ /g, "");
@@ -173,11 +173,11 @@ MoleculeGeometryBuilder.prototype =
                 z = parseFloat(line.substr(46, 8));
                 b = parseFloat(line.substr(60, 8));
                 elem = line.substr(76, 2).replace(/ /g, "");
-                if (elem == '') // for some incorrect PDB files
+                if (elem === '') // for some incorrect PDB files
                 {
                     elem = line.substr(12, 4).replace(/ /g, "");
                 }
-                if (line[0] == 'H')
+                if (line[0] === 'H')
                 {
                     hetflag = true;
                 }
@@ -186,13 +186,13 @@ MoleculeGeometryBuilder.prototype =
                 atoms[serial] = {'resn': resn, 'x': x, 'y': y, 'z': z, 'elem': elem,
                     'hetflag': hetflag, 'chain': chain, 'resi': resi, 'serial': serial, 'atom': atom,
                     'bonds': [], 'ss': 'c', 'color': 0xFFFFFF, 'bonds': [], 'bondOrder': [], 'b': b /*', altLoc': altLoc*/};
-            } else if (recordName == 'SHEET ') {
+            } else if (recordName === 'SHEET ') {
                 var startChain = line.substr(21, 1);
                 var startResi = parseInt(line.substr(22, 4));
                 var endChain = line.substr(32, 1);
                 var endResi = parseInt(line.substr(33, 4));
                 protein.sheet.push([startChain, startResi, endChain, endResi]);
-            } else if (recordName == 'CONECT') {
+            } else if (recordName === 'CONECT') {
                 // MEMO: We don't have to parse SSBOND, LINK because both are also 
                 // described in CONECT. But what about 2JYT???
                 var from = parseInt(line.substr(6, 5));
@@ -200,18 +200,18 @@ MoleculeGeometryBuilder.prototype =
                     var to = parseInt(line.substr([11, 16, 21, 26][j], 5));
                     if (isNaN(to))
                         continue;
-                    if (atoms[from] != undefined) {
+                    if (atoms[from] !== undefined) {
                         atoms[from].bonds.push(to);
                         atoms[from].bondOrder.push(1);
                     }
                 }
-            } else if (recordName == 'HELIX ') {
+            } else if (recordName === 'HELIX ') {
                 var startChain = line.substr(19, 1);
                 var startResi = parseInt(line.substr(21, 4));
                 var endChain = line.substr(31, 1);
                 var endResi = parseInt(line.substr(33, 4));
                 protein.helix.push([startChain, startResi, endChain, endResi]);
-            } else if (recordName == 'CRYST1') {
+            } else if (recordName === 'CRYST1') {
                 protein.a = parseFloat(line.substr(6, 9));
                 protein.b = parseFloat(line.substr(15, 9));
                 protein.c = parseFloat(line.substr(24, 9));
@@ -220,39 +220,39 @@ MoleculeGeometryBuilder.prototype =
                 protein.gamma = parseFloat(line.substr(47, 7));
                 protein.spacegroup = line.substr(55, 11);
                 this.defineCell();
-            } else if (recordName == 'REMARK') {
+            } else if (recordName === 'REMARK') {
                 var type = parseInt(line.substr(7, 3));
-                if (type == 290 && line.substr(13, 5) == 'SMTRY') {
+                if (type === 290 && line.substr(13, 5) == 'SMTRY') {
                     var n = parseInt(line[18]) - 1;
                     var m = parseInt(line.substr(21, 2));
-                    if (protein.symMat[m] == undefined)
+                    if (protein.symMat[m] === undefined)
                         protein.symMat[m] = new THREE.Matrix4().identity();
                     protein.symMat[m].elements[n] = parseFloat(line.substr(24, 9));
                     protein.symMat[m].elements[n + 4] = parseFloat(line.substr(34, 9));
                     protein.symMat[m].elements[n + 8] = parseFloat(line.substr(44, 9));
                     protein.symMat[m].elements[n + 12] = parseFloat(line.substr(54, 10));
-                } else if (type == 350 && line.substr(13, 5) == 'BIOMT') {
+                } else if (type === 350 && line.substr(13, 5) === 'BIOMT') {
                     var n = parseInt(line[18]) - 1;
                     var m = parseInt(line.substr(21, 2));
-                    if (protein.biomtMatrices[m] == undefined)
+                    if (protein.biomtMatrices[m] === undefined)
                         protein.biomtMatrices[m] = new THREE.Matrix4().identity();
                     protein.biomtMatrices[m].elements[n] = parseFloat(line.substr(24, 9));
                     protein.biomtMatrices[m].elements[n + 4] = parseFloat(line.substr(34, 9));
                     protein.biomtMatrices[m].elements[n + 8] = parseFloat(line.substr(44, 9));
                     protein.biomtMatrices[m].elements[n + 12] = parseFloat(line.substr(54, 10));
-                } else if (type == 350 && line.substr(11, 11) == 'BIOMOLECULE') {
+                } else if (type === 350 && line.substr(11, 11) === 'BIOMOLECULE') {
                     protein.biomtMatrices = [];
                     protein.biomtChains = '';
-                } else if (type == 350 && line.substr(34, 6) == 'CHAINS') {
+                } else if (type === 350 && line.substr(34, 6) === 'CHAINS') {
                     protein.biomtChains += line.substr(41, 40);
                 }
-            } else if (recordName == 'HEADER') {
+            } else if (recordName === 'HEADER') {
                 protein.pdbID = line.substr(62, 4);
-            } else if (recordName == 'TITLE ') {
-                if (protein.title == undefined)
+            } else if (recordName === 'TITLE ') {
+                if (protein.title === undefined)
                     protein.title = "";
                 protein.title += line.substr(10, 70) + "\n"; // CHECK: why 60 is not enough???
-            } else if (recordName == 'COMPND') {
+            } else if (recordName === 'COMPND') {
                 // TODO: Implement me!
             }
         }
@@ -260,35 +260,35 @@ MoleculeGeometryBuilder.prototype =
         // Assign secondary structures 
         for (i = 0; i < atoms.length; i++) {
             atom = atoms[i];
-            if (atom == undefined)
+            if (atom === undefined)
                 continue;
 
             var found = false;
             // MEMO: Can start chain and end chain differ?
             for (j = 0; j < protein.sheet.length; j++) {
-                if (atom.chain != protein.sheet[j][0])
+                if (atom.chain !== protein.sheet[j][0])
                     continue;
                 if (atom.resi < protein.sheet[j][1])
                     continue;
                 if (atom.resi > protein.sheet[j][3])
                     continue;
                 atom.ss = 's';
-                if (atom.resi == protein.sheet[j][1])
+                if (atom.resi === protein.sheet[j][1])
                     atom.ssbegin = true;
-                if (atom.resi == protein.sheet[j][3])
+                if (atom.resi === protein.sheet[j][3])
                     atom.ssend = true;
             }
             for (j = 0; j < protein.helix.length; j++) {
-                if (atom.chain != protein.helix[j][0])
+                if (atom.chain !== protein.helix[j][0])
                     continue;
                 if (atom.resi < protein.helix[j][1])
                     continue;
                 if (atom.resi > protein.helix[j][3])
                     continue;
                 atom.ss = 'h';
-                if (atom.resi == protein.helix[j][1])
+                if (atom.resi === protein.helix[j][1])
                     atom.ssbegin = true;
-                else if (atom.resi == protein.helix[j][3])
+                else if (atom.resi === protein.helix[j][3])
                     atom.ssend = true;
             }
         }
