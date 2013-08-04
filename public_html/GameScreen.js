@@ -6,7 +6,8 @@
 
 GameScreen = function ( )
 {
-    this.scene = new THREE.Scene ( );
+    this.timer = new Timer ( );
+    timer.start ( );
     
     var extractor = new MoleculeGeometryBuilder ( );
     var molStr = 
@@ -105,8 +106,6 @@ GameScreen = function ( )
 };
 
 GameScreen.prototype = new Screen ( );
-
-GameScreen.prototype.answer = undefined;
             
 GameScreen.prototype.onUpdate = function ( delta )
 {
@@ -124,12 +123,12 @@ GameScreen.prototype.onPause = function ( )
 
 GameScreen.prototype.onLeave = function ( )
 {
-
+    
 };
 
 GameScreen.prototype.onResume = function ( )
 {
-
+    timer.reset ( );
 };
 
 GameScreen.prototype.buttonLogic = function( button )
@@ -141,12 +140,15 @@ GameScreen.prototype.buttonLogic = function( button )
             break;
             
         case 'Option 2':
+             alert( 'Not Yet Implemented!' );
              break;
              
         case 'Option 3':
+             alert( 'Not Yet Implemented!' );
             break;
             
         case 'Option 4':
+             alert( 'Not Yet Implemented!' );
              break;
             
         default:

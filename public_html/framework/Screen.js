@@ -5,7 +5,7 @@
 
 Screen = function ( )
 {
-    
+    this.scene = new THREE.Scene ( );
 };
 
 Screen.prototype =
