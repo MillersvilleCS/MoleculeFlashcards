@@ -52,6 +52,6 @@ MenuScreen.prototype.buttonLogic = function( button )
             return 'menu';
             
         default:
-            alert( 'Not Yet Implemented!' );
+            //alert( 'Not Yet Implemented!' );
     }
 };

@@ -131,3 +131,25 @@ GameScreen.prototype.onResume = function ( )
 {
 
 };
+
+GameScreen.prototype.buttonLogic = function( button )
+{
+    switch ( button )
+    {    
+        case 'Option 1':
+            alert( 'Not Yet Implemented!' );
+            break;
+            
+        case 'Option 2':
+             break;
+             
+        case 'Option 3':
+            break;
+            
+        case 'Option 4':
+             break;
+            
+        default:
+            //alert( 'Not Yet Implemented!' );
+    }
+};
