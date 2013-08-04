@@ -19,6 +19,7 @@
         <script type="text/javascript"src="lib/jQuery.js"></script>
         
         <script type="text/javascript"src="framework/Application.js"></script>
+        <script type="text/javascript"src="framework/ApplicationSettings.js"></script>
         <script type="text/javascript"src="framework/Exceptions.js"></script>
         <script type="text/javascript"src="framework/Game.js"></script>
         <script type="text/javascript"src="framework/Map.js"></script>
@@ -57,11 +58,10 @@
                 
                 var loop = function ( )
                 {
-                    requestAnimationFrame( loop );
-                    application.loop ( );
+                    requestAnimationFrame ( loop );
+                    application.loop ( );      
                 };
                 loop ( this );
-
                 /* 
                     Launch CSS Transition with JavaScript:
                     http://www.impressivewebs.com/css3-transitions-javascript/ 
