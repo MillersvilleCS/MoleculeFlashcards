@@ -58,13 +58,8 @@
                 camera.lookAt ( new THREE.Vector3 ( 0,0,0 ) );
                 game = new MoleculeGame ( );
                 var application = new Application ( game, camera, "Game Test", width, height );
-                
-                var loop = function ( )
-                {
-                    requestAnimationFrame ( loop );
-                    application.loop ( );
-                };
-                loop ( );
+                application.performGameLoop ( );
+
                 /* 
                     Launch CSS Transition with JavaScript:
                     http://www.impressivewebs.com/css3-transitions-javascript/ 

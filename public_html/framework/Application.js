@@ -1,8 +1,3 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 Application = function ( game, camera, title, width, height )
 {   
@@ -17,6 +12,8 @@ Application = function ( game, camera, title, width, height )
     this.frameTimer = new Timer ( );
     this.frameTimer.start ( );
     
+    this.prevTime = Date.now ( );
+    
     $( '#container' ).append( this.renderer.domElement );
 };
 
@@ -24,12 +21,13 @@ Application.prototype =
 {
     constructor: Application,
                 
-    loop: function ( )
+    performGameLoop: function ( currTime )
     {
-        var delta = this.frameTimer.getElapsedMs ( );
-        this.frameTimer.reset ( );
-
+        requestAnimationFrame ( this.performGameLoop.bind (this) );
+        var delta = currTime - this.prevTime;
         this.game.update ( delta );
+        this.prevTime = currTime;
+        
         this.renderer.render ( this.game.getCurrentScene ( ), this.camera);
     }
 };
