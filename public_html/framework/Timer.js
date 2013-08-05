@@ -35,7 +35,7 @@ Timer.prototype =
         this.stopTime = time;
     },
             
-    getElapsedTimeMili: function ( )
+    getElapsedMs: function ( )
     {
         if ( this.running )
         {
@@ -45,8 +45,8 @@ Timer.prototype =
         return this.stopTime - this.startTime;
     },
     
-    getElapsedTimeSeconds: function ( )
+    getElapsedSec: function ( )
     {
-        return Math.floor(this.getElapsedTimeMili ( ) / 1000);
+        return Math.floor(this.getElapsedMs ( ) / 1000);
     }
 };

@@ -129,19 +129,17 @@ GameScreen.prototype.onPause = function ( )
 GameScreen.prototype.onLeave = function ( )
 {
     this.timer.reset ( );
-    this.timer.stop ( );
 };
 
 GameScreen.prototype.onResume = function ( )
 {
-    this.timer.reset ( );
     this.timer.start ( );
     this.score = 0;
 };
 
 GameScreen.prototype.getSecondsLeft = function ( )
 {
-    var time = this.GAME_LENGTH - this.timer.getElapsedTimeSeconds ( );
+    var time = this.GAME_LENGTH - this.timer.getElapsedSec ( );
     if ( time > 0 )
     {
         return time;

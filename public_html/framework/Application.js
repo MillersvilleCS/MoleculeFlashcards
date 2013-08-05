@@ -26,7 +26,7 @@ Application.prototype =
                 
     loop: function ( )
     {
-        var delta = this.frameTimer.getElapsedTimeMili ( );
+        var delta = this.frameTimer.getElapsedMs ( );
         this.frameTimer.reset ( );
 
         this.game.update ( delta );
