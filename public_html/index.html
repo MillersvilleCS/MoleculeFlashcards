@@ -21,7 +21,7 @@
         <script type="text/javascript"src="framework/Application.js"></script>
         <script type="text/javascript"src="framework/ApplicationSettings.js"></script>
         <script type="text/javascript"src="framework/Exceptions.js"></script>
-        <script type="text/javascript"src="framework/FileLoader.js"></script>
+        <script type="text/javascript"src="framework/TextLoader.js"></script>
         <script type="text/javascript"src="framework/Game.js"></script>
         <script type="text/javascript"src="framework/Map.js"></script>
         <script type="text/javascript"src="framework/MouseManager.js"></script>
@@ -31,7 +31,9 @@
         <script type="text/javascript"src="GameScreen.js"></script>
         <script type="text/javascript"src="MenuScreen.js"></script>
         <script type="text/javascript"src="MoleculeGame.js"></script>
+        
         <script type="text/javascript"src="MoleculeGeometryBuilder.js"></script> 
+        <script type="text/javascript"src="Molecule.js"></script>
 
         <script type="text/javascript">
 
@@ -60,7 +62,7 @@
                 var loop = function ( )
                 {
                     requestAnimationFrame ( loop );
-                    application.loop ( );      
+                    application.loop ( );
                 };
                 loop ( );
                 /* 

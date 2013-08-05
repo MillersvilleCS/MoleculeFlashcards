@@ -12,7 +12,7 @@ TextLoader = function ( )
 TextLoader.FILE_READY = 4;
 TextLoader.FILE_FOUND = 200;
 
-TextLoader.prototype.loadText = function ( url )
+TextLoader.loadText = function ( url )
 {
     var textFile;
     

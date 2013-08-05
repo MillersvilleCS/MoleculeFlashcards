@@ -8,8 +8,6 @@ Timer = function ( )
     
 };
 
-Timer.date = new Date ( );
-
 Timer.prototype =
 {
     constructor: Timer,
@@ -21,18 +19,18 @@ Timer.prototype =
     start: function ( )
     {
         this.running = true;
-        this.startTime = Timer.date.getTime ( );
+        this.startTime = new Date ( );
     },
             
     stop: function ( )
     {
         this.running = false;
-        this.stopTime = Timer.date.getTime ( );
+        this.stopTime = new Date ( );
     },
             
     reset: function ( )
     {
-        var time = Timer.date.getTime ( );
+        var time = new Date ( );
         this.startTime = time;
         this.stopTime = time;
     },
@@ -41,11 +39,14 @@ Timer.prototype =
     {
         if ( this.running )
         {
-            return Timer.date.getTime ( ) - this.startTime;
+            return new Date - this.startTime;
         }
-        else
-        {
-            return this.stopTime - this.startTime;
-        }
-    } 
+        
+        return this.stopTime - this.startTime;
+    },
+    
+    getElapsedTimeSeconds: function ( )
+    {
+        return Math.floor(this.getElapsedTimeMili ( ) / 1000);
+    }
 };
