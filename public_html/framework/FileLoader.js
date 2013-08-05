@@ -12,22 +12,26 @@ FileLoader = function ( )
 FileLoader.FILE_READY = 4;
 FileLoader.FILE_FOUND = 200;
 
-FileLoader.loadText = function ( url )
+FileLoader.prototype.loadText = function ( url )
 {
-    var textfile;
+    var textFile;
     
     if ( window.XMLHttpRequest )
     {
-        textfile = new XMLHttpRequest ( );
+        textFile = new XMLHttpRequest ( );
     }
-    textfile.onreadystatechange = function ( )
+    textFile.onreadystatechange = function ( )
     {
-        if ( textfile.readyState === FileLoader.FILE_READY && 
-                textfile.status === FileLoader.FILE_FOUND )
+        if ( textFile.readyState === FileLoader.FILE_READY && 
+                textFile.status === FileLoader.FILE_FOUND )
         {
-           allText = textfile.responseText;
-           lines = txtFile.responseText.split ( "\n" );
+           allText = textFile.responseText;
+           lines = textFile.responseText.split ( '\n' );
+           console.log('These are split correctly! Shows them weird in console, good to parse!');
+           console.log(lines);
         }    
     };
-    textfile.send( null );
+    textFile.open( "GET", url, true );
+    textFile.setRequestHeader( "Content-Type", "text/plain" );
+    textFile.send( null );
 };
