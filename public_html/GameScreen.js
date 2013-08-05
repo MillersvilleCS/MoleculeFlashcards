@@ -7,7 +7,7 @@
 GameScreen = function ( )
 {
     this.timer = new Timer ( );
-    timer.start ( );
+    this.timer.start ( );
     
     var extractor = new MoleculeGeometryBuilder ( );
     var molStr = 
@@ -128,7 +128,7 @@ GameScreen.prototype.onLeave = function ( )
 
 GameScreen.prototype.onResume = function ( )
 {
-    timer.reset ( );
+   // timer.reset ( );
 };
 
 GameScreen.prototype.buttonLogic = function( button )

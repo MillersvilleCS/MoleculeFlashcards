@@ -22,25 +22,5 @@ ApplicationSettings.prototype =
     getAspectRatio: function ( )
     {
         return this.width / this.height;
-    },
-       
-    isExitRequested: function ( )
-    {
-        return this.exitRequested;
-    },
-            
-    isFullScreen: function ( )
-    {
-        return this.fullscreen;
-    },
-    
-    getWidth: function ( )
-    {
-        return this.width;
-    },
-            
-    getHeight: function ( )
-    {
-        return this.width;
     }
 };

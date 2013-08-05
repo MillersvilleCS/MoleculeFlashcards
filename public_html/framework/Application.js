@@ -18,8 +18,6 @@ Application = function ( game, camera, title, width, height )
     this.frameTimer.start ( );
     
     $( '#container' ).append( this.renderer.domElement );
-    
-    return this;
 };
 
 Application.prototype =
