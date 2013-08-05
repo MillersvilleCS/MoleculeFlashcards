@@ -4,15 +4,15 @@
  */
 
 
-FileLoader = function ( )
+TextLoader = function ( )
 {
     
 };
 
-FileLoader.FILE_READY = 4;
-FileLoader.FILE_FOUND = 200;
+TextLoader.FILE_READY = 4;
+TextLoader.FILE_FOUND = 200;
 
-FileLoader.prototype.loadText = function ( url )
+TextLoader.prototype.loadText = function ( url )
 {
     var textFile;
     
