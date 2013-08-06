@@ -36,7 +36,7 @@ GameScreen.prototype.onUpdate = function ( delta )
     var timeElement = document.getElementById ( "score" );
     timeElement.innerHTML = game.getScreen ( 'game' ).score;
 
-    if ( MouseManager.leftButton.isPressed )
+    if ( MouseManager.leftButton.isPressed && this.currentMolecule != undefined)
     {
         this.currentMolecule.mesh.rotation.x +=
                 (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
