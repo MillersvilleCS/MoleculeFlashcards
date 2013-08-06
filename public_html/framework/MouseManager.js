@@ -1,11 +1,3 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * Mouse Button
- */
 
 MouseButton = function ( )
 {
@@ -36,12 +28,6 @@ MouseButton.prototype =
         this.pressedY = event.screenY;
     }
 };
-
-
-
-/*
- *MOUSE MANAGER
- */
 
 function MouseManager ( )
 {
