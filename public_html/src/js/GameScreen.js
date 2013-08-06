@@ -78,7 +78,7 @@ GameScreen.prototype.createMolecule = function ( data )
 };
 GameScreen.prototype.nextQuestion = function ( )
 {
-    TextLoader.loadText ( 'models/first.pdb', this.createMolecule.bind ( this ) );
+    TextLoader.loadText ( 'res/models/first.pdb', this.createMolecule.bind ( this ) );
     ++this.currentQuestion;
 };
 
