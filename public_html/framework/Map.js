@@ -1,21 +1,13 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 
 Map = function ( )
 {
-    
+    this.size = 0;
 };
 
 Map.prototype =
 {
     constructor: Map,
             
-    size: 0,
-    
     put: function ( key , value )
     {
         this[ key ] = value;
@@ -29,16 +21,16 @@ Map.prototype =
       
     remove: function ( key )
     {
-        this[ key ] = undefined;
+        delete this[ key ];
         --this.size;
     },
             
     contains: function ( key )
     {
-        return this[ key ] !== undefined;
+        return this.hasOwnProperty (key);
     },
     
-    getNumberOfElements: function ( )
+    getSize: function ( )
     {
         return this.size;
     }
