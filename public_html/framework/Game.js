@@ -1,4 +1,3 @@
-
 Game = function ( )
 {
     this.screenMap = new Map ( )
