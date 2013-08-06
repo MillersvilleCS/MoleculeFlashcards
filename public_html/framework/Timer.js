@@ -1,8 +1,4 @@
 
-/*
- * The timer class can be used to grab elapsed time in miliseconds
- */
-
 Timer = function ( )
 {
     
