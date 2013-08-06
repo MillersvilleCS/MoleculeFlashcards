@@ -41,8 +41,8 @@
 
             function start ( )
             {
-                var width = 800;
-                var height = 600;
+                var WIDTH = 800;
+                var HEIGHT = 600;
                 var VIEW_ANGLE = 45,
                     ASPECT = width / height,
                     NEAR = 0.1,
@@ -57,7 +57,7 @@
                 camera.position.x = 3;
                 camera.lookAt ( new THREE.Vector3 ( 0,0,0 ) );
                 game = new MoleculeGame ( );
-                var application = new Application ( game, camera, "Game Test", width, height );
+                var application = new Application ( game, camera, "Game Test", WIDTH, HEIGHT );
                 application.performGameLoop ( );
 
                 /* 
