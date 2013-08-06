@@ -158,7 +158,9 @@ GameScreen.prototype.buttonLogic = function( button )
     switch ( button )
     {    
         case 'Option 1':
-            alert( 'Not Yet Implemented!' );
+            //alert( 'Not Yet Implemented!' );
+            var textLoader = new TextLoader();
+            textLoader.loadText( 'models/aspirin.pdb' );
             break;
             
         case 'Option 2':
