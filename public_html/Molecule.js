@@ -1,11 +1,7 @@
-
 Molecule = function ( pdbStr )
 {
-    this.id = ++Molecule.idGen;
     this.mesh = Molecule.extractor.load ( pdbStr );
 };
-
-Molecule.idGen = 0;
 
 Molecule.extractor = new MoleculeGeometryBuilder ( );
 
