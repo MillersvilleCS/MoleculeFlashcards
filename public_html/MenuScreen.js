@@ -35,7 +35,7 @@ MenuScreen.prototype.buttonLogic = function ( button )
             return 'game';
 
         case 'HIGH SCORES':
-            return 'highscore';
+            return 'score';
 
         case 'Main Menu':
             return 'menu';

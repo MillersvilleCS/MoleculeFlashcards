@@ -12,16 +12,16 @@ Timer.prototype = {
     start: function ( )
     {
         this.running = true;
-        this.startTime = new Date ( );
+        this.startTime = Date.now ( );
     },
     stop: function ( )
     {
         this.running = false;
-        this.stopTime = new Date ( );
+        this.stopTime = Date.now ( );
     },
     reset: function ( )
     {
-        var time = new Date ( );
+        var time = Date.now ( );
         this.startTime = time;
         this.stopTime = time;
     },
@@ -29,7 +29,7 @@ Timer.prototype = {
     {
         if ( this.running )
         {
-            return new Date - this.startTime;
+            return Date.now ( ) - this.startTime;
         }
 
         return this.stopTime - this.startTime;

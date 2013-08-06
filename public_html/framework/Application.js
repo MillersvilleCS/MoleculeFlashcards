@@ -6,9 +6,6 @@ Application = function ( game, camera, title, width, height )
     this.renderer = new THREE.WebGLRenderer ( );
     this.renderer.setSize ( width, height );
 
-    this.frameTimer = new Timer ( );
-    this.frameTimer.start ( );
-
     this.prevTime = Date.now ( );
 
     $ ( '#container' ).append ( this.renderer.domElement );
