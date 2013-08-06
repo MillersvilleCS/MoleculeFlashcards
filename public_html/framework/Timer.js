@@ -32,11 +32,7 @@ Timer.prototype = {
     {
         if ( this.running )
         {
-<<<<<<< HEAD
             return Date.now ( ) - this.startTime;
-=======
-            return Date.now () - this.startTime;
->>>>>>> 4237afd73ad1da0455443b132a500cf3ade363e4
         }
 
         return this.stopTime - this.startTime;
