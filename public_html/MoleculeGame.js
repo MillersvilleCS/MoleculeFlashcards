@@ -2,7 +2,6 @@
 MoleculeGame = function ( )
 {
     var gameScreen = new GameScreen ( );
-    gameScreen.init();
     var menuScreen = new MenuScreen ( );
     
     this.screenMap.put ( 'game', gameScreen );
