@@ -3,15 +3,9 @@ GameScreen = function ( )
 {
     this.timer = new Timer ( );
     this.score = 0;
+    this.currentQuestion = 0;
+    this.numberOfQuestions = 0;
     this.GAME_LENGTH = 120;
-
-    /*
-     this.moleculeTest = new Molecule ( molStr );
-     this.moleculeTest.setUniformScale ( 0.5 );
-     
-     this.moleculeTest.addPosition ( -2.5, 0, 0 ) ;
-     this.scene.add ( this.moleculeTest.mesh );
-     */
 
     var pointLight = new THREE.PointLight ( 0xFFFFFF );
 
@@ -85,6 +79,7 @@ GameScreen.prototype.createMolecule = function ( data )
 GameScreen.prototype.nextQuestion = function ( )
 {
     TextLoader.loadText ( 'models/first.pdb', this.createMolecule.bind ( this ) );
+    ++this.currentQuestion;
 };
 
 GameScreen.prototype.buttonLogic = function ( button )
