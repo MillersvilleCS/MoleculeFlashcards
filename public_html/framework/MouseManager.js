@@ -1,18 +1,15 @@
 
 MouseButton = function ( )
 {
-    
+
 };
 
-MouseButton.prototype =
-{
+MouseButton.prototype = {
     constructor: MouseButton,
-            
-    isPressed: false, 
-    pressedX: 0, 
+    isPressed: false,
+    pressedX: 0,
     pressedY: 0,
     pressedShift: false,
-    
     press: function ( event )
     {
         this.isPressed = true;
@@ -20,7 +17,6 @@ MouseButton.prototype =
         this.pressedX = event.screenX;
         this.pressedY = event.screenY;
     },
-    
     release: function ( event )
     {
         this.isPressed = false;
@@ -31,13 +27,12 @@ MouseButton.prototype =
 
 function MouseManager ( )
 {
-    
+
 };
 
 MouseManager.leftButton = new MouseButton ( ),
-MouseManager.rightButton = new MouseButton ( ),
-
-MouseManager.currentX = 0;
+        MouseManager.rightButton = new MouseButton ( ),
+        MouseManager.currentX = 0;
 MouseManager.cuttentY = 0;
 
 //The mouse button standard values

@@ -2,20 +2,19 @@
 GameScreen = function ( )
 {
     this.timer = new Timer ( );
-    this.currentMolecule = undefined;
     this.nextMolecule = undefined;
     this.score = 0;
     this.GAME_LENGTH = 120;
-    
+
     /*
-    this.moleculeTest = new Molecule ( molStr );
-    this.moleculeTest.setUniformScale ( 0.5 );
+     this.moleculeTest = new Molecule ( molStr );
+     this.moleculeTest.setUniformScale ( 0.5 );
+     
+     this.moleculeTest.addPosition ( -2.5, 0, 0 ) ;
+     this.scene.add ( this.moleculeTest.mesh );
+     */
 
-    this.moleculeTest.addPosition ( -2.5, 0, 0 ) ;
-    this.scene.add ( this.moleculeTest.mesh );
-    */
-
-    var pointLight = new THREE.PointLight( 0xFFFFFF );
+    var pointLight = new THREE.PointLight ( 0xFFFFFF );
 
     // set its position
     pointLight.position.x = 0;
@@ -23,23 +22,24 @@ GameScreen = function ( )
     pointLight.position.z = 130;
 
     // add to the scene
-    this.scene.add(pointLight);
+    this.scene.add ( pointLight );
 
 };
 
 GameScreen.prototype = new Screen ( );
-            
+
 GameScreen.prototype.onUpdate = function ( delta )
 {
-    var timeElement = document.getElementById("time");
-    timeElement.innerHTML = game.getScreen ('game').getSecondsLeft ();
+    var timeElement = document.getElementById ( "time" );
+    timeElement.innerHTML = game.getScreen ( 'game' ).getSecondsLeft ();
 
-    var timeElement = document.getElementById("score");
-    timeElement.innerHTML = game.getScreen ('game').score;
+    var timeElement = document.getElementById ( "score" );
+    timeElement.innerHTML = game.getScreen ( 'game' ).score;
+
     if ( MouseManager.leftButton.isPressed )
     {
-       this.currentMolecule.mesh.rotation.x += (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
-        //this.molMesh.rotation.z += (MouseManager.currentY - MouseManager.leftButton.pressedY) / 1000;
+        this.currentMolecule.mesh.rotation.x +=
+                (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
     }
 };
 
@@ -55,6 +55,7 @@ GameScreen.prototype.onLeave = function ( )
 
 GameScreen.prototype.onResume = function ( )
 {
+    this.currentMolecule = this.createMolecule ( );
     this.timer.start ( );
     this.score = 0;
 };
@@ -62,44 +63,45 @@ GameScreen.prototype.onResume = function ( )
 GameScreen.prototype.getSecondsLeft = function ( )
 {
     var time = this.GAME_LENGTH - this.timer.getElapsedSec ( );
+    
     if ( time > 0 )
     {
         return time;
     }
     return 0;
-},
-        
+};
+
 GameScreen.prototype.createMolecule = function ( )
 {
-    FileLoader.loadText('models/aspirin.pdb');
-    return new Molecule ( );
-},
-        
+    var moleculeData;
+    TextLoader.loadText ( 'models/aspirin.pdb', moleculeData );
+    return new Molecule ( moleculeData );
+};
 GameScreen.prototype.nextQuestion = function ( )
 {
     this.currentMolecule = this.nextMolecule;
-},
+};
 
-GameScreen.prototype.buttonLogic = function( button )
+GameScreen.prototype.buttonLogic = function ( button )
 {
     switch ( button )
-    {    
+    {
         case 'Option 1':
-            this.nextQuestion();
+            this.nextQuestion ();
             break;
-            
+
         case 'Option 2':
-            alert( 'Not Yet Implemented!' );
+            alert ( 'Not Yet Implemented!' );
             break;
-             
+
         case 'Option 3':
-            alert( 'Not Yet Implemented!' );
+            alert ( 'Not Yet Implemented!' );
             break;
-            
+
         case 'Option 4':
-             alert( 'Not Yet Implemented!' );
-             break;
-            
+            alert ( 'Not Yet Implemented!' );
+            break;
+
         default:
             //alert( 'Not Yet Implemented!' );
     }
