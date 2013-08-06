@@ -2,7 +2,6 @@
 GameScreen = function ( )
 {
     this.timer = new Timer ( );
-    this.nextMolecule = undefined;
     this.score = 0;
     this.GAME_LENGTH = 120;
 
@@ -23,7 +22,6 @@ GameScreen = function ( )
 
     // add to the scene
     this.scene.add ( pointLight );
-
 };
 
 GameScreen.prototype = new Screen ( );
@@ -36,7 +34,7 @@ GameScreen.prototype.onUpdate = function ( delta )
     var timeElement = document.getElementById ( "score" );
     timeElement.innerHTML = game.getScreen ( 'game' ).score;
 
-    if ( MouseManager.leftButton.isPressed && this.currentMolecule != undefined)
+    if ( MouseManager.leftButton.isPressed && this.currentMolecule !== undefined)
     {
         this.currentMolecule.mesh.rotation.x +=
                 (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
@@ -59,6 +57,7 @@ GameScreen.prototype.onResume = function ( )
     $ ( '#rightPanel' ).fadeIn ( 1 );
     
     //this.currentMolecule = this.createMolecule ( );
+    this.nextQuestion ( );
     this.timer.start ( );
     this.score = 0;
 };
@@ -74,15 +73,18 @@ GameScreen.prototype.getSecondsLeft = function ( )
     return 0;
 };
 
-GameScreen.prototype.createMolecule = function ( )
-{
-    var moleculeData;
-    TextLoader.loadText ( 'models/aspirin.pdb', moleculeData );
-    return new Molecule ( moleculeData );
+GameScreen.prototype.createMolecule = function ( data )
+{   
+    if(this.currentMolecule !== undefined )
+    {
+        this.scene.remove ( this.currentMolecule.mesh );
+    }
+    this.currentMolecule = new Molecule ( data );
+    this.scene.add ( this.currentMolecule.mesh );
 };
 GameScreen.prototype.nextQuestion = function ( )
 {
-    this.currentMolecule = this.nextMolecule;
+    TextLoader.loadText ( 'models/first.pdb', this.createMolecule.bind ( this ) );
 };
 
 GameScreen.prototype.buttonLogic = function ( button )
