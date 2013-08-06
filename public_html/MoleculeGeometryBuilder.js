@@ -343,7 +343,7 @@ MoleculeGeometryBuilder.prototype =
            if (atom.hetflag) continue;
            if (colorSidechains || atom.atom == 'CA' || atom.atom == 'O3\'') {
               var color = new TCo(0);
-              color.setHSV((atom.chain.charCodeAt(0) * 5) % 17 / 17.0, 1, 0.9);
+              color.setHSL((atom.chain.charCodeAt(0) * 5) % 17 / 17.0, 1, 0.9);//was .setHSV
               atom.color = color.getHex();
            }
         }
