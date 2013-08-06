@@ -18,6 +18,7 @@
 #rightPanel
 {
     position: relative;
+    display:none;
     float: right;
     margin: 2px;
     text-align: right;

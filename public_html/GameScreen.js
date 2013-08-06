@@ -55,7 +55,10 @@ GameScreen.prototype.onLeave = function ( )
 
 GameScreen.prototype.onResume = function ( )
 {
-    this.currentMolecule = this.createMolecule ( );
+    $ ( 'canvas' ).fadeIn ( 1 );
+    $ ( '#rightPanel' ).fadeIn ( 1 );
+    
+    //this.currentMolecule = this.createMolecule ( );
     this.timer.start ( );
     this.score = 0;
 };

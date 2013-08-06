@@ -3,11 +3,14 @@ MoleculeGame = function ( )
 {
     var gameScreen = new GameScreen ( );
     var menuScreen = new MenuScreen ( );
+    var scoreScreen = new HighScoreScreen ( );
 
     this.screenMap.put ( 'game', gameScreen );
     this.screenMap.put ( 'menu', menuScreen );
+    this.screenMap.put ( 'score', scoreScreen );
 
     this.screenID = 'menu';
+    this.getCurrentScreen ( ).onResume ( );
 };
 
 MoleculeGame.prototype = new Game ( );

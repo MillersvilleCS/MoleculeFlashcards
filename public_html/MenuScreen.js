@@ -18,12 +18,13 @@ MenuScreen.prototype.onPause = function ( )
 
 MenuScreen.prototype.onLeave = function ( )
 {
-
+    $ ( '#mainMenuUI' ).fadeOut ( 500 );
 };
 
 MenuScreen.prototype.onResume = function ( )
 {
-
+    $ ( '#gameUI' ).fadeIn ( 500 );
+    $ ( '#mainMenuUI' ).fadeIn ( 500 );
 };
 
 MenuScreen.prototype.buttonLogic = function ( button )
@@ -31,21 +32,12 @@ MenuScreen.prototype.buttonLogic = function ( button )
     switch ( button )
     {
         case 'START':
-            $ ( '#mainMenuUI' ).fadeOut ( 500 );
             return 'game';
 
         case 'HIGH SCORES':
-            $ ( 'canvas' ).css ( 'display', 'none' );
-            $ ( '#mainMenuUI' ).fadeOut ( 500 );
-            $ ( '#gameUI' ).fadeOut ( 500 );
-            $ ( '#highScoreUI' ).css ( 'display', 'block' );
-            break;
+            return 'highscore';
 
         case 'Main Menu':
-            $ ( '#mainMenuUI' ).fadeIn ( 500 );
-            $ ( '#gameUI' ).fadeIn ( 500 );
-            $ ( '#highScoreUI' ).delay ( 500 ).fadeOut ( 1 );
-            $ ( 'canvas' ).delay ( 500 ).fadeIn ( 1 );
             return 'menu';
 
         default:
