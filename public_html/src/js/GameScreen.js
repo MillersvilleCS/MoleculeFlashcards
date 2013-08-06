@@ -69,11 +69,13 @@ GameScreen.prototype.getSecondsLeft = function ( )
 
 GameScreen.prototype.createMolecule = function ( data )
 {   
-    if(this.currentMolecule !== undefined )
+    if ( this.currentMolecule !== undefined )
     {
         this.scene.remove ( this.currentMolecule.mesh );
     }
     this.currentMolecule = new Molecule ( data );
+    this.currentMolecule.setPosition ( -2.5, 0, 0 );
+    this.currentMolecule.setUniformScale ( 0.5 );
     this.scene.add ( this.currentMolecule.mesh );
 };
 GameScreen.prototype.nextQuestion = function ( )

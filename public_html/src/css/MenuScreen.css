@@ -30,7 +30,7 @@
 /*
     Start Button
 */
-#mainMenuStart
+#mainMenuStartButton
 {
     background-color: #4D4D62;
     color: #F8F8FE;
@@ -41,12 +41,12 @@
     margin-bottom: 34px;
 }
 
-#mainMenuStart:hover
+#mainMenuStartButton:hover
 {
     background-color: #53495E;
 }
 
-#mainMenuStart:active
+#mainMenuStartButton:active
 {
     background-color: #EFE1FE;
 }
@@ -55,7 +55,7 @@
     Tutorial Button
 */
 
-#mainMenuTutorial
+#mainMenuTutorialButton
 {
     background-color: #4D4D62;
     color: #F8F8FE;
@@ -65,12 +65,12 @@
     margin-right: 89px;
 }
 
-#mainMenuTutorial:hover
+#mainMenuTutorialButton:hover
 {
     background-color: #53495E;
 }
 
-#mainMenuTutorial:active
+#mainMenuTutorialButton:active
 {
     background-color: #EFE1FE;
 }
@@ -79,7 +79,7 @@
     HighScore Button
 */
 
-#mainMenuHighScore
+#mainMenuHighScoreButton
 {
     background-color: #4D4D62;
     color: #F8F8FE;
@@ -90,12 +90,12 @@
     height: 50px;
 }
 
-#mainMenuHighScore:hover
+#mainMenuHighScoreButton:hover
 {
     background-color: #53495E;
 }
 
-#mainMenuHighScore:active
+#mainMenuHighScoreButton:active
 {
     background-color: #EFE1FE;
 }
