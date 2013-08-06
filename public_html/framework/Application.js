@@ -1,8 +1,5 @@
-
 Application = function ( game, camera, title, width, height )
 {   
-    //this.settings = new ApplicationSettings ( title, width, height );
-    
     this.game = game;
     this.camera = camera;
     
