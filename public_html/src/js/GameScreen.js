@@ -1,6 +1,8 @@
 
 GameScreen = function ( )
 {
+    this.MOLECULE = 0;
+    this.ANSWER = 1;
     //////////temporary/////////////
     this.modelList =
             [
@@ -41,10 +43,10 @@ GameScreen.prototype.onUpdate = function ( delta )
 
     if ( MouseManager.leftButton.isPressed )
     {
-        this.currentQuestion.value1.rotation.z -=
+        this.currentQuestion[this.MOLECULE].rotation.z -=
                 (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
 
-        this.currentQuestion.value1.rotation.x +=
+        this.currentQuestion[this.MOLECULE].rotation.x +=
                 (MouseManager.currentY - MouseManager.leftButton.pressedY) / 1000;
     }
 };
@@ -63,8 +65,7 @@ GameScreen.prototype.onResume = function ( )
 {
     //start the loading screen
     $ ( '#loadingUI' ).fadeIn ( 1 );
-    this.questionManager = new QuestionManager ( );
-
+    this.questionList = [ ];
     TextLoader.loadText ( this.modelList[0],
             this.loadAssets.bind ( this ) );
 
@@ -76,11 +77,11 @@ GameScreen.prototype.startGame = function ( )
     $ ( 'canvas' ).fadeIn ( 500 );
     $ ( '#rightPanel' ).fadeIn ( 500 );
 
-    this.questionIterator = this.questionManager.getIterator ( );
+    this.questionIterator = new Iterator ( this.questionList );
     if ( this.questionIterator.hasNext ( ) )
     {
         this.currentQuestion = this.questionIterator.next ( );
-        this.scene.add ( this.currentQuestion.value1 );
+        this.scene.add ( this.currentQuestion [ this.MOLECULE ] );
         this.timer.start ( );
         this.score = 0;
     }
@@ -95,9 +96,9 @@ GameScreen.prototype.nextQuestion = function ( )
     //TextLoader.loadText ( 'res/models/aspirin.pdb', this.createMolecule.bind ( this ) );
     if ( this.questionIterator.hasNext ( ) )
     {
-        this.scene.remove ( this.currentQuestion.value1 );
+        this.scene.remove ( this.currentQuestion[ this.MOLECULE ] );
         this.currentQuestion = this.questionIterator.next ( );
-        this.scene.add ( this.currentQuestion.value1 );
+        this.scene.add ( this.currentQuestion[ this.MOLECULE ] );
         return true;
     }
     return false;
@@ -105,6 +106,7 @@ GameScreen.prototype.nextQuestion = function ( )
 
 GameScreen.prototype.loadAssets = function ( data )
 {
+    
     var molecule = MoleculeGeometryBuilder.load ( data );
     molecule.position.x = -2.5;
     molecule.scale.x = 0.5;
@@ -118,9 +120,10 @@ GameScreen.prototype.loadAssets = function ( data )
         loadingString += '.';
     }
     $ ( '#loadingMessage' ).html(loadingString);
-
-    this.questionManager.add ( molecule, "Option 1" );
-    var moleculeCount = this.questionManager.numberOfQuestions ( );
+    
+    this.questionList.push ( [molecule , "Option 1"] );
+    
+    var moleculeCount = this.questionList.length;
     if ( moleculeCount === this.modelList.length )
     {
         this.startGame ( );
@@ -147,7 +150,7 @@ GameScreen.prototype.getSecondsLeft = function ( )
 
 GameScreen.prototype.answerQuestion = function ( userAnswer )
 {
-    if ( this.currentQuestion.value2 === userAnswer )
+    if ( this.currentQuestion [ this.ANSWER ] === userAnswer )
     {
         this.score += 100;
         this.nextQuestion ();
