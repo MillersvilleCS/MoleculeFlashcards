@@ -78,12 +78,12 @@ GameScreen.prototype.createMolecule = function ( data )
     }
     this.currentMolecule = new Molecule ( data );
     this.currentMolecule.setPosition ( -2.5, 0, 0 );
-    this.currentMolecule.setUniformScale ( 0.35 );
+    this.currentMolecule.setUniformScale ( 0.5 );
     this.scene.add ( this.currentMolecule.mesh );
 };
 GameScreen.prototype.nextQuestion = function ( )
 {
-    TextLoader.loadText ( 'res/models/5.pdb', this.createMolecule.bind ( this ) );
+    TextLoader.loadText ( 'res/models/aspirin.pdb', this.createMolecule.bind ( this ) );
     ++this.currentQuestion;
 };
 
