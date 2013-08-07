@@ -40,10 +40,10 @@ GameScreen.prototype.onUpdate = function ( delta )
 
     if ( MouseManager.leftButton.isPressed )
     {
-        this.currentQuestion.value1.mesh.rotation.z -=
+        this.currentQuestion.value1.rotation.z -=
                 (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
 
-        this.currentQuestion.value1.mesh.rotation.x +=
+        this.currentQuestion.value1.rotation.x +=
                 (MouseManager.currentY - MouseManager.leftButton.pressedY) / 1000;
     }
 };
@@ -79,7 +79,7 @@ GameScreen.prototype.startGame = function ( )
     if ( this.questionIterator.hasNext ( ) )
     {
         this.currentQuestion = this.questionIterator.next ( );
-        this.scene.add ( this.currentQuestion.value1.mesh );
+        this.scene.add ( this.currentQuestion.value1 );
         this.timer.start ( );
         this.score = 0;
     }
@@ -94,9 +94,9 @@ GameScreen.prototype.nextQuestion = function ( )
     //TextLoader.loadText ( 'res/models/aspirin.pdb', this.createMolecule.bind ( this ) );
     if ( this.questionIterator.hasNext ( ) )
     {
-        this.scene.remove ( this.currentQuestion.value1.mesh );
+        this.scene.remove ( this.currentQuestion.value1 );
         this.currentQuestion = this.questionIterator.next ( );
-        this.scene.add ( this.currentQuestion.value1.mesh );
+        this.scene.add ( this.currentQuestion.value1 );
         return true;
     }
     return false;
@@ -104,9 +104,11 @@ GameScreen.prototype.nextQuestion = function ( )
 
 GameScreen.prototype.createQuestion = function ( data )
 {
-    var molecule = new Molecule ( data );
-    molecule.setPosition ( -2.5, 0, 0 );
-    molecule.setUniformScale ( 0.5 );
+    var molecule = MoleculeGeometryBuilder.load ( data );
+    molecule.position.x = -2.5;
+    molecule.scale.x = 0.5;
+    molecule.scale.y = 0.5;
+    molecule.scale.z = 0.5;
 
     this.questionManager.add ( molecule, "Option 1" );
     var moleculeCount = this.questionManager.numberOfQuestions ( );
