@@ -18,12 +18,12 @@ HighScoreScreen.prototype.onPause = function ( )
 
 HighScoreScreen.prototype.onLeave = function ( )
 {
-    $ ( '#highScoreUI' ).delay ( 500 ).fadeOut ( 1 );
+    $ ( '#highScoreUI' ).fadeOut( 500 );
 };
 
 HighScoreScreen.prototype.onResume = function ( )
 {
-     $ ( '#highScoreUI' ).css ( 'display', 'block' );
+     $ ( '#highScoreUI' ).fadeIn( 500 );
 };
 
 HighScoreScreen.prototype.buttonLogic = function ( button )

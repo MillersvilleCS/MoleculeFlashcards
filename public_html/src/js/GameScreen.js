@@ -171,4 +171,3 @@ GameScreen.prototype.buttonLogic = function ( button )
             //alert( 'Not Yet Implemented!' );
     }
 };
-
