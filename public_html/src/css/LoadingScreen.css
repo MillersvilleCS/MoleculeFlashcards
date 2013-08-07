@@ -6,3 +6,13 @@
     z-index: 4;
     display: none;
 }
+
+#beginButton
+{
+    display: none;
+}
+
+#loadingMessage
+{
+    /* Add CSS Later */
+}
