@@ -1,0 +1,124 @@
+############################
+# Communication Protocol
+############################
+Brief Client Side: The request object is encoded in JSON and posted to the /request_handler.php page, then the response text is an object encoded in JSON, which can be evaluated as a JavaScript object.
+
+Example code:
+	
+    function send_request(request_object, request_URL){
+		//Make request
+		var response= $.ajax({
+		    url: request_URL,
+		    type: 'POST',
+		    data: JSON.stringify(request_object),
+		    async: false
+		}).responseText;
+	
+		//Turn the JSON response into an object and return it
+		try{
+		    return JSON.parse(response);
+		} catch(err){
+		    var ret = Object();
+		    ret.success = false;
+		    ret.error = "JSON syntax error, invalid server response";
+		    return ret;
+		}
+    }
+    
+    var request_obj = Object();
+	request_obj.request_type = "login";
+	request_obj.email = "sam@lol.com";
+	request_obj.pw_hash = "1234dinosaur";
+	send_request(request_obj, "/request_handler.php");
+
+#########################
+# Request Types
+#########################
+Note:
+	- All requests must include the "request_type" field which is the name of the request (see example above).
+	- All responses include a "success" field, which contains the string "true" when the request was successful and "false" when the request failed
+	- Anything preceded with a # is not implemented
+
+Name:
+	login
+Description:
+	login and get basic user data
+Request Fields:
+	email
+	pw_hash
+Response Fields:
+	username
+	authenticator
+
+Name:
+	get_avail_flashcard_games
+Description:
+	get a list of games available for a given user to play
+Request Fields:
+	authenticator
+Response Fields:
+	available_games - array of game_info objects (defined below)
+		game_info object properties:
+			id
+			q_count
+			image
+			name
+			description
+			time_limit
+			#high_scores - array of high_score objects (defined below)
+			#	high_score object properties:
+			#		username
+			#		score
+	
+Name: 
+	load_flashcard_game
+Description:
+	load the flashcard game data
+Request Fields:
+	authenticator
+Response Fields:
+	game_session_id
+	questions - array of question objects (defined below)
+		question object properties:
+			text
+			pdb_url #will be changed to media_id to facilitate randomizing question order and down the road we have to add 2D molecule representations (most likely as images), so we'll have to load other types of media
+			answers - array of strings - possible answers - can be between 2 and 5 strings long
+	question_id - array of answers stored as ints, commonly indexed wrt questions array (ie. if question_id[0] = 0 the answer to question[0].answers[0] ) - security through obscurity :)
+	
+
+	
+#Name:
+#	get_media
+#Description:
+#	get a single piece of media (image/pdb). Now that I'm thinking about it we'll probably want to load the media through a seperate interface so that we can return an image or pdb directly, but these are the fields required to load media
+#Request Fields:
+#	authenticator
+#	game_session_id
+#	media_type (pdb for pdbs, image for images)
+#	media_id
+#Response:
+#	Media File
+
+#Name:
+#	end_flashcard_game
+#Description:
+#	Submitted when the game is over or the user goes back to the main menu (the server will automatically clean up old sessions, this just keeps the table from getting too big)
+#Request Fields:
+#	authenticator
+#	game_session_id
+#Response Fields:
+#	None
+
+#Name:
+#	submit_answer
+#Description:
+#	Submitted when a user answers a question - submit  -1 when the user hits the "start" button
+#Request Fields:
+#	game_session_id
+#	authenticator
+#	question_id
+#	answer
+#	game_time
+#Response Fields:
+#	score
+#	correct
