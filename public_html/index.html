@@ -8,10 +8,11 @@
         <meta http-equiv = 'content-type' content='text/html; charset=UTF-8'>
 
         <!-- css files -->
-        <link rel = 'stylesheet' type = 'text/css' href = 'src/css/GameScreen.css'>
-        <link rel = 'stylesheet' type = 'text/css' href = 'src/css/MenuScreen.css'>
         <link rel = 'stylesheet' type = 'text/css' href = 'src/css/MoleculeFlashcards.css'> 
+        <link rel = 'stylesheet' type = 'text/css' href = 'src/css/GameScreen.css'>
         <link rel = 'stylesheet' type = 'text/css' href = 'src/css/HighScoreScreen.css'>
+        <link rel = 'stylesheet' type = 'text/css' href = 'src/css/LoadingScreen.css'>
+        <link rel = 'stylesheet' type = 'text/css' href = 'src/css/MenuScreen.css'>
 
         <!-- js files -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
@@ -30,6 +31,7 @@
         <script type="text/javascript"src="src/js/GameScreen.js"></script>
         <script type="text/javascript"src="src/js/MenuScreen.js"></script>
         <script type="text/javascript"src="src/js/HighScoreScreen.js"></script>
+        <script type="text/javascript"src="src/js/LoadingScreen.js"></script>
         <script type="text/javascript"src="src/js/MoleculeGame.js"></script>
         <script type="text/javascript"src="src/js/MoleculeGeometryBuilder.js"></script> 
         <script type="text/javascript"src="src/js/PDBLoader.js"></script> 
@@ -109,6 +111,15 @@
                         id = "mainMenuHighScoreButton" 
                         onclick = "game.buttonLogic ( 'HIGH SCORES' );">
                         HIGH SCORES
+                    </div>
+                </div>
+
+                <div id = "loadingUI">
+                    Test.
+                    <div 
+                        class = "button"
+                        onclick = "game.buttonLogic ( 'Begin' );">
+                        Begin
                     </div>
                 </div>
 

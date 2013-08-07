@@ -32,7 +32,7 @@ MenuScreen.prototype.buttonLogic = function ( button )
     switch ( button )
     {
         case 'START':
-            return 'game';
+            return 'loading';
 
         case 'HIGH SCORES':
             return 'score';
