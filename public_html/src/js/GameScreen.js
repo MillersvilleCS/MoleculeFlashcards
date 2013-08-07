@@ -16,6 +16,7 @@ GameScreen = function ( )
     this.timer = new Timer ( );
     this.score = 0;
     this.GAME_LENGTH = 120;
+    this.loadingState = 0;
 
     var pointLight = new THREE.PointLight ( 0xFFFFFF );
 
@@ -65,7 +66,7 @@ GameScreen.prototype.onResume = function ( )
     this.questionManager = new QuestionManager ( );
 
     TextLoader.loadText ( this.modelList[0],
-            this.createQuestion.bind ( this ) );
+            this.loadAssets.bind ( this ) );
 
 };
 
@@ -102,13 +103,21 @@ GameScreen.prototype.nextQuestion = function ( )
     return false;
 };
 
-GameScreen.prototype.createQuestion = function ( data )
+GameScreen.prototype.loadAssets = function ( data )
 {
     var molecule = MoleculeGeometryBuilder.load ( data );
     molecule.position.x = -2.5;
     molecule.scale.x = 0.5;
     molecule.scale.y = 0.5;
     molecule.scale.z = 0.5;
+
+    var loadingString =  $ ( '#loadingMessage' ).html();
+    ++this.loadingState;
+    for(var i = 0; i < this.loadingState % 3; ++i)
+    {
+        loadingString += '.';
+    }
+    $ ( '#loadingMessage' ).html(loadingString);
 
     this.questionManager.add ( molecule, "Option 1" );
     var moleculeCount = this.questionManager.numberOfQuestions ( );
@@ -121,7 +130,7 @@ GameScreen.prototype.createQuestion = function ( data )
     else
     {
         TextLoader.loadText ( this.modelList[moleculeCount],
-                this.createQuestion.bind ( this ) );
+                this.loadAssets.bind ( this ) );
     }
 };
 
