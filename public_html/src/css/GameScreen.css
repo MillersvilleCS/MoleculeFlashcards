@@ -59,5 +59,28 @@
     float: right;
 }
 
+/*
+    Loading 
+*/
+
+#loadingUI
+{
+    position: absolute;
+    min-width: 810px;
+    min-height: 610px;
+    z-index: 4;
+    display: none;
+}
+
+#beginButton
+{
+    display: none;
+}
+
+#loadingMessage
+{
+    /* Add CSS Later */
+}
+
 
 

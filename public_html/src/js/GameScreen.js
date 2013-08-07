@@ -89,19 +89,6 @@ GameScreen.prototype.startGame = function  ( )
     }
 };
 
-GameScreen.prototype.getSecondsLeft = function ( )
-{
-    var time = this.GAME_LENGTH - this.timer.getElapsedSec ( );
-    
-    if ( time > 0 )
-    {
-        return time;
-    }
-    return 0;
-};
-
-
-
 GameScreen.prototype.nextQuestion = function ( )
 {
     //TextLoader.loadText ( 'res/models/aspirin.pdb', this.createMolecule.bind ( this ) );
@@ -113,31 +100,6 @@ GameScreen.prototype.nextQuestion = function ( )
         return true;
     } 
     return false;
-};
-
-GameScreen.prototype.buttonLogic = function ( button )
-{
-    switch ( button )
-    {
-        case 'Option 1':
-            this.nextQuestion ();
-            break;
-
-        case 'Option 2':
-            alert ( 'Not Yet Implemented!' );
-            break;
-
-        case 'Option 3':
-            alert ( 'Not Yet Implemented!' );
-            break;
-
-        case 'Option 4':
-            alert ( 'Not Yet Implemented!' );
-            break;
-
-        default:
-            //alert( 'Not Yet Implemented!' );
-    }
 };
 
 GameScreen.prototype.createQuestion = function ( data )
@@ -160,3 +122,53 @@ GameScreen.prototype.createQuestion = function ( data )
             this.createQuestion.bind ( this ) );
     }
 };
+
+GameScreen.prototype.getSecondsLeft = function ( )
+{
+    var time = this.GAME_LENGTH - this.timer.getElapsedSec ( );
+    
+    if ( time > 0 )
+    {
+        return time;
+    }
+    return 0;
+};
+
+GameScreen.prototype.answerQuestion = function ( userAnswer )
+{
+    if ( this.currentQuestion.value2 === userAnswer )
+    {
+        this.score += 100;
+        this.nextQuestion ();
+    }
+    else
+    {
+        this.score -= 30;
+    }
+};
+
+GameScreen.prototype.buttonLogic = function ( button )
+{
+    switch ( button )
+    {
+        case 'Option 1':
+            this.answerQuestion ( "Option 1" );
+            break;
+
+        case 'Option 2':
+             this.answerQuestion ( "Option 2" );
+            break;
+
+        case 'Option 3':
+             this.answerQuestion ( "Option 3" );
+            break;
+
+        case 'Option 4':
+             this.answerQuestion ( "Option 4" );
+            break;
+
+        default:
+            //alert( 'Not Yet Implemented!' );
+    }
+};
+
