@@ -1,7 +1,6 @@
 
-LoadingScreen = function ( gameScr )
+LoadingScreen = function ( )
 {
-    this.gameScreen = gameScr;
     this.moleculeCount = 0;
 
     this.modelList = 
@@ -46,7 +45,7 @@ LoadingScreen.prototype.pushMolecule = function ( data )
     molecule.setPosition ( -2.5, 0, 0 );
     molecule.setUniformScale ( 0.5 );
 
-    this.gameScreen.pushMolecules( molecule );
+    game.getScreen ( 'game' ).pushMolecules( molecule );
     ++this.moleculeCount;
 
     if( this.moleculeCount == 7 )

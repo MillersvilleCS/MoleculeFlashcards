@@ -2,7 +2,7 @@
 MoleculeGame = function ( )
 {
     var gameScreen = new GameScreen ( );
-    var loadingScreen = new LoadingScreen ( gameScreen );
+    var loadingScreen = new LoadingScreen ( );
     var menuScreen = new MenuScreen ( );
     var scoreScreen = new HighScoreScreen ( );
 

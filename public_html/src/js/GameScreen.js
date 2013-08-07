@@ -23,7 +23,7 @@ GameScreen.prototype = new Screen ( );
 
 GameScreen.prototype.onUpdate = function ( delta )
 {
-    console.log('ran' + Date.now());
+    console.log('ran time: ' + Date.now());
 
     var timeElement = document.getElementById ( "time" );
     timeElement.innerHTML = game.getScreen ( 'game' ).getSecondsLeft ();
