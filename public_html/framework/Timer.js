@@ -42,4 +42,23 @@ Timer.prototype = {
     {
         return Math.floor ( this.getElapsedMs ( ) / 1000 );
     }
+            
+};
+
+Timer.getDigitalRep = function ( seconds )
+{  
+    var minutes = Math.floor ( seconds / 60 );
+    seconds = seconds - minutes * 60;
+
+    var digitalRep = undefined;
+    if(seconds < 10)
+    {
+        digitalRep = minutes + ':0' + seconds;
+    }
+    else
+    {
+        digitalRep = minutes + ':' + seconds;
+    }
+
+    return digitalRep;
 };

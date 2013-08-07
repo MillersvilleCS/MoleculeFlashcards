@@ -23,26 +23,14 @@ GameScreen.prototype = new Screen ( );
 
 GameScreen.prototype.onUpdate = function ( delta )
 {
-    console.log('ran time: ' + Date.now());
-
     var timeElement = document.getElementById ( "time" );
-    var seconds = this.getSecondsLeft ();
-    var minutes = Math.floor(seconds / 60);
-    seconds = seconds - minutes * 60;
-    if(seconds < 10)
-    {
-        timeElement.innerHTML = minutes + ':0' + seconds;
-    }
-    else
-    {
-        timeElement.innerHTML = minutes + ':' + seconds;
-    }
+    timeElement.innerHTML = Timer.getDigitalRep ( this.getSecondsLeft  ( ) );
     
+    var scoreElement = document.getElementById ( "score" );
+    scoreElement.innerHTML = this.score;
 
-    var timeElement = document.getElementById ( "score" );
-    timeElement.innerHTML = game.getScreen ( 'game' ).score;
-
-    if ( MouseManager.leftButton.isPressed && this.moleculeList[this.currentQuestion] !== undefined)
+    if ( MouseManager.leftButton.isPressed && 
+            this.moleculeList[this.currentQuestion] !== undefined)
     {
         this.moleculeList[this.currentQuestion].mesh.rotation.z -=
                 (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
@@ -84,20 +72,6 @@ GameScreen.prototype.getSecondsLeft = function ( )
     return 0;
 };
 
-/*
-GameScreen.prototype.createMolecule = function ( data )
-{   
-    if ( this.currentMolecule !== undefined )
-    {
-        this.scene.remove ( this.currentMolecule.mesh );
-    }
-    this.currentMolecule = new Molecule ( data );
-    this.currentMolecule.setPosition ( -2.5, 0, 0 );
-    this.currentMolecule.setUniformScale ( 0.5 );
-    this.scene.add ( this.currentMolecule.mesh );
-};
-*/
-
 GameScreen.prototype.pushMolecules = function  ( molecule )
 {
     this.moleculeList.push(molecule);
@@ -106,7 +80,7 @@ GameScreen.prototype.pushMolecules = function  ( molecule )
 GameScreen.prototype.nextQuestion = function ( )
 {
     //TextLoader.loadText ( 'res/models/aspirin.pdb', this.createMolecule.bind ( this ) );
-    if ( this.moleculeList[this.currentQuestion] != undefined )
+    if ( this.moleculeList[this.currentQuestion] !== undefined )
     {
         this.scene.remove ( this.moleculeList[this.currentQuestion].mesh );
         ++this.currentQuestion;  
