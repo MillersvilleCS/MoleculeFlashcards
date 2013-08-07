@@ -11,8 +11,7 @@ MoleculeGame = function ( )
     this.screenMap.put ( 'menu', menuScreen );
     this.screenMap.put ( 'score', scoreScreen );
 
-    this.screenID = 'menu';
-    this.getCurrentScreen ( ).onResume ( );
+    this.init ( 'menu' );
 };
 
 MoleculeGame.prototype = new Game ( );

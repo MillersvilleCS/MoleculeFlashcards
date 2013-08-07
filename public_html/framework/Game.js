@@ -2,10 +2,23 @@ Game = function ( )
 {
     this.screenMap = new Map ( )
     this.screenID = undefined;
+    this.initialized = false;
 };
 
 Game.prototype = {
     constructor: Game,
+    init: function ( screenID )
+    {
+        if ( this.initialized === false )
+        {
+            this.screenID = screenID;
+            this.getCurrentScreen ( ).onResume ( );
+        }
+        else
+        {
+            throw new AlreadyInitilizedException ( "Game" );
+        }
+    },
     update: function ( delta )
     {
         throw new UnimplementedFunctionException ( "update" );

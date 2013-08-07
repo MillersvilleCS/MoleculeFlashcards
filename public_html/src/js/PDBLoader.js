@@ -159,6 +159,7 @@ PDBLoader.prototype =
         var atoms = json.atoms;
         var bonds = json.bonds;
         var bondInfo = undefined;
+        
         function createAtomsAsSpheres 
             ( atoms, atomScale, quality, model )
         {
@@ -227,6 +228,7 @@ PDBLoader.prototype =
 
                 bondGeometry.vertices.push(vertex1.clone());
                 bondGeometry.vertices.push(vertex2.clone());
+                
                 bondGeometry.colors.push (color1.clone());
                 bondGeometry.colors.push (color2.clone());
 
