@@ -10,8 +10,8 @@
 #gameUI
 {
     position: absolute;
-    min-width: 810px;
-    min-height: 610px;
+    min-width: 806px;
+    min-height: 600px;
     z-index: 3;
 }
 
@@ -79,8 +79,7 @@
 
 #loadingMessage
 {
-    /* Add CSS Later */
+    font-size: 60px;
+    text-align: center;
+    padding-top: 200px;
 }
-
-
-
