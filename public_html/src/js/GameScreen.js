@@ -1,11 +1,20 @@
 
 GameScreen = function ( )
 {
+    //////////temporary/////////////
+    this.modelList = 
+    [
+        'res/models/first.pdb',
+        'res/models/aspirin.pdb',
+        'res/models/0.pdb',
+        'res/models/1.pdb',
+        'res/models/2.pdb',
+        'res/models/4.pdb',
+        'res/models/5.pdb'
+    ];
+    ////////////////////
     this.timer = new Timer ( );
     this.score = 0;
-    this.currentQuestion = 0;
-    this.numberOfQuestions = 0;
-    this.moleculeList = [];
     this.GAME_LENGTH = 120;
 
     var pointLight = new THREE.PointLight ( 0xFFFFFF );
@@ -52,13 +61,9 @@ GameScreen.prototype.onLeave = function ( )
 
 GameScreen.prototype.onResume = function ( )
 {
-    $ ( 'canvas' ).fadeIn ( 500 );
-    $ ( '#rightPanel' ).fadeIn ( 500 );
+     $ ( '#loadingUI' ).fadeIn( 1 );
+    TextLoader.loadText ( this.modelList[this.moleculeCount], this.pushMolecule.bind ( this ) );
     
-    //this.currentMolecule = this.createMolecule ( );
-    this.nextQuestion ( );
-    this.timer.start ( );
-    this.score = 0;
 };
 
 GameScreen.prototype.getSecondsLeft = function ( )
@@ -72,9 +77,18 @@ GameScreen.prototype.getSecondsLeft = function ( )
     return 0;
 };
 
-GameScreen.prototype.pushMolecules = function  ( molecule )
+GameScreen.prototype.startGame = function  ( )
 {
-    this.moleculeList.push(molecule);
+    
+    
+    $ ( '#loadingUI' ).fadeOut ( 1 );
+    $ ( 'canvas' ).fadeIn ( 500 );
+    $ ( '#rightPanel' ).fadeIn ( 500 );
+    
+    //this.currentMolecule = this.createMolecule ( );
+    this.nextQuestion ( );
+    this.timer.start ( );
+    this.score = 0;
 };
 
 GameScreen.prototype.nextQuestion = function ( )
@@ -111,5 +125,25 @@ GameScreen.prototype.buttonLogic = function ( button )
 
         default:
             //alert( 'Not Yet Implemented!' );
+    }
+};
+
+LoadingScreen.prototype.pushMolecule = function ( data )
+{
+    var molecule = new Molecule ( data );
+    molecule.setPosition ( -2.5, 0, 0 );
+    molecule.setUniformScale ( 0.5 );
+
+    this.moleculeList.push(molecule);
+    ++this.moleculeCount;
+
+    if( this.moleculeCount === this.modelList.length )
+    {
+        $ ( '#loadingMessage' ).fadeIn( 500 );
+        $ ( '#beginButton' ).fadeIn ( 500 );
+    }
+    else
+    {
+        TextLoader.loadText ( this.modelList[this.moleculeCount], this.pushMolecule.bind ( this ) );
     }
 };

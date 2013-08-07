@@ -9,6 +9,7 @@ Map.prototype = {
     put: function ( key, value )
     {
         this[ key ] = value;
+
         ++this.size;
     },
     get: function ( key )
