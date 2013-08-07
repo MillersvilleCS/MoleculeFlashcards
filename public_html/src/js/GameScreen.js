@@ -35,7 +35,7 @@ GameScreen.prototype = new Screen ( );
 
 GameScreen.prototype.onUpdate = function ( delta )
 {
-    if ( this.timer.getElapsedSec() >= this.GAME_LENGTH - 15 )
+    if ( this.getSecondsLeft ( ) < 15 )
     {
         $ ( '#time' ).css ( 'color', 'red' );
     }
@@ -120,7 +120,7 @@ GameScreen.prototype.loadAssets = function ( data )
 
     var loadingString =  "Loading";
     ++this.loadingState;
-    for(var i = 0; i < this.loadingState % 3; ++i)
+    for(var i = 0; i < (this.loadingState / 2) % 3; ++i)
     {
         loadingString += '.';
     }
