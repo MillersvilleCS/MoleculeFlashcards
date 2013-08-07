@@ -221,9 +221,14 @@ PDBLoader.prototype =
                 
                 var vertex1 = bondInfo.vertices[ start ];
                 var vertex2 = bondInfo.vertices[ end ];
+                
+                var color1 = bondInfo.colors[ start ];
+                var color2 = bondInfo.colors[ end ];
 
                 bondGeometry.vertices.push(vertex1.clone());
                 bondGeometry.vertices.push(vertex2.clone());
+                bondGeometry.colors.push (color1.clone());
+                bondGeometry.colors.push (color2.clone());
 
             }
             
