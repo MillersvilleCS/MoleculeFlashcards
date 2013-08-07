@@ -2,8 +2,8 @@
 Timer = function ( )
 {
     this.startTime = 0,
-            this.stopTime = 0,
-            this.running = false;
+    this.stopTime = 0,
+    this.running = false;
 };
 
 Timer.prototype = {

@@ -35,6 +35,11 @@ GameScreen.prototype = new Screen ( );
 
 GameScreen.prototype.onUpdate = function ( delta )
 {
+    if ( this.timer.getElapsedSec() >= this.GAME_LENGTH - 15 )
+    {
+        $ ( '#time' ).css ( 'color', 'red' );
+    }
+
     var timeElement = document.getElementById ( "time" );
     timeElement.innerHTML = Timer.getDigitalRep ( this.getSecondsLeft ( ) );
 
@@ -166,19 +171,19 @@ GameScreen.prototype.buttonLogic = function ( button )
     switch ( button )
     {
         case 'Option 1':
-            this.answerQuestion ( "Option 1" );
+            this.answerQuestion ( 'Option 1' );
             break;
 
         case 'Option 2':
-            this.answerQuestion ( "Option 2" );
+            this.answerQuestion ( 'Option 2' );
             break;
 
         case 'Option 3':
-            this.answerQuestion ( "Option 3" );
+            this.answerQuestion ( 'Option 3' );
             break;
 
         case 'Option 4':
-            this.answerQuestion ( "Option 4" );
+            this.answerQuestion ( 'Option 4' );
             break;
 
         default:
