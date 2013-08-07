@@ -157,11 +157,20 @@ GameScreen.prototype.answerQuestion = function ( userAnswer )
 {
     if ( this.currentQuestion [ this.ANSWER ] === userAnswer )
     {
+        $ ( '#scoreChange' ).html( '+100' );
+        $ ( '#scoreChange' ).css ( 'color', 'green' );
+        //Must use .animate, because .fadeIn/.fadeOut set display: none
+        $ ( '#scoreChange' ).animate({ opacity: 1.0 }, 300);
+        $ ( '#scoreChange' ).delay( 300 ).animate({ opacity: 0 }, 500);
         this.score += 100;
         this.nextQuestion ();
     }
     else
     {
+        $ ( '#scoreChange' ).html( '-30' );
+        $ ( '#scoreChange' ).css ( 'color', 'red' );
+        $ ( '#scoreChange' ).animate({ opacity: 1.0 }, 300);
+        $ ( '#scoreChange' ).delay( 300 ).animate({ opacity: 0 }, 500);
         this.score -= 30;
     }
 };

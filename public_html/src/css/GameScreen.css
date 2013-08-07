@@ -43,10 +43,18 @@
     color: #F8F8FE;
     margin: 20px;
     padding: 5px;
-    margin-bottom: 70px;
     font-size: 32px;
     text-align: left;
     border-radius: 2px;
+}
+
+#scoreChange
+{
+    padding: 0px;
+    margin: 20px;
+    margin-bottom: 40px;
+    color: green;
+    opacity: 0;
 }
 
 #time
