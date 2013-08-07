@@ -150,6 +150,12 @@ PDBLoader.atomRadii = {
 
 PDBLoader.prototype = {
     constructor: THREE.OBJLoader,
+            
+    load: function ( text )
+    {
+        var pdbJson = this.parsePDB ( pdbStr );
+        return this.createModel ( pdbJson );
+    },
     parsePDB: function ( text ) {
 
         function trim ( text ) {
