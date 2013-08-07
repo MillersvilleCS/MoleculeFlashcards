@@ -26,7 +26,7 @@ GameScreen.prototype.onUpdate = function ( delta )
     console.log('ran time: ' + Date.now());
 
     var timeElement = document.getElementById ( "time" );
-    var seconds = game.getScreen ( 'game' ).getSecondsLeft ();
+    var seconds = this.getSecondsLeft ();
     var minutes = Math.floor(seconds / 60);
     seconds = seconds - minutes * 60;
     if(seconds < 10)
