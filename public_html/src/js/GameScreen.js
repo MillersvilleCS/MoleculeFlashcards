@@ -42,12 +42,12 @@ GameScreen.prototype.onUpdate = function ( delta )
     var timeElement = document.getElementById ( "score" );
     timeElement.innerHTML = game.getScreen ( 'game' ).score;
 
-    if ( MouseManager.leftButton.isPressed && this.moleculeList[this.currentMolecule] !== undefined)
+    if ( MouseManager.leftButton.isPressed && this.moleculeList[this.currentQuestion] !== undefined)
     {
-        this.moleculeList[this.currentMolecule].mesh.rotation.z -=
+        this.moleculeList[this.currentQuestion].mesh.rotation.z -=
                 (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
         
-        this.moleculeList[this.currentMolecule].mesh.rotation.x +=
+        this.moleculeList[this.currentQuestion].mesh.rotation.x +=
                 (MouseManager.currentY - MouseManager.leftButton.pressedY) / 1000;
     }
 };
