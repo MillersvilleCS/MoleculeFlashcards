@@ -6,7 +6,7 @@ Iterator = function ( iterable )
 
 Iterator.prototype = {
     constructor: Iterator,
-    index: 0,
+    index: -1,
     hasNext: function ( )
     {
         return this.index < this.data.length - 1;

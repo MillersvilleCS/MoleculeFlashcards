@@ -115,7 +115,7 @@ MoleculeGeometryBuilder.createModel = function ( json ) {
     }
 
     createAtomsAsSpheres ( atoms, 0.25, 16, model );
-    createBondsAsLines ( bonds, 5, model );
+    createBondsAsLines ( bonds, 10, model );
 
     return model;
 };
