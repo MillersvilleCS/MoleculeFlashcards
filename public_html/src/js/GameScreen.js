@@ -30,8 +30,11 @@ GameScreen.prototype.onUpdate = function ( delta )
 
     if ( MouseManager.leftButton.isPressed && this.currentMolecule !== undefined)
     {
-        this.currentMolecule.mesh.rotation.x +=
+        this.currentMolecule.mesh.rotation.z -=
                 (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
+        
+        this.currentMolecule.mesh.rotation.x +=
+                (MouseManager.currentY - MouseManager.leftButton.pressedY) / 1000;
     }
 };
 
@@ -75,7 +78,7 @@ GameScreen.prototype.createMolecule = function ( data )
     }
     this.currentMolecule = new Molecule ( data );
     this.currentMolecule.setPosition ( -2.5, 0, 0 );
-    this.currentMolecule.setUniformScale ( 0.5 );
+    this.currentMolecule.setUniformScale ( 0.4 );
     this.scene.add ( this.currentMolecule.mesh );
 };
 GameScreen.prototype.nextQuestion = function ( )

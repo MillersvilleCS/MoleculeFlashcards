@@ -23,9 +23,5 @@ Map.prototype = {
     contains: function ( key )
     {
         return this.hasOwnProperty ( key );
-    },
-    getSize: function ( )
-    {
-        return this.size;
     }
 };
