@@ -9,9 +9,9 @@
 #highScoreUI
 {
     position: absolute;
-    min-width: 810px;
+    min-width: 800px;
     min-height: 600px;
-    max-width: 810px;
+    max-width: 800px;
     max-height: 600px;
     z-index: 3;
     background-color: gray;
