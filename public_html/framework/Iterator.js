@@ -5,7 +5,7 @@ Iterator = function ( iterable )
 };
 
 Iterator.prototype = {
-    constructor: Iterator,        
+    constructor: Iterator,
     index: 0,
     hasNext: function ( )
     {

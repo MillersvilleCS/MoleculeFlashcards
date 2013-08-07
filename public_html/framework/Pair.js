@@ -6,6 +6,5 @@ Pair = function ( value1, value2 )
 };
 
 Pair.prototype = {
-    
 };
 

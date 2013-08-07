@@ -2,16 +2,16 @@
 GameScreen = function ( )
 {
     //////////temporary/////////////
-    this.modelList = 
-    [
-        'res/models/first.pdb',
-        'res/models/aspirin.pdb',
-        'res/models/0.pdb',
-        'res/models/1.pdb',
-        'res/models/2.pdb',
-        'res/models/4.pdb',
-        'res/models/5.pdb'
-    ];
+    this.modelList =
+            [
+                'res/models/first.pdb',
+                'res/models/aspirin.pdb',
+                'res/models/0.pdb',
+                'res/models/1.pdb',
+                'res/models/2.pdb',
+                'res/models/4.pdb',
+                'res/models/5.pdb'
+            ];
     ////////////////////
     this.timer = new Timer ( );
     this.score = 0;
@@ -33,8 +33,8 @@ GameScreen.prototype = new Screen ( );
 GameScreen.prototype.onUpdate = function ( delta )
 {
     var timeElement = document.getElementById ( "time" );
-    timeElement.innerHTML = Timer.getDigitalRep ( this.getSecondsLeft  ( ) );
-    
+    timeElement.innerHTML = Timer.getDigitalRep ( this.getSecondsLeft ( ) );
+
     var scoreElement = document.getElementById ( "score" );
     scoreElement.innerHTML = this.score;
 
@@ -42,7 +42,7 @@ GameScreen.prototype.onUpdate = function ( delta )
     {
         this.currentQuestion.value1.mesh.rotation.z -=
                 (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
-        
+
         this.currentQuestion.value1.mesh.rotation.x +=
                 (MouseManager.currentY - MouseManager.leftButton.pressedY) / 1000;
     }
@@ -61,20 +61,20 @@ GameScreen.prototype.onLeave = function ( )
 GameScreen.prototype.onResume = function ( )
 {
     //start the loading screen
-     $ ( '#loadingUI' ).fadeIn( 1 );
-     this.questionManager = new QuestionManager ( );
-     
-    TextLoader.loadText ( this.modelList[0], 
-        this.createQuestion.bind ( this ) );
-    
+    $ ( '#loadingUI' ).fadeIn ( 1 );
+    this.questionManager = new QuestionManager ( );
+
+    TextLoader.loadText ( this.modelList[0],
+            this.createQuestion.bind ( this ) );
+
 };
 
-GameScreen.prototype.startGame = function  ( )
+GameScreen.prototype.startGame = function ( )
 {
     $ ( '#loadingUI' ).fadeOut ( 1 );
     $ ( 'canvas' ).fadeIn ( 500 );
     $ ( '#rightPanel' ).fadeIn ( 500 );
-    
+
     this.questionIterator = this.questionManager.getIterator ( );
     if ( this.questionIterator.hasNext ( ) )
     {
@@ -98,7 +98,7 @@ GameScreen.prototype.nextQuestion = function ( )
         this.currentQuestion = this.questionIterator.next ( );
         this.scene.add ( this.currentQuestion.value1.mesh );
         return true;
-    } 
+    }
     return false;
 };
 
@@ -108,9 +108,9 @@ GameScreen.prototype.createQuestion = function ( data )
     molecule.setPosition ( -2.5, 0, 0 );
     molecule.setUniformScale ( 0.5 );
 
-    this.questionManager.add (molecule, "Option 1");
+    this.questionManager.add ( molecule, "Option 1" );
     var moleculeCount = this.questionManager.numberOfQuestions ( );
-    if( moleculeCount === this.modelList.length )
+    if ( moleculeCount === this.modelList.length )
     {
         this.startGame ( );
         //$ ( '#loadingMessage' ).fadeIn( 500 );
@@ -118,15 +118,15 @@ GameScreen.prototype.createQuestion = function ( data )
     }
     else
     {
-        TextLoader.loadText ( this.modelList[moleculeCount], 
-            this.createQuestion.bind ( this ) );
+        TextLoader.loadText ( this.modelList[moleculeCount],
+                this.createQuestion.bind ( this ) );
     }
 };
 
 GameScreen.prototype.getSecondsLeft = function ( )
 {
     var time = this.GAME_LENGTH - this.timer.getElapsedSec ( );
-    
+
     if ( time > 0 )
     {
         return time;
@@ -156,15 +156,15 @@ GameScreen.prototype.buttonLogic = function ( button )
             break;
 
         case 'Option 2':
-             this.answerQuestion ( "Option 2" );
+            this.answerQuestion ( "Option 2" );
             break;
 
         case 'Option 3':
-             this.answerQuestion ( "Option 3" );
+            this.answerQuestion ( "Option 3" );
             break;
 
         case 'Option 4':
-             this.answerQuestion ( "Option 4" );
+            this.answerQuestion ( "Option 4" );
             break;
 
         default:

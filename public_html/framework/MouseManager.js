@@ -10,7 +10,6 @@ MouseButton.prototype = {
     shifted: false,
     pressedX: 0,
     pressedY: 0,
-    
     press: function ( event )
     {
         this.isPressed = true;
@@ -30,7 +29,8 @@ MouseButton.prototype = {
 function MouseManager ( )
 {
 
-};
+}
+;
 
 MouseManager.leftButton = new MouseButton ( );
 MouseManager.rightButton = new MouseButton ( );

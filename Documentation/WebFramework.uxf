@@ -1,367 +1,367 @@
 <?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="11.3">
-  <zoom_level>3</zoom_level>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>441</x>
-      <y>273</y>
-      <w>81</w>
-      <h>57</h>
-    </coordinates>
-    <panel_attributes>Interface
-Game
---
--Map: screenMap
--var: currentScreenId
---
-void update ( delta )
-THREE.Scene getCurrentScene ( )
-Screen getCurrentScreen ( )
-boolean hasScreen ( screenID )
-Screen getScreen ( screenID )
-void swapScreejs ( screenID )</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>642</x>
-      <y>288</y>
-      <w>54</w>
-      <h>48</h>
-    </coordinates>
-    <panel_attributes>Interface
-Screen
---
-THREE.Scene scene
---
-void onUpdate ( delta )
-void onPause ( )
-void onLeave ( )
-void onResume ( )
+    <zoom_level>3</zoom_level>
+    <element>
+        <type>com.umlet.element.Class</type>
+        <coordinates>
+            <x>441</x>
+            <y>273</y>
+            <w>81</w>
+            <h>57</h>
+        </coordinates>
+        <panel_attributes>Interface
+            Game
+            --
+            -Map: screenMap
+            -var: currentScreenId
+            --
+            void update ( delta )
+            THREE.Scene getCurrentScene ( )
+            Screen getCurrentScreen ( )
+            boolean hasScreen ( screenID )
+            Screen getScreen ( screenID )
+            void swapScreejs ( screenID )</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <type>com.umlet.element.Class</type>
+        <coordinates>
+            <x>642</x>
+            <y>288</y>
+            <w>54</w>
+            <h>48</h>
+        </coordinates>
+        <panel_attributes>Interface
+            Screen
+            --
+            THREE.Scene scene
+            --
+            void onUpdate ( delta )
+            void onPause ( )
+            void onLeave ( )
+            void onResume ( )
 </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>513</x>
-      <y>282</y>
-      <w>134</w>
-      <h>14</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>129;9;9;9</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>513</x>
-      <y>279</y>
-      <w>134</w>
-      <h>14</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>9;9;129;9</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>324</x>
-      <y>264</y>
-      <w>122</w>
-      <h>14</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>117;9;9;9</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>231</x>
-      <y>252</y>
-      <w>102</w>
-      <h>39</h>
-    </coordinates>
-    <panel_attributes>Class
-Application
---
--THREE.WebGLRenderer: renderer
--THREE.Camera: camera
--Game game
--double: prevTime
---
-void performGameLoop ( currTime )</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>138</x>
-      <y>363</y>
-      <w>63</w>
-      <h>45</h>
-    </coordinates>
-    <panel_attributes>Class
-MouseButton
---
--boolean: isPressed
--boolean: shifted
--double: pressedX
--double: pressedY
---
-void press ( event )
-void release ( event )</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>237</x>
-      <y>312</y>
-      <w>93</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>Static Class
-MouseManager
---
-Standard button constants
--LEFT_STD_BUTTON = 0
--MIDDLE_STD_BUTTON = 1
--RIGHT_STD_BUTTON = 2
---
--LEFT_WIN_BUTTON = 1
--MIDDLE_WIN_BUTTON = 4
--RIGHT_WIN_BUTTON = 2
---
--MouseButton: leftButton
--MouseButton: rightButton
--double: currentX
--double: currentY
---
-void onMouseDown ( event )
-void onMouseUp ( event )
-void onMouseMove ( event )
+        <additional_attributes/>
+    </element>
+    <element>
+        <type>com.umlet.element.Relation</type>
+        <coordinates>
+            <x>513</x>
+            <y>282</y>
+            <w>134</w>
+            <h>14</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>129;9;9;9</additional_attributes>
+    </element>
+    <element>
+        <type>com.umlet.element.Relation</type>
+        <coordinates>
+            <x>513</x>
+            <y>279</y>
+            <w>134</w>
+            <h>14</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+        <additional_attributes>9;9;129;9</additional_attributes>
+    </element>
+    <element>
+        <type>com.umlet.element.Relation</type>
+        <coordinates>
+            <x>324</x>
+            <y>264</y>
+            <w>122</w>
+            <h>14</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>117;9;9;9</additional_attributes>
+    </element>
+    <element>
+        <type>com.umlet.element.Class</type>
+        <coordinates>
+            <x>231</x>
+            <y>252</y>
+            <w>102</w>
+            <h>39</h>
+        </coordinates>
+        <panel_attributes>Class
+            Application
+            --
+            -THREE.WebGLRenderer: renderer
+            -THREE.Camera: camera
+            -Game game
+            -double: prevTime
+            --
+            void performGameLoop ( currTime )</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <type>com.umlet.element.Class</type>
+        <coordinates>
+            <x>138</x>
+            <y>363</y>
+            <w>63</w>
+            <h>45</h>
+        </coordinates>
+        <panel_attributes>Class
+            MouseButton
+            --
+            -boolean: isPressed
+            -boolean: shifted
+            -double: pressedX
+            -double: pressedY
+            --
+            void press ( event )
+            void release ( event )</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <type>com.umlet.element.Class</type>
+        <coordinates>
+            <x>237</x>
+            <y>312</y>
+            <w>93</w>
+            <h>90</h>
+        </coordinates>
+        <panel_attributes>Static Class
+            MouseManager
+            --
+            Standard button constants
+            -LEFT_STD_BUTTON = 0
+            -MIDDLE_STD_BUTTON = 1
+            -RIGHT_STD_BUTTON = 2
+            --
+            -LEFT_WIN_BUTTON = 1
+            -MIDDLE_WIN_BUTTON = 4
+            -RIGHT_WIN_BUTTON = 2
+            --
+            -MouseButton: leftButton
+            -MouseButton: rightButton
+            -double: currentX
+            -double: currentY
+            --
+            void onMouseDown ( event )
+            void onMouseUp ( event )
+            void onMouseMove ( event )
 </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>450</x>
-      <y>390</y>
-      <w>63</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>Class
-MoleculeGame
---
---
-void update ( delta )
-void buttonLogic ( button )</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>471</x>
-      <y>321</y>
-      <w>14</w>
-      <h>74</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>9;69;9;9</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>567</x>
-      <y>480</y>
-      <w>69</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>Class
-GameScreen
---
--Timer: timer
--double: score
--double: currentQuestion
--double: numberOfQuestions
--double: GAME_LENGTH
---
-double getSecondsLeft ( )
-void createMolecule ( )
-void nextQuestion ( )
-var buttonLogic ( button )
+        <additional_attributes/>
+    </element>
+    <element>
+        <type>com.umlet.element.Class</type>
+        <coordinates>
+            <x>450</x>
+            <y>390</y>
+            <w>63</w>
+            <h>24</h>
+        </coordinates>
+        <panel_attributes>Class
+            MoleculeGame
+            --
+            --
+            void update ( delta )
+            void buttonLogic ( button )</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <type>com.umlet.element.Relation</type>
+        <coordinates>
+            <x>471</x>
+            <y>321</y>
+            <w>14</w>
+            <h>74</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+        <additional_attributes>9;69;9;9</additional_attributes>
+    </element>
+    <element>
+        <type>com.umlet.element.Class</type>
+        <coordinates>
+            <x>567</x>
+            <y>480</y>
+            <w>69</w>
+            <h>60</h>
+        </coordinates>
+        <panel_attributes>Class
+            GameScreen
+            --
+            -Timer: timer
+            -double: score
+            -double: currentQuestion
+            -double: numberOfQuestions
+            -double: GAME_LENGTH
+            --
+            double getSecondsLeft ( )
+            void createMolecule ( )
+            void nextQuestion ( )
+            var buttonLogic ( button )
 </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>558</x>
-      <y>327</y>
-      <w>89</w>
-      <h>158</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>9;153;84;9</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>666</x>
-      <y>480</y>
-      <w>57</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>Class
-MenuScreen
---
---
-var buttonLogic ( button )</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>738</x>
-      <y>477</y>
-      <w>60</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>Class
-HighScoreScreen
---
---
-var buttonLogic ( button )</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>657</x>
-      <y>327</y>
-      <w>14</w>
-      <h>158</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>9;153;9;9</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>684</x>
-      <y>327</y>
-      <w>59</w>
-      <h>155</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>54;150;9;9</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Note</type>
-    <coordinates>
-      <x>453</x>
-      <y>423</y>
-      <w>63</w>
-      <h>36</h>
-    </coordinates>
-    <panel_attributes>Note..
---
-MoleculeGame contains 
-an aggregate with instances 
-of GameScreen, MenuScreen, 
-and HighScoreScreen</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>423</x>
-      <y>492</y>
-      <w>63</w>
-      <h>57</h>
-    </coordinates>
-    <panel_attributes>Class
-Timer
---
--double: startTime
--double: stopTime
--boolean: isRunning
---
-void start ( )
-void stop ( )
-void reset ( )
-double elapsedTimeMs ( )
-double elapsedTimeSec ( )
+        <additional_attributes/>
+    </element>
+    <element>
+        <type>com.umlet.element.Relation</type>
+        <coordinates>
+            <x>558</x>
+            <y>327</y>
+            <w>89</w>
+            <h>158</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+        <additional_attributes>9;153;84;9</additional_attributes>
+    </element>
+    <element>
+        <type>com.umlet.element.Class</type>
+        <coordinates>
+            <x>666</x>
+            <y>480</y>
+            <w>57</w>
+            <h>24</h>
+        </coordinates>
+        <panel_attributes>Class
+            MenuScreen
+            --
+            --
+            var buttonLogic ( button )</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <type>com.umlet.element.Class</type>
+        <coordinates>
+            <x>738</x>
+            <y>477</y>
+            <w>60</w>
+            <h>24</h>
+        </coordinates>
+        <panel_attributes>Class
+            HighScoreScreen
+            --
+            --
+            var buttonLogic ( button )</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <type>com.umlet.element.Relation</type>
+        <coordinates>
+            <x>657</x>
+            <y>327</y>
+            <w>14</w>
+            <h>158</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+        <additional_attributes>9;153;9;9</additional_attributes>
+    </element>
+    <element>
+        <type>com.umlet.element.Relation</type>
+        <coordinates>
+            <x>684</x>
+            <y>327</y>
+            <w>59</w>
+            <h>155</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+        <additional_attributes>54;150;9;9</additional_attributes>
+    </element>
+    <element>
+        <type>com.umlet.element.Note</type>
+        <coordinates>
+            <x>453</x>
+            <y>423</y>
+            <w>63</w>
+            <h>36</h>
+        </coordinates>
+        <panel_attributes>Note..
+            --
+            MoleculeGame contains 
+            an aggregate with instances 
+            of GameScreen, MenuScreen, 
+            and HighScoreScreen</panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <type>com.umlet.element.Class</type>
+        <coordinates>
+            <x>423</x>
+            <y>492</y>
+            <w>63</w>
+            <h>57</h>
+        </coordinates>
+        <panel_attributes>Class
+            Timer
+            --
+            -double: startTime
+            -double: stopTime
+            -boolean: isRunning
+            --
+            void start ( )
+            void stop ( )
+            void reset ( )
+            double elapsedTimeMs ( )
+            double elapsedTimeSec ( )
 </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>477</x>
-      <y>486</y>
-      <w>95</w>
-      <h>14</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>90;9;9;9</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>192</x>
-      <y>354</y>
-      <w>50</w>
-      <h>14</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>45;9;9;9</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>192</x>
-      <y>357</y>
-      <w>50</w>
-      <h>14</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>45;9;9;9</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>342</x>
-      <y>285</y>
-      <w>57</w>
-      <h>39</h>
-    </coordinates>
-    <panel_attributes>Class
-Map
---
--double: size
---
-void put ( key, value )
-Object get ( key )
-void remove ( key )
-boolean contains ( key )
+        <additional_attributes/>
+    </element>
+    <element>
+        <type>com.umlet.element.Relation</type>
+        <coordinates>
+            <x>477</x>
+            <y>486</y>
+            <w>95</w>
+            <h>14</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>90;9;9;9</additional_attributes>
+    </element>
+    <element>
+        <type>com.umlet.element.Relation</type>
+        <coordinates>
+            <x>192</x>
+            <y>354</y>
+            <w>50</w>
+            <h>14</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>45;9;9;9</additional_attributes>
+    </element>
+    <element>
+        <type>com.umlet.element.Relation</type>
+        <coordinates>
+            <x>192</x>
+            <y>357</y>
+            <w>50</w>
+            <h>14</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>45;9;9;9</additional_attributes>
+    </element>
+    <element>
+        <type>com.umlet.element.Class</type>
+        <coordinates>
+            <x>342</x>
+            <y>285</y>
+            <w>57</w>
+            <h>39</h>
+        </coordinates>
+        <panel_attributes>Class
+            Map
+            --
+            -double: size
+            --
+            void put ( key, value )
+            Object get ( key )
+            void remove ( key )
+            boolean contains ( key )
 
 
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>390</x>
-      <y>276</y>
-      <w>56</w>
-      <h>14</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>51;9;9;9</additional_attributes>
-  </element>
+        </panel_attributes>
+        <additional_attributes/>
+    </element>
+    <element>
+        <type>com.umlet.element.Relation</type>
+        <coordinates>
+            <x>390</x>
+            <y>276</y>
+            <w>56</w>
+            <h>14</h>
+        </coordinates>
+        <panel_attributes>lt=&lt;-</panel_attributes>
+        <additional_attributes>51;9;9;9</additional_attributes>
+    </element>
 </diagram>
