@@ -113,7 +113,7 @@ GameScreen.prototype.loadAssets = function ( data )
     molecule.scale.y = 0.5;
     molecule.scale.z = 0.5;
 
-    var loadingString =  $ ( '#loadingMessage' ).html();
+    var loadingString =  "Loading";
     ++this.loadingState;
     for(var i = 0; i < this.loadingState % 3; ++i)
     {
