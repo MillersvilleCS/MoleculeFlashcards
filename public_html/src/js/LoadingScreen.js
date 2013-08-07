@@ -48,7 +48,7 @@ LoadingScreen.prototype.pushMolecule = function ( data )
     game.getScreen ( 'game' ).pushMolecules( molecule );
     ++this.moleculeCount;
 
-    if( this.moleculeCount == 7 )
+    if( this.moleculeCount == this.modelList.length )
     {
         $ ( '#loadingMessage' ).fadeIn( 500 );
         $ ( '#beginButton' ).fadeIn ( 500 );
