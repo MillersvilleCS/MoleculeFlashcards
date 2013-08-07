@@ -26,7 +26,18 @@ GameScreen.prototype.onUpdate = function ( delta )
     console.log('ran time: ' + Date.now());
 
     var timeElement = document.getElementById ( "time" );
-    timeElement.innerHTML = game.getScreen ( 'game' ).getSecondsLeft ();
+    var seconds = game.getScreen ( 'game' ).getSecondsLeft ();
+    var minutes = Math.floor(seconds / 60);
+    seconds = seconds - minutes * 60;
+    if(seconds < 10)
+    {
+        timeElement.innerHTML = minutes + ':0' + seconds;
+    }
+    else
+    {
+        timeElement.innerHTML = minutes + ':' + seconds;
+    }
+    
 
     var timeElement = document.getElementById ( "score" );
     timeElement.innerHTML = game.getScreen ( 'game' ).score;
