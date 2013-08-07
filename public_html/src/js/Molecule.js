@@ -1,9 +1,10 @@
 Molecule = function ( pdbStr )
 {
-    this.mesh = Molecule.extractor.load ( pdbStr );
+    var pdbJson = Molecule.extractor.parsePDB ( pdbStr );
+    this.mesh = Molecule.extractor.createModel ( pdbJson );
 };
 
-Molecule.extractor = new MoleculeGeometryBuilder ( );
+Molecule.extractor = new PDBLoader ( );
 
 Molecule.prototype = {
     constructor: Molecule,
