@@ -1,4 +1,6 @@
-
+/*
+ * replace with map class when javascript 6 is finalized.
+ */
 Map = function ( )
 {
     this.size = 0;

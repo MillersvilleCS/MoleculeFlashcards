@@ -23,7 +23,7 @@ List.prototype = {
             {
                 this.data  [i - 1] = this.data  [ i ];
             }
-            if ( this [ i ]  === element )
+            else if ( this [ i ]  === element )
             {
                 found = true;
                 this.data  [ i ] = undefined;

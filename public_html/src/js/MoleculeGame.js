@@ -2,12 +2,10 @@
 MoleculeGame = function ( )
 {
     var gameScreen = new GameScreen ( );
-    var loadingScreen = new LoadingScreen ( );
     var menuScreen = new MenuScreen ( );
     var scoreScreen = new HighScoreScreen ( );
 
     this.screenMap.put ( 'game', gameScreen );
-    this.screenMap.put ( 'loading', loadingScreen );
     this.screenMap.put ( 'menu', menuScreen );
     this.screenMap.put ( 'score', scoreScreen );
 
