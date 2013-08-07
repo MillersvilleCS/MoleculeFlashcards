@@ -7,9 +7,10 @@ List = function ( )
 List.prototype = {
     constructor: List,
     size: 0,
+    data: [],
     add: function ( element )
     {
-        this [ size ] = element;
+        this.data [ this.size ] = element;
         ++this.size;
     },
             
@@ -20,12 +21,12 @@ List.prototype = {
         {
             if ( found )
             {
-                this [i - 1] = this [ i ];
+                this.data  [i - 1] = this.data  [ i ];
             }
             if ( this [ i ]  === element )
             {
                 found = true;
-                this [ i ] = undefined;
+                this.data  [ i ] = undefined;
                 --this.size;
             }
         }
@@ -33,6 +34,6 @@ List.prototype = {
             
     getIterator: function ( )
     {
-        return new Iterator ( this );
+        return new Iterator ( this.data );
     }
 };

@@ -38,13 +38,12 @@ GameScreen.prototype.onUpdate = function ( delta )
     var scoreElement = document.getElementById ( "score" );
     scoreElement.innerHTML = this.score;
 
-    if ( MouseManager.leftButton.isPressed && 
-            this.moleculeList[this.currentQuestion] !== undefined)
+    if ( MouseManager.leftButton.isPressed )
     {
-        this.moleculeList[this.currentQuestion].mesh.rotation.z -=
+        this.currentQuestion.value1.mesh.rotation.z -=
                 (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
         
-        this.moleculeList[this.currentQuestion].mesh.rotation.x +=
+        this.currentQuestion.value1.mesh.rotation.x +=
                 (MouseManager.currentY - MouseManager.leftButton.pressedY) / 1000;
     }
 };
@@ -61,9 +60,33 @@ GameScreen.prototype.onLeave = function ( )
 
 GameScreen.prototype.onResume = function ( )
 {
+    //start the loading screen
      $ ( '#loadingUI' ).fadeIn( 1 );
-    TextLoader.loadText ( this.modelList[this.moleculeCount], this.pushMolecule.bind ( this ) );
+     this.questionManager = new QuestionManager ( );
+     
+    TextLoader.loadText ( this.modelList[0], 
+        this.createQuestion.bind ( this ) );
     
+};
+
+GameScreen.prototype.startGame = function  ( )
+{
+    $ ( '#loadingUI' ).fadeOut ( 1 );
+    $ ( 'canvas' ).fadeIn ( 500 );
+    $ ( '#rightPanel' ).fadeIn ( 500 );
+    
+    this.questionIterator = this.questionManager.getIterator ( );
+    if ( this.questionIterator.hasNext ( ) )
+    {
+        this.currentQuestion = this.questionIterator.next ( );
+        this.scene.add ( this.currentQuestion.value1.mesh );
+        this.timer.start ( );
+        this.score = 0;
+    }
+    else
+    {
+        //exit the game;
+    }
 };
 
 GameScreen.prototype.getSecondsLeft = function ( )
@@ -77,30 +100,19 @@ GameScreen.prototype.getSecondsLeft = function ( )
     return 0;
 };
 
-GameScreen.prototype.startGame = function  ( )
-{
-    
-    
-    $ ( '#loadingUI' ).fadeOut ( 1 );
-    $ ( 'canvas' ).fadeIn ( 500 );
-    $ ( '#rightPanel' ).fadeIn ( 500 );
-    
-    //this.currentMolecule = this.createMolecule ( );
-    this.nextQuestion ( );
-    this.timer.start ( );
-    this.score = 0;
-};
+
 
 GameScreen.prototype.nextQuestion = function ( )
 {
     //TextLoader.loadText ( 'res/models/aspirin.pdb', this.createMolecule.bind ( this ) );
-    if ( this.moleculeList[this.currentQuestion] !== undefined )
+    if ( this.questionIterator.hasNext ( ) )
     {
-        this.scene.remove ( this.moleculeList[this.currentQuestion].mesh );
-        ++this.currentQuestion;  
-    }
-    
-    this.scene.add ( this.moleculeList[this.currentQuestion].mesh );
+        this.scene.remove ( this.currentQuestion.value1.mesh );
+        this.currentQuestion = this.questionIterator.next ( );
+        this.scene.add ( this.currentQuestion.value1.mesh );
+        return true;
+    } 
+    return false;
 };
 
 GameScreen.prototype.buttonLogic = function ( button )
@@ -128,22 +140,23 @@ GameScreen.prototype.buttonLogic = function ( button )
     }
 };
 
-LoadingScreen.prototype.pushMolecule = function ( data )
+GameScreen.prototype.createQuestion = function ( data )
 {
     var molecule = new Molecule ( data );
     molecule.setPosition ( -2.5, 0, 0 );
     molecule.setUniformScale ( 0.5 );
 
-    this.moleculeList.push(molecule);
-    ++this.moleculeCount;
-
-    if( this.moleculeCount === this.modelList.length )
+    this.questionManager.add (molecule, "Option 1");
+    var moleculeCount = this.questionManager.numberOfQuestions ( );
+    if( moleculeCount === this.modelList.length )
     {
-        $ ( '#loadingMessage' ).fadeIn( 500 );
-        $ ( '#beginButton' ).fadeIn ( 500 );
+        this.startGame ( );
+        //$ ( '#loadingMessage' ).fadeIn( 500 );
+        //$ ( '#beginButton' ).fadeIn ( 500 );
     }
     else
     {
-        TextLoader.loadText ( this.modelList[this.moleculeCount], this.pushMolecule.bind ( this ) );
+        TextLoader.loadText ( this.modelList[moleculeCount], 
+            this.createQuestion.bind ( this ) );
     }
 };
