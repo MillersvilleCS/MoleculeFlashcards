@@ -101,7 +101,7 @@ GameScreen.prototype.startGame = function ( )
     $ ( '#loadingUI' ).fadeOut ( 1 );
     $ ( 'canvas' ).fadeIn ( 500 );
    
-
+    this.scoreManager.reset ( );
     this.questionIterator = new Iterator ( this.questionList );
     if ( this.questionIterator.hasNext ( ) )
     {

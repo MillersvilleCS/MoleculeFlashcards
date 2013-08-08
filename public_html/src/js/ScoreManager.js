@@ -28,6 +28,7 @@ ScoreManager.prototype = {
         this.score += addition * this.multiplier;
         this.questionTimer.reset ( );
     },
+
     incorrect: function ( deduction )
     {
         this.change = deduction;
@@ -36,7 +37,17 @@ ScoreManager.prototype = {
         this.streak = 0;
         this.multiplier = 1;
     },
-    text: function( )
+
+    reset: function ( )
+    {
+        this.score = 0;
+        this.streak = 0;
+        this.multiplier = 1;
+        this.change = 0;
+        this.questionTimer.reset ( );
+    },
+
+    text: function ( )
     {
         var response = this.change * this.multiplier;
 
@@ -56,6 +67,7 @@ ScoreManager.prototype = {
 
         return response;
     },
+
     getTimeMSOnQuestion: function ( )
     {
         return this.questionTimer.getElapsedMs ( );
