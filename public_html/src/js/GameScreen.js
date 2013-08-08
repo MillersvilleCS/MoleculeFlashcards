@@ -34,7 +34,7 @@ GameScreen = function ( )
     pointLight.position.z = 130;
 
     // add to the scene
-    screen.scene.add ( pointLight );
+    this.scene.add ( pointLight );
 };
 
 GameScreen.prototype = new Screen ( );
