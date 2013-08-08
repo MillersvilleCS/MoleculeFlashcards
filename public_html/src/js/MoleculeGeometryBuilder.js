@@ -29,6 +29,7 @@ MoleculeGeometryBuilder.createModel = function ( json ) {
             ( atoms, atomScale, quality, model )
     {
         bondInfo = new THREE.Geometry ( );
+        var sphereGeometry = new THREE.SphereGeometry ( 1, quality, quality )
         for ( var i = 0; i < atoms.length; i++ )
         {
 
@@ -62,18 +63,16 @@ MoleculeGeometryBuilder.createModel = function ( json ) {
                         color: color.getHex ( )
                     } );
 
-            var atomGeometry = new THREE.SphereGeometry ( radius, quality, quality );
-
-            var atomMesh = new THREE.Mesh ( atomGeometry, atomMaterial );
-
+            var atomMesh = new THREE.Mesh ( sphereGeometry.clone ( ), atomMaterial );
+            atomMesh.scale.x *= radius ;
+            atomMesh.scale.y *= radius ;
+            atomMesh.scale.z *= radius ;
             atomMesh.position = position;
             model.add ( atomMesh );
 
             //get information needed by bonds
             bondInfo.vertices.push ( position );
             bondInfo.colors.push ( color );
-
-
         }
     }
 
