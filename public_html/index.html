@@ -128,12 +128,6 @@
                 </div>
 
                 <div id = "gameUI">
-                    <div id ="gameCompletedUI">
-                        <div class = "button" 
-                            onclick = "game.buttonLogic ( 'Game Return' );">
-                            Return
-                        </div>
-                    </div>
 
                     <div id = "rightPanel">
                         <div id = "timeAndScore">
@@ -164,6 +158,26 @@
                             Option 4
                         </div>
                     </div>
+
+                    <div id = "gameCompletedUI">
+                        <div class = "button" 
+                            onclick = "game.buttonLogic ( 'Game Return' );">
+                            Return
+                        </div>
+                    </div>
+
+                    <div id = "tutorialUI">
+                        Molecules will appear in this window. <br /> <br />
+                        Select the correct answer from the panel on the right. <br /> <br />
+                        Multiple correct answers in a row will grant combo bonuses! <br /> <br />
+                        Incorrect answers will cost you points, and end combos. <br /> <br />
+                        Answer as many as you can in 2 minutes!
+                        <div class = "button" 
+                            onclick = "game.buttonLogic ( 'Tutorial Return' );">
+                            Return
+                        </div>
+                    </div>
+
                 </div>
 
                 <div id = "highScoreUI">

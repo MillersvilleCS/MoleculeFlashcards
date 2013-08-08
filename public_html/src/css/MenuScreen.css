@@ -80,6 +80,19 @@
 }
 
 /*
+    Tutorial UI
+*/
+
+#tutorialUI
+{
+    width: 500px;
+    display: none;
+    padding: 25px;
+    margin: 0px;
+    font-size: 28px;
+}
+
+/*
     HighScore Button
 */
 
