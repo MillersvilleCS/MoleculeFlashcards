@@ -3,7 +3,7 @@ Application = function ( game, camera, title, width, height )
     this.game = game;
     this.camera = camera;
 
-    this.renderer = new THREE.WebGLRenderer ( );
+    this.renderer = new THREE.WebGLRenderer ( {antialias: true} );
     this.renderer.setSize ( width, height );
 
     this.prevTime = Date.now ( );
