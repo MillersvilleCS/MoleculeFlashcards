@@ -80,45 +80,49 @@ Response Fields:
 	game_session_id
 	questions - array of question objects (defined below)
 		question object properties:
+			id
 			text
-			pdb_url #will be changed to media_id to facilitate randomizing question order and down the road we have to add 2D molecule representations (most likely as images), so we'll have to load other types of media
 			answers - array of strings - possible answers - can be between 2 and 5 strings long
 	question_id - array of answers stored as ints, commonly indexed wrt questions array (ie. if question_id[0] = 0 the answer to question[0].answers[0] ) - security through obscurity :)
+
+Name:
+	end_flashcard_game
+Description:
+	Submitted when the game is over or the user goes back to the main menu (the server will automatically clean up old sessions, this just keeps the table from getting too big)
+Request Fields:
+	authenticator
+	game_session_id
+Response Fields:
+	None
+
+Name:
+	submit_flashcard_answer
+Description:
+	Submitted when a user answers a question - submit  -1 when the user hits the "start" button
+Request Fields:
+	game_session_id
+	authenticator
+	question_id
+	answer
+	game_time
+Response Fields:
+	score
+	correct
 	
-
-	
-#Name:
-#	get_media
-#Description:
-#	get a single piece of media (image/pdb). Now that I'm thinking about it we'll probably want to load the media through a seperate interface so that we can return an image or pdb directly, but these are the fields required to load media
-#Request Fields:
-#	authenticator
-#	game_session_id
-#	media_type (pdb for pdbs, image for images)
-#	media_id
-#Response:
-#	Media File
-
-#Name:
-#	end_flashcard_game
-#Description:
-#	Submitted when the game is over or the user goes back to the main menu (the server will automatically clean up old sessions, this just keeps the table from getting too big)
-#Request Fields:
-#	authenticator
-#	game_session_id
-#Response Fields:
-#	None
-
-#Name:
-#	submit_answer
-#Description:
-#	Submitted when a user answers a question - submit  -1 when the user hits the "start" button
-#Request Fields:
-#	game_session_id
-#	authenticator
-#	question_id
-#	answer
-#	game_time
-#Response Fields:
-#	score
-#	correct
+Name:
+	get_media
+Description:
+	get a single piece of media (image/pdb). This is a GET request is sent to ./game_session.php
+Request Fields:
+	gsi - game_session_id
+	mt - media_type (0 for pdbs, 1 for images)
+	qid - question_id
+Example:
+	if:
+	 game_session_id = 5203f94a9f4b2
+	 media_type = pdb
+	 question_id = 1
+	then:
+	 GET ./get_media.php?gsi=5203f94a9f4b2&mt=0&qid=1
+Response:
+	Media 
