@@ -1,11 +1,12 @@
 
 Screen = function ( )
 {
-    this.scene = new THREE.Scene ( );
+    
 };
 
 Screen.prototype = {
     constructor: Screen,
+    scene: new THREE.Scene ( ),
     onUpdate: function ( delta )
     {
         throw new UnimplementedFunctionException ( "onUpdate" );

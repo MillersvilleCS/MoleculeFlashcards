@@ -5,9 +5,9 @@ MoleculeGame = function ( )
     var menuScreen = new MenuScreen ( );
     var scoreScreen = new HighScoreScreen ( );
 
-    this.screenMap.put ( 'game', gameScreen );
-    this.screenMap.put ( 'menu', menuScreen );
-    this.screenMap.put ( 'score', scoreScreen );
+    this.addScreen ( 'game', gameScreen );
+    this.addScreen ( 'menu', menuScreen );
+    this.addScreen ( 'score', scoreScreen );
 
     this.init ( 'menu' );
 };

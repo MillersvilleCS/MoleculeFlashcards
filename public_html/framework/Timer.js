@@ -1,13 +1,14 @@
 
 Timer = function ( )
 {
-    this.startTime = 0,
-    this.stopTime = 0,
-    this.running = false;
+
 };
 
 Timer.prototype = {
     constructor: Timer,
+    startTime: 0,
+    stopTime: 0,
+    running: false,
     start: function ( )
     {
         this.running = true;

@@ -1,17 +1,18 @@
 Game = function ( )
 {
     this.screenMap = new Map ( )
-    this.screenID = undefined;
-    this.initialized = false;
 };
 
 Game.prototype = {
     constructor: Game,
+    currentScreenID: undefined,
+    initialized: false,
     init: function ( screenID )
     {
         if ( this.initialized === false )
         {
-            this.screenID = screenID;
+            this.initialized = true;
+            this.currentScreenID = screenID;
             this.getCurrentScreen ( ).onResume ( );
         }
         else
@@ -29,7 +30,7 @@ Game.prototype = {
     },
     getCurrentScreen: function ( )
     {
-        return this.screenMap.get ( this.screenID );
+        return this.screenMap.get ( this.currentScreenID );
     },
     hasScreen: function ( screenID )
     {
@@ -39,10 +40,14 @@ Game.prototype = {
     {
         return this.screenMap.get ( screenID );
     },
+    addScreen: function ( screenID, screen)
+    {
+        this.screenMap.put ( screenID, screen );  
+    },
     swapScreens: function ( screenID )
     {
         this.getCurrentScreen ( ).onLeave ( );
-        this.screenID = screenID;
+        this.currentScreenID = screenID;
         this.getCurrentScreen ( ).onResume ( );
     }
 };

@@ -3,11 +3,12 @@
  */
 Map = function ( )
 {
-    this.size = 0;
+    
 };
 
 Map.prototype = {
     constructor: Map,
+    size: 0,
     put: function ( key, value )
     {
         this[ key ] = value;
