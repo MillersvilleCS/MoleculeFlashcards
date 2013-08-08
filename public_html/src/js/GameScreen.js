@@ -29,9 +29,7 @@ GameScreen = function ( )
     var pointLight = new THREE.PointLight ( 0xFFFFFF );
 
     // set its position
-    pointLight.position.x = 0;
-    pointLight.position.y = 0;
-    pointLight.position.z = 130;
+    pointLight.position.set ( 0, 0, 130 );
 
     // add to the scene
     this.scene.add ( pointLight );
@@ -120,6 +118,7 @@ GameScreen.prototype.endGame = function ( )
     this.scene.remove ( this.currentQuestion[ this.MOLECULE ] );
     this.currentQuestion = undefined;
     this.timer.stop  ( );
+    $ ( '#scoreChange' ).stop ( true, true );
     $ ( '#gameCompletedUI' ).fadeIn ( 500 );
     $ ( '#gameCompletedReturnButton' ).fadeIn ( 500 );
 };
@@ -198,7 +197,6 @@ GameScreen.prototype.answerQuestion = function ( userAnswer )
     if ( this.currentQuestion [ this.ANSWER ] === userAnswer )
     {
         this.running = false;
-        console.log( 'RAN' );
         this.scoreManager.correct ( this.RIGHT_ANSWER_POINTS );
         $ ( '#scoreChange' ).html( this.scoreManager.text ( ) );
         $ ( '#scoreChange' ).css ( 'color', 'green' );
