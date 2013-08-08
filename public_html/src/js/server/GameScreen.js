@@ -1,4 +1,5 @@
 
+
 GameScreen = function ( )
 {
     this.MOLECULE = 0;
@@ -9,8 +10,9 @@ GameScreen = function ( )
     
     this.timer = new Timer ( );
     this.scoreManager = new ScoreManager ( );
+    this.communicationsManager = new CommunicationsManager ( );
     
-    this.loadingState = 0;
+     this.loadingState = 0;
     //////////temporary/////////////
     this.modelList =
             [
@@ -25,15 +27,19 @@ GameScreen = function ( )
     ////////////////////
     
     
-    var pointLight = new THREE.PointLight ( 0xFFFFFF );
+    (function createScene ( )
+    {
+        var pointLight = new THREE.PointLight ( 0xFFFFFF );
 
-    // set its position
-    pointLight.position.x = 0;
-    pointLight.position.y = 0;
-    pointLight.position.z = 130;
+        // set its position
+        pointLight.position.x = 0;
+        pointLight.position.y = 0;
+        pointLight.position.z = 130;
 
-    // add to the scene
-    screen.scene.add ( pointLight );
+        // add to the scene
+        this.scene.add ( pointLight );
+    }) ();
+    
 };
 
 GameScreen.prototype = new Screen ( );
@@ -234,3 +240,4 @@ GameScreen.prototype.buttonLogic = function ( button )
             //alert( 'Not Yet Implemented!' );
     }
 };
+
