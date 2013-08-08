@@ -54,7 +54,7 @@ GameScreen.prototype.onUpdate = function ( delta )
     timeElement.innerHTML = Timer.getDigitalRep ( this.getSecondsLeft ( ) );
 
     var scoreElement = document.getElementById ( "score" );
-    scoreElement.innerHTML = this.scoreManager.getScore ( );
+    scoreElement.innerHTML = this.scoreManager.score;
 
     if ( MouseManager.leftButton.isPressed )
     {
