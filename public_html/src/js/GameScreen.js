@@ -74,6 +74,7 @@ GameScreen.prototype.onPause = function ( )
 GameScreen.prototype.onLeave = function ( )
 {
     $ ( '#gameCompletedUI' ).fadeOut ( 500 );
+    $ ( '#rightPanel' ).fadeOut ( 500 );
     $ ( '#gameCompletedReturnButton' ).fadeOut ( 500 );
     
     this.scene.remove ( this.currentQuestion[ this.MOLECULE ] );
@@ -96,6 +97,7 @@ GameScreen.prototype.onResume = function ( )
 
 GameScreen.prototype.startGame = function ( )
 {
+    $ ( '#beginButton' ).fadeOut ( 500 );
     $ ( '#loadingUI' ).fadeOut ( 1 );
     $ ( 'canvas' ).fadeIn ( 500 );
    
