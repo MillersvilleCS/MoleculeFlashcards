@@ -16,11 +16,11 @@ ScoreManager.prototype = {
         this.change = addition;
 
         ++this.streak;
-        if ( this.streak === 3 )
+        if ( this.streak === 4 )
         {
             this.multiplier = 2;
         }
-        if ( this.streak === 6 )
+        if ( this.streak === 7 )
         {
             this.multiplier = 3;
         }

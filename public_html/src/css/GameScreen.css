@@ -104,6 +104,10 @@
     min-height: 610px;
     z-index: 4;
     display: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 #gameCompletedReturnButton

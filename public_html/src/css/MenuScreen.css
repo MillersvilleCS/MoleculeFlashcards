@@ -17,6 +17,10 @@
     border: 2px;
     border-style: solid;
     border-color: #010120;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
   
 #mainMenuTitle
@@ -114,10 +118,6 @@
     font-size: 30px;
     width: 300px;
     height: 40px;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
 }
 
 #optionsButton
