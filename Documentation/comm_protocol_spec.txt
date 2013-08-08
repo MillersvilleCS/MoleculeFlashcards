@@ -82,7 +82,9 @@ Response Fields:
 		question object properties:
 			id
 			text
-			answers - array of strings - possible answers - can be between 2 and 5 strings long
+			answers - array of answer objects - possible answers - can be between 2 and 5 strings long
+				id
+				text
 	question_id - array of answers stored as ints, commonly indexed wrt questions array (ie. if question_id[0] = 0 the answer to question[0].answers[0] ) - security through obscurity :)
 
 Name:
