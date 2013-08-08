@@ -5,8 +5,10 @@ GameScreen = function ( )
     this.ANSWER = 1;
     
     this.timer = new Timer ( );
+    this.scoreManager = new ScoreManager ( );
+    this.WRONG_ANSWER_POINTS = -30;
+    this.RIGHT_ANSWER_POINTS = 100;
     
-    this.score = 0;
     this.GAME_LENGTH = 10;
     this.loadingState = 0;
     //////////temporary/////////////
@@ -52,7 +54,7 @@ GameScreen.prototype.onUpdate = function ( delta )
     timeElement.innerHTML = Timer.getDigitalRep ( this.getSecondsLeft ( ) );
 
     var scoreElement = document.getElementById ( "score" );
-    scoreElement.innerHTML = this.score;
+    scoreElement.innerHTML = this.scoreManager.getScore ( );
 
     if ( MouseManager.leftButton.isPressed )
     {
@@ -74,7 +76,6 @@ GameScreen.prototype.onLeave = function ( )
     $ ( '#gameCompletedUI' ).fadeOut ( 500 );
     $ ( '#gameCompletedReturnButton' ).fadeOut ( 500 );
     
-    this.score = 0;
     this.scene.remove ( this.currentQuestion[ this.MOLECULE ] );
     this.currentQuestion = undefined;
     this.timer.stop  ( );
@@ -181,21 +182,21 @@ GameScreen.prototype.answerQuestion = function ( userAnswer )
 {
     if ( this.currentQuestion [ this.ANSWER ] === userAnswer )
     {
-        $ ( '#scoreChange' ).html( '+100' );
+        this.scoreManager.correct ( this.RIGHT_ANSWER_POINTS );
+        $ ( '#scoreChange' ).html( this.scoreManager.text ( ) );
         $ ( '#scoreChange' ).css ( 'color', 'green' );
         //Must use .animate, because .fadeIn/.fadeOut set display: none
         $ ( '#scoreChange' ).animate({ opacity: 1.0 }, 300);
         $ ( '#scoreChange' ).delay( 300 ).animate({ opacity: 0 }, 500);
-        this.score += 100;
         this.nextQuestion ();
     }
     else
     {
-        $ ( '#scoreChange' ).html( '-30' );
+        this.scoreManager.incorrect ( this.WRONG_ANSWER_POINTS );
+        $ ( '#scoreChange' ).html( this.scoreManager.text ( ) );
         $ ( '#scoreChange' ).css ( 'color', 'red' );
         $ ( '#scoreChange' ).animate({ opacity: 1.0 }, 300);
         $ ( '#scoreChange' ).delay( 300 ).animate({ opacity: 0 }, 500);
-        this.score -= 30;
     }
 };
 
