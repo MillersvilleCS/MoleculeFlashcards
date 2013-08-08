@@ -8,10 +8,11 @@ ScoreManager.prototype = {
     score: 0,
     streak: 0,
     multiplier: 1,
+    change: 0,
 
     correct: function ( addition )
     {
-        this.score += addition;
+        this.change = addition;
 
         ++this.streak;
         if ( this.streak == 3 )
@@ -22,10 +23,13 @@ ScoreManager.prototype = {
         {
             this.multiplier = 3;
         }
+
+        this.score += addition * this.multiplier;
     },
 
     incorrect: function ( deduction )
     {
+        this.change = deduction;
         this.score += deduction;
 
         this.streak = 0;
@@ -49,18 +53,16 @@ ScoreManager.prototype = {
 
     text: function ( )
     {
-        console.log(this.score);
-        var response = this.score * this.multiplier;
-        console.log(response);
+        var response = this.change * this.multiplier;
 
-        if ( this.score > 0 )
+        if ( this.change > 0 )
         {
             response = '+' + response;
         }
 
         if ( this.multiplier == 2 )
         {
-            response += ' x2 COBMO';
+            response += ' x2 COMBO';
         }
         else if ( this.multiplier == 3 )
         {
