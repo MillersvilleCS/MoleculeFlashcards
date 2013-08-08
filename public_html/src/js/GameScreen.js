@@ -3,6 +3,12 @@ GameScreen = function ( )
 {
     this.MOLECULE = 0;
     this.ANSWER = 1;
+    
+    this.timer = new Timer ( );
+    
+    this.score = 0;
+    this.GAME_LENGTH = 10;
+    this.loadingState = 0;
     //////////temporary/////////////
     this.modelList =
             [
@@ -15,10 +21,8 @@ GameScreen = function ( )
                 'res/models/5.pdb'
             ];
     ////////////////////
-    this.timer = new Timer ( );
-    this.score = 0;
-    this.GAME_LENGTH = 120;
-    this.loadingState = 0;
+    
+    
 
     var pointLight = new THREE.PointLight ( 0xFFFFFF );
 
@@ -38,6 +42,10 @@ GameScreen.prototype.onUpdate = function ( delta )
     if ( this.getSecondsLeft ( ) < 15 )
     {
         $ ( '#time' ).css ( 'color', 'red' );
+    }
+    if ( this.getSecondsLeft () === 0 )
+    {
+        this.endGame ( );
     }
 
     var timeElement = document.getElementById ( "time" );
@@ -63,13 +71,22 @@ GameScreen.prototype.onPause = function ( )
 
 GameScreen.prototype.onLeave = function ( )
 {
-    this.timer.reset ( );
+    $ ( '#gameCompletedUI' ).fadeOut ( 500 );
+    $ ( '#gameCompletedReturnButton' ).fadeOut ( 500 );
+    
+    this.score = 0;
+    this.scene.remove ( this.currentQuestion[ this.MOLECULE ] );
+    this.currentQuestion = undefined;
+    this.timer.stop  ( );
 };
 
 GameScreen.prototype.onResume = function ( )
 {
     //start the loading screen
-    $ ( '#loadingUI' ).fadeIn ( 1 );
+    $ ( '#loadingUI' ).fadeIn ( 500 );
+    $ ( '#rightPanel' ).fadeIn ( 500 );
+    
+    this.timer.reset ( );
     this.questionList = [ ];
     TextLoader.loadText ( this.modelList[0],
             this.loadAssets.bind ( this ) );
@@ -80,7 +97,7 @@ GameScreen.prototype.startGame = function ( )
 {
     $ ( '#loadingUI' ).fadeOut ( 1 );
     $ ( 'canvas' ).fadeIn ( 500 );
-    $ ( '#rightPanel' ).fadeIn ( 500 );
+   
 
     this.questionIterator = new Iterator ( this.questionList );
     if ( this.questionIterator.hasNext ( ) )
@@ -88,12 +105,17 @@ GameScreen.prototype.startGame = function ( )
         this.currentQuestion = this.questionIterator.next ( );
         this.scene.add ( this.currentQuestion [ this.MOLECULE ] );
         this.timer.start ( );
-        this.score = 0;
     }
     else
     {
-        //exit the game;
+        this.endGame ( );
     }
+};
+
+GameScreen.prototype.endGame = function ( )
+{
+    $ ( '#gameCompletedUI' ).fadeIn ( 500 );
+    $ ( '#gameCompletedReturnButton' ).fadeIn ( 500 );
 };
 
 GameScreen.prototype.nextQuestion = function ( )
@@ -111,13 +133,7 @@ GameScreen.prototype.nextQuestion = function ( )
 
 GameScreen.prototype.loadAssets = function ( data )
 {
-    
-    var molecule = MoleculeGeometryBuilder.load ( data );
-    molecule.position.x = -2.5;
-    molecule.scale.x = 0.5;
-    molecule.scale.y = 0.5;
-    molecule.scale.z = 0.5;
-
+    //update loading screen
     var loadingString =  "Loading";
     ++this.loadingState;
     for(var i = 0; i < (this.loadingState / 2) % 3; ++i)
@@ -126,14 +142,22 @@ GameScreen.prototype.loadAssets = function ( data )
     }
     $ ( '#loadingMessage' ).html(loadingString);
     
+    //create a new question
+    var molecule = MoleculeGeometryBuilder.load ( data );
+    molecule.position.x = -2.5;
+    molecule.scale.x = 0.5;
+    molecule.scale.y = 0.5;
+    molecule.scale.z = 0.5;
+    
     this.questionList.push ( [molecule , "Option 1"] );
     
+    //check if all the molecules have been loaded
     var moleculeCount = this.questionList.length;
     if ( moleculeCount === this.modelList.length )
     {
-        this.startGame ( );
-        //$ ( '#loadingMessage' ).fadeIn( 500 );
-        //$ ( '#beginButton' ).fadeIn ( 500 );
+        $ ( '#loadingMessage' ).html("Ready");
+        $ ( '#beginButton' ).fadeIn ( 500 );
+        
     }
     else
     {
@@ -194,7 +218,14 @@ GameScreen.prototype.buttonLogic = function ( button )
         case 'Option 4':
             this.answerQuestion ( 'Option 4' );
             break;
-
+        
+        case 'Begin Game':
+            this.startGame ( );
+            break;
+            
+        case 'Game Return':
+            return 'menu';
+            
         default:
             //alert( 'Not Yet Implemented!' );
     }

@@ -94,8 +94,8 @@
                     </div>
                     <div 
                         class = "button" 
-                        id = "mainMenuStartButton" 
-                        onclick = "game.buttonLogic ( 'START' );">
+                        id = "mainMenuPlayButton" 
+                        onclick = "game.buttonLogic ( 'Play' );">
                         START
                     </div>
                     <div 
@@ -119,12 +119,18 @@
                     <div 
                         class = "button"
                         id = "beginButton"
-                        onclick = "game.buttonLogic ( 'Begin' );">
+                        onclick = "game.buttonLogic ( 'Begin Game' );">
                         Begin
                     </div>
                 </div>
 
                 <div id = "gameUI">
+                    <div id ="gameCompletedUI">
+                        <div class = "button" 
+                            onclick = "game.buttonLogic ( 'Game Return' );">
+                            Return
+                        </div>
+                    </div>
 
                     <div id = "rightPanel">
                         <div id = "timeAndScore">

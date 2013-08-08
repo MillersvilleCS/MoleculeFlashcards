@@ -30,7 +30,7 @@
 /*
     Start Button
 */
-#mainMenuStartButton
+#mainMenuPlayButton
 {
     background-color: #4D4D62;
     color: #F8F8FE;
@@ -41,12 +41,12 @@
     margin-bottom: 34px;
 }
 
-#mainMenuStartButton:hover
+#mainMenuPlayButton:hover
 {
     background-color: #53495E;
 }
 
-#mainMenuStartButton:active
+#mainMenuPlayButton:active
 {
     background-color: #EFE1FE;
 }

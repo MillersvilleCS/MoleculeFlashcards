@@ -74,7 +74,7 @@
 #loadingUI
 {
     position: absolute;
-    min-width: 810px;
+    min-width: 536px;
     min-height: 610px;
     z-index: 4;
     display: none;
@@ -90,4 +90,22 @@
     font-size: 60px;
     text-align: center;
     padding-top: 200px;
+}
+
+/*
+    completed
+*/
+
+#gameCompletedUI
+{
+    position: absolute;
+    min-width: 536px;
+    min-height: 610px;
+    z-index: 4;
+    display: none;
+}
+
+#gameCompletedReturnButton
+{
+    display: none;
 }
