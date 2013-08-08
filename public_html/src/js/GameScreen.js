@@ -76,6 +76,8 @@ GameScreen.prototype.onLeave = function ( )
     $ ( '#gameCompletedUI' ).fadeOut ( 500 );
     $ ( '#rightPanel' ).fadeOut ( 500 );
     $ ( '#gameCompletedReturnButton' ).fadeOut ( 500 );
+    $ ( '#time' ).css ( 'color', '#F8F8FE' );
+    $ ( '#time' ).html ( '2:00' );
     
     this.scene.remove ( this.currentQuestion[ this.MOLECULE ] );
     this.currentQuestion = undefined;
