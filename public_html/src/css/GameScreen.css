@@ -89,8 +89,9 @@
 #loadingMessage
 {
     font-size: 60px;
-    text-align: center;
+    text-align: left;
     padding-top: 200px;
+    padding-left: 150px;
 }
 
 /*

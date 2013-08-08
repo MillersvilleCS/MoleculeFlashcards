@@ -152,13 +152,15 @@ GameScreen.prototype.loadAssets = function ( data )
     molecule.scale.y = 0.5;
     molecule.scale.z = 0.5;
     
-    this.questionList.push ( [molecule , "Option 1"] );
+    this.questionList.push ( [molecule , 'Option 1'] );
     
     //check if all the molecules have been loaded
     var moleculeCount = this.questionList.length;
     if ( moleculeCount === this.modelList.length )
     {
-        $ ( '#loadingMessage' ).html("Ready");
+        $ ( '#loadingMessage' ).html( 'Ready' );
+        $ ( '#loadingMessage' ).css ( 'padding-left', '0px' );
+        $ ( '#loadingMessage' ).css ( 'text-align', 'center' );
         $ ( '#beginButton' ).fadeIn ( 500 );
         
     }
