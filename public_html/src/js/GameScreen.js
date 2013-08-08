@@ -50,11 +50,8 @@ GameScreen.prototype.onUpdate = function ( delta )
         this.endGame ( );
     }
 
-    var timeElement = document.getElementById ( "time" );
-    timeElement.innerHTML = Timer.getDigitalRep ( this.getSecondsLeft ( ) );
-
-    var scoreElement = document.getElementById ( "score" );
-    scoreElement.innerHTML = this.scoreManager.score;
+    $('#time').html( Timer.getDigitalRep ( this.getSecondsLeft ( ) ) );
+    $('#score').html( this.scoreManager.score );
 
     if ( MouseManager.leftButton.isPressed )
     {
