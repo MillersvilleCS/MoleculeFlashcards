@@ -11,6 +11,7 @@ GameScreen = function ( )
     this.scoreManager = new ScoreManager ( );
     
     this.loadingState = 0;
+    this.running = false;
     //////////temporary/////////////
     this.modelList =
             [
@@ -42,21 +43,19 @@ GameScreen.prototype.onUpdate = function ( delta )
 {
     if ( this.getSecondsLeft ( ) < 15 )
     {
-        $ ( '#time' ).css ( 'color', 'red' );
+        $('#time').css ( 'color', 'red' );
     }
-    if ( this.getSecondsLeft () === 0 )
+    if ( this.getSecondsLeft () === 0 && this.running )
     {
         this.endGame ( );
     }
 
-    var timeElement = document.getElementById ( "time" );
-    timeElement.innerHTML = Timer.getDigitalRep ( this.getSecondsLeft ( ) );
+    $('#time').html( Timer.getDigitalRep ( this.getSecondsLeft ( ) ) );
+    $('#score').html( this.scoreManager.score );
 
-    var scoreElement = document.getElementById ( "score" );
-    scoreElement.innerHTML = this.scoreManager.score;
-
-    if ( MouseManager.leftButton.isPressed )
+    if ( MouseManager.leftButton.isPressed && this.running )
     {
+
         this.currentQuestion[this.MOLECULE].rotation.z -=
                 (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
 
@@ -75,10 +74,11 @@ GameScreen.prototype.onLeave = function ( )
     $ ( '#gameCompletedUI' ).fadeOut ( 500 );
     $ ( '#rightPanel' ).fadeOut ( 500 );
     $ ( '#gameCompletedReturnButton' ).fadeOut ( 500 );
+    $ ( '#time' ).css ( 'color', '#F8F8FE' );
+    $ ( '#time' ).html ( '2:00' );
+    $ ( '#score' ).html ( '0' );
     
-    this.scene.remove ( this.currentQuestion[ this.MOLECULE ] );
-    this.currentQuestion = undefined;
-    this.timer.stop  ( );
+    this.scoreManager.reset ( );
 };
 
 GameScreen.prototype.onResume = function ( )
@@ -99,8 +99,8 @@ GameScreen.prototype.startGame = function ( )
     $ ( '#beginButton' ).fadeOut ( 500 );
     $ ( '#loadingUI' ).fadeOut ( 1 );
     $ ( 'canvas' ).fadeIn ( 500 );
-   
-    this.scoreManager.reset ( );
+    
+    this.running = true;
     this.questionIterator = new Iterator ( this.questionList );
     if ( this.questionIterator.hasNext ( ) )
     {
@@ -116,6 +116,10 @@ GameScreen.prototype.startGame = function ( )
 
 GameScreen.prototype.endGame = function ( )
 {
+    this.running = false;
+    this.scene.remove ( this.currentQuestion[ this.MOLECULE ] );
+    this.currentQuestion = undefined;
+    this.timer.stop  ( );
     $ ( '#gameCompletedUI' ).fadeIn ( 500 );
     $ ( '#gameCompletedReturnButton' ).fadeIn ( 500 );
 };
@@ -128,9 +132,12 @@ GameScreen.prototype.nextQuestion = function ( )
         this.scene.remove ( this.currentQuestion[ this.MOLECULE ] );
         this.currentQuestion = this.questionIterator.next ( );
         this.scene.add ( this.currentQuestion[ this.MOLECULE ] );
-        return true;
+        this.running = true;
     }
-    return false;
+    else
+    {
+        this.endGame ( );
+    }
 };
 
 GameScreen.prototype.loadAssets = function ( data )
@@ -183,8 +190,15 @@ GameScreen.prototype.getSecondsLeft = function ( )
 
 GameScreen.prototype.answerQuestion = function ( userAnswer )
 {
+    if ( !this.running )
+    {
+        return; 
+    }
+
     if ( this.currentQuestion [ this.ANSWER ] === userAnswer )
     {
+        this.running = false;
+        console.log( 'RAN' );
         this.scoreManager.correct ( this.RIGHT_ANSWER_POINTS );
         $ ( '#scoreChange' ).html( this.scoreManager.text ( ) );
         $ ( '#scoreChange' ).css ( 'color', 'green' );
