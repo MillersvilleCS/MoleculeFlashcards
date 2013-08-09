@@ -132,6 +132,7 @@ GameScreen.prototype.endGame = function ( )
     this.currentQuestion = undefined;
     this.timer.stop  ( );
     $ ( '#scoreChange' ).stop ( true, true );
+    $ ( '#scoreChange' ).animate({ opacity: 0 }, 300);
     $ ( '#gameCompletedUI' ).fadeIn ( 500 );
     $ ( '#gameCompletedReturnButton' ).fadeIn ( 500 );
 };
