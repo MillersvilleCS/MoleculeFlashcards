@@ -3,6 +3,13 @@
 ############################
 Brief Client Side: The request object is encoded in JSON and posted to the /request_handler.php page, then the response text is an object encoded in JSON, which can be evaluated as a JavaScript object.
 
+
+NOTE: TO TEST THIS LOCALLY, you must run chromium-browser --disable-web-security
+
+Google Chrome and Firefox probably have different commands. Make sure the browser is entirely
+off before you try this. This allows the browser to make requests to the existech server
+from a different domain (i.e. your local one).
+
 Example code:
 	
     function send_request(request_object, request_URL){
