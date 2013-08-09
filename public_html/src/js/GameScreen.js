@@ -10,8 +10,6 @@ GameScreen = function ( )
     this.timer = new Timer ( );
     this.scoreManager = new ScoreManager ( );
     
-    this.loadingState = 0;
-    this.running = false;
     //////////temporary/////////////
     this.modelList =
             [
@@ -43,7 +41,7 @@ GameScreen.prototype.onUpdate = function ( delta )
     {
         $('#time').css ( 'color', 'red' );
     }
-    if ( this.getSecondsLeft () === 0 && this.running )
+    if ( this.getSecondsLeft () === 0 )
     {
         this.endGame ( );
     }
@@ -51,7 +49,7 @@ GameScreen.prototype.onUpdate = function ( delta )
     $('#time').html( Timer.getDigitalRep ( this.getSecondsLeft ( ) ) );
     $('#score').html( this.scoreManager.score );
 
-    if ( MouseManager.leftButton.isPressed && this.running )
+    if ( MouseManager.leftButton.isPressed && this.active )
     {
 
         this.currentQuestion[this.MOLECULE].rotation.z -=
@@ -87,6 +85,8 @@ GameScreen.prototype.onResume = function ( )
     
     this.timer.reset ( );
     this.questionList = [ ];
+    this.loadingState = 0;
+    this.active = false;
     TextLoader.loadText ( this.modelList[0],
             this.loadAssets.bind ( this ) );
 
@@ -98,7 +98,7 @@ GameScreen.prototype.startGame = function ( )
     $ ( '#loadingUI' ).fadeOut ( 1 );
     $ ( 'canvas' ).fadeIn ( 500 );
     
-    this.running = true;
+    this.active = true;
     this.questionIterator = new Iterator ( this.questionList );
     if ( this.questionIterator.hasNext ( ) )
     {
@@ -114,7 +114,7 @@ GameScreen.prototype.startGame = function ( )
 
 GameScreen.prototype.endGame = function ( )
 {
-    this.running = false;
+    this.active = false;
     this.scene.remove ( this.currentQuestion[ this.MOLECULE ] );
     this.currentQuestion = undefined;
     this.timer.stop  ( );
@@ -131,7 +131,7 @@ GameScreen.prototype.nextQuestion = function ( )
         this.scene.remove ( this.currentQuestion[ this.MOLECULE ] );
         this.currentQuestion = this.questionIterator.next ( );
         this.scene.add ( this.currentQuestion[ this.MOLECULE ] );
-        this.running = true;
+        this.active = true;
     }
     else
     {
@@ -152,10 +152,8 @@ GameScreen.prototype.loadAssets = function ( data )
     
     //create a new question
     var molecule = MoleculeGeometryBuilder.load ( data );
-    molecule.position.x = -2.5;
-    molecule.scale.x = 0.5;
-    molecule.scale.y = 0.5;
-    molecule.scale.z = 0.5;
+    molecule.position = new THREE.Vector3 ( -2.5, -1, 0 );
+    molecule.scale = new THREE.Vector3 ( 0.5, 0.5, 0.5 );
     
     this.questionList.push ( [molecule , 'Option 1'] );
     
@@ -184,19 +182,21 @@ GameScreen.prototype.getSecondsLeft = function ( )
     {
         return time;
     }
+    
     return 0;
 };
 
 GameScreen.prototype.answerQuestion = function ( userAnswer )
 {
-    if ( !this.running )
+    //prevents answering a question multiple times
+    if ( !this.active )
     {
         return; 
     }
 
     if ( this.currentQuestion [ this.ANSWER ] === userAnswer )
     {
-        this.running = false;
+        this.active = false;
         this.scoreManager.correct ( this.RIGHT_ANSWER_POINTS );
         $ ( '#scoreChange' ).html( this.scoreManager.text ( ) );
         $ ( '#scoreChange' ).css ( 'color', 'green' );
@@ -243,6 +243,6 @@ GameScreen.prototype.buttonLogic = function ( button )
             return 'menu';
             
         default:
-            //alert( 'Not Yet Implemented!' );
+            alert( 'Not Yet Implemented!' );
     }
 };
