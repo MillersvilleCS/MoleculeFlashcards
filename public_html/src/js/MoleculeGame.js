@@ -1,6 +1,7 @@
 
 MoleculeGame = function ( ) {
     'use strict';
+    Game.apply (this, arguments);
     /*@const*/
     var gameScreen = new GameScreen ( );
     /*@const*/
@@ -15,7 +16,8 @@ MoleculeGame = function ( ) {
     this.init ('menu');
 };
 
-MoleculeGame.prototype = new Game ( );
+MoleculeGame.prototype = Object.create (Game.prototype);
+MoleculeGame.prototype.constructor = MoleculeGame;
 
 MoleculeGame.prototype.update = function (delta) {
     'use strict';

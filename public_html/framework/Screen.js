@@ -6,7 +6,6 @@ Screen = function () {
 
 Screen.prototype = {
     constructor: Screen,
-    super: Screen,
     onUpdate: function (delta) {
         'use strict';
         throw new UnimplementedFunctionException ("onUpdate");

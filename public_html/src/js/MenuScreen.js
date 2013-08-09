@@ -1,9 +1,11 @@
 
 MenuScreen = function ( ) {
     'use strict';
+    Screen.apply (this, arguments);
 };
 
-MenuScreen.prototype = new Screen ( );
+MenuScreen.prototype = Object.create (Screen.prototype);
+MenuScreen.prototype.constructor = MenuScreen;
 
 MenuScreen.prototype.onUpdate = function (delta) {
     'use strict';

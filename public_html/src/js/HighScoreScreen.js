@@ -1,9 +1,11 @@
 
 HighScoreScreen = function ( ) {
     'use strict';
+    Screen.apply (this, arguments);
 };
 
-HighScoreScreen.prototype = new Screen ( );
+HighScoreScreen.prototype = Object.create (Screen.prototype);
+HighScoreScreen.prototype.constructor = HighScoreScreen;
 
 HighScoreScreen.prototype.onUpdate = function (delta) {
     'use strict';

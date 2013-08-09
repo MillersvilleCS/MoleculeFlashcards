@@ -1,8 +1,7 @@
 
 GameScreen = function ( ) {
-   
     'use strict';
-    this.super ( );
+    Screen.apply (this, arguments);
     /*@const*/
     this.MOLECULE = 0;
     /*@const*/
