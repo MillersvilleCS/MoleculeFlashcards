@@ -20,7 +20,7 @@ CommunicationManager.request = function ( requestUrl, requestObject, callback ) 
 
 CommunicationManager.parse = function ( text ) {
     try {
-        return eval ('(' + text + ')');
+        return JSON.parse ( text );
     }
     catch (err) {
         var ret = {};
