@@ -1,5 +1,9 @@
+/**
+ * @public
+ * @constructor
+ * @returns {Game}
+ */
 Game = function ( ) {
-    /**@const*/
     this.screenMap = new Map ( );
 };
 

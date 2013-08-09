@@ -1,6 +1,8 @@
 
 GameScreen = function ( ) {
+   
     'use strict';
+    this.super ( );
     /*@const*/
     this.MOLECULE = 0;
     /*@const*/
@@ -40,7 +42,8 @@ GameScreen = function ( ) {
     this.scene.add (pointLight);
 };
 
-GameScreen.prototype = new Screen ( );
+GameScreen.prototype = Object.create (Screen.prototype);
+GameScreen.prototype.constructor = GameScreen;
 
 GameScreen.prototype.onUpdate = function (delta) {
     'use strict';

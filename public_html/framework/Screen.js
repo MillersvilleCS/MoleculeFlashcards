@@ -1,12 +1,12 @@
 
 Screen = function () {
     'use strict';
-    /**@const*/
     this.scene = new THREE.Scene ();
 };
 
 Screen.prototype = {
     constructor: Screen,
+    super: Screen,
     onUpdate: function (delta) {
         'use strict';
         throw new UnimplementedFunctionException ("onUpdate");
