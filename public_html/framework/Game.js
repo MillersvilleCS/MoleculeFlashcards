@@ -1,5 +1,4 @@
-Game = function ( )
-{
+Game = function ( ) {
     /**@const*/
     this.screenMap = new Map ( );
 };
@@ -8,24 +7,20 @@ Game.prototype = {
     constructor: Game,
     currentScreenID: undefined,
     initialized: false,
-    init: function ( screenID )
-    {
+    init: function (screenID) {
         'use strict';
-        if ( this.initialized === false )
-        {
+        if (this.initialized === false) {
             this.initialized = true;
             this.currentScreenID = screenID;
             this.getCurrentScreen ( ).onResume ( );
-        }
-        else
-        {
-            throw new AlreadyInitilizedException ( "Game" );
+        } else {
+            throw new AlreadyInitilizedException ("Game");
         }
     },
-    update: function ( delta )
+    update: function (delta)
     {
         'use strict';
-        throw new UnimplementedFunctionException ( "update" );
+        throw new UnimplementedFunctionException ("update");
     },
     getCurrentScene: function ( )
     {
@@ -35,24 +30,24 @@ Game.prototype = {
     getCurrentScreen: function ( )
     {
         'use strict';
-        return this.screenMap.get ( this.currentScreenID );
+        return this.screenMap.get (this.currentScreenID);
     },
-    hasScreen: function ( screenID )
+    hasScreen: function (screenID)
     {
         'use strict';
-        return this.screenMap.contains ( screenID );
+        return this.screenMap.contains (screenID);
     },
-    getScreen: function ( screenID )
+    getScreen: function (screenID)
     {
         'use strict';
-        return this.screenMap.get ( screenID );
+        return this.screenMap.get (screenID);
     },
-    addScreen: function ( screenID, screen)
+    addScreen: function (screenID, screen)
     {
         'use strict';
-        this.screenMap.put ( screenID, screen );  
+        this.screenMap.put (screenID, screen);
     },
-    swapScreens: function ( screenID )
+    swapScreens: function (screenID)
     {
         'use strict';
         this.getCurrentScreen ( ).onLeave ( );

@@ -1,6 +1,5 @@
 
-GameScreen = function ( )
-{
+GameScreen = function ( ) {
     'use strict';
     /*@const*/
     this.MOLECULE = 0;
@@ -16,7 +15,7 @@ GameScreen = function ( )
     this.timer = new Timer ( );
     /*@const*/
     this.scoreManager = new ScoreManager ( );
-    
+
     //////////temporary/////////////
     /*@const*/
     this.modelList =
@@ -30,36 +29,32 @@ GameScreen = function ( )
                 'res/models/5.pdb'
             ];
     ////////////////////
-    
-    
-    var pointLight = new THREE.PointLight ( 0xFFFFFF );
+
+
+    var pointLight = new THREE.PointLight (0xFFFFFF);
 
     // set its position
-    pointLight.position.set ( 0, 0, 130 );
+    pointLight.position.set (0, 0, 130);
 
     // add to the scene
-    this.scene.add ( pointLight );
+    this.scene.add (pointLight);
 };
 
 GameScreen.prototype = new Screen ( );
 
-GameScreen.prototype.onUpdate = function ( delta )
-{
+GameScreen.prototype.onUpdate = function (delta) {
     'use strict';
-    if ( this.getSecondsLeft ( ) < 15 )
-    {
-        $('#time').css ( 'color', 'red' );
+    if (this.getSecondsLeft ( ) < 15) {
+        $ ('#time').css ('color', 'red');
     }
-    if ( this.getSecondsLeft () === 0 )
-    {
+    if (this.getSecondsLeft () === 0) {
         this.endGame ( );
     }
 
-    $('#time').html( Timer.getDigitalRep ( this.getSecondsLeft ( ) ) );
-    $('#score').html( this.scoreManager.score );
+    $ ('#time').html (Timer.getDigitalRep (this.getSecondsLeft ( )));
+    $ ('#score').html (this.scoreManager.score);
 
-    if ( MouseManager.leftButton.isPressed && this.active )
-    {
+    if (MouseManager.leftButton.isPressed && this.active) {
 
         this.currentQuestion[this.MOLECULE].rotation.z -=
                 (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
@@ -69,53 +64,49 @@ GameScreen.prototype.onUpdate = function ( delta )
     }
 };
 
-GameScreen.prototype.onPause = function ( )
-{
+GameScreen.prototype.onPause = function ( ) {
     'use strict';
 };
 
-GameScreen.prototype.onLeave = function ( )
-{
+GameScreen.prototype.onLeave = function ( ) {
     'use strict';
-    $ ( '#gameCompletedUI' ).fadeOut ( 500 );
-    $ ( '#rightPanel' ).fadeOut ( 500 );
-    $ ( '#gameCompletedReturnButton' ).fadeOut ( 500 );
-    $ ( '#time' ).css ( 'color', '#F8F8FE' );
-    $ ( '#time' ).html ( '2:00' );
-    $ ( '#score' ).html ( '0' );
-    
+    $ ('#gameCompletedUI').fadeOut (500);
+    $ ('#rightPanel').fadeOut (500);
+    $ ('#gameCompletedReturnButton').fadeOut (500);
+    $ ('#time').css ('color', '#F8F8FE');
+    $ ('#time').html ('2:00');
+    $ ('#score').html ('0');
+
     this.scoreManager.reset ( );
 };
 
-GameScreen.prototype.onResume = function ( )
-{
+GameScreen.prototype.onResume = function ( ) {
     'use strict';
     //start the loading screen
-    $ ( '#loadingUI' ).fadeIn ( 500 );
-    $ ( '#rightPanel' ).fadeIn ( 500 );
-    
+    $ ('#loadingUI').fadeIn (500);
+    $ ('#rightPanel').fadeIn (500);
+
     this.timer.reset ( );
-    this.questionList = [ ];
+    this.questionList = [];
     this.loadingState = 0;
     this.active = false;
-    TextLoader.loadText ( this.modelList[0],
-            this.loadAssets.bind ( this ) );
+    TextLoader.loadText (this.modelList[0],
+            this.loadAssets.bind (this));
 
 };
 
-GameScreen.prototype.startGame = function ( )
-{
+GameScreen.prototype.startGame = function ( ) {
     'use strict';
-    $ ( '#beginButton' ).fadeOut ( 500 );
-    $ ( '#loadingUI' ).fadeOut ( 1 );
-    $ ( 'canvas' ).fadeIn ( 500 );
-    
+    $ ('#beginButton').fadeOut (500);
+    $ ('#loadingUI').fadeOut (1);
+    $ ('canvas').fadeIn (500);
+
     this.active = true;
-    this.questionIterator = new Iterator ( this.questionList );
-    if ( this.questionIterator.hasNext ( ) )
+    this.questionIterator = new Iterator (this.questionList);
+    if (this.questionIterator.hasNext ( ))
     {
         this.currentQuestion = this.questionIterator.next ( );
-        this.scene.add ( this.currentQuestion [ this.MOLECULE ] );
+        this.scene.add (this.currentQuestion [ this.MOLECULE ]);
         this.timer.start ( );
     }
     else
@@ -124,144 +115,141 @@ GameScreen.prototype.startGame = function ( )
     }
 };
 
-GameScreen.prototype.endGame = function ( )
-{
+GameScreen.prototype.endGame = function ( ) {
     'use strict';
     this.active = false;
-    this.scene.remove ( this.currentQuestion[ this.MOLECULE ] );
+    this.scene.remove (this.currentQuestion[ this.MOLECULE ]);
     this.currentQuestion = undefined;
-    this.timer.stop  ( );
-    $ ( '#scoreChange' ).stop ( true, true );
-    $ ( '#scoreChange' ).animate({ opacity: 0 }, 300);
-    $ ( '#gameCompletedUI' ).fadeIn ( 500 );
-    $ ( '#gameCompletedReturnButton' ).fadeIn ( 500 );
+    this.timer.stop ( );
+    $ ('#scoreChange').stop (true, true);
+    $ ('#scoreChange').animate ({
+        opacity: 0
+    },
+    300);
+    $ ('#gameCompletedUI').fadeIn (500);
+    $ ('#gameCompletedReturnButton').fadeIn (500);
 };
 
-GameScreen.prototype.nextQuestion = function ( )
-{
+GameScreen.prototype.nextQuestion = function ( ) {
     'use strict';
     //TextLoader.loadText ( 'res/models/aspirin.pdb', this.createMolecule.bind ( this ) );
-    if ( this.questionIterator.hasNext ( ) )
-    {
-        this.scene.remove ( this.currentQuestion[ this.MOLECULE ] );
+    if (this.questionIterator.hasNext ( )) {
+        this.scene.remove (this.currentQuestion[ this.MOLECULE ]);
         this.currentQuestion = this.questionIterator.next ( );
-        this.scene.add ( this.currentQuestion[ this.MOLECULE ] );
+        this.scene.add (this.currentQuestion[ this.MOLECULE ]);
         this.active = true;
-    }
-    else
-    {
+    } else {
         this.endGame ( );
     }
 };
 
-GameScreen.prototype.loadAssets = function ( data )
-{
+GameScreen.prototype.loadAssets = function (data) {
     'use strict';
     //update loading screen
-    var loadingString =  "Loading";
+    var loadingString = "Loading";
     ++this.loadingState;
-    for(var i = 0; i < (this.loadingState / 2) % 3; ++i)
-    {
+    for (var i = 0; i < (this.loadingState / 2) % 3; ++i) {
         loadingString += '.';
     }
-    $ ( '#loadingMessage' ).html(loadingString);
-    
+    $ ('#loadingMessage').html (loadingString);
+
     //create a new question
-    var molecule = MoleculeGeometryBuilder.load ( data );
-    molecule.position = new THREE.Vector3 ( -2.5, -1, 0 );
-    molecule.scale = new THREE.Vector3 ( 0.5, 0.5, 0.5 );
-    
-    this.questionList.push ( [molecule , 'Option 1'] );
-    
+    var molecule = MoleculeGeometryBuilder.load (data);
+    molecule.position = new THREE.Vector3 (-2.5, -1, 0);
+    molecule.scale = new THREE.Vector3 (0.5, 0.5, 0.5);
+
+    this.questionList.push ([molecule, 'Option 1']);
+
     //check if all the molecules have been loaded
     var moleculeCount = this.questionList.length;
-    if ( moleculeCount === this.modelList.length )
-    {
-        $ ( '#loadingMessage' ).html( 'Ready' );
-        $ ( '#loadingMessage' ).css ( 'padding-left', '0px' );
-        $ ( '#loadingMessage' ).css ( 'text-align', 'center' );
-        $ ( '#beginButton' ).fadeIn ( 500 );
-        
-    }
-    else
-    {
-        TextLoader.loadText ( this.modelList[moleculeCount],
-                this.loadAssets.bind ( this ) );
+    if (moleculeCount === this.modelList.length) {
+        $ ('#loadingMessage').html ('Ready');
+        $ ('#loadingMessage').css ('padding-left', '0px');
+        $ ('#loadingMessage').css ('text-align', 'center');
+        $ ('#beginButton').fadeIn (500);
+
+    } else {
+        TextLoader.loadText (this.modelList[moleculeCount],
+                this.loadAssets.bind (this));
     }
 };
 
-GameScreen.prototype.getSecondsLeft = function ( )
-{
+GameScreen.prototype.getSecondsLeft = function ( ) {
     'use strict';
     var time = this.GAME_LENGTH - this.timer.getElapsedSec ( );
 
-    if ( time > 0 )
-    {
+    if (time > 0) {
         return time;
     }
-    
+
     return 0;
 };
 
-GameScreen.prototype.answerQuestion = function ( userAnswer )
+GameScreen.prototype.answerQuestion = function (userAnswer)
 {
     'use strict';
     //prevents answering a question multiple times
-    if ( !this.active )
-    {
-        return; 
+    if (!this.active) {
+        return;
     }
 
-    if ( this.currentQuestion [ this.ANSWER ] === userAnswer )
-    {
+    if (this.currentQuestion [ this.ANSWER ] === userAnswer) {
         this.active = false;
-        this.scoreManager.correct ( this.RIGHT_ANSWER_POINTS );
-        $ ( '#scoreChange' ).html( this.scoreManager.text ( ) );
-        $ ( '#scoreChange' ).css ( 'color', 'green' );
+        this.scoreManager.correct (this.RIGHT_ANSWER_POINTS);
+        $ ('#scoreChange').html (this.scoreManager.text ( ));
+        $ ('#scoreChange').css ('color', 'green');
         //Must use .animate, because .fadeIn/.fadeOut set display: none
-        $ ( '#scoreChange' ).animate({ opacity: 1.0 }, 300);
-        $ ( '#scoreChange' ).delay( 300 ).animate({ opacity: 0 }, 500);
+        $ ('#scoreChange').animate ({
+            opacity: 1.0
+        },
+        300);
+        $ ('#scoreChange').delay (300).animate ({
+            opacity: 0
+        },
+        500);
         this.nextQuestion ();
-    }
-    else
-    {
-        this.scoreManager.incorrect ( this.WRONG_ANSWER_POINTS );
-        $ ( '#scoreChange' ).html( this.scoreManager.text ( ) );
-        $ ( '#scoreChange' ).css ( 'color', 'red' );
-        $ ( '#scoreChange' ).animate({ opacity: 1.0 }, 300);
-        $ ( '#scoreChange' ).delay( 300 ).animate({ opacity: 0 }, 500);
+    } else {
+        this.scoreManager.incorrect (this.WRONG_ANSWER_POINTS);
+        $ ('#scoreChange').html (this.scoreManager.text ( ));
+        $ ('#scoreChange').css ('color', 'red');
+        $ ('#scoreChange').animate ({
+            opacity: 1.0
+        },
+        300);
+        $ ('#scoreChange').delay (300).animate ({
+            opacity: 0
+        },
+        500);
     }
 };
 
-GameScreen.prototype.buttonLogic = function ( button )
-{
+GameScreen.prototype.buttonLogic = function (button) {
     'use strict';
-    switch ( button )
-    {
+    switch (button) {
         case 'Option 1':
-            this.answerQuestion ( 'Option 1' );
+            this.answerQuestion ('Option 1');
             break;
 
         case 'Option 2':
-            this.answerQuestion ( 'Option 2' );
+            this.answerQuestion ('Option 2');
             break;
 
         case 'Option 3':
-            this.answerQuestion ( 'Option 3' );
+            this.answerQuestion ('Option 3');
             break;
 
         case 'Option 4':
-            this.answerQuestion ( 'Option 4' );
+            this.answerQuestion ('Option 4');
             break;
-        
+
         case 'Begin Game':
             this.startGame ( );
             break;
-            
+
         case 'Game Return':
             return 'menu';
-            
+
         default:
-            alert( 'Not Yet Implemented!' );
+            alert ('Not Yet Implemented!');
     }
 };

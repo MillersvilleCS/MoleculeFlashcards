@@ -1,6 +1,5 @@
 
-MoleculeGame = function ( )
-{
+MoleculeGame = function ( ) {
     'use strict';
     /*@const*/
     var gameScreen = new GameScreen ( );
@@ -9,27 +8,24 @@ MoleculeGame = function ( )
     /*@const*/
     var scoreScreen = new HighScoreScreen ( );
 
-    this.addScreen ( 'game', gameScreen );
-    this.addScreen ( 'menu', menuScreen );
-    this.addScreen ( 'score', scoreScreen );
+    this.addScreen ('game', gameScreen);
+    this.addScreen ('menu', menuScreen);
+    this.addScreen ('score', scoreScreen);
 
-    this.init ( 'menu' );
+    this.init ('menu');
 };
 
 MoleculeGame.prototype = new Game ( );
 
-MoleculeGame.prototype.update = function ( delta )
-{
+MoleculeGame.prototype.update = function (delta) {
     'use strict';
-    this.getCurrentScreen ( ).onUpdate ( delta );
+    this.getCurrentScreen ( ).onUpdate (delta);
 };
 
-MoleculeGame.prototype.buttonLogic = function ( button )
-{
+MoleculeGame.prototype.buttonLogic = function (button) {
     'use strict';
-    var screenID = this.getCurrentScreen ( ).buttonLogic ( button );
-    if ( this.hasScreen ( screenID ) )
-    {
-        this.swapScreens ( screenID );
+    var screenID = this.getCurrentScreen ( ).buttonLogic (button);
+    if (this.hasScreen (screenID)) {
+        this.swapScreens (screenID);
     }
 };

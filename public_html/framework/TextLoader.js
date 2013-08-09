@@ -3,15 +3,15 @@ TextLoader = function ( )
 
 };
 
-TextLoader.loadText = function ( url, callback )
+TextLoader.loadText = function (url, callback)
 {
-    var textFile = $.ajax ( url )
-            .done ( function () {
-        callback ( textFile.responseText );
-    } )
-            .fail ( function () {
-        callback ( 'ERROR' );
-    } )
-            .always ( function () {
-    } );
+    var textFile = $.ajax (url)
+            .done (function () {
+        callback (textFile.responseText);
+    })
+            .fail (function () {
+        callback ('ERROR');
+    })
+            .always (function () {
+    });
 };

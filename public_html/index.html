@@ -49,16 +49,16 @@
                         NEAR = 0.1,
                         FAR = 10000;
 
-                var camera = new THREE.PerspectiveCamera ( VIEW_ANGLE,
+                var camera = new THREE.PerspectiveCamera (VIEW_ANGLE,
                         ASPECT,
                         NEAR,
-                        FAR );
+                        FAR);
                 camera.position.y = 7;
                 camera.position.z = 5;
                 camera.position.x = 3;
-                camera.lookAt ( new THREE.Vector3 ( 0, 0, 0 ) );
+                camera.lookAt (new THREE.Vector3 (0, 0, 0));
                 game = new MoleculeGame ( );
-                var application = new Application ( game, camera, "Game Test", WIDTH, HEIGHT );
+                var application = new Application (game, camera, "Game Test", WIDTH, HEIGHT);
                 application.performGameLoop ( );
 
                 /* 
@@ -71,9 +71,9 @@
     <body onload = "start ( )">
         <div id = "game">
             <div id = "container"
-                 onmousedown="MouseManager.onMouseDown ( event )"
-                 onmouseup="MouseManager.onMouseUp ( event )" 
-                 onmousemove="MouseManager.onMouseMove ( event )">
+                 onmousedown="MouseManager.onMouseDown (event)"
+                 onmouseup="MouseManager.onMouseUp (event)" 
+                 onmousemove="MouseManager.onMouseMove (event)">
                 <!-- canvas goes here -->
 
                 <div id = "mainMenuUI">
@@ -98,19 +98,19 @@
                     <div 
                         class = "button" 
                         id = "mainMenuPlayButton" 
-                        onclick = "game.buttonLogic ( 'Play' );">
+                        onclick = "game.buttonLogic ('Play');">
                         START
                     </div>
                     <div 
                         class = "button" 
                         id = "mainMenuTutorialButton" 
-                        onclick = "game.buttonLogic ( 'TUTORIAL' );">
+                        onclick = "game.buttonLogic ('TUTORIAL');">
                         TUTORIAL
                     </div>
                     <div 
                         class = "button" 
                         id = "mainMenuHighScoreButton" 
-                        onclick = "game.buttonLogic ( 'HIGH SCORES' );">
+                        onclick = "game.buttonLogic ('HIGH SCORES');">
                         HIGH SCORES
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                     <div 
                         class = "button"
                         id = "beginButton"
-                        onclick = "game.buttonLogic ( 'Begin Game' );">
+                        onclick = "game.buttonLogic ('Begin Game');">
                         Begin
                     </div>
                 </div>
@@ -139,29 +139,29 @@
                         </div>
                         <div 
                             class = "button" 
-                            onclick = "game.buttonLogic ( 'Option 1' );">
+                            onclick = "game.buttonLogic ('Option 1');">
                             Option 1
                         </div>
                         <div 
                             class = "button" 
-                            onclick = "game.buttonLogic ( 'Option 2' );">
+                            onclick = "game.buttonLogic ('Option 2');">
                             Option 2
                         </div>
                         <div 
                             class = "button" 
-                            onclick = "game.buttonLogic ( 'Option 3' );">
+                            onclick = "game.buttonLogic ('Option 3');">
                             Option 3
                         </div>
                         <div 
                             class = "button" 
-                            onclick = "game.buttonLogic ( 'Option 4' );">
+                            onclick = "game.buttonLogic ('Option 4');">
                             Option 4
                         </div>
                     </div>
 
                     <div id = "gameCompletedUI">
                         <div class = "button" 
-                            onclick = "game.buttonLogic ( 'Game Return' );">
+                             onclick = "game.buttonLogic ('Game Return');">
                             Return
                         </div>
                     </div>
@@ -173,7 +173,7 @@
                         Incorrect answers will cost you points, and end combos. <br /> <br />
                         Answer as many as you can in 2 minutes!
                         <div class = "button" 
-                            onclick = "game.buttonLogic ( 'Tutorial Return' );">
+                             onclick = "game.buttonLogic ('Tutorial Return');">
                             Return
                         </div>
                     </div>
@@ -214,7 +214,7 @@
                     <div 
                         class = "button" 
                         id = "highScoreReturnButton" 
-                        onclick = "game.buttonLogic ( 'Main Menu' );">
+                        onclick = "game.buttonLogic ('Main Menu');">
                         Main Menu
                     </div>
                 </div>

@@ -1,38 +1,31 @@
 
-HighScoreScreen = function ( )
-{
+HighScoreScreen = function ( ) {
     'use strict';
 };
 
 HighScoreScreen.prototype = new Screen ( );
 
-HighScoreScreen.prototype.onUpdate = function ( delta )
-{
+HighScoreScreen.prototype.onUpdate = function (delta) {
     'use strict';
 };
 
-HighScoreScreen.prototype.onPause = function ( )
-{
+HighScoreScreen.prototype.onPause = function ( ) {
     'use strict';
 };
 
-HighScoreScreen.prototype.onLeave = function ( )
-{
+HighScoreScreen.prototype.onLeave = function ( ) {
     'use strict';
-    $ ( '#highScoreUI' ).fadeOut( 500 );
+    $ ('#highScoreUI').fadeOut (500);
 };
 
-HighScoreScreen.prototype.onResume = function ( )
-{
+HighScoreScreen.prototype.onResume = function ( ) {
     'use strict';
-    $ ( '#highScoreUI' ).fadeIn( 500 );
+    $ ('#highScoreUI').fadeIn (500);
 };
 
-HighScoreScreen.prototype.buttonLogic = function ( button )
-{
+HighScoreScreen.prototype.buttonLogic = function (button) {
     'use strict';
-    switch ( button )
-    {
+    switch (button) {
         case 'Main Menu':
             return 'menu';
 

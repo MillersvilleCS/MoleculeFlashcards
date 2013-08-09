@@ -1,31 +1,26 @@
 
-Screen = function ( )
-{
+Screen = function () {
     'use strict';
     /**@const*/
-    this.scene = new THREE.Scene ( );
+    this.scene = new THREE.Scene ();
 };
 
 Screen.prototype = {
     constructor: Screen,
-    onUpdate: function ( delta )
-    {
+    onUpdate: function (delta) {
         'use strict';
-        throw new UnimplementedFunctionException ( "onUpdate" );
+        throw new UnimplementedFunctionException ("onUpdate");
     },
-    onPause: function ( )
-    {
+    onPause: function () {
         'use strict';
-        throw new UnimplementedFunctionException ( "onPause" );
+        throw new UnimplementedFunctionException ("onPause");
     },
-    onLeave: function ( )
-    {
+    onLeave: function () {
         'use strict';
-        throw new UnimplementedFunctionException ( "onLeave" );
+        throw new UnimplementedFunctionException ("onLeave");
     },
-    onResume: function ( )
-    {
+    onResume: function () {
         'use strict';
-        throw new UnimplementedFunctionException ( "onResume" );
+        throw new UnimplementedFunctionException ("onResume");
     }
 };
