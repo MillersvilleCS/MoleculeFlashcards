@@ -4,9 +4,10 @@
 
 PDBLoader = function ()
 {
-
+    'use strict';
 };
 
+/*@const*/
 PDBLoader.atomColors = {
     "h": [ 255, 255, 255 ],
     "he": [ 217, 255, 255 ],
@@ -128,6 +129,7 @@ PDBLoader.atomColors = {
     "uuo": [ 235, 0, 38 ]
 };
 
+/*@const*/
 PDBLoader.atomRadii = {
     "h": 1.2,
     "li": 1.82,
@@ -152,8 +154,10 @@ PDBLoader.prototype = {
     constructor: THREE.OBJLoader,
             
     parsePDB: function ( text ) {
+        'use strict';
 
         function trim ( text ) {
+            'use strict';
 
             return text.replace ( /^\s\s*/, '' )
                     .replace ( /\s\s*$/, '' );
@@ -161,6 +165,7 @@ PDBLoader.prototype = {
         }
 
         function capitalize ( text ) {
+            'use strict';
 
             return text.charAt ( 0 ).toUpperCase () + text.substr ( 1 )
                     .toLowerCase ();
@@ -168,12 +173,14 @@ PDBLoader.prototype = {
         }
 
         function hash ( s, e ) {
+            'use strict';
 
             return "s" + Math.min ( s, e ) + "e" + Math.max ( s, e );
 
         }
 
         function parseBond ( start, length ) {
+            'use strict';
 
             var eatom = parseInt ( lines[ i ].substr ( start, length ) );
 

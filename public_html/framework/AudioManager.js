@@ -1,6 +1,7 @@
 
 AudioObject = function ( location )
 {
+    'use strict';
     this.audio = document.createElement ( 'audio' );
     var source = document.createElement ( 'source' );
 
@@ -15,10 +16,12 @@ AudioObject.prototype = {
     muted: false,
     play: function ( )
     {
+        'use strict';
         this.audio.play ( );
     },
     setVolume: function ( volume )
     {
+        'use strict';
         this.volume = volume;
 
         if ( this.volume > 100 )

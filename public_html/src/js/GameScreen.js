@@ -1,16 +1,24 @@
 
 GameScreen = function ( )
 {
+    'use strict';
+    /*@const*/
     this.MOLECULE = 0;
+    /*@const*/
     this.ANSWER = 1;
+    /*@const*/
     this.WRONG_ANSWER_POINTS = -30;
+    /*@const*/
     this.RIGHT_ANSWER_POINTS = 100;
+    /*@const*/
     this.GAME_LENGTH = 10;
-    
+    /*@const*/
     this.timer = new Timer ( );
+    /*@const*/
     this.scoreManager = new ScoreManager ( );
     
     //////////temporary/////////////
+    /*@const*/
     this.modelList =
             [
                 'res/models/first.pdb',
@@ -37,6 +45,7 @@ GameScreen.prototype = new Screen ( );
 
 GameScreen.prototype.onUpdate = function ( delta )
 {
+    'use strict';
     if ( this.getSecondsLeft ( ) < 15 )
     {
         $('#time').css ( 'color', 'red' );
@@ -62,11 +71,12 @@ GameScreen.prototype.onUpdate = function ( delta )
 
 GameScreen.prototype.onPause = function ( )
 {
-
+    'use strict';
 };
 
 GameScreen.prototype.onLeave = function ( )
 {
+    'use strict';
     $ ( '#gameCompletedUI' ).fadeOut ( 500 );
     $ ( '#rightPanel' ).fadeOut ( 500 );
     $ ( '#gameCompletedReturnButton' ).fadeOut ( 500 );
@@ -79,6 +89,7 @@ GameScreen.prototype.onLeave = function ( )
 
 GameScreen.prototype.onResume = function ( )
 {
+    'use strict';
     //start the loading screen
     $ ( '#loadingUI' ).fadeIn ( 500 );
     $ ( '#rightPanel' ).fadeIn ( 500 );
@@ -94,6 +105,7 @@ GameScreen.prototype.onResume = function ( )
 
 GameScreen.prototype.startGame = function ( )
 {
+    'use strict';
     $ ( '#beginButton' ).fadeOut ( 500 );
     $ ( '#loadingUI' ).fadeOut ( 1 );
     $ ( 'canvas' ).fadeIn ( 500 );
@@ -114,6 +126,7 @@ GameScreen.prototype.startGame = function ( )
 
 GameScreen.prototype.endGame = function ( )
 {
+    'use strict';
     this.active = false;
     this.scene.remove ( this.currentQuestion[ this.MOLECULE ] );
     this.currentQuestion = undefined;
@@ -125,6 +138,7 @@ GameScreen.prototype.endGame = function ( )
 
 GameScreen.prototype.nextQuestion = function ( )
 {
+    'use strict';
     //TextLoader.loadText ( 'res/models/aspirin.pdb', this.createMolecule.bind ( this ) );
     if ( this.questionIterator.hasNext ( ) )
     {
@@ -141,6 +155,7 @@ GameScreen.prototype.nextQuestion = function ( )
 
 GameScreen.prototype.loadAssets = function ( data )
 {
+    'use strict';
     //update loading screen
     var loadingString =  "Loading";
     ++this.loadingState;
@@ -176,6 +191,7 @@ GameScreen.prototype.loadAssets = function ( data )
 
 GameScreen.prototype.getSecondsLeft = function ( )
 {
+    'use strict';
     var time = this.GAME_LENGTH - this.timer.getElapsedSec ( );
 
     if ( time > 0 )
@@ -188,6 +204,7 @@ GameScreen.prototype.getSecondsLeft = function ( )
 
 GameScreen.prototype.answerQuestion = function ( userAnswer )
 {
+    'use strict';
     //prevents answering a question multiple times
     if ( !this.active )
     {
@@ -217,6 +234,7 @@ GameScreen.prototype.answerQuestion = function ( userAnswer )
 
 GameScreen.prototype.buttonLogic = function ( button )
 {
+    'use strict';
     switch ( button )
     {
         case 'Option 1':

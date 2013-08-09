@@ -6,19 +6,21 @@
 
 MoleculeGeometryBuilder = function ( )
 {
-    
+    'use strict';
 };
 
+/*@const*/
 MoleculeGeometryBuilder.pdbloader = new PDBLoader ( );
 
 MoleculeGeometryBuilder.load = function ( data )
 {
+    'use strict';
     var pdbJson = MoleculeGeometryBuilder.pdbloader.parsePDB ( data );
     return MoleculeGeometryBuilder.createModel ( pdbJson );
 };
 
 MoleculeGeometryBuilder.createModel = function ( json ) {
-
+    'use strict';
     var model = new THREE.Object3D ( );
 
     var atoms = json.atoms;
@@ -78,6 +80,7 @@ MoleculeGeometryBuilder.createModel = function ( json ) {
 
     function createBondsAsLines ( bonds, lineWidth, model )
     {
+        'use strict';
         var bondGeometry = new THREE.Geometry ( );
         for ( var i = 0; i < bonds.length; i++ )
         {

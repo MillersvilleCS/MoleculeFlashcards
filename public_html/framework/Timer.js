@@ -11,22 +11,26 @@ Timer.prototype = {
     running: false,
     start: function ( )
     {
+        'use strict';
         this.running = true;
         this.startTime = Date.now ( );
     },
     stop: function ( )
     {
+        'use strict';
         this.running = false;
         this.stopTime = Date.now ( );
     },
     reset: function ( )
     {
+        'use strict';
         var time = Date.now ( );
         this.startTime = time;
         this.stopTime = time;
     },
     getElapsedMs: function ( )
     {
+        'use strict';
         if ( this.running )
         {
             return Date.now ( ) - this.startTime;
@@ -36,6 +40,7 @@ Timer.prototype = {
     },
     getElapsedSec: function ( )
     {
+        'use strict';
         return Math.floor ( this.getElapsedMs ( ) / 1000 );
     }
 
@@ -43,6 +48,7 @@ Timer.prototype = {
 
 Timer.getDigitalRep = function ( seconds )
 {
+    'use strict';
     var minutes = Math.floor ( seconds / 60 );
     seconds = seconds - minutes * 60;
 

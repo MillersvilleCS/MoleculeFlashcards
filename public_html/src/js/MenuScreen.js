@@ -1,34 +1,37 @@
 
 MenuScreen = function ( )
 {
-
+    'use strict';
 };
 
 MenuScreen.prototype = new Screen ( );
 
 MenuScreen.prototype.onUpdate = function ( delta )
 {
-
+    'use strict';
 };
 
 MenuScreen.prototype.onPause = function ( )
 {
-
+    'use strict';
 };
 
 MenuScreen.prototype.onLeave = function ( )
 {
+    'use strict';
     $ ( '#mainMenuUI' ).fadeOut ( 500 );
 };
 
 MenuScreen.prototype.onResume = function ( )
 {
+    'use strict';
     $ ( '#gameUI' ).fadeIn ( 500 );
     $ ( '#mainMenuUI' ).fadeIn ( 500 );
 };
 
 MenuScreen.prototype.tutorial = function ( )
 {
+    'use strict';
     $ ( '#mainMenuUI' ).fadeOut ( 200 );
     $ ( '#tutorialUI' ).delay ( 200 ).fadeIn ( 300 );
     $ ( '#rightPanel' ).delay ( 2000 ).fadeIn ( 300 );
@@ -39,6 +42,7 @@ MenuScreen.prototype.tutorial = function ( )
 
 MenuScreen.prototype.endTutorial = function ( )
 {
+    'use strict';
     $ ( '#rightPanel' ).fadeOut ( 300 );
     $ ( '#tutorialUI' ).fadeOut ( 300 );
     $ ( '#mainMenuUI' ).delay ( 300 ).fadeIn ( 300 );
@@ -46,6 +50,7 @@ MenuScreen.prototype.endTutorial = function ( )
 
 MenuScreen.prototype.buttonLogic = function ( button )
 {
+    'use strict';
     switch ( button )
     {
         case 'Play':

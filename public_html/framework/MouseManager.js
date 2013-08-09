@@ -1,7 +1,7 @@
 
 MouseButton = function ( )
 {
-
+    
 };
 
 MouseButton.prototype = {
@@ -12,6 +12,7 @@ MouseButton.prototype = {
     pressedY: 0,
     press: function ( event )
     {
+        'use strict';
         this.isPressed = true;
         this.shifted = event.shiftKey;
         this.pressedX = event.screenX;
@@ -19,6 +20,7 @@ MouseButton.prototype = {
     },
     release: function ( event )
     {
+        'use strict';
         this.isPressed = false;
         this.shifted = false;
         this.pressedX = event.screenX;
@@ -29,26 +31,33 @@ MouseButton.prototype = {
 function MouseManager ( )
 {
 
-}
-;
-
+};
+/**@const*/
 MouseManager.leftButton = new MouseButton ( );
 MouseManager.rightButton = new MouseButton ( );
+/**@const*/
 MouseManager.currentX = 0;
 MouseManager.cuttentY = 0;
 
 //The mouse button standard values
+/**@const*/
 MouseManager.LEFT_STD_BUTTON = 0;
+/**@const*/
 MouseManager.MIDDLE_STD_BUTTON = 1;
+/**@const*/
 MouseManager.RIGHT_STD_BUTTON = 2;
 
 //Microsofts values
+/**@const*/
 MouseManager.LEFT_WIN_BUTTON = 1;
+/**@const*/
 MouseManager.MIDDLE_WIN_BUTTON = 4;
+/**@const*/
 MouseManager.RIGHT_WIN_BUTTON = 2;
 
 MouseManager.onMouseDown = function ( event )
 {
+    'use strict';
     if ( event.button === MouseManager.LEFT_STD_BUTTON )
     {
         MouseManager.leftButton.press ( event );
@@ -61,6 +70,7 @@ MouseManager.onMouseDown = function ( event )
 
 MouseManager.onMouseUp = function ( event )
 {
+    'use strict';
     if ( event.button === MouseManager.LEFT_STD_BUTTON )
     {
         MouseManager.leftButton.release ( event );
@@ -73,6 +83,7 @@ MouseManager.onMouseUp = function ( event )
 
 MouseManager.onMouseMove = function ( event )
 {
+    'use strict';
     MouseManager.currentX = event.screenX;
     MouseManager.currentY = event.screenY;
 };

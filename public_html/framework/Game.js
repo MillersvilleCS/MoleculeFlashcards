@@ -1,6 +1,7 @@
 Game = function ( )
 {
-    this.screenMap = new Map ( )
+    /**@const*/
+    this.screenMap = new Map ( );
 };
 
 Game.prototype = {
@@ -9,6 +10,7 @@ Game.prototype = {
     initialized: false,
     init: function ( screenID )
     {
+        'use strict';
         if ( this.initialized === false )
         {
             this.initialized = true;
@@ -22,30 +24,37 @@ Game.prototype = {
     },
     update: function ( delta )
     {
+        'use strict';
         throw new UnimplementedFunctionException ( "update" );
     },
     getCurrentScene: function ( )
     {
+        'use strict';
         return this.getCurrentScreen ( ).scene;
     },
     getCurrentScreen: function ( )
     {
+        'use strict';
         return this.screenMap.get ( this.currentScreenID );
     },
     hasScreen: function ( screenID )
     {
+        'use strict';
         return this.screenMap.contains ( screenID );
     },
     getScreen: function ( screenID )
     {
+        'use strict';
         return this.screenMap.get ( screenID );
     },
     addScreen: function ( screenID, screen)
     {
+        'use strict';
         this.screenMap.put ( screenID, screen );  
     },
     swapScreens: function ( screenID )
     {
+        'use strict';
         this.getCurrentScreen ( ).onLeave ( );
         this.currentScreenID = screenID;
         this.getCurrentScreen ( ).onResume ( );

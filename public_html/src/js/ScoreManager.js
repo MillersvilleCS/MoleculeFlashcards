@@ -1,5 +1,7 @@
 ScoreManager = function ( )
 {
+    'use strict';
+    /*@const*/
     this.questionTimer = new Timer ( );
     this.questionTimer.start ( );
 };
@@ -13,6 +15,7 @@ ScoreManager.prototype = {
     
     correct: function ( addition )
     {
+        'use strict';
         this.change = addition;
 
         ++this.streak;
@@ -31,6 +34,7 @@ ScoreManager.prototype = {
 
     incorrect: function ( deduction )
     {
+        'use strict';
         this.change = deduction;
         this.score += deduction;
 
@@ -40,6 +44,7 @@ ScoreManager.prototype = {
 
     reset: function ( )
     {
+        'use strict';
         this.score = 0;
         this.streak = 0;
         this.multiplier = 1;
@@ -49,6 +54,7 @@ ScoreManager.prototype = {
 
     text: function ( )
     {
+        'use strict';
         var response = this.change * this.multiplier;
 
         if ( this.change > 0 )
@@ -70,6 +76,7 @@ ScoreManager.prototype = {
 
     getTimeMSOnQuestion: function ( )
     {
+        'use strict';
         return this.questionTimer.getElapsedMs ( );
     }
 };
