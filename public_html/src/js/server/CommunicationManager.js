@@ -3,7 +3,7 @@ CommunicationManager = function () {
 };
 
 CommunicationManager.REQUEST_HANDLER_URL = 'http://exscitech.gcl.cis.udel.edu/exscitech_sam/request_handler.php';
-CommunicationManager.GAME_SESSION_URL = 'http://exscitech.gcl.cis.udel.edu/exscitech_sam/get_media.php';
+CommunicationManager.GET_MEDIA_URL = 'http://exscitech.gcl.cis.udel.edu/exscitech_sam/get_media.php';
 CommunicationManager.MEDIA_PDB = 0;
 CommunicationManager.MEDIA_IMAGE = 1;
 
@@ -110,5 +110,5 @@ CommunicationManager.getMedia = function ( gameSessionID, mediaType, questionID,
     requestObject.mt = mediaType;
     requestObject.qid = questionID;
 
-    CommunicationManager.get ( CommunicationManager.GAME_SESSION_URL, requestObject, callback );
+    CommunicationManager.get ( CommunicationManager.GET_MEDIA_URL, requestObject, callback );
 }
