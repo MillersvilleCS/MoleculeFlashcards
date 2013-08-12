@@ -10,7 +10,7 @@ GameScreen = function ( ) {
     /*@const*/
     this.RIGHT_ANSWER_POINTS = 100;
     /*@const*/
-    this.GAME_LENGTH = 10;
+    this.GAME_LENGTH = 120;
     /*@const*/
     this.timer = new Timer ( );
     /*@const*/
@@ -32,6 +32,7 @@ GameScreen = function ( ) {
     this.questionList = [];
     this.currentQuestion = undefined;
     this.questionIterator = undefined;
+    this.wrongAnswers = new Map ( );
 
     var pointLight = new THREE.PointLight (0xFFFFFF);
 
@@ -209,19 +210,24 @@ GameScreen.prototype.answerQuestion = function (userAnswer)
             opacity: 0
         },
         500);
+        this.wrongAnswers = new Map ( );
         this.nextQuestion ();
     } else {
-        this.scoreManager.incorrect (this.WRONG_ANSWER_POINTS);
-        $ ('#scoreChange').html (this.scoreManager.text ( ));
-        $ ('#scoreChange').css ('color', 'red');
-        $ ('#scoreChange').animate ({
-            opacity: 1.0
-        },
-        300);
-        $ ('#scoreChange').delay (300).animate ({
-            opacity: 0
-        },
-        500);
+
+        if( !this.wrongAnswers.contains ( userAnswer ) ) {
+            this.wrongAnswers.put ( userAnswer );
+            this.scoreManager.incorrect (this.WRONG_ANSWER_POINTS);
+            $ ('#scoreChange').html (this.scoreManager.text ( ));
+            $ ('#scoreChange').css ('color', 'red');
+            $ ('#scoreChange').animate ({
+                opacity: 1.0
+            },
+            300);
+            $ ('#scoreChange').delay (300).animate ({
+                opacity: 0
+            },
+            500);
+        }
     }
 };
 

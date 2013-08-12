@@ -83,6 +83,7 @@ Description:
 	load the flashcard game data
 Request Fields:
 	authenticator
+	game_id
 Response Fields:
 	game_session_id
 	questions - array of question objects (defined below)

@@ -69,10 +69,11 @@ CommunicationManager.availableGames = function ( auth, callback ) {
     CommunicationManager.post ( CommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
 }
 
-CommunicationManager.loadFlashcardGame = function ( auth, callback ) {
+CommunicationManager.loadFlashcardGame = function ( auth, gameID, callback ) {
     var requestObject = {};
     requestObject.request_type = 'load_flashcard_game';
     requestObject.auth = auth;
+    requestObject.game_id = gameID;
 
     CommunicationManager.post ( CommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
 }
