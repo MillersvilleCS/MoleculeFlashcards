@@ -52,6 +52,7 @@ CommunicationManager.get = function ( requestUrl, requestObject, callback ) {
 }
 
 CommunicationManager.login = function ( email, password , callback) {
+    /* Tested */
     email = email.toLowerCase ();
     var passwordHash = hex_md5 (password + email);
 
@@ -64,6 +65,7 @@ CommunicationManager.login = function ( email, password , callback) {
 }
 
 CommunicationManager.availableGames = function ( auth, callback ) {
+    /* Tested */
     var requestObject = {};
     requestObject.request_type = 'get_avail_flashcard_games';
     requestObject.auth = auth;
@@ -72,6 +74,7 @@ CommunicationManager.availableGames = function ( auth, callback ) {
 }
 
 CommunicationManager.loadFlashcardGame = function ( auth, gameID, callback ) {
+    /* Tested - Ours isn't on there yet I guess */
     var requestObject = {};
     requestObject.request_type = 'load_flashcard_game';
     requestObject.auth = auth;
@@ -101,8 +104,8 @@ CommunicationManager.submitFlashcardAnswer = function ( auth, gameSessionID, que
 }
 
 CommunicationManager.getMedia = function ( gameSessionID, mediaType, questionID, callback ) {
+    /* Tested - Pulled back a PDB + other info Sam talked about */
     var requestObject = {};
-    //requestObject.request_type = 'get_media';
     requestObject.gsi = gameSessionID;
     requestObject.mt = mediaType;
     requestObject.qid = questionID;
