@@ -3,7 +3,9 @@ CommunicationManager = function () {
 };
 
 CommunicationManager.REQUEST_HANDLER_URL = 'http://exscitech.gcl.cis.udel.edu/exscitech_sam/request_handler.php';
-CommunicationManager.GAME_SESSION_URL = 'http://exscitech.gcl.cis.udel.edu/exscitech_sam/game_session.php';
+CommunicationManager.GAME_SESSION_URL = 'http://exscitech.gcl.cis.udel.edu/exscitech_sam/get_media.php';
+CommunicationManager.MEDIA_PDB = 0;
+CommunicationManager.MEDIA_IMAGE = 1;
 
 CommunicationManager.parse = function ( text ) {
     try {
@@ -40,11 +42,11 @@ CommunicationManager.get = function ( requestUrl, requestObject, callback ) {
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'html',
                 type: 'GET',
-                data: JSON.stringify (requestObject),
+                data: requestObject,
                 async: true
             }).done (
                 function () {
-                    callback (CommunicationManager.parse(response.responseText));
+                    callback (response.responseText);
                 }
             );
 }
@@ -100,7 +102,7 @@ CommunicationManager.submitFlashcardAnswer = function ( auth, gameSessionID, que
 
 CommunicationManager.getMedia = function ( gameSessionID, mediaType, questionID, callback ) {
     var requestObject = {};
-    requestObject.request_type = 'get_media';
+    //requestObject.request_type = 'get_media';
     requestObject.gsi = gameSessionID;
     requestObject.mt = mediaType;
     requestObject.qid = questionID;
