@@ -196,7 +196,7 @@ GameScreen.prototype.answerQuestion = function (userAnswer)
         return;
     }
 
-    if (this.currentQuestion [ this.ANSWER ] === userAnswer) {
+    if ( this.currentQuestion [ this.ANSWER ] === userAnswer ) {
         this.active = false;
         this.scoreManager.correct (this.RIGHT_ANSWER_POINTS);
         $ ('#scoreChange').html (this.scoreManager.text ( ));
@@ -213,20 +213,24 @@ GameScreen.prototype.answerQuestion = function (userAnswer)
         this.wrongAnswers = new Map ( );
         this.nextQuestion ();
     } else {
-
         if( !this.wrongAnswers.contains ( userAnswer ) ) {
             this.wrongAnswers.put ( userAnswer );
             this.scoreManager.incorrect (this.WRONG_ANSWER_POINTS);
-            $ ('#scoreChange').html (this.scoreManager.text ( ));
-            $ ('#scoreChange').css ('color', 'red');
-            $ ('#scoreChange').animate ({
-                opacity: 1.0
-            },
-            300);
-            $ ('#scoreChange').delay (300).animate ({
-                opacity: 0
-            },
-            500);
+                $ ('#scoreChange').html (this.scoreManager.text ( ));
+                $ ('#scoreChange').css ('color', 'red');
+                $ ('#scoreChange').animate ({
+                    opacity: 1.0
+                },
+                300);
+                $ ('#scoreChange').delay (300).animate ({
+                    opacity: 0
+                },
+                500);
+            if ( this.wrongAnswers.size === 3 ) {
+                this.active = false;
+                this.wrongAnswers = new Map ( );
+                this.nextQuestion ( );
+            }
         }
     }
 };
