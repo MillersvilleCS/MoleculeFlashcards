@@ -2,6 +2,7 @@
 Screen = function () {
     'use strict';
     this.scene = new THREE.Scene ();
+    return null;
 };
 
 Screen.prototype = {

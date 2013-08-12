@@ -1,10 +1,7 @@
-/**
- * @public
- * @constructor
- * @returns {Game}
- */
+
 Game = function ( ) {
     this.screenMap = new Map ( );
+    return null;
 };
 
 Game.prototype = {

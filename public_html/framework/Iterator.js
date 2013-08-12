@@ -1,13 +1,14 @@
 
 Iterator = function (iterable) {
     'use strict';
-    /**@const*/
+    /**@private @const*/
     this.data = iterable;
+    /**@private @const*/
+    this.index = -1;
 };
 
 Iterator.prototype = {
     constructor: Iterator,
-    index: -1,
     hasNext: function ( ) {
         'use strict';
         return this.index < this.data.length - 1;
