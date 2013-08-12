@@ -2,23 +2,17 @@
 GameScreen = function ( ) {
     'use strict';
     Screen.apply (this, arguments);
-    /*@const*/
+
     this.MOLECULE = 0;
-    /*@const*/
     this.ANSWER = 1;
-    /*@const*/
     this.WRONG_ANSWER_POINTS = -30;
-    /*@const*/
     this.RIGHT_ANSWER_POINTS = 100;
-    /*@const*/
     this.GAME_LENGTH = 120;
-    /*@const*/
+
     this.timer = new Timer ( );
-    /*@const*/
     this.scoreManager = new ScoreManager ( );
 
     //////////temporary/////////////
-    /*@const*/
     this.modelList =
             [
                 'res/models/first.pdb',
@@ -198,7 +192,7 @@ GameScreen.prototype.answerQuestion = function (userAnswer)
         return;
     }
 
-    if ( this.currentQuestion [ this.ANSWER ] === userAnswer ) {
+    if (this.currentQuestion [ this.ANSWER ] === userAnswer) {
         this.active = false;
         this.scoreManager.correct (this.RIGHT_ANSWER_POINTS);
         $ ('#scoreChange').html (this.scoreManager.text ( ));
@@ -215,20 +209,20 @@ GameScreen.prototype.answerQuestion = function (userAnswer)
         this.wrongAnswers = new Map ( );
         this.nextQuestion ();
     } else {
-        if( !this.wrongAnswers.contains ( userAnswer ) ) {
-            this.wrongAnswers.put ( userAnswer );
+        if (!this.wrongAnswers.contains (userAnswer)) {
+            this.wrongAnswers.put (userAnswer);
             this.scoreManager.incorrect (this.WRONG_ANSWER_POINTS);
-                $ ('#scoreChange').html (this.scoreManager.text ( ));
-                $ ('#scoreChange').css ('color', 'red');
-                $ ('#scoreChange').animate ({
-                    opacity: 1.0
-                },
-                300);
-                $ ('#scoreChange').delay (300).animate ({
-                    opacity: 0
-                },
-                500);
-            if ( this.wrongAnswers.size === 3 ) {
+            $ ('#scoreChange').html (this.scoreManager.text ( ));
+            $ ('#scoreChange').css ('color', 'red');
+            $ ('#scoreChange').animate ({
+                opacity: 1.0
+            },
+            300);
+            $ ('#scoreChange').delay (300).animate ({
+                opacity: 0
+            },
+            500);
+            if (this.wrongAnswers.size === 3) {
                 this.active = false;
                 this.wrongAnswers = new Map ( );
                 this.nextQuestion ( );

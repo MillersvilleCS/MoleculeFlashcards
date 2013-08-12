@@ -2,7 +2,6 @@
  * replace with map class when javascript 6 is finalized.
  */
 Map = function ( ) {
-    /**@private @const*/
     this.size = 0;
 };
 

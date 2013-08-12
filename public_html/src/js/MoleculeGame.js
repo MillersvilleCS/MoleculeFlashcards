@@ -2,11 +2,8 @@
 MoleculeGame = function ( ) {
     'use strict';
     Game.apply (this, arguments);
-    /*@const*/
     var gameScreen = new GameScreen ( );
-    /*@const*/
     var menuScreen = new MenuScreen ( );
-    /*@const*/
     var scoreScreen = new HighScoreScreen ( );
 
     this.addScreen ('game', gameScreen);

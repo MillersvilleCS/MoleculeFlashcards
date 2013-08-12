@@ -24,7 +24,7 @@ ScoreManager.prototype = {
         }
 
         this.score += addition * this.multiplier;
-        this.questionTimer.reset ();
+        this.questionTimer.reset ( );
     },
     incorrect: function (deduction) {
         'use strict';
@@ -34,15 +34,15 @@ ScoreManager.prototype = {
         this.streak = 0;
         this.multiplier = 1;
     },
-    reset: function () {
+    reset: function ( ) {
         'use strict';
         this.score = 0;
         this.streak = 0;
         this.multiplier = 1;
         this.change = 0;
-        this.questionTimer.reset ();
+        this.questionTimer.reset ( );
     },
-    text: function () {
+    text: function ( ) {
         'use strict';
         var response = this.change * this.multiplier;
 
@@ -62,8 +62,8 @@ ScoreManager.prototype = {
 
         return response;
     },
-    getTimeMSOnQuestion: function () {
+    getTimeMSOnQuestion: function ( ) {
         'use strict';
-        return this.questionTimer.getElapsedMs ();
+        return this.questionTimer.getElapsedMs ( );
     }
 };

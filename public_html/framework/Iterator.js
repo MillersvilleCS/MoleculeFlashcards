@@ -1,9 +1,7 @@
 
 Iterator = function (iterable) {
     'use strict';
-    /**@private @const*/
     this.data = iterable;
-    /**@private @const*/
     this.index = -1;
 };
 
