@@ -29,7 +29,9 @@ GameScreen = function ( ) {
                 'res/models/5.pdb'
             ];
     ////////////////////
-
+    this.questionList = [];
+    this.currentQuestion = undefined;
+    this.questionIterator = undefined;
 
     var pointLight = new THREE.PointLight (0xFFFFFF);
 
@@ -188,7 +190,7 @@ GameScreen.prototype.getSecondsLeft = function ( ) {
 GameScreen.prototype.answerQuestion = function (userAnswer)
 {
     'use strict';
-    //prevents answering a question multiple times
+    //prevents answering a question correctly multiple times (lock)
     if (!this.active) {
         return;
     }
