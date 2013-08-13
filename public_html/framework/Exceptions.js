@@ -18,3 +18,8 @@ function AlreadyInitilizedException (name) {
     'use strict';
     return name + " has already been initialized.";
 };
+
+function IOException (error) {
+    'use strict';
+    return error;
+}

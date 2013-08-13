@@ -7,11 +7,7 @@ CommunicationManager.parse = function (text) {
     try {
         return JSON.parse (text);
     } catch (err) {
-        var ret = {
-        };
-        ret.success = false;
-        ret.error = 'JSON syntax error, invalid server response';
-        return ret;
+        throw new IOException('JSON syntax error, invalid server response');
     }
 };
 
