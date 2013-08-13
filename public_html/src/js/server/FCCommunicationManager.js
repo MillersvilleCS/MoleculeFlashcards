@@ -51,6 +51,7 @@ FCCommunicationManager.endFlashcardGame = function ( auth, gameSessionID, callba
     var requestObject = {};
     requestObject.request_type = 'end_flashcard_game';
     requestObject.auth = auth;
+    requestObject.game_session_id = gameSessionID;
 
     FCCommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
 };
