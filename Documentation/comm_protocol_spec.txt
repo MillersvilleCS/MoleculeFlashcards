@@ -7,7 +7,7 @@ Brief Client Side: The request object is encoded in JSON and posted to the /requ
 NOTE: TO TEST THIS LOCALLY, you must run chromium-browser --disable-web-security
 
 Google Chrome and Firefox probably have different commands. Make sure the browser is entirely
-off before you try this. This allows the browser to make requests to the existech server
+off before you try this. This allows the browser to make requests to the exscitech server
 from a different domain (i.e. your local one).
 
 Example code:
@@ -52,7 +52,7 @@ Description:
 	login and get basic user data
 Request Fields:
 	email
-	pw_hash
+	pw_hash - md5 hash of email concatenated with password
 Response Fields:
 	username
 	authenticator
@@ -72,10 +72,11 @@ Response Fields:
 			name
 			description
 			time_limit
-			#high_scores - array of high_score objects (defined below)
-			#	high_score object properties:
-			#		username
-			#		score
+			high_scores - array of high_score objects (defined below)
+				high_score object properties:
+					rank
+					username
+					score
 	
 Name: 
 	load_flashcard_game
@@ -93,7 +94,6 @@ Response Fields:
 			answers - array of answer objects - possible answers - can be between 2 and 5 strings long
 				id
 				text
-	question_id - array of answers stored as ints, commonly indexed wrt questions array (ie. if question_id[0] = 0 the answer to question[0].answers[0] ) - security through obscurity :)
 
 Name:
 	end_flashcard_game
