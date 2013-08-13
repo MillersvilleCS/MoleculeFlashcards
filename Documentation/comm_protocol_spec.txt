@@ -47,6 +47,19 @@ Note:
 	- Anything preceded with a # is not implemented
 
 Name:
+	Register
+Description:
+	Register a new account
+Request Fields:
+	email
+	password
+	username
+Response Fields:
+	username
+	authenticator
+
+
+Name:
 	login
 Description:
 	login and get basic user data
@@ -98,12 +111,14 @@ Response Fields:
 Name:
 	end_flashcard_game
 Description:
-	Submitted when the game is over or the user goes back to the main menu (the server will automatically clean up old sessions, this just keeps the table from getting too big)
+	Submitted when the game is over or the user goes back to the main menu (the server will automatically clean up old sessions, this just keeps the table from getting too big). Also computes the final score 
 Request Fields:
 	authenticator
 	game_session_id
+	game_time
 Response Fields:
-	None
+	rank
+	score
 
 Name:
 	submit_flashcard_answer
