@@ -29,8 +29,12 @@ LoginScreen.prototype.buttonLogic = function (button) {
     'use strict';
     switch (button) {
         case 'Login':
-            FCCommunicationManager.login (email, password, this.login.bind(this) );
+            console.log($('#emailLogin').val());
+            FCCommunicationManager.login ($('#emailLogin').val(), $('#passLogin').val(), this.loginFinish.bind(this) );
+            this.loginStart();
             break;
+        case 'Login Proceed':
+            return 'menu';
         case 'CreateDiv':
             this.createDivShow();
             break;
@@ -43,8 +47,13 @@ LoginScreen.prototype.buttonLogic = function (button) {
     }
 };
 
-LoginScreen.prototype.login = function ( ) {
-    
+LoginScreen.prototype.loginStart = function ( ) {
+    $('#loginBox').slideUp( 300 );
+};
+
+LoginScreen.prototype.loginFinish = function ( ) {
+    $('#loginBox').delay( 500 ).css( 'display', 'block' );
+    game.buttonLogic('Login Proceed');
 };
 
 LoginScreen.prototype.createDivShow = function ( ) {
