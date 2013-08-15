@@ -78,6 +78,59 @@
                  onmousemove="MouseManager.onMouseMove (event)">
                 <!-- canvas goes here -->
 
+                <div id = "pageHeader">
+                    <a href = "">
+                        <img id = "exscitechLogo" src = "res/media/exscitech_logo.png">
+                    </a>
+                    <a href = "">
+                        <img id = "dockingLogo" src = "res/media/dh_logo.png">
+                    </a>
+                    <div id = "exscitechLinks">
+                        <a class = "headerLinks" href = ""> Job Submission </a> | 
+                        <a class = "headerLinks" href = ""> Molecule Flashcards </a> | 
+                        <a class = "headerLinks" href = ""> Contributors </a> | 
+                        <a class = "headerLinks" href = ""> Docking@Home </a>
+                    </div>
+                </div>
+
+                <div id = "loginUI">
+                    <div id = "loginTitle">
+                        Molecule Flashcards!
+                    </div>
+                    <div id = "loginBox">
+                        Email: <input type = "text" name = "emailLogin"><br />
+                        Password: <input type = "password" name = "passLogin"><br />
+                        <div class = "button" id = "loginButton">
+                            Login
+                        </div>
+                        Not a member? <a onclick = "showRegisterBox"> Create an account </a>
+                    </div>
+                    <div id = "registerBox">
+                        Username: <input type = "text" name = "usernameRegister"><br />
+                        Email: <input type = "text" name = "emailRegister"><br />
+                        Password: <input type = "password" name = "passRegister"><br />
+                        Repeat Password: <input type = "password" name = "passRepRegister"><br />
+                        <div class = "button" id = "registerButton">
+                            Register!
+                        </div>
+                    </div>
+                </div>
+
+                <div id = "topicListUI">
+                    <div id = "title">
+                        Topic:
+                    </div>
+                    <div id = "topicChooser">
+                        <!-- Insert games with JQuery here-->
+                    </div>
+                    <div class = "button" id = "tutorialButton">
+                        Tutorial
+                    </div>
+                    <div class = "button" id = "loadTopicButton">
+                        Load
+                    </div>
+                </div>
+
                 <div id = "mainMenuUI">
                     <!--
                     <div id = "options">
