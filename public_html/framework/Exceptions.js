@@ -19,6 +19,11 @@ function AlreadyInitilizedException (name) {
     return name + " has already been initialized.";
 };
 
+function Exception (error) {
+    'use strict';
+    return error;
+}
+
 function IOException (error) {
     'use strict';
     return error;

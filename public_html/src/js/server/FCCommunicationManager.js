@@ -1,10 +1,8 @@
 FCCommunicationManager = function () {
-    'use strict';
-    FCCommunicationManager.apply (this, arguments);
+    
 };
 
-FCCommunicationManager.prototype = Object.create (CommunicationManager.prototype);
-FCCommunicationManager.prototype.constructor = FCCommunicationManager;
+FCCommunicationManager = CommunicationManager;
 
 FCCommunicationManager.REQUEST_HANDLER_URL = 'http://exscitech.gcl.cis.udel.edu/exscitech_sam/request_handler.php';
 FCCommunicationManager.GET_MEDIA_URL = 'http://exscitech.gcl.cis.udel.edu/exscitech_sam/get_media.php';
