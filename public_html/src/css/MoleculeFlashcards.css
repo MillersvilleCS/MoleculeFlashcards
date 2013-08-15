@@ -3,7 +3,7 @@
 body
 {
     margin: 0px;
-    padding: 20px;
+    padding: 0px;
     background-color: #F8F8FE;
     font-family: "Times New Roman", Arial;
 }
@@ -40,6 +40,27 @@ div.button:active
     background-color: #EFE1FE;
 }
 
+a.headerLinks:link {
+    color: white;
+    text-decoration: none;
+    transition-property: color;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
+}
+
+a.headerLinks:visited {
+    color: white;
+    text-decoration: none;
+    transition-property: color;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
+}
+
+a.headerLinks:hover {
+    color: red;
+    text-decoration: none;
+}
+
 /* Parent Div Elements */
 
 #game
@@ -53,4 +74,17 @@ div.button:active
     max-width: 804px;
     max-height: 604px;
     margin: auto;
+}
+
+#pageHeader {
+    background-color: blue;
+}
+
+#exscitechLinks {
+    color: white;
+    text-align: center;
+}
+
+#dockingLogo {
+    float: right;
 }
