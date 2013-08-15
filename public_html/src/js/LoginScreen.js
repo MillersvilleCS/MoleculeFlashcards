@@ -17,12 +17,12 @@ LoginScreen.prototype.onPause = function ( ) {
 
 LoginScreen.prototype.onLeave = function ( ) {
     'use strict';
-    
+    $ ('#loginUI').fadeOut (500);
 };
 
 LoginScreen.prototype.onResume = function ( ) {
     'use strict';
-    
+    $ ('#loginUI').fadeIn (500);
 };
 
 LoginScreen.prototype.buttonLogic = function (button) {
@@ -32,8 +32,6 @@ LoginScreen.prototype.buttonLogic = function (button) {
             FCCommunicationManager.login ( $('#emailLogin').val(), $('#passLogin').val(), this.loginFinish.bind(this) );
             this.loginStart();
             break;
-        case 'Login Proceed':
-            return 'menu';
         case 'CreateDiv':
             this.createDivShow();
             break;
@@ -51,9 +49,8 @@ LoginScreen.prototype.loginStart = function ( ) {
 };
 
 LoginScreen.prototype.loginFinish = function ( response ) {
-    console.log('loginFinish');
     $('#loginBox').delay( 500 ).css( 'display', 'block' );
-    game.buttonLogic('Login Proceed');
+    game.swapScreens('menu');//extremely temp
 };
 
 LoginScreen.prototype.createDivShow = function ( ) {
