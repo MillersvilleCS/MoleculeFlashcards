@@ -15,9 +15,9 @@
         <link rel = 'stylesheet' type = 'text/css' href = 'src/css/MenuScreen.css'>
 
         <!-- js files -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
         <script type="text/javascript"src="libs/three.js"></script>
         <script type="text/javascript"src="libs/jQuery.js"></script>
+        <script type="text/javascript"src="libs/md5-min.js"></script>
 
         <script type="text/javascript"src="framework/Application.js"></script>
         <script type="text/javascript"src="framework/CommunicationManager.js"></script>
@@ -104,8 +104,8 @@
                             <div id = "loginBoxTitle">
                                 Login
                             </div>
-                            Email: <input type = "text" name = "emailLogin"><br /><br />
-                            Password: <input type = "password" name = "passLogin"><br />
+                            Email: <input type = "text" name = "emailLogin" id = "emailLogin"><br /><br />
+                            Password: <input type = "password" name = "passLogin" id = "passLogin"><br />
                             <div class = "button" id = "loginButton" onclick = "game.buttonLogic ('Login');">
                                 Login
                             </div>
@@ -118,10 +118,10 @@
                             <div id = "registerBoxTitle">
                                 Register
                             </div>
-                            Username: <input type = "text" name = "usernameRegister"><br /><br />
-                            Email: <input type = "text" name = "emailRegister"><br /><br />
-                            Password: <input type = "password" name = "passRegister"><br /><br />
-                            Repeat Password: <input type = "password" name = "passRepRegister"><br /><br />
+                            Username: <input type = "text" name = "usernameRegister" id = "usernameRegister"><br /><br />
+                            Email: <input type = "text" name = "emailRegister" id = "emailRegister"><br /><br />
+                            Password: <input type = "password" name = "passRegister" id = "passRegister"><br /><br />
+                            Repeat Password: <input type = "password" name = "passRepRegister" id = "passRepRegister"><br /><br />
                             <div class = "button" id = "registerButton">
                                 Register!
                             </div>
