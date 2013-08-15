@@ -2,8 +2,6 @@ FCCommunicationManager = function () {
     
 };
 
-FCCommunicationManager = CommunicationManager;
-
 FCCommunicationManager.REQUEST_HANDLER_URL = 'http://exscitech.gcl.cis.udel.edu/exscitech_sam/request_handler.php';
 FCCommunicationManager.GET_MEDIA_URL = 'http://exscitech.gcl.cis.udel.edu/exscitech_sam/get_media.php';
 FCCommunicationManager.MEDIA_PDB = 0;
@@ -19,7 +17,7 @@ FCCommunicationManager.login = function ( email, password , callback) {
     requestObject.email = email;
     requestObject.hash = passwordHash;
 
-    FCCommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
+    CommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
 };
 
 FCCommunicationManager.availableGames = function ( auth, callback ) {
@@ -28,7 +26,7 @@ FCCommunicationManager.availableGames = function ( auth, callback ) {
     requestObject.request_type = 'get_avail_flashcard_games';
     requestObject.authenticator = auth;
 
-    FCCommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
+    CommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
 };
 
 FCCommunicationManager.loadFlashcardGame = function ( auth, gameID, callback ) {
@@ -38,7 +36,7 @@ FCCommunicationManager.loadFlashcardGame = function ( auth, gameID, callback ) {
     requestObject.authenticator = auth;
     requestObject.game_id = gameID;
 
-    FCCommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
+    CommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
 };
 
 FCCommunicationManager.endFlashcardGame = function ( auth, gameSessionID, callback ) {
@@ -49,7 +47,7 @@ FCCommunicationManager.endFlashcardGame = function ( auth, gameSessionID, callba
     requestObject.game_session_id = gameSessionID;
     requestObject.game_time = gameTime;
 
-    FCCommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
+    CommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
 };
 
 FCCommunicationManager.submitFlashcardAnswer = function ( auth, gameSessionID, questionID, answer, gameTime, callback ) {
@@ -62,7 +60,7 @@ FCCommunicationManager.submitFlashcardAnswer = function ( auth, gameSessionID, q
     requestObject.answer = answer;
     requestObject.game_time = gameTime;
 
-    FCCommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
+    CommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
 };
 
 FCCommunicationManager.getMedia = function ( gameSessionID, mediaType, questionID, callback ) {
@@ -72,5 +70,5 @@ FCCommunicationManager.getMedia = function ( gameSessionID, mediaType, questionI
     requestObject.mt = mediaType;
     requestObject.qid = questionID;
 
-    FCCommunicationManager.get ( FCCommunicationManager.GET_MEDIA_URL, requestObject, callback );
+    CommunicationManager.get ( FCCommunicationManager.GET_MEDIA_URL, requestObject, callback );
 };
