@@ -90,6 +90,20 @@ Response Fields:
 					rank
 					username
 					score
+Name:
+	get_high_scores
+Description:
+	get additional high scores for a specific game
+Request Fields:
+	game_id
+	starting_rank
+	range
+Response Fields:
+	scores - array of scores (defined below)
+		score properties:
+			rank
+			score
+			username
 	
 Name: 
 	load_flashcard_game
