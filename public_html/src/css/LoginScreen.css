@@ -1,12 +1,91 @@
 /* 
     Document   : LoginScreen
     Created on : Aug 14, 2013, 3:19:24 PM
-    Author     : william
+    Author     : connor
     Description:
         Purpose of the stylesheet follows.
 */
 
-#loginUI { 
-    display: none;
+div.basicLink {
+    color: blue;
+    display: inline;
+    cursor: pointer;
+    text-decoration: none;
 }
 
+div.basicLink:hover {
+    text-decoration: underline;
+}
+
+#loginUI { 
+    background-color: gray;
+    width: 804px;
+    height: 600px;
+    text-align: center;
+}
+
+#loginUIContainer {
+    margin: 100px;
+    margin-left: 180px;
+    text-align: center;
+}
+
+#loginTitle {
+    font-size: 72px;
+    text-align: center;
+}
+
+#loginBox {
+    width: 400px;
+    height: 200px;
+    background-color: white;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    padding: 20px;
+}
+
+#loginBoxTitle {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+#loginButton {
+    background-color: blue;
+    width: 75px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#loginButton:hover {
+    background-color: red;
+}
+
+#registerBox {
+    display: none;
+    width: 400px;
+    height: 300px;
+    background-color: white;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    padding: 20px;
+}
+
+#registerBoxTitle {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+#registerButton {
+    background-color: blue;
+    width: 100px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#registerButton:hover {
+    background-color: red;
+}

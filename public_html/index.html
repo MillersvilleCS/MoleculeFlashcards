@@ -30,8 +30,9 @@
         <script type="text/javascript"src="framework/Screen.js"></script>
         <script type="text/javascript"src="framework/Iterator.js"></script>
 
-        <script type="text/javascript"src="src/js/GameScreen.js"></script>
         <script type="text/javascript"src="src/js/FCCommunicationManager.js"></script>
+        <script type="text/javascript"src="src/js/GameScreen.js"></script>
+        <script type="text/javascript"src="src/js/LoginScreen.js"></script>
         <script type="text/javascript"src="src/js/MenuScreen.js"></script>
         <script type="text/javascript"src="src/js/HighScoreScreen.js"></script>
         <script type="text/javascript"src="src/js/ScoreManager.js"></script> 
@@ -98,21 +99,32 @@
                     <div id = "loginTitle">
                         Molecule Flashcards!
                     </div>
-                    <div id = "loginBox">
-                        Email: <input type = "text" name = "emailLogin"><br />
-                        Password: <input type = "password" name = "passLogin"><br />
-                        <div class = "button" id = "loginButton">
-                            Login
+                    <div id = "loginUIContainer">
+                        <div id = "loginBox">
+                            <div id = "loginBoxTitle">Login</div>
+                            Email: <input type = "text" name = "emailLogin"><br /><br />
+                            Password: <input type = "password" name = "passLogin"><br />
+                            <div class = "button" id = "loginButton" onclick = "game.buttonLogic ('Login');">
+                                Login
+                            </div>
+                            Not a member? 
+                            <div class = "basicLink" onclick = "game.buttonLogic ('CreateDiv');"> 
+                                Create an account 
+                            </div>
                         </div>
-                        Not a member? <a onclick = "showRegisterBox"> Create an account </a>
-                    </div>
-                    <div id = "registerBox">
-                        Username: <input type = "text" name = "usernameRegister"><br />
-                        Email: <input type = "text" name = "emailRegister"><br />
-                        Password: <input type = "password" name = "passRegister"><br />
-                        Repeat Password: <input type = "password" name = "passRepRegister"><br />
-                        <div class = "button" id = "registerButton">
-                            Register!
+                        <div id = "registerBox">
+                            <div id = "registerBoxTitle">Register</div>
+                            Username: <input type = "text" name = "usernameRegister"><br /><br />
+                            Email: <input type = "text" name = "emailRegister"><br /><br />
+                            Password: <input type = "password" name = "passRegister"><br /><br />
+                            Repeat Password: <input type = "password" name = "passRepRegister"><br /><br />
+                            <div class = "button" id = "registerButton">
+                                Register!
+                            </div>
+                            Have an account? 
+                            <div class = "basicLink" onclick = "game.buttonLogic ('LoginDiv');">
+                                Login
+                            </div>
                         </div>
                     </div>
                 </div>

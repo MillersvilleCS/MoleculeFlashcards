@@ -29,7 +29,13 @@ LoginScreen.prototype.buttonLogic = function (button) {
     'use strict';
     switch (button) {
         case 'Login':
-            FCCommunicationManager.login (email, password, this.login )
+            FCCommunicationManager.login (email, password, this.login.bind(this) );
+            break;
+        case 'CreateDiv':
+            this.createDivShow();
+            break;
+        case 'LoginDiv':
+            this.loginDivShow();
             break;
 
         default:
@@ -39,4 +45,14 @@ LoginScreen.prototype.buttonLogic = function (button) {
 
 LoginScreen.prototype.login = function ( ) {
     
+};
+
+LoginScreen.prototype.createDivShow = function ( ) {
+    $('#loginBox').slideUp( 300 );
+    $('#registerBox').delay( 300 ).slideDown( 300 );
+};
+
+LoginScreen.prototype.loginDivShow = function ( ) {
+    $('#registerBox').slideUp( 300 );
+    $('#loginBox').delay( 300 ).slideDown( 300 );
 };

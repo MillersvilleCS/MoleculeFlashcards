@@ -5,12 +5,14 @@ MoleculeGame = function ( ) {
     var gameScreen = new GameScreen ( );
     var menuScreen = new MenuScreen ( );
     var scoreScreen = new HighScoreScreen ( );
+    var loginScreen = new LoginScreen ( );
 
     this.addScreen ('game', gameScreen);
     this.addScreen ('menu', menuScreen);
     this.addScreen ('score', scoreScreen);
+    this.addScreen ('login', loginScreen);
 
-    this.init ('menu');
+    this.init ('login');
 };
 
 MoleculeGame.prototype = Object.create (Game.prototype);
