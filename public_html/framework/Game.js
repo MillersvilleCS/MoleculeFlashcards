@@ -1,23 +1,13 @@
 
-Game = function ( ) {
+Game = function (screen) {
     this.screenMap = new Map ( );
+    this.currentScreen = screen;
+    this.initialized = false;
     return null;
 };
 
 Game.prototype = {
     constructor: Game,
-    currentScreenID: undefined,
-    initialized: false,
-    init: function (screenID) {
-        'use strict';
-        if (this.initialized === false) {
-            this.initialized = true;
-            this.currentScreenID = screenID;
-            this.getCurrentScreen ( ).onResume ( );
-        } else {
-            throw new AlreadyInitilizedException ("Game");
-        }
-    },
     update: function (delta)
     {
         'use strict';
@@ -26,34 +16,24 @@ Game.prototype = {
     getCurrentScene: function ( )
     {
         'use strict';
-        return this.getCurrentScreen ( ).scene;
-    },
-    getCurrentScreen: function ( )
-    {
-        'use strict';
-        return this.screenMap.get (this.currentScreenID);
+        return this.currentScreen.scene;
     },
     hasScreen: function (screenID)
     {
         'use strict';
         return this.screenMap.contains (screenID);
     },
-    getScreen: function (screenID)
-    {
-        'use strict';
-        return this.screenMap.get (screenID);
-    },
     addScreen: function (screenID, screen)
     {
         'use strict';
         this.screenMap.put (screenID, screen);
     },
-    swapScreens: function (screenID)
+    changeScreens: function (screenID)
     {
         'use strict';
-        this.getCurrentScreen ( ).onLeave ( );
-        this.currentScreenID = screenID;
-        this.getCurrentScreen ( ).onResume ( );
+        this.currentScreen.onLeave ( );
+        this.currentScreen = this.screenMap.get (screenID);
+        this.currentScreen.onResume ( );
     }
 };
 
