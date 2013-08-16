@@ -8,9 +8,9 @@
 #mainMenuUI
 {
     position: absolute;
-    min-width: 532px;
+    min-width: 800px;
     min-height: 600px;
-    max-width: 532px;
+    max-width: 800px;
     max-height: 600px;
     z-index: 5;
     background-color: #E3E3FE;
@@ -23,12 +23,29 @@
     -ms-user-select: none;
 }
 
+#mainMenuLeft {
+    max-width: 534px;
+    float: left;
+}
+
 #mainMenuTitle
 {
     color: #10011F;
     font-size: 55px;
     margin-top: 34px;
-    text-align: center; 
+    text-align: center;
+}
+
+#topicList {
+    font-size: 84px;
+    max-height: 350px;
+    height: inherit;
+    overflow: auto;
+    margin: 25px;
+}
+
+#mainMenuRight {
+    float: right;
 }
 
 /*

@@ -28,7 +28,7 @@
         var username = this.getCookie('username');
         var auth = this.getCookie('authenticator');
         if( username != null && auth != null ) {
-            alert('Already logged in');
+            //alert('Already logged in');
             /* Swap screens here */
             this.nextScreen( );
         } else {
