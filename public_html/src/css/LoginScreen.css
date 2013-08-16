@@ -37,7 +37,7 @@ div.basicLink:hover {
 
 #loginBox {
     width: 400px;
-    height: 200px;
+    height: 240px;
     background-color: white;
     border-color: black;
     border-width: 2px;
@@ -60,6 +60,11 @@ div.basicLink:hover {
 
 #loginButton:hover {
     background-color: red;
+}
+
+#loginMessage {
+    display: none;
+    color: red;
 }
 
 #registerBox {

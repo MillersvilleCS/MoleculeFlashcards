@@ -29,6 +29,7 @@ LoginScreen.prototype.buttonLogic = function (button) {
     'use strict';
     switch (button) {
         case 'Login':
+            $('#loginButton').css('display', 'none');
             FCCommunicationManager.login ( $('#emailLogin').val(), $('#passLogin').val(), this.loginFinish.bind(this) );
             this.loginStart();
             break;
@@ -49,9 +50,17 @@ LoginScreen.prototype.loginStart = function ( ) {
 };
 
 LoginScreen.prototype.loginFinish = function ( response ) {
-    console.log(response);
-    $('#loginBox').delay( 500 ).css( 'display', 'block' );
-    game.swapScreens('menu');//extremely temp
+    console.log(response.success == 'false');
+    if( response.success == 'false' ) {
+        $('#loginBox').slideDown( 300 );
+        $('#loginButton').css('display', 'block');
+        $('#loginMessage').html('Invalid username/password!');
+        $('#loginMessage').css('display', 'block');
+    } else {
+        $('#loginBox').delay( 500 ).css( 'display', 'block' );
+        $('#loginMessage').delay( 500 ).css('display', 'none');
+        game.swapScreens('menu');//extremely temp
+    }
 };
 
 LoginScreen.prototype.createDivShow = function ( ) {
