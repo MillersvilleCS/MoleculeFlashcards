@@ -15,37 +15,37 @@
         <link rel = 'stylesheet' type = 'text/css' href = 'src/css/MenuScreen.css'>
 
         <!-- js files -->
-        <script type="text/javascript"src="libs/three.js"></script>
-        <script type="text/javascript"src="libs/jQuery.js"></script>
-        <script type="text/javascript"src="libs/md5-min.js"></script>
+        <script src="libs/three.js"></script>
+        <script src="libs/jQuery.js"></script>
+        <script src="libs/md5-min.js"></script>
 
-        <script type="text/javascript"src="framework/Application.js"></script>
-        <script type="text/javascript"src="framework/CommunicationManager.js"></script>
-        <script type="text/javascript"src="framework/Exceptions.js"></script>
-        <script type="text/javascript"src="framework/TextLoader.js"></script>
-        <script type="text/javascript"src="framework/Game.js"></script>
-        <script type="text/javascript"src="framework/Map.js"></script>
-        <script type="text/javascript"src="framework/MouseManager.js"></script>
-        <script type="text/javascript"src="framework/Timer.js"></script>  
-        <script type="text/javascript"src="framework/Screen.js"></script>
-        <script type="text/javascript"src="framework/Iterator.js"></script>
+        <script src="framework/Application.js"></script>
+        <script src="framework/CommunicationManager.js"></script>
+        <script src="framework/Exceptions.js"></script>
+        <script src="framework/TextLoader.js"></script>
+        <script src="framework/Game.js"></script>
+        <script src="framework/Map.js"></script>
+        <script src="framework/MouseManager.js"></script>
+        <script src="framework/Timer.js"></script>  
+        <script src="framework/Screen.js"></script>
+        <script src="framework/Iterator.js"></script>
 
-        <script type="text/javascript"src="src/js/server/FCCommunicationManager.js"></script>
-        <script type="text/javascript"src="src/js/GameScreen.js"></script>
-        <script type="text/javascript"src="src/js/LoginScreen.js"></script>
-        <script type="text/javascript"src="src/js/MenuScreen.js"></script>
-        <script type="text/javascript"src="src/js/HighScoreScreen.js"></script>
-        <script type="text/javascript"src="src/js/ScoreManager.js"></script> 
-        <script type="text/javascript"src="src/js/MoleculeGame.js"></script>  
-        <script type="text/javascript"src="src/js/PDBLoader.js"></script> 
-        <script type="text/javascript"src="src/js/MoleculeGeometryBuilder.js"></script> 
+        <script src="src/js/server/FCCommunicationManager.js"></script>
+        <script src="src/js/GameScreen.js"></script>
+        <script src="src/js/LoginScreen.js"></script>
+        <script src="src/js/MenuScreen.js"></script>
+        <script src="src/js/HighScoreScreen.js"></script>
+        <script src="src/js/ScoreManager.js"></script> 
+        <script src="src/js/MoleculeGame.js"></script>  
+        <script src="src/js/PDBLoader.js"></script> 
+        <script src="src/js/MoleculeGeometryBuilder.js"></script> 
 
-        <script type="text/javascript">
+        <script>
 
             var game; // temporary global?
 
-            function start ( )
-            {
+            $(document).ready(function ( ) {
+                
                 var WIDTH = 800;
                 var HEIGHT = 600;
                 var VIEW_ANGLE = 45,
@@ -69,12 +69,12 @@
                  Launch CSS Transition with JavaScript:
                  http://www.impressivewebs.com/css3-transitions-javascript/ 
                  */
-            }
+            });
         </script>
     </head>
-    <body onload = "start ( )">
+    <body>
         <div id = "game">
-            <div id = "container"
+            <div id = "container" 
                  onmousedown="MouseManager.onMouseDown (event)"
                  onmouseup="MouseManager.onMouseUp (event)" 
                  onmousemove="MouseManager.onMouseMove (event)">
