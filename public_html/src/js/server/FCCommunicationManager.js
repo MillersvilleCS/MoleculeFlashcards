@@ -20,6 +20,19 @@ FCCommunicationManager.login = function ( email, password , callback) {
     CommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
 };
 
+FCCommunicationManager.register = function ( email, password , username, callback) {
+    'use strict';
+    email = email.toLowerCase ();
+
+    var requestObject = {};
+    requestObject.request_type = 'register';
+    requestObject.email = email;
+    requestObject.password = password;
+    requestObject.username = username;
+
+    CommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
+};
+
 FCCommunicationManager.availableGames = function ( auth, callback ) {
     'use strict';
     var requestObject = {};

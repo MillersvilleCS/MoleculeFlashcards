@@ -50,7 +50,6 @@ LoginScreen.prototype.loginStart = function ( ) {
 };
 
 LoginScreen.prototype.loginFinish = function ( response ) {
-    console.log(response.success == 'false');
     if( response.success == 'false' ) {
         $('#loginBox').slideDown( 300 );
         $('#loginButton').css('display', 'block');
