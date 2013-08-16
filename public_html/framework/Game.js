@@ -4,7 +4,7 @@
     var Game = function (screen) {
         this.screenMap = new Map ( );
         this.currentScreen = screen;
-        this.currentScreen.getElement().on('screenChange', screenChangeHandler(this));
+        this.currentScreen.getElement().on('screenChange', screenChangeHandler.bind(this));
     };
 
     Game.prototype = {
@@ -27,18 +27,16 @@
                 throw new UndefinedReferenceException (screenID);
             }
             
-            this.currentScreen.getElement ( ).off ('screenChange', screenChangeHandler(this));
+            this.currentScreen.getElement ( ).off ('screenChange');
             this.currentScreen.onLeave ( );
             this.currentScreen = this.screenMap.get (screenID);
-            this.currentScreen.getElement().on('screenChange', screenChangeHandler(this));
+            this.currentScreen.getElement().on('screenChange', screenChangeHandler.bind(this));
             this.currentScreen.onResume ( );
         }
     };
     
-    function screenChangeHandler (game) {
-        return function (e) {
-            game.changeScreens(e.screenID);
-        };
+    function screenChangeHandler (e) {
+        this.changeScreens(e.screenID);
     }
 
     // export MenuScreen
