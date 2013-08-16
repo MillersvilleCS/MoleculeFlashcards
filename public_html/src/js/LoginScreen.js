@@ -71,3 +71,40 @@ LoginScreen.prototype.loginDivShow = function ( ) {
     $('#registerBox').slideUp( 300 );
     $('#loginBox').delay( 300 ).slideDown( 300 );
 };
+
+LoginScreen.prototype.getCookie = function ( cookieName ) {
+    var cookieValue = document.cookie;
+    var cookieStart = cookieValue.indexOf(' ' + cookieName + '=');
+    if (cookieStart == -1){
+        cookieStart = cookieValue.indexOf(cookieName + '=');
+    }
+    
+    if (cookieStart == -1){
+        cookieValue = null;
+    }
+    else{
+        cookieStart = cookieValue.indexOf('=', cookieStart) + 1;
+        var cookieEnd = cookieValue.indexOf(';', cookieStart);
+        if (cookieEnd == -1){
+            cookieEnd = cookieValue.length;
+        }
+        cookieValue = unescape(cookieValue.substring(cookieStart, cookieEnd));
+    }
+    
+    return cookieValue;
+};
+
+LoginScreen.prototype.setCookie = function (cookieName, cookieValue, cookieExpireDays, path) {
+    var expireDate = new Date();
+    expireDate.setDate(expireDate.getDate() + cookieExpireDays);
+    var cookieValue = escape(value) + ((path) ? ';path='+path:'') + 
+                      ((cookieExpireDays == null) ? '' : '; expires=' + expireDate.toUTCString());
+    document.cookie = cookieName + '=' + cookieValue;
+};
+
+Login.prototype.deleteCookie = function ( cookieName, path, domain ) {
+    if ( get_cookie( name ) ) {
+        document.cookie=name + '=' + ((path) ? ';path=' + path:'') + ((domain) ? ';domain=' + domain:'') +
+                        ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
+    }
+};
