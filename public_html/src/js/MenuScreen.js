@@ -1,69 +1,111 @@
-
-MenuScreen = function ( ) {
+( function () {
     'use strict';
-    Screen.apply (this, arguments);
-};
+    
+    var MenuScreen = function ( ) {
+        Screen.apply (this, arguments);
+    };
+    
+    var $element;
 
-MenuScreen.prototype = Object.create (Screen.prototype);
-MenuScreen.prototype.constructor = MenuScreen;
+    MenuScreen.prototype = Object.create (Screen.prototype);
+    MenuScreen.prototype.constructor = MenuScreen;
 
-MenuScreen.prototype.onUpdate = function (delta) {
-    'use strict';
-};
+    MenuScreen.prototype.onUpdate = function (delta) {
+    };
 
-MenuScreen.prototype.onPause = function ( ) {
-    'use strict';
-};
+    MenuScreen.prototype.onPause = function ( ) {
+    };
 
-MenuScreen.prototype.onLeave = function ( ) {
-    'use strict';
-    $ ('#mainMenuUI').fadeOut (500);
-};
+    MenuScreen.prototype.onLeave = function ( ) {
+        disableButtons ( );
+        $ ('#mainMenuUI').fadeOut (500);
+    };
 
-MenuScreen.prototype.onResume = function ( ) {
-    'use strict';
-    $ ('#gameUI').fadeIn (500);
-    $ ('#mainMenuUI').fadeIn (500);
-};
+    MenuScreen.prototype.onResume = function ( ) {
+        enableButtons(this);
+        $ ('#gameUI').fadeIn (500);
+        $ ('#mainMenuUI').fadeIn (500);
+    };
+    
+    MenuScreen.prototype.getElement = function ( ) {
+        if ( !$element ) {
+            $element = $ ( '#mainMenuUI' );
+        }
+        return $element;
+    };
 
-MenuScreen.prototype.tutorial = function ( ) {
-    'use strict';
-    $ ('#mainMenuUI').fadeOut (200);
-    $ ('#tutorialUI').delay (200).fadeIn (300);
-    $ ('#rightPanel').delay (2000).fadeIn (300);
-    //$ ( '#rightPanel' ).delay ( 10000 ).fadeOut ( 300 );
-    //$ ( '#tutorialUI' ).delay ( 12000 ).fadeOut ( 300 );
-    //$ ( '#mainMenuUI' ).delay ( 12000 ).fadeIn ( 300 );
-};
+    MenuScreen.prototype.tutorial = function ( ) {
+        $ ('#mainMenuUI').fadeOut (200);
+        $ ('#tutorialUI').delay (200).fadeIn (300);
+        $ ('#rightPanel').delay (2000).fadeIn (300);
+        //$ ( '#rightPanel' ).delay ( 10000 ).fadeOut ( 300 );
+        //$ ( '#tutorialUI' ).delay ( 12000 ).fadeOut ( 300 );
+        //$ ( '#mainMenuUI' ).delay ( 12000 ).fadeIn ( 300 );
+    };
 
-MenuScreen.prototype.endTutorial = function ( ) {
-    'use strict';
-    $ ('#rightPanel').fadeOut (300);
-    $ ('#tutorialUI').fadeOut (300);
-    $ ('#mainMenuUI').delay (300).fadeIn (300);
-};
+    MenuScreen.prototype.endTutorial = function ( ) {
+        $ ('#rightPanel').fadeOut (300);
+        $ ('#tutorialUI').fadeOut (300);
+        $ ('#mainMenuUI').delay (300).fadeIn (300);
+    };
 
-MenuScreen.prototype.buttonLogic = function (button) {
-    'use strict';
-    switch (button) {
-        case 'Play':
-            return 'game';
+//    MenuScreen.prototype.buttonLogic = function (button) {
+//        switch (button) {
+//            case 'Play':
+//                return 'game';
+//
+//            case 'TUTORIAL':
+//                this.tutorial ( );
+//                break;
+//
+//            case 'Tutorial Return':
+//                this.endTutorial ( );
+//                break;
+//
+//            case 'HIGH SCORES':
+//                return 'score';
+//
+//            case 'Main Menu':
+//                return 'menu';
+//
+//            default:
+//                //alert( 'Not Yet Implemented!' );
+//        }
+//    };
 
-        case 'TUTORIAL':
-            this.tutorial ( );
-            break;
-
-        case 'Tutorial Return':
-            this.endTutorial ( );
-            break;
-
-        case 'HIGH SCORES':
-            return 'score';
-
-        case 'Main Menu':
-            return 'menu';
-
-        default:
-            //alert( 'Not Yet Implemented!' );
+    function enableButtons (menuScreen) {
+        $('#mainMenuUI .button[data-logic="play"]').on('click', function () {
+            var screenChangeEvent = jQuery.Event("screenChange");
+            screenChangeEvent.screenID = "game";
+            menuScreen.getElement().trigger(screenChangeEvent);
+        });
+        
+        $('#mainMenuUI .button[data-logic="tutorial"]').on('click', function () {
+            menuScreen.tutorial ( );
+        });
+        
+        $('#mainMenuUI .button[data-logic="endTutorial"]').on('click', function () {
+            menuScreen.endTutorial ( );
+        });
+        
+        $('#mainMenuUI .button[data-logic="scores"]').on('click', function () {
+            var screenChangeEvent = jQuery.Event("screenChange");
+            screenChangeEvent.screenID = "score";
+            menuScreen.getElement().trigger(screenChangeEvent);
+        });
+        
+        $('#mainMenuUI .button[data-logic="menu"]').on('click', function () {
+            var screenChangeEvent = jQuery.Event("screenChange");
+            screenChangeEvent.screenID = "menu";
+            menuScreen.getElement().trigger(screenChangeEvent);
+        });
+        
     }
-};
+
+    function disableButtons ( ) {
+        $('#mainMenuUI .button').off('click');
+    }
+    
+    // export MenuScreen
+    window.MenuScreen = MenuScreen;
+}) ( );

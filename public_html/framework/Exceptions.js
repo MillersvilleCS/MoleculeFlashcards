@@ -7,7 +7,7 @@
 function UnimplementedFunctionException (name) {
     'use strict';
     return "Function '" + name + "' has not been implemented.";
-};
+}
 
 /**
  * Used to indicate an object has already been initialized;
@@ -17,7 +17,7 @@ function UnimplementedFunctionException (name) {
 function AlreadyInitilizedException (name) {
     'use strict';
     return name + " has already been initialized.";
-};
+}
 
 function Exception (error) {
     'use strict';
@@ -27,4 +27,9 @@ function Exception (error) {
 function IOException (error) {
     'use strict';
     return error;
+}
+
+function UndefinedReferenceException (name) {
+    'use strict';
+    return "Object reference '" + name + "' is undefined";
 }

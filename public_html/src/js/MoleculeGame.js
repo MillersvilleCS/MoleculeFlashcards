@@ -28,7 +28,5 @@ MoleculeGame.prototype.update = function (delta) {
 MoleculeGame.prototype.buttonLogic = function (button) {
     'use strict';
     var screenID = this.currentScreen.buttonLogic (button);
-    if (this.hasScreen (screenID)) {
-        this.changeScreens (screenID);
-    }
+    this.changeScreens (screenID);
 };
