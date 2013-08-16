@@ -12,7 +12,7 @@ MoleculeGame = function ( ) {
     this.addScreen ('score', scoreScreen);
     this.addScreen ('login', loginScreen);
 
-    this.init ('login');
+    this.init ('menu');
 };
 
 MoleculeGame.prototype = Object.create (Game.prototype);

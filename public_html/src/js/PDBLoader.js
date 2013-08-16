@@ -1,6 +1,5 @@
 /**
  * @author alteredq / http://alteredqualia.com/
- * comment
  */
 
 PDBLoader = function ()
