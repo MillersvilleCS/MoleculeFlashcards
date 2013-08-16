@@ -22,6 +22,7 @@ div.basicLink:hover {
     width: 804px;
     height: 600px;
     text-align: center;
+    display: none;
 }
 
 #loginUIContainer {

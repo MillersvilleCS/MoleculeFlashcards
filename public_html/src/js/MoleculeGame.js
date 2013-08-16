@@ -7,12 +7,14 @@ MoleculeGame = function ( ) {
     var scoreScreen = new HighScoreScreen ( );
     var loginScreen = new LoginScreen ( );
     
-    Game.apply (this, [menuScreen]);
+    Game.apply (this, [loginScreen]);
 
     this.addScreen ('game', gameScreen);
     this.addScreen ('menu', menuScreen);
     this.addScreen ('score', scoreScreen);
     this.addScreen ('login', loginScreen);
+
+    loginScreen.onResume();
 };
 
 MoleculeGame.prototype = Object.create (Game.prototype);

@@ -22,7 +22,16 @@ LoginScreen.prototype.onLeave = function ( ) {
 
 LoginScreen.prototype.onResume = function ( ) {
     'use strict';
-    $ ('#loginUI').fadeIn (500);
+    var username = this.getCookie('username');
+    var auth = this.getCookie('authenticator');
+    if( username != null && auth != null ) {
+        alert('Already logged in');
+        /* Swap screens here */
+        $ ('#loginUI').fadeOut (500);//temp
+    } else {
+        /* stay on this screen */
+        $ ('#loginUI').fadeIn (500);
+    }
 };
 
 LoginScreen.prototype.buttonLogic = function (button) {
@@ -50,6 +59,7 @@ LoginScreen.prototype.loginStart = function ( ) {
 };
 
 LoginScreen.prototype.loginFinish = function ( response ) {
+    console.log(response);
     if( response.success == 'false' ) {
         $('#loginBox').slideDown( 300 );
         $('#loginButton').css('display', 'block');
@@ -58,7 +68,10 @@ LoginScreen.prototype.loginFinish = function ( response ) {
     } else {
         $('#loginBox').delay( 500 ).css( 'display', 'block' );
         $('#loginMessage').delay( 500 ).css('display', 'none');
-        game.swapScreens('menu');//extremely temp
+        this.setCookie('username', response.username, 1, '/');
+        this.setCookie('authenticator', response.auth, 1, '/');
+        /* Swap Screens */
+        $('#loginUI').fadeOut( 500 );//temp
     }
 };
 
@@ -97,12 +110,12 @@ LoginScreen.prototype.getCookie = function ( cookieName ) {
 LoginScreen.prototype.setCookie = function (cookieName, cookieValue, cookieExpireDays, path) {
     var expireDate = new Date();
     expireDate.setDate(expireDate.getDate() + cookieExpireDays);
-    var cookieValue = escape(value) + ((path) ? ';path='+path:'') + 
+    var cookieValue = escape(cookieValue) + ((path) ? ';path=' + path:'') + 
                       ((cookieExpireDays == null) ? '' : '; expires=' + expireDate.toUTCString());
     document.cookie = cookieName + '=' + cookieValue;
 };
 
-Login.prototype.deleteCookie = function ( cookieName, path, domain ) {
+LoginScreen.prototype.deleteCookie = function ( cookieName, path, domain ) {
     if ( get_cookie( name ) ) {
         document.cookie=name + '=' + ((path) ? ';path=' + path:'') + ((domain) ? ';domain=' + domain:'') +
                         ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
