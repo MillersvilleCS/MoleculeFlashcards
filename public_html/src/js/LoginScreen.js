@@ -27,7 +27,6 @@
         enableButtons(this);
         var username = this.getCookie('username');
         var auth = this.getCookie('authenticator');
-        username = null;
         if( username != null && auth != null ) {
             alert('Already logged in');
             /* Swap screens here */
@@ -72,17 +71,17 @@
     */
 
     LoginScreen.prototype.loginStart = function ( ) {
-        $('#loginBox').slideUp( 300 );
+        //$('#loginBox').slideUp( 300 );
     };
 
     LoginScreen.prototype.loginFinish = function ( response ) {
         if( response.success == 'false' ) {
-            $('#loginBox').slideDown( 300 );
+            //$('#loginBox').slideDown( 300 );
             $('#loginButton').css('display', 'block');
             $('#loginMessage').html('Invalid username/password!');
             $('#loginMessage').css('display', 'block');
         } else {
-            $('#loginBox').delay( 500 ).css( 'display', 'block' );
+            //$('#loginBox').delay( 500 ).css( 'display', 'block' );
             $('#loginMessage').delay( 500 ).css('display', 'none');
             this.setCookie('username', response.username, 1, '/');
             this.setCookie('authenticator', response.auth, 1, '/');
