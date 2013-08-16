@@ -4,8 +4,8 @@
     var Game = function (screen) {
         this.screenMap = new Map ( );
         this.currentScreen = screen;
-        screen.onResume ( );
         this.currentScreen.getElement().on('screenChange', screenChangeHandler(this));
+        screen.onResume ( );
         this.initialized = false;
         return null;
     };

@@ -45,8 +45,8 @@
     };
 
     LoginScreen.prototype.nextScreen = function ( ) {
-        var screenChangeEvent = jQuery.Event("screenChange");
-        screenChangeEvent.screenID = "menu";
+        var screenChangeEvent = jQuery.Event('screenChange');
+        screenChangeEvent.screenID = 'menu';
         this.getElement().trigger(screenChangeEvent);
     }
 
