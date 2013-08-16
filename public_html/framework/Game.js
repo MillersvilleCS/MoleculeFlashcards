@@ -5,9 +5,6 @@
         this.screenMap = new Map ( );
         this.currentScreen = screen;
         this.currentScreen.getElement().on('screenChange', screenChangeHandler(this));
-        screen.onResume ( );
-        this.initialized = false;
-        return null;
     };
 
     Game.prototype = {
