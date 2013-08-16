@@ -117,7 +117,7 @@ LoginScreen.prototype.setCookie = function (cookieName, cookieValue, cookieExpir
 
 LoginScreen.prototype.deleteCookie = function ( cookieName, path, domain ) {
     if ( get_cookie( name ) ) {
-        document.cookie=name + '=' + ((path) ? ';path=' + path:'') + ((domain) ? ';domain=' + domain:'') +
+        document.cookie = name + '=' + ((path) ? ';path=' + path:'') + ((domain) ? ';domain=' + domain:'') +
                         ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
     }
 };
