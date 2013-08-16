@@ -49,6 +49,7 @@ LoginScreen.prototype.loginStart = function ( ) {
 };
 
 LoginScreen.prototype.loginFinish = function ( response ) {
+    console.log(response);
     $('#loginBox').delay( 500 ).css( 'display', 'block' );
     game.swapScreens('menu');//extremely temp
 };
