@@ -164,7 +164,16 @@
                         </div>
                     </div>
                     <div id = "mainMenuRight">
-                        Game information can go over here.
+                        <div id = "timeLimit">
+                            <!-- Dynamically added -->
+                        </div>
+                        <div id = "highScores">
+                            <!-- Dynamically add high scores here -->
+                        </div>
+                        <div class = "button"
+                            data-logic = "start">
+                            Start
+                        </div>
                     </div>
                 </div>
 
@@ -226,7 +235,7 @@
                         Incorrect answers will cost you points, and end combos. <br /> <br />
                         Answer as many as you can in 2 minutes!
                         <div class = "button" 
-                             onclick = "game.buttonLogic ('Tutorial Return');">
+                             data-logic = "endTutorial">
                             Return
                         </div>
                     </div>
