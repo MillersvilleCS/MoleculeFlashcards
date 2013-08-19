@@ -12,11 +12,12 @@
     min-height: 600px;
     max-width: 800px;
     max-height: 600px;
-    z-index: 5;
+    z-index: 4;
     background-color: #E3E3FE;
     border: 2px;
     border-style: solid;
     border-color: #010120;
+    display: none;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
