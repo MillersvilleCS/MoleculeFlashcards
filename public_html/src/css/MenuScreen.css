@@ -47,16 +47,16 @@
     margin: 25px;
 }
 
-#topic {
+div.topic {
     height: 160px;
 }
 
-#topicImage {
+img.topicImage {
     float: left;
     margin: 15px;
 }
 
-#topicDescription {
+div.topicDescription {
     font-size: 16px;
 }
 

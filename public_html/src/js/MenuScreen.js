@@ -8,11 +8,13 @@
     };
     
     var $element;
+    var topics;
+    var currentTopic = 0;
 
-    var TOPIC_HTML = '<div id = \'topic\'>' +
-                        '<img id = \'topicImage\' src = \'$imageSrc\' width = \'114\' height = \'94\' >' +
+    var TOPIC_HTML = '<div class = \'topic\' id = \'$uniqueID\' >' +
+                        '<img class = \'topicImage\' src = \'$imageSrc\' width = \'114\' height = \'94\' >' +
                         '<b>$title</b>' + '<br />' +
-                        '<div id = \'topicDescription\'>$description</div>' +
+                        '<div class = \'topicDescription\'>$description</div>' +
                      '</div>';
 
     MenuScreen.prototype = Object.create (Screen.prototype);
@@ -49,29 +51,32 @@
         return 'http://exscitech.gcl.cis.udel.edu/' + imageSrc.substr(2, imageSrc.length - 2);
     };
 
-    MenuScreen.prototype.insertInfo = function ( keys, values, base ) {
+    MenuScreen.prototype.insertInfo = function ( keys, values, base, location ) {
         var workingHTML = base;
         for(var i = 0; i < keys.length; ++i) {
             workingHTML = workingHTML.replace( keys[i], values[i] );
         }
 
-        $('#topicList').append( workingHTML );
+        $( location ).append( workingHTML );
     };
 
     MenuScreen.prototype.showAvailableTopics = function ( response ) {
-        console.log(response);
-        for( var i = 0; i < response.available_games.length; ++i ) {
+        topics = response.available_games;
+        for( var i = 0; i < topics.length; ++i ) {
             var keys = [
                 '$title', 
                 '$description',
                 '$imageSrc',
+                '$uniqueID'
             ];
             var values = [
-                response.available_games[i].name, 
-                response.available_games[i].description,
-                this.tempImageChange ( response.available_games[i].image )
+                topics[i].name, 
+                topics[i].description,
+                this.tempImageChange ( topics[i].image ),
+                'divID' + i
             ];
-            this.insertInfo( keys, values, TOPIC_HTML );
+            this.insertInfo( keys, values, TOPIC_HTML, '#topicList' );
+            topics[i].divID = i;
         }
     };
 
