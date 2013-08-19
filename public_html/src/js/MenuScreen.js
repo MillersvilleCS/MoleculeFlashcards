@@ -44,13 +44,13 @@
     };
 
     MenuScreen.prototype.tempImageChange = function ( imageSrc ) {
-        /* Until this is running on the exscitech server, we need to give an absolutel path */
+        /* Until this is running on the exscitech server, we need to give an absolute path */
 
         return 'http://exscitech.gcl.cis.udel.edu/' + imageSrc.substr(2, imageSrc.length - 2);
     };
 
-    MenuScreen.prototype.insertTopicInfo = function ( keys, values ) {
-        var workingHTML = TOPIC_HTML;
+    MenuScreen.prototype.insertInfo = function ( keys, values, base ) {
+        var workingHTML = base;
         for(var i = 0; i < keys.length; ++i) {
             workingHTML = workingHTML.replace( keys[i], values[i] );
         }
@@ -71,7 +71,7 @@
                 response.available_games[i].description,
                 this.tempImageChange ( response.available_games[i].image )
             ];
-            this.insertTopicInfo( keys, values );
+            this.insertInfo( keys, values, TOPIC_HTML );
         }
     };
 
