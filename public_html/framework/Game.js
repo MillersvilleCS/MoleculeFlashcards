@@ -1,45 +1,38 @@
-( function () {
+/*
+ * Don't ever modify me
+ */
+var Game = function (screen) {
     'use strict';
-    
-    var Game = function (screen) {
-        this.screenMap = new Map ( );
-        this.currentScreen = screen;
-        this.currentScreen.getElement().on('screenChange', screenChangeHandler.bind(this));
-    };
+    this.screenMap = new Map ();
+    this.currentScreen = screen;
+};
 
-    Game.prototype = {
-        constructor: Game,
-        update: function (delta)
-        {
-            throw new UnimplementedFunctionException ("update");
-        },
-        getCurrentScene: function ( )
-        {
-            return this.currentScreen.scene;
-        },
-        addScreen: function (screenID, screen)
-        {
-            this.screenMap.put (screenID, screen);
-        },
-        changeScreens: function (screenID)
-        {
-            if (!this.screenMap.contains (screenID)) {
-                throw new UndefinedReferenceException (screenID);
-            }
-            
-            this.currentScreen.getElement ( ).off ('screenChange');
-            this.currentScreen.onLeave ( );
-            this.currentScreen = this.screenMap.get (screenID);
-            this.currentScreen.getElement().on('screenChange', screenChangeHandler.bind(this));
-            this.currentScreen.onResume ( );
+Game.prototype = {
+    constructor: Game,
+    update: function (delta)
+    {
+        'use strict';
+        throw new UnimplementedFunctionException ("update");
+    },
+    getCurrentScene: function ()
+    {
+        'use strict';
+        return this.currentScreen.scene;
+    },
+    addScreen: function (screenID, screen)
+    {
+        'use strict';
+        this.screenMap.put (screenID, screen);
+    },
+    changeScreens: function (screenID)
+    {
+        'use strict';
+        if (!this.screenMap.contains (screenID)) {
+            throw new UndefinedReferenceException (screenID);
         }
-    };
-    
-    function screenChangeHandler (e) {
-        this.changeScreens(e.screenID);
+
+        this.currentScreen.onLeave ();
+        this.currentScreen = this.screenMap.get (screenID);
+        this.currentScreen.onResume ();
     }
-
-    // export MenuScreen
-    window.Game = Game;
-}) ( );
-
+};

@@ -4,8 +4,10 @@ Application = function (game, camera, title, width, height) {
     this.game = game;
     this.camera = camera;
     this.prevTime = Date.now ( );
-    this.renderer = new THREE.WebGLRenderer ({ antialias: true });
-    
+    this.renderer = new THREE.WebGLRenderer ({
+        antialias: true
+    });
+
     this.renderer.setSize (width, height);
 
     $ ('#container').append (this.renderer.domElement);

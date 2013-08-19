@@ -1,4 +1,4 @@
-Timer = function ( ) {
+Timer = function () {
     this.startTime = 0;
     this.stopTime = 0;
     this.running = false;
@@ -6,33 +6,33 @@ Timer = function ( ) {
 
 Timer.prototype = {
     constructor: Timer,
-    start: function ( ) {
+    start: function () {
         'use strict';
         this.running = true;
         this.startTime = Date.now ( );
     },
-    stop: function ( ) {
+    stop: function () {
         'use strict';
         this.running = false;
-        this.stopTime = Date.now ( );
+        this.stopTime = Date.now ();
     },
-    reset: function ( ) {
+    reset: function () {
         'use strict';
-        var time = Date.now ( );
+        var time = Date.now ();
         this.startTime = time;
         this.stopTime = time;
     },
-    getElapsedMs: function ( ) {
+    getElapsedMs: function () {
         'use strict';
         if (this.running) {
-            return Date.now ( ) - this.startTime;
+            return Date.now () - this.startTime;
         }
 
         return this.stopTime - this.startTime;
     },
-    getElapsedSec: function ( ) {
+    getElapsedSec: function () {
         'use strict';
-        return Math.floor (this.getElapsedMs ( ) / 1000);
+        return Math.floor (this.getElapsedMs () / 1000);
     }
 
 };

@@ -27,13 +27,6 @@
         enableButtons(this);
         $ ('#highScoreUI').fadeIn (500);
     };
-    
-    HighScoreScreen.prototype.getElement = function ( ) {
-        if ( !$element ) {
-            $element = $ ( '#highScoreUI' );
-        }
-        return $element;
-    };
 
     function enableButtons (menuScreen) {
         $('#highScoreUI .button[data-logic="menu"]').on('click', function () {
@@ -49,4 +42,4 @@
     
     // export HighScoreScreen
     window.HighScoreScreen = HighScoreScreen;
-}) ( );
+}) ();

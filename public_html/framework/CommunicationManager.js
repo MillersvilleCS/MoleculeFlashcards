@@ -1,5 +1,5 @@
 CommunicationManager = function () {
-
+    'use strict';
 };
 
 CommunicationManager.parse = function (text) {
@@ -22,16 +22,17 @@ CommunicationManager.post = function (requestUrl, requestObject, callback) {
                 data: JSON.stringify (requestObject),
                 async: true
             }).done (
-                function () {
-                    callback (CommunicationManager.parse (response.responseText));
-                }
-            ).fail(
-                function()  {
-                    var response = {};
-                    response.success = false;
-                    callback (CommunicationManager.parse (response));
-                }
-            );
+            function () {
+                callback (CommunicationManager.parse (response.responseText));
+            }
+    ).fail (
+            function () {
+                var response = {
+                };
+                response.success = false;
+                callback (CommunicationManager.parse (response));
+            }
+    );
 };
 
 CommunicationManager.get = function (requestUrl, requestObject, callback) {
@@ -45,14 +46,15 @@ CommunicationManager.get = function (requestUrl, requestObject, callback) {
                 data: requestObject,
                 async: true
             }).done (
-                function () {
-                    callback (response.responseText);
-                }
-            ).fail(
-                function()  {
-                    var response = {};
-                    response.success = false;
-                    callback ('Ajax Failure');
-                }
-            );
+            function () {
+                callback (response.responseText);
+            }
+    ).fail (
+            function () {
+                var response = {
+                };
+                response.success = false;
+                callback ('Ajax Failure');
+            }
+    );
 };
