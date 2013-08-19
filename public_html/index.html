@@ -13,7 +13,7 @@
         <link rel = 'stylesheet' type = 'text/css' href = 'src/css/HighScoreScreen.css'>
         <link rel = 'stylesheet' type = 'text/css' href = 'src/css/LoginScreen.css'>
         <link rel = 'stylesheet' type = 'text/css' href = 'src/css/MenuScreen.css'>
-
+        
         <!-- js files -->
         <script src="libs/three.js"></script>
         <script src="libs/jQuery.js"></script>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
 
-                <div id = "loginUI">
+                <div id="loginUI" class="screen fade in">
                     <div id = "loginTitle">
                         Molecule Flashcards!
                     </div>
@@ -111,7 +111,7 @@
                             </div>
                             <div id = "loginMessage">Invalid username/password</div>
                             Not a member? 
-                            <div class = "basicLink" onclick = "game.buttonLogic ('CreateDiv');"> 
+                            <div class = "basicLink" data-logic="showCreate"> 
                                 Create an account 
                             </div>
                         </div>
@@ -123,11 +123,11 @@
                             Email: <input type = "text" name = "emailRegister" id = "emailRegister"><br /><br />
                             Password: <input type = "password" name = "passRegister" id = "passRegister"><br /><br />
                             Repeat Password: <input type = "password" name = "passRepRegister" id = "passRepRegister"><br /><br />
-                            <div class = "button" id = "registerButton" data-logic = "register">
+                            <div class="button" id ="registerButton" data-logic="register">
                                 Register!
                             </div>
                             Have an account? 
-                            <div class = "basicLink" onclick = "game.buttonLogic ('LoginDiv');">
+                            <div class="basicLink" data-logic="showLogin">
                                 Login
                             </div>
                         </div>

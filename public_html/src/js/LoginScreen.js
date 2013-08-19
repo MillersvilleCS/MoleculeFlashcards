@@ -1,5 +1,5 @@
 ( function () {
-    'use strict'
+    'use strict';
 
     var LoginScreen = function ( data ) {
         Screen.apply (this, arguments);
@@ -21,7 +21,7 @@
     };
 
     LoginScreen.prototype.onLeave = function ( ) {
-        $ ('#loginUI').fadeOut (500);
+        $ ('#loginUI').removeClass('in active');
         disableButtons( );
     };
 
@@ -36,7 +36,7 @@
             this.nextScreen( );
         } else {
             /* stay on this screen */
-            $ ('#loginUI').fadeIn (500);
+            $('#loginUI').addClass('in active');
         }
     };
 
@@ -52,26 +52,6 @@
         screenChangeEvent.screenID = 'menu';
         this.getElement().trigger(screenChangeEvent);
     }
-
-    /*
-    LoginScreen.prototype.buttonLogic = function (button) {
-        
-        switch (button) {
-            case 'Login':
-                
-                break;
-            case 'CreateDiv':
-                this.createDivShow();
-                break;
-            case 'LoginDiv':
-                this.loginDivShow();
-                break;
-
-            default:
-                //alert( 'Not Yet Implemented!' );
-        }
-    };
-    */
 
     LoginScreen.prototype.loginStart = function ( ) {
         //$('#loginBox').slideUp( 300 );
@@ -150,6 +130,14 @@
             FCCommunicationManager.login ( $('#emailLogin').val(), $('#passLogin').val(), 
                                             loginScreen.loginFinish.bind(loginScreen) );
             loginScreen.loginStart();
+        }); 
+        
+        $('#loginUI [data-logic="showCreate"]').on('click', loginScreen.createDivShow); 
+        
+        $('#loginUI [data-logic="showLogin"]').on('click', loginScreen.loginDivShow); 
+        
+        $('#loginUI .button[data-logic="register"]').on('click', function () {
+            /** TODO: Needs Implementation */
         }); 
     }
 
