@@ -26,6 +26,7 @@
 
 #mainMenuLeft {
     max-width: 534px;
+    min-width: 534px;
     float: left;
 }
 
@@ -38,11 +39,25 @@
 }
 
 #topicList {
-    font-size: 84px;
+    font-size: 22px;
     max-height: 350px;
+    min-height: 350px;
     height: inherit;
     overflow: auto;
     margin: 25px;
+}
+
+#topic {
+    height: 160px;
+}
+
+#topicImage {
+    float: left;
+    margin: 15px;
+}
+
+#topicDescription {
+    font-size: 16px;
 }
 
 #mainMenuRight {

@@ -1,8 +1,10 @@
 ( function () {
     'use strict';
     
-    var HighScoreScreen = function ( ) {
+    var HighScoreScreen = function ( data ) {
         Screen.apply (this, arguments);
+
+        this.dataRef = data;
     };
     
     var $element;

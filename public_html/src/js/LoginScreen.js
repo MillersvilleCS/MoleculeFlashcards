@@ -1,8 +1,10 @@
 ( function () {
     'use strict'
 
-    var LoginScreen = function ( ) {
+    var LoginScreen = function ( data ) {
         Screen.apply (this, arguments);
+
+        this.dataRef = data;
     };
 
     var $element;
@@ -28,7 +30,8 @@
         var username = this.getCookie('username');
         var auth = this.getCookie('authenticator');
         if( username != null && auth != null ) {
-            //alert('Already logged in');
+            this.dataRef.username = username;
+            this.dataRef.auth = auth;
             /* Swap screens here */
             this.nextScreen( );
         } else {
@@ -85,6 +88,8 @@
             $('#loginMessage').delay( 500 ).css('display', 'none');
             this.setCookie('username', response.username, 1, '/');
             this.setCookie('authenticator', response.auth, 1, '/');
+            this.dataRef.username = response.username;
+            this.dataRef.auth = response.auth;
             /* Swap Screens */
             this.nextScreen( );
         }

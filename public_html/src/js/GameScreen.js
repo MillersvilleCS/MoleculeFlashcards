@@ -1,7 +1,7 @@
 ( function () {
     'use strict';
 
-    var GameScreen = function ( ) {
+    var GameScreen = function ( data ) {
         Screen.apply (this, arguments);
 
         this.MOLECULE = 0;
@@ -10,6 +10,7 @@
         this.RIGHT_ANSWER_POINTS = 100;
         this.GAME_LENGTH = 120;
 
+        this.dataRef = data;
         this.timer = new Timer ( );
         this.scoreManager = new ScoreManager ( );
 

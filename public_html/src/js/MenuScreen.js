@@ -1,11 +1,19 @@
 ( function () {
     'use strict';
     
-    var MenuScreen = function ( ) {
+    var MenuScreen = function ( data ) {
         Screen.apply (this, arguments);
+
+        this.dataRef = data;
     };
     
     var $element;
+
+    var TOPIC_HTML = '<div id = \'topic\'>' +
+                        '<img id = \'topicImage\' src = \'$imageSrc\' width = \'114\' height = \'94\' >' +
+                        '<b>$title</b>' + '<br />' +
+                        '<div id = \'topicDescription\'>$description</div>' +
+                     '</div>';
 
     MenuScreen.prototype = Object.create (Screen.prototype);
     MenuScreen.prototype.constructor = MenuScreen;
@@ -25,6 +33,7 @@
         enableButtons(this);
         $ ('#gameUI').fadeIn (500);
         $ ('#mainMenuUI').fadeIn (500);
+        FCCommunicationManager.availableGames( this.dataRef.auth, this.showAvailableTopics.bind( this ) );
     };
     
     MenuScreen.prototype.getElement = function ( ) {
@@ -32,6 +41,38 @@
             $element = $ ( '#mainMenuUI' );
         }
         return $element;
+    };
+
+    MenuScreen.prototype.tempImageChange = function ( imageSrc ) {
+        /* Until this is running on the exscitech server, we need to give an absolutel path */
+
+        return 'http://exscitech.gcl.cis.udel.edu/' + imageSrc.substr(2, imageSrc.length - 2);
+    };
+
+    MenuScreen.prototype.insertTopicInfo = function ( keys, values ) {
+        var workingHTML = TOPIC_HTML;
+        for(var i = 0; i < keys.length; ++i) {
+            workingHTML = workingHTML.replace( keys[i], values[i] );
+        }
+
+        $('#topicList').append( workingHTML );
+    };
+
+    MenuScreen.prototype.showAvailableTopics = function ( response ) {
+        console.log(response);
+        for( var i = 0; i < response.available_games.length; ++i ) {
+            var keys = [
+                '$title', 
+                '$description',
+                '$imageSrc',
+            ];
+            var values = [
+                response.available_games[i].name, 
+                response.available_games[i].description,
+                this.tempImageChange ( response.available_games[i].image )
+            ];
+            this.insertTopicInfo( keys, values );
+        }
     };
 
     MenuScreen.prototype.tutorial = function ( ) {

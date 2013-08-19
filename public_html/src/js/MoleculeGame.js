@@ -1,11 +1,12 @@
 
 MoleculeGame = function ( ) {
     'use strict';
-    
-    var gameScreen = new GameScreen ( );
-    var menuScreen = new MenuScreen ( );
-    var scoreScreen = new HighScoreScreen ( );
-    var loginScreen = new LoginScreen ( );
+    var data = { };
+
+    var gameScreen = new GameScreen ( data );
+    var menuScreen = new MenuScreen ( data );
+    var scoreScreen = new HighScoreScreen ( data );
+    var loginScreen = new LoginScreen ( data );
     
     Game.apply (this, [loginScreen]);
 
