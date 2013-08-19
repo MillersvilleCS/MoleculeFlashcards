@@ -2,8 +2,8 @@
 MoleculeGame = function () {
     'use strict';
     var data = {
+        
     };
-
     var gameScreen = new GameScreen (data);
     var menuScreen = new MenuScreen (data);
     var scoreScreen = new HighScoreScreen (data);
@@ -33,15 +33,10 @@ MoleculeGame.prototype.update = function (delta) {
 };
 
 MoleculeGame.prototype.changeScreens = function (screenID) {
+    'use strict';
     this.currentScreen.$element.off ('screenChange');
     Game.prototype.changeScreens.call (this, screenID);
     this.currentScreen.$element.on ('screenChange', screenChangeHandler.bind (this));
-};
-
-MoleculeGame.prototype.buttonLogic = function (button) {
-    'use strict';
-    var screenID = this.currentScreen.buttonLogic (button);
-    this.changeScreens (screenID);
 };
 
 function screenChangeHandler (e) {

@@ -17,19 +17,19 @@ div.basicLink:hover {
     text-decoration: underline;
 }
 
-#loginUI { 
+#loginUI {
     background-color: gray;
-    min-width: 800px;
+    /*min-width: 800px;
     min-height: 600px;
     max-width: 800px;
     max-height: 600px;
     border: 2px;
     border-style: solid;
     border-color: #010120;
-    text-align: center;
     display: none;
+    position: absolute;*/
+    text-align: center;
     z-index: 5;
-    position: absolute;
 }
 
 #loginUIContainer {

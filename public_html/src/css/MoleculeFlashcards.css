@@ -88,3 +88,29 @@ a.headerLinks:hover {
 #dockingLogo {
     float: right;
 }
+
+/* Transition classes */
+
+.fade {
+    opacity: 0;
+    -webkit-transition: opacity 0.5s linear;
+       -moz-transition: opacity 0.5s linear;
+         -o-transition: opacity 0.5s linear;
+            transition: opacity 0.5s linear;
+}
+
+.fade.in {
+    opacity: 1;
+}
+
+.screen {
+    height: 600px;
+    width: 800px;
+    border: 2px solid #010120;
+    position: absolute;
+    display: none;
+}
+
+.active {
+    display: block;
+}
