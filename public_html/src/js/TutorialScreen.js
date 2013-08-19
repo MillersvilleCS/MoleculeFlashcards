@@ -39,7 +39,7 @@
         enableButtons(this);
     };
 
-    function enableButtons (menuScreen) {
+    function enableButtons (tutorialScreen) {
         'use strict';
         
         $('#TutorialScreenUI.button[data-logic="menu"]').on('click', 
@@ -48,7 +48,7 @@
 
                 var screenChangeEvent = jQuery.Event("screenChange");
                 screenChangeEvent.screenID = "menu";
-                menuScreen.getElement().trigger(screenChangeEvent);
+                tutorialScreen.getElement().trigger(screenChangeEvent);
             }
         );        
     }

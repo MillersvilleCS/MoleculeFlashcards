@@ -103,11 +103,6 @@
         UserData.gameID = topic.id;
     };
 
-    MenuScreen.prototype.tutorial = function ( ) {
-        'use strict';
-       
-    };
-
     MenuScreen.prototype.endTutorial = function ( ) {
        
     };
@@ -120,7 +115,9 @@
         });
         
         $('#mainMenuUI .button[data-logic=\'tutorial\']').on('click', function () {
-            menuScreen.tutorial ( );
+            var screenChangeEvent = jQuery.Event('screenChange');
+            screenChangeEvent.screenID = 'tutorial';
+            menuScreen.$element.trigger(screenChangeEvent);
         });
         
         $('#tutorialUI .button[data-logic=\'endTutorial\']').on('click', function () {

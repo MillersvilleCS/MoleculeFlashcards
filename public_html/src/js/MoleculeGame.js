@@ -3,6 +3,7 @@ MoleculeGame = function () {
     'use strict';
     
     var gameScreen = new GameScreen ($( '#gameUI, #loadingUI' ));
+    var tutorialScreen = new TutorialScreen ($( '#TutorialScreenUI' ));
     var menuScreen = new MenuScreen ($('#mainMenuUI'));
     var scoreScreen = new HighScoreScreen ($('#highScoreUI'));
     var loginScreen = new LoginScreen ($('#loginUI'));
@@ -11,6 +12,7 @@ MoleculeGame = function () {
     
     this.currentScreen.$element.on ('screenChange', screenChangeHandler.bind (this));
     this.addScreen ('game', gameScreen);
+    this.addScreen ('tutorial', tutorialScreen);
     this.addScreen ('menu', menuScreen);
     this.addScreen ('score', scoreScreen);
     this.addScreen ('login', loginScreen);
@@ -37,10 +39,13 @@ MoleculeGame.prototype.changeScreens = function (screenID) {
 
 MoleculeGame.prototype.buttonLogic = function (button) {
     'use strict';
+    
     var screenID = this.currentScreen.buttonLogic (button);
     this.changeScreens (screenID);
 };
 
 function screenChangeHandler (e) {
+    'use strict';
+    
     this.changeScreens (e.screenID);
-}
+};
