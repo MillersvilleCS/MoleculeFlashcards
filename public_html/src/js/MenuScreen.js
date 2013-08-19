@@ -5,6 +5,7 @@
         Screen.apply (this, arguments);
 
         this.dataRef = data;
+        this.dataRef.gameID = 0;
     };
     
     var $element;
@@ -62,6 +63,7 @@
 
     MenuScreen.prototype.showAvailableTopics = function ( response ) {
         topics = response.available_games;
+        this.dataRef.gameID = topics[0].id;
         for( var i = 0; i < topics.length; ++i ) {
             var keys = [
                 '$title', 
@@ -100,6 +102,7 @@
             ];
             this.insertInfo( keys, values, SCORES_HTML, '#highScores' );
         }
+        this.dataRef.gameID = topic.id;
     };
 
     MenuScreen.prototype.tutorial = function ( ) {
@@ -125,7 +128,7 @@
             menuScreen.tutorial ( );
         });
         
-        $('#mainMenuUI .button[data-logic=\'endTutorial\']').on('click', function () {
+        $('#tutorialUI .button[data-logic=\'endTutorial\']').on('click', function () {
             menuScreen.endTutorial ( );
         });
         
@@ -134,10 +137,10 @@
             screenChangeEvent.screenID = 'score';
             menuScreen.getElement().trigger(screenChangeEvent);
         });
-        
-        $('#mainMenuUI .button[data-logic=\'menu\']').on('click', function () {
+
+        $('#mainMenuUI .button[data-logic=\'start\']').on('click', function () {
             var screenChangeEvent = jQuery.Event('screenChange');
-            screenChangeEvent.screenID = 'menu';
+            screenChangeEvent.screenID = 'game';
             menuScreen.getElement().trigger(screenChangeEvent);
         });
         
@@ -151,6 +154,7 @@
 
     function disableButtons ( ) {
         $('#mainMenuUI .button').off('click');
+        $('#tutorialUI .button').off('click');
     }
     
     window.MenuScreen = MenuScreen;
