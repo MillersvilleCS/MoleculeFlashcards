@@ -1,21 +1,15 @@
 
 MoleculeGame = function () {
     'use strict';
-    var data = {
-        
-    };
-    var gameScreen = new GameScreen (data);
-    var menuScreen = new MenuScreen (data);
-    var scoreScreen = new HighScoreScreen (data);
-    var loginScreen = new LoginScreen (data);
     
-    menuScreen.$element = $('#mainMenuUI');
-    scoreScreen.$element = $('#highScoreUI');
-    loginScreen.$element = $('#loginUI');
+    var gameScreen = new GameScreen ($( '#gameUI, #loadingUI' ));
+    var menuScreen = new MenuScreen ($('#mainMenuUI'));
+    var scoreScreen = new HighScoreScreen ($('#highScoreUI'));
+    var loginScreen = new LoginScreen ($('#loginUI'));
 
     Game.apply (this, [loginScreen]);
-    this.currentScreen.$element
-                .on ('screenChange', screenChangeHandler.bind (this));
+    
+    this.currentScreen.$element.on ('screenChange', screenChangeHandler.bind (this));
     this.addScreen ('game', gameScreen);
     this.addScreen ('menu', menuScreen);
     this.addScreen ('score', scoreScreen);
@@ -29,14 +23,22 @@ MoleculeGame.prototype.constructor = MoleculeGame;
 
 MoleculeGame.prototype.update = function (delta) {
     'use strict';
+    
     this.currentScreen.onUpdate (delta);
 };
 
 MoleculeGame.prototype.changeScreens = function (screenID) {
     'use strict';
+    
     this.currentScreen.$element.off ('screenChange');
     Game.prototype.changeScreens.call (this, screenID);
     this.currentScreen.$element.on ('screenChange', screenChangeHandler.bind (this));
+};
+
+MoleculeGame.prototype.buttonLogic = function (button) {
+    'use strict';
+    var screenID = this.currentScreen.buttonLogic (button);
+    this.changeScreens (screenID);
 };
 
 function screenChangeHandler (e) {

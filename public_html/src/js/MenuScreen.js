@@ -1,12 +1,9 @@
 ( function () {
     'use strict';
     
-    var MenuScreen = function ( data ) {
+    var MenuScreen = function ( $element ) {
         'use strict';
-        Screen.apply (this, arguments);
-
-        this.dataRef = data;
-        this.dataRef.gameID = 0;
+        Screen.apply (this, [$element]);
     };
     var topics;
     var $lastTopicElement;
@@ -40,7 +37,8 @@
         enableButtons(this);
         $ ('#gameUI').fadeIn (500);
         $ ('#mainMenuUI').fadeIn (500);
-        FCCommunicationManager.availableGames( this.dataRef.auth, this.showAvailableTopics.bind( this ) );
+        console.log(UserData.auth);
+        FCCommunicationManager.availableGames( UserData.auth, this.showAvailableTopics.bind( this ) );
     };
 
     MenuScreen.prototype.tempImageChange = function ( imageSrc ) {
@@ -62,7 +60,7 @@
     MenuScreen.prototype.showAvailableTopics = function ( response ) {
         'use strict';
         topics = response.available_games;
-        this.dataRef.gameID = topics[0].id;
+        UserData.gameID = topics[0].id;
         for( var i = 0; i < topics.length; ++i ) {
             var keys = [
                 '$title', 
@@ -102,7 +100,7 @@
             ];
             this.insertInfo( keys, values, SCORES_HTML, '#highScores' );
         }
-        this.dataRef.gameID = topic.id;
+        UserData.gameID = topic.id;
     };
 
     MenuScreen.prototype.tutorial = function ( ) {

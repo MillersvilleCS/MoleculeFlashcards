@@ -2,11 +2,9 @@
 ( function () {
     'use strict';
 
-    var LoginScreen = function (data) {
+    var LoginScreen = function ($element) {
         'use strict';
-        Screen.apply (this, arguments);
-
-        this.dataRef = data;
+        Screen.apply (this, [$element]);
     };
 
     LoginScreen.prototype = Object.create (Screen.prototype);
@@ -31,8 +29,8 @@
         var username = CookieManager.getCookie ('username');
         var auth = CookieManager.getCookie ('authenticator');
         if (username !== null && auth !== null) {
-            this.dataRef.username = username;
-            this.dataRef.auth = auth;
+            UserData.username = username;
+            UserData.auth = auth;
             
             var screenChangeEvent = jQuery.Event ('screenChange');
             screenChangeEvent.screenID = 'menu';
@@ -46,7 +44,7 @@
     LoginScreen.prototype.nextScreen = function ( ) {
         var screenChangeEvent = jQuery.Event('screenChange');
         screenChangeEvent.screenID = 'menu';
-        this.getElement().trigger(screenChangeEvent);
+        this.$element.trigger(screenChangeEvent);
     }
 
     LoginScreen.prototype.loginStart = function ( ) {
@@ -64,8 +62,8 @@
             $ ('#loginMessage').delay (500).css ('display', 'none');
             CookieManager.setCookie ('username', response.username, 1, '/');
             CookieManager.setCookie ('authenticator', response.auth, 1, '/');
-            this.dataRef.username = response.username;
-            this.dataRef.auth = response.auth;
+            UserData.username = response.username;
+            UserData.auth = response.auth;
             /* Swap Screens */
             this.nextScreen ( );
         }

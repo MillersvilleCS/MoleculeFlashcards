@@ -1,6 +1,7 @@
 
 Application = function (game, camera, title, width, height) {
     'use strict';
+    
     this.game = game;
     this.camera = camera;
     this.prevTime = Date.now ( );

@@ -1,16 +1,15 @@
 ( function () {
     'use strict';
 
-    var GameScreen = function ( data ) {
-        Screen.apply (this, arguments);
+    var GameScreen = function ( $element ) {
+        Screen.apply (this, [$element]);
 
         this.MOLECULE = 0;
         this.ANSWER = 1;
         this.WRONG_ANSWER_POINTS = -30;
         this.RIGHT_ANSWER_POINTS = 100;
         this.GAME_LENGTH = 120;
-
-        this.dataRef = data;
+        
         this.timer = new Timer ( );
         this.scoreManager = new ScoreManager ( );
 
@@ -40,8 +39,6 @@
         this.scene.add (pointLight);
     };
     
-    var $element;
-
     GameScreen.prototype = Object.create (Screen.prototype);
     GameScreen.prototype.constructor = GameScreen;
 
@@ -92,13 +89,6 @@
         TextLoader.loadText (this.modelList[0],
                 this.loadAssets.bind (this));
 
-    };
-    
-    GameScreen.prototype.getElement = function ( ) {
-        if ( !$element ) {
-            $element = $ ( '#gameUI, #loadingUI' );
-        }
-        return $element;
     };
 
     GameScreen.prototype.startGame = function ( ) {

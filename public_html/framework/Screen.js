@@ -1,8 +1,9 @@
 /*
  * Don't ever modify me
  */
-var Screen = function () {
+var Screen = function ($element) {
     'use strict';
+    this.$element = $element;
     this.scene = new THREE.Scene ();
 };
 
