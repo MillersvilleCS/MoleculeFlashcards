@@ -111,13 +111,13 @@
         $('#mainMenuUI .button[data-logic=\'play\']').on('click', function () {
             var screenChangeEvent = jQuery.Event('screenChange');
             screenChangeEvent.screenID = 'game';
-            menuScreen.$element.trigger(screenChangeEvent);
+            $ ('#container').trigger(screenChangeEvent);
         });
         
         $('#mainMenuUI .button[data-logic=\'tutorial\']').on('click', function () {
             var screenChangeEvent = jQuery.Event('screenChange');
             screenChangeEvent.screenID = 'tutorial';
-            menuScreen.$element.trigger(screenChangeEvent);
+            $ ('#container').trigger(screenChangeEvent);
         });
         
         $('#tutorialUI .button[data-logic=\'endTutorial\']').on('click', function () {
@@ -127,13 +127,13 @@
         $('#mainMenuUI .button[data-logic=\'scores\']').on('click', function () {
             var screenChangeEvent = jQuery.Event('screenChange');
             screenChangeEvent.screenID = 'score';
-            menuScreen.$element.trigger(screenChangeEvent);
+            $ ('#container').trigger(screenChangeEvent);
         });
 
         $('#mainMenuUI .button[data-logic=\'start\']').on('click', function () {
             var screenChangeEvent = jQuery.Event('screenChange');
             screenChangeEvent.screenID = 'game';
-            menuScreen.$element.trigger(screenChangeEvent);
+            $ ('#container').trigger(screenChangeEvent);
         });
         
         $('#topicList').on('click', '.topic[data-id]' , function (e) {

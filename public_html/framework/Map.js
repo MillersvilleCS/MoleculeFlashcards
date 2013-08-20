@@ -1,7 +1,8 @@
 /*
  * replace with map class when javascript 6 is finalized.
  */
-Map = function ( ) {
+Map = function () {
+    'use strict';
     this.size = 0;
 };
 

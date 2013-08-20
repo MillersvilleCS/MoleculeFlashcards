@@ -10,7 +10,7 @@ MoleculeGame = function () {
 
     Game.apply (this, [loginScreen]);
     
-    this.currentScreen.$element.on ('screenChange', screenChangeHandler.bind (this));
+    $ ('#container').on ('screenChange', screenChangeHandler.bind (this));
     this.addScreen ('game', gameScreen);
     this.addScreen ('tutorial', tutorialScreen);
     this.addScreen ('menu', menuScreen);
@@ -32,16 +32,18 @@ MoleculeGame.prototype.update = function (delta) {
 MoleculeGame.prototype.changeScreens = function (screenID) {
     'use strict';
     
-    this.currentScreen.$element.off ('screenChange');
+    $ ('#container').off ('screenChange');
     Game.prototype.changeScreens.call (this, screenID);
-    this.currentScreen.$element.on ('screenChange', screenChangeHandler.bind (this));
+    $ ('#container').on ('screenChange', screenChangeHandler.bind (this));
 };
 
 MoleculeGame.prototype.buttonLogic = function (button) {
     'use strict';
     
     var screenID = this.currentScreen.buttonLogic (button);
-    this.changeScreens (screenID);
+    if(screenID) {
+        this.changeScreens (screenID);
+    }
 };
 
 function screenChangeHandler (e) {
