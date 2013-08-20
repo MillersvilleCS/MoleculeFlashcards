@@ -1,22 +1,11 @@
-/* 
-    Document   : GameScreen
-    Created on : Aug 2, 2013, 1:29:03 PM
-    Author     : connor
-    Description:
-        Purpose of the stylesheet follows.
-*/
-
-
-#gameUI
-{
+#gameUI {
     position: absolute;
     min-width: 806px;
     min-height: 600px;
     z-index: 3;
 }
 
-#rightPanel
-{
+#rightPanel {
     position: relative;
     display:none;
     float: right;
@@ -37,8 +26,7 @@
     -ms-user-select: none;
 }
 
-#timeAndScore
-{
+#timeAndScore {
     background-color: #2D2D33;
     color: #F8F8FE;
     margin: 20px;
@@ -48,8 +36,7 @@
     border-radius: 2px;
 }
 
-#scoreChange
-{
+#scoreChange {
     padding: 0px;
     margin: 20px;
     margin-bottom: 40px;
@@ -58,13 +45,11 @@
     font-size: 28px;
 }
 
-#time
-{
+#time {
     float: right;
 }
 
-#score
-{
+#score {
     float: right;
 }
 
@@ -72,8 +57,7 @@
     Loading 
 */
 
-#loadingUI
-{
+#loadingUI {
     position: absolute;
     min-width: 536px;
     min-height: 610px;
@@ -81,13 +65,11 @@
     display: none;
 }
 
-#beginButton
-{
+#beginButton {
     display: none;
 }
 
-#loadingMessage
-{
+#loadingMessage {
     font-size: 60px;
     text-align: left;
     padding-top: 200px;
@@ -98,8 +80,7 @@
     completed
 */
 
-#gameCompletedUI
-{
+#gameCompletedUI {
     position: absolute;
     min-width: 536px;
     min-height: 610px;
@@ -111,8 +92,7 @@
     -ms-user-select: none;
 }
 
-#gameCompletedReturnButton
-{
+#gameCompletedReturnButton {
     display: none;
 }
 

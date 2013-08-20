@@ -1,13 +1,4 @@
-/* 
-    Document   : HighScoreScreen
-    Created on : Aug 2, 2013, 1:30:02 PM
-    Author     : connor
-    Description:
-        Purpose of the stylesheet follows.
-*/
-
-#highScoreUI
-{
+#highScoreUI {
     position: absolute;
     min-width: 800px;
     min-height: 600px;
@@ -23,19 +14,17 @@
     display: none;
 }
 
-#highScoreTitle
-{
+#highScoreTitle {
     color: #F2F2F2;
     font-size: 50px;
     text-align: center;
     text-shadow: -1px -1px 0 #000000,
-        1px -1px 0 #000000,
-        -1px  1px 0 #000000,
-        1px  1px 0 #000000;
+                  1px -1px 0 #000000,
+                 -1px  1px 0 #000000,
+                  1px  1px 0 #000000;
 }
 
-#highScoreContainer
-{
+#highScoreContainer {
     padding-left: 200px;
     padding-right: 200px;
     padding-top: 35px;
@@ -45,8 +34,7 @@
     line-height: 40px;
 }
 
-#names
-{
+#names {
     padding: 0px;
     text-align: left;
     float: left;
@@ -55,8 +43,7 @@
     overflow: hidden;
 }
 
-#scores
-{
+#scores {
     padding: 0px;
     text-align: right;
     float: right;
@@ -65,8 +52,7 @@
     overflow: hidden;
 }
 
-#highScoreReturnButton
-{
+#highScoreReturnButton {
     margin-top: 450px;
     margin-bottom: 30px;
     margin-left: 300px;

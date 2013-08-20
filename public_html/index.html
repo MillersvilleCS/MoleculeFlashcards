@@ -15,32 +15,32 @@
         <link rel = 'stylesheet' type = 'text/css' href = 'src/css/MenuScreen.css'>
         
         <!-- js files -->
-        <script src="libs/three.js"></script>
-        <script src="libs/jQuery.js"></script>
-        <script src="libs/md5-min.js"></script>
+        <script src='libs/three.js'></script>
+        <script src='libs/jQuery.js'></script>
+        <script src='libs/md5-min.js'></script>
 
-        <script src="framework/Application.js"></script>
-        <script src="framework/CommunicationManager.js"></script>
-        <script src="framework/CookieManager.js"></script>
-        <script src="framework/Exceptions.js"></script>
-        <script src="framework/TextLoader.js"></script>
-        <script src="framework/Game.js"></script>
-        <script src="framework/Map.js"></script>
-        <script src="framework/MouseManager.js"></script>
-        <script src="framework/Timer.js"></script>  
-        <script src="framework/Screen.js"></script>
-        <script src="framework/Iterator.js"></script>
+        <script src='framework/Application.js'></script>
+        <script src='framework/CommunicationManager.js'></script>
+        <script src='framework/CookieManager.js'></script>
+        <script src='framework/Exceptions.js'></script>
+        <script src='framework/TextLoader.js'></script>
+        <script src='framework/Game.js'></script>
+        <script src='framework/Map.js'></script>
+        <script src='framework/MouseManager.js'></script>
+        <script src='framework/Timer.js'></script>  
+        <script src='framework/Screen.js'></script>
+        <script src='framework/Iterator.js'></script>
 
-        <script src="src/js/server/FCCommunicationManager.js"></script>
-        <script src="src/js/GameScreen.js"></script>
-        <script src="src/js/UserData.js"></script>
-        <script src="src/js/LoginScreen.js"></script>
-        <script src="src/js/MenuScreen.js"></script>
-        <script src="src/js/HighScoreScreen.js"></script>
-        <script src="src/js/ScoreManager.js"></script> 
-        <script src="src/js/MoleculeGame.js"></script>  
-        <script src="src/js/PDBLoader.js"></script> 
-        <script src="src/js/MoleculeGeometryBuilder.js"></script> 
+        <script src='src/js/server/FCCommunicationManager.js'></script>
+        <script src='src/js/GameScreen.js'></script>
+        <script src='src/js/UserData.js'></script>
+        <script src='src/js/LoginScreen.js'></script>
+        <script src='src/js/MenuScreen.js'></script>
+        <script src='src/js/HighScoreScreen.js'></script>
+        <script src='src/js/ScoreManager.js'></script> 
+        <script src='src/js/MoleculeGame.js'></script>  
+        <script src='src/js/PDBLoader.js'></script> 
+        <script src='src/js/MoleculeGeometryBuilder.js'></script> 
 
         <script>
 
@@ -64,7 +64,7 @@
                 camera.position.x = 3;
                 camera.lookAt (new THREE.Vector3 (0, 0, 0));
                 game = new MoleculeGame ( );
-                var application = new Application (game, camera, "Game Test", WIDTH, HEIGHT);
+                var application = new Application (game, camera, 'Game Test', WIDTH, HEIGHT);
                 application.performGameLoop ( );
 
                 /* 
@@ -75,180 +75,180 @@
         </script>
     </head>
     <body>
-        <div id = "game">
-            <div id = "container" 
-                 onmousedown="MouseManager.onMouseDown (event)"
-                 onmouseup="MouseManager.onMouseUp (event)" 
-                 onmousemove="MouseManager.onMouseMove (event)">
+        <div id = 'game'>
+            <div id = 'container' 
+                 onmousedown='MouseManager.onMouseDown (event)'
+                 onmouseup='MouseManager.onMouseUp (event)' 
+                 onmousemove='MouseManager.onMouseMove (event)'>
                 <!-- canvas goes here -->
 
-                <div id = "pageHeader">
-                    <a href = "http://gcl.cis.udel.edu/mailman/listinfo/exscitech">
-                        <img id = "exscitechLogo" src = "res/media/exscitech_logo.png">
+                <div id = 'pageHeader'>
+                    <a href = 'http://gcl.cis.udel.edu/mailman/listinfo/exscitech'>
+                        <img id = 'exscitechLogo' src = 'res/media/exscitech_logo.png'>
                     </a>
-                    <a href = "http://docking.cis.udel.edu/">
-                        <img id = "dockingLogo" src = "res/media/dh_logo.png">
+                    <a href = 'http://docking.cis.udel.edu/'>
+                        <img id = 'dockingLogo' src = 'res/media/dh_logo.png'>
                     </a>
-                    <div id = "exscitechLinks">
-                        <a class = "headerLinks" href = ""> Job Submission </a> | 
-                        <a class = "headerLinks" href = ""> Molecule Flashcards </a> | 
-                        <a class = "headerLinks" href = "http://docking.cis.udel.edu/about/project/staff.php"> Contributors </a> | 
-                        <a class = "headerLinks" href = "http://docking.cis.udel.edu/"> Docking@Home </a>
+                    <div id = 'exscitechLinks'>
+                        <a class = 'headerLinks' href = ''> Job Submission </a> | 
+                        <a class = 'headerLinks' href = ''> Molecule Flashcards </a> | 
+                        <a class = 'headerLinks' href = 'http://docking.cis.udel.edu/about/project/staff.php'> Contributors </a> | 
+                        <a class = 'headerLinks' href = 'http://docking.cis.udel.edu/'> Docking@Home </a>
                     </div>
                 </div>
 
-                <div id="loginUI" class="screen fade in">
-                    <div id = "loginTitle">
+                <div id='loginUI' class='screen fade in'>
+                    <div id = 'loginTitle'>
                         Molecule Flashcards!
                     </div>
-                    <div id="loginUIContainer" class="inputContainer">
-                        <div id="loginBox" class="slide">
-                            <div id = "loginBoxTitle">
+                    <div id='loginUIContainer' class='inputContainer'>
+                        <div id='loginBox' class='slide'>
+                            <div id = 'loginBoxTitle'>
                                 Login
                             </div>
-                            Email: <input type = "text" name = "emailLogin" id = "emailLogin"><br /><br />
-                            Password: <input type = "password" name = "passLogin" id = "passLogin"><br />
-                            <div class = "button" id = "loginButton" data-logic = "login">
+                            Email: <input type = 'text' name = 'emailLogin' id = 'emailLogin'><br /><br />
+                            Password: <input type = 'password' name = 'passLogin' id = 'passLogin'><br />
+                            <div class = 'button' id = 'loginButton' data-logic = 'login'>
                                 Login
                             </div>
-                            <div id = "loginMessage">Invalid username/password</div>
+                            <div id = 'loginMessage'>Invalid username/password</div>
                             Not a member? 
-                            <div class = "basicLink" data-logic="showCreate"> 
+                            <div class = 'basicLink' data-logic='showCreate'> 
                                 Create an account 
                             </div>
                         </div>
-                        <div id="registerBox" class="slide up">
-                            <div id = "registerBoxTitle">
+                        <div id='registerBox' class='slide up'>
+                            <div id = 'registerBoxTitle'>
                                 Register
                             </div>
-                            Username: <input type = "text" name = "usernameRegister" id = "usernameRegister"><br /><br />
-                            Email: <input type = "text" name = "emailRegister" id = "emailRegister"><br /><br />
-                            Password: <input type = "password" name = "passRegister" id = "passRegister"><br /><br />
-                            Repeat Password: <input type = "password" name = "passRepRegister" id = "passRepRegister"><br /><br />
-                            <div class="button" id ="registerButton" data-logic="register">
+                            Username: <input type = 'text' name = 'usernameRegister' id = 'usernameRegister'><br /><br />
+                            Email: <input type = 'text' name = 'emailRegister' id = 'emailRegister'><br /><br />
+                            Password: <input type = 'password' name = 'passRegister' id = 'passRegister'><br /><br />
+                            Repeat Password: <input type = 'password' name = 'passRepRegister' id = 'passRepRegister'><br /><br />
+                            <div class='button' id ='registerButton' data-logic='register'>
                                 Register!
                             </div>
                             Have an account? 
-                            <div class="basicLink" data-logic="showLogin">
+                            <div class='basicLink' data-logic='showLogin'>
                                 Login
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div id = "mainMenuUI">
+                <div id = 'mainMenuUI'>
                     <!--
-                    <div id = "options">
-                        <div id = "optionsButton">
+                    <div id = 'options'>
+                        <div id = 'optionsButton'>
                             ? <br />
                             Anti-Aliasing <br />
-                            <div id = "radioButtons">
-                                ON<input type="radio" name="aaSet" value="ON" checked>
-                                OFF<input type="radio" name="aaSet" value="OFF"> <br />
+                            <div id = 'radioButtons'>
+                                ON<input type='radio' name='aaSet' value='ON' checked>
+                                OFF<input type='radio' name='aaSet' value='OFF'> <br />
                             </div>
 
                             Quality <br />
-                            <input type="range" min = "0" max = "10" value = "10" step = "1" />
+                            <input type='range' min = '0' max = '10' value = '10' step = '1' />
                         </div>
                     </div>
                     -->
-                    <div id = "mainMenuLeft">
-                        <div id = "mainMenuTitle">
+                    <div id = 'mainMenuLeft'>
+                        <div id = 'mainMenuTitle'>
                             <b>Select a Topic!</b>
                         </div>
-                        <div id = "topicList">
+                        <div id = 'topicList'>
                             <!-- Topics added dynamically here -->
                         </div>
-                        <div class = "button"
-                             data-logic = "tutorial">
+                        <div class = 'button'
+                             data-logic = 'tutorial'>
                             TUTORIAL
                         </div>
                     </div>
-                    <div id = "mainMenuRight">
-                        <div id = "timeLimit">
+                    <div id = 'mainMenuRight'>
+                        <div id = 'timeLimit'>
                             <!-- Dynamically added -->
                         </div>
-                        <div id = "highScores">
+                        <div id = 'highScores'>
                             <!-- Dynamically add high scores here -->
                         </div>
-                        <div class = "button"
-                            data-logic = "start">
+                        <div class = 'button'
+                            data-logic = 'start'>
                             Start
                         </div>
                     </div>
                 </div>
 
-                <div id = "loadingUI">
-                    <div id = "loadingMessage">
+                <div id = 'loadingUI'>
+                    <div id = 'loadingMessage'>
                         Loading...
                     </div>
                     <div 
-                        class = "button"
-                        id = "beginButton"
+                        class = 'button'
+                        id = 'beginButton'
                         onclick = "game.buttonLogic ('Begin Game');">
                         Begin
                     </div>
                 </div>
 
-                <div id = "gameUI">
+                <div id = 'gameUI'>
 
-                    <div id = "rightPanel">
-                        <div id = "timeAndScore">
-                            Time Left: <div id = "time">2:00</div><br />
-                            Score: <div id = "score">0</div><br />
+                    <div id = 'rightPanel'>
+                        <div id = 'timeAndScore'>
+                            Time Left: <div id = 'time'>2:00</div><br />
+                            Score: <div id = 'score'>0</div><br />
                         </div>
-                        <div id = "scoreChange">
+                        <div id = 'scoreChange'>
                             +25
                         </div>
                         <div 
-                            class = "button" 
+                            class = 'button' 
                             onclick = "game.buttonLogic ('Option 1');">
                             Option 1
                         </div>
                         <div 
-                            class = "button" 
+                            class = 'button' 
                             onclick = "game.buttonLogic ('Option 2');">
                             Option 2
                         </div>
                         <div 
-                            class = "button" 
+                            class = 'button' 
                             onclick = "game.buttonLogic ('Option 3');">
                             Option 3
                         </div>
                         <div 
-                            class = "button" 
+                            class = 'button' 
                             onclick = "game.buttonLogic ('Option 4');">
                             Option 4
                         </div>
                     </div>
 
-                    <div id = "gameCompletedUI">
-                        <div class = "button" 
+                    <div id = 'gameCompletedUI'>
+                        <div class = 'button' 
                              onclick = "game.buttonLogic ('Game Return');">
                             Return
                         </div>
                     </div>
 
-                    <div id = "tutorialUI">
+                    <div id = 'tutorialUI'>
                         Molecules will appear in this window. <br /> <br />
                         Select the correct answer from the panel on the right. <br /> <br />
                         Multiple correct answers in a row will grant combo bonuses! <br /> <br />
                         Incorrect answers will cost you points, and end combos. <br /> <br />
                         Answer as many as you can in 2 minutes!
-                        <div class = "button" 
-                             data-logic = "endTutorial">
+                        <div class = 'button' 
+                             data-logic = 'endTutorial'>
                             Return
                         </div>
                     </div>
 
                 </div>
 
-                <div id = "highScoreUI">
-                    <div id = "highScoreTitle">
+                <div id = 'highScoreUI'>
+                    <div id = 'highScoreTitle'>
                         High Scores!
                     </div>
-                    <div id = "highScoreContainer">
-                        <div id = "names">
+                    <div id = 'highScoreContainer'>
+                        <div id = 'names'>
                             John <br />
                             Bobby <br />
                             Zoltar <br />
@@ -261,7 +261,7 @@
                             Homer Simpson <br />
                         </div>
 
-                        <div id = "scores">
+                        <div id = 'scores'>
                             1023874632874327 <br />
                             9 <br />
                             8 <br />
@@ -275,9 +275,9 @@
                         </div>
                     </div>
                     <div 
-                        class = "button" 
-                        id = "highScoreReturnButton" 
-                        data-logic="menu">
+                        class = 'button' 
+                        id = 'highScoreReturnButton' 
+                        data-logic='menu'>
                         Main Menu
                     </div>
                 </div>

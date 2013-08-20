@@ -1,4 +1,3 @@
-
 AudioObject = function (location)
 {
     'use strict';

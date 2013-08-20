@@ -2,7 +2,7 @@
     'use strict';
     
     var HighScoreScreen = function ( $element ) {
-        'use strict';
+        
         Screen.apply (this, [$element]);
     };
     
@@ -12,36 +12,32 @@
     HighScoreScreen.prototype.constructor = HighScoreScreen;
 
     HighScoreScreen.prototype.onUpdate = function (delta) {
-        'use strict';
+        
     };
 
     HighScoreScreen.prototype.onPause = function ( ) {
-        'use strict';
+        
     };
 
     HighScoreScreen.prototype.onLeave = function ( ) {
-        'use strict';
         disableButtons ( );
         $ ('#highScoreUI').fadeOut (500);
     };
 
     HighScoreScreen.prototype.onResume = function ( ) {
-        'use strict';
         enableButtons(this);
         $ ('#highScoreUI').fadeIn (500);
     };
 
     function enableButtons (menuScreen) {
-        'use strict';
-        $('#highScoreUI .button[data-logic="menu"]').on('click', function () {
-            var screenChangeEvent = jQuery.Event("screenChange");
-            screenChangeEvent.screenID = "menu";
+        $('#highScoreUI .button[data-logic=\'menu\']').on('click', function () {
+            var screenChangeEvent = jQuery.Event('screenChange');
+            screenChangeEvent.screenID = 'menu';
             menuScreen.getElement().trigger(screenChangeEvent);
         });        
     }
 
     function disableButtons ( ) {
-        'use strict';
         $('#highScoreUI .button').off('click');
     }
     

@@ -1,4 +1,3 @@
-
 Application = function (game, camera, title, width, height) {
     'use strict';
     

@@ -1,5 +1,7 @@
 /*
  * Don't ever modify me
+ *
+ * - Modified.
  */
 var Game = function (screen) {
     'use strict';
@@ -12,7 +14,7 @@ Game.prototype = {
     update: function (delta)
     {
         'use strict';
-        throw new UnimplementedFunctionException ("update");
+        throw new UnimplementedFunctionException ('update');
     },
     getCurrentScene: function ()
     {
