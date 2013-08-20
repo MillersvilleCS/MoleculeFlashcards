@@ -2,7 +2,6 @@
     'use strict';
     
     var MenuScreen = function ( $element ) {
-        'use strict';
         Screen.apply (this, [$element]);
     };
     var topics;
@@ -19,36 +18,31 @@
     MenuScreen.prototype.constructor = MenuScreen;
 
     MenuScreen.prototype.onUpdate = function (delta) {
-        'use strict';
+        
     };
 
     MenuScreen.prototype.onPause = function ( ) {
-        'use strict';
+        
     };
 
     MenuScreen.prototype.onLeave = function ( ) {
-        'use strict';
         disableButtons ( );
         $ ('#mainMenuUI').fadeOut (500);
     };
 
     MenuScreen.prototype.onResume = function ( ) {
-        'use strict';
         enableButtons(this);
         $ ('#gameUI').fadeIn (500);
         $ ('#mainMenuUI').fadeIn (500);
-        console.log(UserData.auth);
         FCCommunicationManager.availableGames( UserData.auth, this.showAvailableTopics.bind( this ) );
     };
 
     MenuScreen.prototype.tempImageChange = function ( imageSrc ) {
-        'use strict';
         /* Until this is running on the exscitech server, we need to give an absolute path */
         return 'http://exscitech.gcl.cis.udel.edu/' + imageSrc.substr(2, imageSrc.length - 2);
     };
 
     MenuScreen.prototype.insertInfo = function ( keys, values, base, location ) {
-        'use strict';
         var workingHTML = base;
         for(var i = 0; i < keys.length; ++i) {
             workingHTML = workingHTML.replace( keys[i], values[i] );
@@ -58,7 +52,6 @@
     };
 
     MenuScreen.prototype.showAvailableTopics = function ( response ) {
-        'use strict';
         topics = response.available_games;
         UserData.gameID = topics[0].id;
         for( var i = 0; i < topics.length; ++i ) {
@@ -83,7 +76,6 @@
     };
 
     MenuScreen.prototype.changeRightPanel = function ( topic ) {
-        'use strict';
         $('#timeLimit').html('Time Limit: ' + Timer.getDigitalRep( topic.time_limit / 1000 ) );
         $('#highScores').html('');
         var currScores = topic.high_scores;
@@ -101,10 +93,6 @@
             this.insertInfo( keys, values, SCORES_HTML, '#highScores' );
         }
         UserData.gameID = topic.id;
-    };
-
-    MenuScreen.prototype.endTutorial = function ( ) {
-       
     };
 
     function enableButtons (menuScreen) {

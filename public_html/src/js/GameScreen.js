@@ -138,7 +138,7 @@
 
     GameScreen.prototype.loadAssets = function (data) {
         //update loading screen
-        var loadingString = "Loading";
+        var loadingString = 'Loading';
         ++this.loadingState;
         for (var i = 0; i < (this.loadingState / 2) % 3; ++i) {
             loadingString += '.';

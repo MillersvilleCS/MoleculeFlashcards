@@ -5,7 +5,7 @@ body
     margin: 0px;
     padding: 0px;
     background-color: #F8F8FE;
-    font-family: "Times New Roman", Arial;
+    font-family: 'Times New Roman', Arial;
 }
 
 canvas
@@ -101,6 +101,22 @@ a.headerLinks:hover {
 
 .fade.in {
     opacity: 1;
+}
+
+.slide {
+    opacity: 1;
+    overflow: hidden;
+    transition: all 0.3s linear;
+    transition-property: height, padding, border;
+}
+
+/* TODO: May be a cleaner way to do this without using !important. */
+.slide.up {
+    height: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    border-top-width: 0 !important;
+    border-bottom-width: 0 !important;
 }
 
 .screen {

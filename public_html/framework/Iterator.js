@@ -1,4 +1,3 @@
-
 Iterator = function (iterable) {
     'use strict';
     this.data = iterable;

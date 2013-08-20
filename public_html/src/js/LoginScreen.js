@@ -3,7 +3,6 @@
     'use strict';
 
     var LoginScreen = function ($element) {
-        'use strict';
         Screen.apply (this, [$element]);
     };
 
@@ -11,20 +10,19 @@
     LoginScreen.prototype.constructor = LoginScreen;
 
     LoginScreen.prototype.onUpdate = function (delta) {
-        'use strict';
+        
     };
 
     LoginScreen.prototype.onPause = function ( ) {
-        'use strict';
+        
     };
 
     LoginScreen.prototype.onLeave = function ( ) {
-        $ ('#loginUI').removeClass('in active');
+        $('#loginUI').removeClass('in active');
         disableButtons( );
     };
 
     LoginScreen.prototype.onResume = function ( ) {
-        'use strict';
         enableButtons (this);
         var username = CookieManager.getCookie ('username');
         var auth = CookieManager.getCookie ('authenticator');
@@ -54,12 +52,10 @@
     LoginScreen.prototype.loginFinish = function ( response ) {
         if( response.success === 'false' ) {
             //$('#loginBox').slideDown( 300 );
-            $ ('#loginButton').css ('display', 'block');
-            $ ('#loginMessage').html ('Invalid username/password!');
-            $ ('#loginMessage').css ('display', 'block');
+            $('#loginMessage').html('Invalid username/password!');
+            $('#loginButton, #loginMessage').addClass('active');
         } else {
-            //$('#loginBox').delay( 500 ).css( 'display', 'block' );
-            $ ('#loginMessage').delay (500).css ('display', 'none');
+            $('#loginMessage').removeClass('active');
             CookieManager.setCookie ('username', response.username, 1, '/');
             CookieManager.setCookie ('authenticator', response.auth, 1, '/');
             UserData.username = response.username;
@@ -70,47 +66,53 @@
     };
 
     LoginScreen.prototype.createDivShow = function ( ) {
-        'use strict';
-        $ ('#loginBox').slideUp (300);
-        $ ('#registerBox').delay (300).slideDown (300);
+//        $('#loginBox').slideUp (300);
+//        $ ('#registerBox').delay (300).slideDown (300);
+        $('#loginBox').addClass('up');
+        setTimeout(function () {
+            $('#registerBox').removeClass('up');
+        }, 300);
     };
 
     LoginScreen.prototype.loginDivShow = function ( ) {
-        'use strict';
-        $ ('#registerBox').slideUp (300);
-        $ ('#loginBox').delay (300).slideDown (300);
+        
+//        $ ('#registerBox').slideUp (300);
+//        $ ('#loginBox').delay (300).slideDown (300);
+        $('#registerBox').addClass('up');
+        setTimeout(function () {
+            $('#loginBox').removeClass('up');
+        }, 300);
+        
     };
-
-    
 
     /* Buttons */
 
     function enableButtons (loginScreen) {
-        $ ('#loginUI .button[data-logic="login"]').on ('click', function () {
+        $('#loginUI .button[data-logic=\'login\']').on ('click', function () {
             $ ('#loginButton').css ('display', 'none');
             FCCommunicationManager.login ($ ('#emailLogin')
                     .val (), $ ('#passLogin').val (),
                     loginScreen.loginFinish.bind (loginScreen));
             loginScreen.loginStart ();
         });
-        $('#loginUI .button[data-logic="login"]').on('click', function () {
+        $('#loginUI .button[data-logic=\'login\']').on('click', function () {
             $('#loginButton').css('display', 'none');
             FCCommunicationManager.login ( $('#emailLogin').val(), $('#passLogin').val(), 
                                             loginScreen.loginFinish.bind(loginScreen) );
             loginScreen.loginStart();
         }); 
         
-        $('#loginUI [data-logic="showCreate"]').on('click', loginScreen.createDivShow); 
+        $('#loginUI [data-logic=\'showCreate\']').on('click', loginScreen.createDivShow); 
         
-        $('#loginUI [data-logic="showLogin"]').on('click', loginScreen.loginDivShow); 
+        $('#loginUI [data-logic=\'showLogin\']').on('click', loginScreen.loginDivShow); 
         
-        $('#loginUI .button[data-logic="register"]').on('click', function () {
+        $('#loginUI .button[data-logic=\'register\']').on('click', function () {
             /** TODO: Needs Implementation */
         }); 
     }
 
     function disableButtons ( ) {
-        $ ('#loginUI .button').off ('click');
+        $('#loginUI .button').off ('click');
     }
 
     window.LoginScreen = LoginScreen;

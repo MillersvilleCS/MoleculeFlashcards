@@ -6,7 +6,7 @@
  */
 function UnimplementedFunctionException (name) {
     'use strict';
-    return "Function '" + name + "' has not been implemented.";
+    return 'Function \'' + name + '\' has not been implemented.';
 }
 
 /**
@@ -16,7 +16,7 @@ function UnimplementedFunctionException (name) {
  */
 function AlreadyInitilizedException (name) {
     'use strict';
-    return name + " has already been initialized.";
+    return name + ' has already been initialized.';
 }
 
 function Exception (error) {
@@ -31,5 +31,5 @@ function IOException (error) {
 
 function UndefinedReferenceException (name) {
     'use strict';
-    return "Object reference '" + name + "' is undefined";
+    return 'Object reference \'' + name + '\' is undefined';
 }

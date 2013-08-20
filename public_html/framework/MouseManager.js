@@ -26,8 +26,7 @@ MouseButton.prototype = {
 
 function MouseManager ( ) {
 
-}
-;
+};
 
 MouseManager.leftButton = new MouseButton ( );
 MouseManager.rightButton = new MouseButton ( );
@@ -63,8 +62,7 @@ MouseManager.onMouseUp = function (event) {
     }
 };
 
-MouseManager.onMouseMove = function (event)
-{
+MouseManager.onMouseMove = function (event) {
     'use strict';
     MouseManager.currentX = event.screenX;
     MouseManager.currentY = event.screenY;

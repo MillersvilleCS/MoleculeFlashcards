@@ -1,4 +1,3 @@
-
 MoleculeGame = function () {
     'use strict';
     
@@ -25,13 +24,12 @@ MoleculeGame.prototype.constructor = MoleculeGame;
 
 MoleculeGame.prototype.update = function (delta) {
     'use strict';
-    
     this.currentScreen.onUpdate (delta);
 };
 
 MoleculeGame.prototype.changeScreens = function (screenID) {
     'use strict';
-    
+
     $ ('#container').off ('screenChange');
     Game.prototype.changeScreens.call (this, screenID);
     $ ('#container').on ('screenChange', screenChangeHandler.bind (this));
@@ -48,6 +46,6 @@ MoleculeGame.prototype.buttonLogic = function (button) {
 
 function screenChangeHandler (e) {
     'use strict';
-    
+
     this.changeScreens (e.screenID);
 };

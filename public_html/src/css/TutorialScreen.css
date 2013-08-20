@@ -1,14 +1,4 @@
-/* 
-    Document   : TutorialScreen
-    Created on : Aug 19, 2013, 3:25:15 PM
-    Author     : william
-    Description:
-        Purpose of the stylesheet follows.
-*/
-
-
-#TutorialScreenUI
-{
+#TutorialScreenUI {
     position: absolute;
     min-width: 800px;
     min-height: 600px;
@@ -24,19 +14,17 @@
     display: none;
 }
 
-#TutorialScreenTitle
-{
+#TutorialScreenTitle {
     color: #F2F2F2;
     font-size: 50px;
     text-align: center;
     text-shadow: -1px -1px 0 #000000,
-        1px -1px 0 #000000,
-        -1px  1px 0 #000000,
-        1px  1px 0 #000000;
+                  1px -1px 0 #000000,
+                 -1px  1px 0 #000000,
+                  1px  1px 0 #000000;
 }
 
-#TutorialScreenContainer
-{
+#TutorialScreenContainer {
     padding-left: 200px;
     padding-right: 200px;
     padding-top: 35px;
@@ -46,10 +34,7 @@
     line-height: 40px;
 }
 
-
-
-#TutorialScreenReturnButton
-{
+#TutorialScreenReturnButton {
     margin-top: 450px;
     margin-bottom: 30px;
     margin-left: 300px;

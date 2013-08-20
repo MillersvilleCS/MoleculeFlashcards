@@ -1,12 +1,4 @@
-/* 
-    Document   : MenuScreen
-    Created on : Aug 2, 2013, 1:29:19 PM
-    Author     : connor
-    Description:
-        Purpose of the stylesheet follows.
-*/
-#mainMenuUI
-{
+#mainMenuUI {
     position: absolute;
     min-width: 800px;
     min-height: 600px;
@@ -30,8 +22,7 @@
     float: left;
 }
 
-#mainMenuTitle
-{
+#mainMenuTitle {
     color: #10011F;
     font-size: 55px;
     margin-top: 34px;
@@ -67,8 +58,8 @@ div.topicDescription {
 /*
     Start Button
 */
-#mainMenuPlayButton
-{
+
+#mainMenuPlayButton {
     background-color: #4D4D62;
     color: #F8F8FE;
     font-size: 50px;
@@ -78,13 +69,11 @@ div.topicDescription {
     margin-bottom: 34px;
 }
 
-#mainMenuPlayButton:hover
-{
+#mainMenuPlayButton:hover {
     background-color: #53495E;
 }
 
-#mainMenuPlayButton:active
-{
+#mainMenuPlayButton:active {
     background-color: #EFE1FE;
 }
 
@@ -92,8 +81,7 @@ div.topicDescription {
     Tutorial Button
 */
 
-#mainMenuTutorialButton
-{
+#mainMenuTutorialButton {
     background-color: #4D4D62;
     color: #F8F8FE;
     font-size: 50px;
@@ -102,13 +90,11 @@ div.topicDescription {
     margin-right: 89px;
 }
 
-#mainMenuTutorialButton:hover
-{
+#mainMenuTutorialButton:hover {
     background-color: #53495E;
 }
 
-#mainMenuTutorialButton:active
-{
+#mainMenuTutorialButton:active {
     background-color: #EFE1FE;
 }
 
@@ -116,8 +102,7 @@ div.topicDescription {
     Tutorial UI
 */
 
-#tutorialUI
-{
+#tutorialUI {
     width: 500px;
     display: none;
     padding: 25px;
@@ -129,8 +114,7 @@ div.topicDescription {
     HighScore Button
 */
 
-#mainMenuHighScoreButton
-{
+#mainMenuHighScoreButton {
     background-color: #4D4D62;
     color: #F8F8FE;
     font-size: 40px;
@@ -140,22 +124,19 @@ div.topicDescription {
     height: 50px;
 }
 
-#mainMenuHighScoreButton:hover
-{
+#mainMenuHighScoreButton:hover {
     background-color: #53495E;
 }
 
-#mainMenuHighScoreButton:active
-{
+#mainMenuHighScoreButton:active {
     background-color: #EFE1FE;
 }
 
 /*
-    Options pane
+    Options pane - TODO: REMOVE?
 */
 
-#options
-{
+#options {
     position: absolute;
     float: left;
     margin: 2px;
@@ -166,8 +147,7 @@ div.topicDescription {
     height: 40px;
 }
 
-#optionsButton
-{
+#optionsButton {
     width: 35px;
     height: 35px;
     overflow: hidden;
@@ -183,8 +163,7 @@ div.topicDescription {
     transition-delay: 0s, 0s, 0s, 0s, 0s;
 }
 
-#optionsButton:hover
-{
+#optionsButton:hover {
     opacity: 1.0;
     height: 200px;
     width: 300px;
@@ -194,7 +173,6 @@ div.topicDescription {
     border-style: solid;
 }
 
-#radioButtons
-{
+#radioButtons {
     font-size: 14px;
 }
