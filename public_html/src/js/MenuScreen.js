@@ -27,13 +27,13 @@
 
     MenuScreen.prototype.onLeave = function ( ) {
         disableButtons ( );
-        $ ('#mainMenuUI').fadeOut (500);
+        $('#mainMenuUI').fadeOut (500);
     };
 
     MenuScreen.prototype.onResume = function ( ) {
         enableButtons(this);
-        $ ('#gameUI').fadeIn (500);
-        $ ('#mainMenuUI').fadeIn (500);
+        $('#gameUI').fadeIn (500);
+        $('#mainMenuUI').fadeIn (500);
         FCCommunicationManager.availableGames( UserData.auth, this.showAvailableTopics.bind( this ) );
     };
 
@@ -52,6 +52,7 @@
     };
 
     MenuScreen.prototype.showAvailableTopics = function ( response ) {
+        $('#topicList').html('');
         topics = response.available_games;
         UserData.gameID = topics[0].id;
         for( var i = 0; i < topics.length; ++i ) {

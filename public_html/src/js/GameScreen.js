@@ -76,10 +76,6 @@
     };
 
     GameScreen.prototype.onLeave = function ( ) {
-
-    };
-
-    GameScreen.prototype.onLeave = function ( ) {
         disableReturnButton( );
         $ ('#gameCompletedUI').fadeOut (500);
         $ ('#rightPanel').fadeOut (500);
