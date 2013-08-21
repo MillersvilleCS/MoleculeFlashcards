@@ -1,60 +1,16 @@
 /* Classes */
 
-body
-{
+body {
     margin: 0;
     padding: 0;
     background-color: #F8F8FE;
     font-family: 'Times New Roman', Arial;
 }
 
-.flashcardsGame canvas
-{
+.flashcardsGame canvas {
     border: 2px solid #010120;
     margin: 0;
     background: #E3E3FE;
-}
-
-div.button
-{
-    text-align: center;
-    background-color: #4D4D62;
-    margin: 20px;
-    padding: 5px;
-    border-radius: 2px;
-    cursor: pointer;
-    transition-property: background-color;
-    transition-duration: 0.3s;
-    transition-delay: 0s;
-}
-
-div.button:hover
-{
-    background-color: #E3E3FE;
-}
-
-div.button:active
-{
-    background-color: #EFE1FE;
-}
-
-a.headerLinks:link {
-    color: white;
-    text-decoration: none;
-    transition-property: color;
-    transition-duration: 0.3s;
-    transition-delay: 0s;
-}
-
-a.headerLinks:visited {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-a.headerLinks:hover {
-    color: red;
-    text-decoration: none;
 }
 
 /* Parent Div Elements */
@@ -83,7 +39,38 @@ div.flashcardsGame {
     float: right;
 }
 
-/* Text and Headings */
+/* Components */
+
+div.button {
+    text-align: center;
+    background-color: #4D4D62;
+    margin: 20px;
+    padding: 5px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
+}
+
+div.button:hover {
+    background-color: #E3E3FE;
+}
+
+div.button:active {
+    background-color: #EFE1FE;
+}
+
+.screen {
+    height: 600px;
+    width: 800px;
+    border: 2px solid #010120;
+    background-color: gray;
+    position: absolute;
+    display: none;
+}
+
+/* Text and Headings and Links */
 
 h1 {
     font-size: 72px;
@@ -96,6 +83,25 @@ h2 {
 
 .screen h1, .screen h2 {
     text-align: center;
+}
+
+a.headerLinks:link {
+    color: white;
+    text-decoration: none;
+    transition-property: color;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
+}
+
+a.headerLinks:visited {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a.headerLinks:hover {
+    color: red;
+    text-decoration: none;
 }
 
 /* Transition classes */
@@ -126,15 +132,6 @@ h2 {
     padding-bottom: 0 !important;
     border-top-width: 0 !important;
     border-bottom-width: 0 !important;
-}
-
-.screen {
-    height: 600px;
-    width: 800px;
-    border: 2px solid #010120;
-    background-color: gray;
-    position: absolute;
-    display: none;
 }
 
 .active {

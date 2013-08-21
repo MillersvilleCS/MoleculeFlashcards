@@ -1,3 +1,32 @@
+#loginUI {
+    z-index: 5;
+}
+
+#loginBox {
+    height: 240px;
+}
+
+#registerBox {
+    height: 320px;
+}
+
+.inputContainer {
+    margin: 50px auto;
+    width: 400px;
+    text-align: center;
+}
+
+.inputBox {
+    height: 300px;
+    padding: 10px;
+    background-color: white;
+    border: 2px solid black;
+}
+
+h1.inputContainer {
+    text-align: center;
+}
+
 a.basicLink {
     color: blue;
     display: inline;
@@ -7,28 +36,6 @@ a.basicLink {
 
 a.basicLink:hover {
     text-decoration: underline;
-}
-
-#loginUI {
-    z-index: 5;
-}
-
-.inputContainer {
-    margin: 50px auto;
-    width: 400px;
-    text-align: center;
-}
-
-h1.inputContainer {
-    text-align: center;
-}
-
-#loginBox {
-    height: 240px;
-}
-
-#registerBox {
-    height: 320px;
 }
 
 span.error {
@@ -46,13 +53,6 @@ span.error {
 
 .button.blueButton:hover {
     background-color: red;
-}
-
-.inputBox {
-    height: 300px;
-    padding: 10px;
-    background-color: white;
-    border: 2px solid black;
 }
 
 .inputBox form {
