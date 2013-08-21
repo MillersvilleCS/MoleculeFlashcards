@@ -13,8 +13,9 @@ ScoreManager.prototype = {
     change: 0,
     correct: function (addition) {
         'use strict';
-        this.change = addition;
 
+        this.change = addition;
+        /*
         ++this.streak;
         if (this.streak === 4) {
             this.multiplier = 2;
@@ -24,6 +25,8 @@ ScoreManager.prototype = {
         }
 
         this.score += addition * this.multiplier;
+        */
+        this.score += addition;
         this.questionTimer.reset ( );
     },
     incorrect: function (deduction) {

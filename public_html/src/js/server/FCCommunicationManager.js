@@ -52,7 +52,7 @@ FCCommunicationManager.loadFlashcardGame = function ( auth, gameID, callback ) {
     CommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
 };
 
-FCCommunicationManager.endFlashcardGame = function ( auth, gameSessionID, callback ) {
+FCCommunicationManager.endFlashcardGame = function ( auth, gameSessionID, gameTime, callback ) {
     'use strict';
     var requestObject = {};
     requestObject.request_type = 'end_flashcard_game';
