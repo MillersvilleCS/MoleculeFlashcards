@@ -101,40 +101,50 @@
                 </div>
 
                 <div id='loginUI' class='screen fade in'>
-                    <div id = 'loginTitle'>
-                        Molecule Flashcards!
-                    </div>
+                    <h1>Molecule Flashcards!</h1>
                     <div id='loginUIContainer' class='inputContainer'>
-                        <div id='loginBox' class='slide'>
-                            <div id = 'loginBoxTitle'>
+                        <div id='loginBox' class='slide inputBox'>
+                            <h2>Login</h2>
+                            <form>
+                                <label>Email:
+                                    <input type = 'text' name = 'emailLogin' id = 'emailLogin'>
+                                </label>
+                                <label>Password:
+                                    <input type = 'password' name = 'passLogin' id = 'passLogin'>
+                                </label>
+                            </form>
+                            <div class = 'button blueButton' id = 'loginButton' data-logic = 'login'>
                                 Login
                             </div>
-                            Email: <input type = 'text' name = 'emailLogin' id = 'emailLogin'><br /><br />
-                            Password: <input type = 'password' name = 'passLogin' id = 'passLogin'><br />
-                            <div class = 'button' id = 'loginButton' data-logic = 'login'>
-                                Login
-                            </div>
-                            <div id = 'loginMessage'>Invalid username/password</div>
-                            Not a member? 
-                            <div class = 'basicLink' data-logic='showCreate'> 
-                                Create an account 
-                            </div>
+                            <div id='loginMessage' class="hide">Invalid username/password</div>
+                            <span>Not a member?</span>
+                            <a class='basicLink' data-logic='showCreate'>
+                                Create an account
+                            </a>
                         </div>
-                        <div id='registerBox' class='slide up'>
-                            <div id = 'registerBoxTitle'>
-                                Register
-                            </div>
-                            Username: <input type = 'text' name = 'usernameRegister' id = 'usernameRegister'><br /><br />
-                            Email: <input type = 'text' name = 'emailRegister' id = 'emailRegister'><br /><br />
-                            Password: <input type = 'password' name = 'passRegister' id = 'passRegister'><br /><br />
-                            Repeat Password: <input type = 'password' name = 'passRepRegister' id = 'passRepRegister'><br /><br />
-                            <div class='button' id ='registerButton' data-logic='register'>
+                        <div id='registerBox' class='slide up inputBox'>
+                            <h2>Register</h2>
+                            <form>
+                                <label>Username:
+                                    <input id = 'usernameRegister' type = 'text' name = 'usernameRegister'>
+                                </label>
+                                <label>Email:
+                                    <input id = 'emailRegister' type = 'text' name = 'emailRegister'>
+                                </label>
+                                <label>Password:
+                                    <input id = 'passRegister' type = 'password' name = 'passRegister'>
+                                </label>
+                                <label>Reenter Password:
+                                    <input id = 'passRepRegister' type = 'password' name = 'passRepRegister'>
+                                </label>
+                            </form>
+                            <div id ='registerButton' class='button blueButton' data-logic='register'>
                                 Register!
                             </div>
-                            Have an account? 
-                            <div class='basicLink' data-logic='showLogin'>
+                            <span>Have an account?</span> 
+                            <a class='basicLink' data-logic='showLogin'>
                                 Login
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>

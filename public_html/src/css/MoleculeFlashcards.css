@@ -14,7 +14,7 @@ canvas
     border-width: 2px;
     border-color: #010120;
     margin: 0px;
-    background: #E3E3FE;
+    /*background: #E3E3FE;*/
 }
 
 div.button
@@ -51,9 +51,7 @@ a.headerLinks:link {
 a.headerLinks:visited {
     color: white;
     text-decoration: none;
-    transition-property: color;
-    transition-duration: 0.3s;
-    transition-delay: 0s;
+    transition: color 0.3s;
 }
 
 a.headerLinks:hover {
@@ -87,6 +85,21 @@ a.headerLinks:hover {
 
 #dockingLogo {
     float: right;
+}
+
+/* Text and Headings */
+
+h1 {
+    font-size: 72px;
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+h2.screen {
+    text-align: center;
 }
 
 /* Transition classes */
@@ -129,4 +142,12 @@ a.headerLinks:hover {
 
 .active {
     display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.hide.active {
+    display: active;
 }

@@ -1,11 +1,11 @@
-div.basicLink {
+a.basicLink {
     color: blue;
     display: inline;
     cursor: pointer;
     text-decoration: none;
 }
 
-div.basicLink:hover {
+a.basicLink:hover {
     text-decoration: underline;
 }
 
@@ -16,72 +16,64 @@ div.basicLink:hover {
 }
 
 .inputContainer {
-    margin: 100px auto;
-    width: 450px;
+    margin: 50px auto;
+    width: 400px;
     text-align: center;
 }
 
-#loginTitle {
-    font-size: 72px;
+h1.inputContainer {
     text-align: center;
 }
 
 #loginBox {
-    width: 400px;
     height: 240px;
-    background-color: white;
-    border-color: black;
-    border-width: 2px;
-    border-style: solid;
-    padding: 20px;
-}
-
-#loginBoxTitle {
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-#loginButton {
-    background-color: blue;
-    width: 75px;
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-#loginButton:hover {
-    background-color: red;
 }
 
 #loginMessage {
-    display: none;
     color: red;
 }
 
 #registerBox {
-    /*display: none;*/
-    width: 400px;
-    height: 300px;
-    background-color: white;
-    border-color: black;
-    border-width: 2px;
-    border-style: solid;
-    padding: 20px;
+    height: 360px;
 }
 
-#registerBoxTitle {
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-#registerButton {
+.button.blueButton {
     background-color: blue;
-    width: 100px;
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
-#registerButton:hover {
+.inputBox .button { 
+    margin: 10px auto;
+    max-width: 100px;
+}
+
+.button.blueButton:hover {
     background-color: red;
+}
+
+.inputBox {
+    /*width: 400px;*/
+    height: 300px;
+    padding: 10px;
+    background-color: white;
+    border: 2px solid black;
+}
+
+.inputBox form {
+    width: 100%;
+}
+
+.inputBox label, .inputBox input {
+    display: inline-block;
+}
+
+.inputBox label {
+    clear: both;
+    margin: 6px auto;
+    text-align: right;
+    width: 80%;
+}
+
+.inputBox label input {
+    width: 55%;
+    margin-left: 10px;
 }

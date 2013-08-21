@@ -43,19 +43,17 @@
         var screenChangeEvent = jQuery.Event('screenChange');
         screenChangeEvent.screenID = 'menu';
         this.$element.trigger(screenChangeEvent);
-    }
+    };
 
     LoginScreen.prototype.loginStart = function ( ) {
-        //$('#loginBox').slideUp( 300 );
     };
 
     LoginScreen.prototype.loginFinish = function ( response ) {
         if( response.success === 'false' ) {
-            //$('#loginBox').slideDown( 300 );
             $('#loginMessage').html('Invalid username/password!');
-            $('#loginButton, #loginMessage').addClass('active');
+            $('#loginButton, #loginMessage').removeClass('hide');
         } else {
-            $('#loginMessage').removeClass('active');
+            $('#loginMessage').addClass('hide');
             CookieManager.setCookie ('username', response.username, 1, '/');
             CookieManager.setCookie ('authenticator', response.auth, 1, '/');
             UserData.username = response.username;
@@ -87,16 +85,16 @@
 
     /* Buttons */
 
-    function enableButtons (loginScreen) {
+    function enableButtons(loginScreen) {
         $('#loginUI .button[data-logic=\'login\']').on ('click', function () {
-            $ ('#loginButton').css ('display', 'none');
+            $ ('#loginButton').addClass('hide');
             FCCommunicationManager.login ($ ('#emailLogin')
                     .val (), $ ('#passLogin').val (),
                     loginScreen.loginFinish.bind (loginScreen));
             loginScreen.loginStart ();
         });
         $('#loginUI .button[data-logic=\'login\']').on('click', function () {
-            $('#loginButton').css('display', 'none');
+            $('#loginButton').addClass('hide');
             FCCommunicationManager.login ( $('#emailLogin').val(), $('#passLogin').val(), 
                                             loginScreen.loginFinish.bind(loginScreen) );
             loginScreen.loginStart();
@@ -109,11 +107,11 @@
         $('#loginUI .button[data-logic=\'register\']').on('click', function () {
             /** TODO: Needs Implementation */
         }); 
-    }
+    };
 
     function disableButtons ( ) {
         $('#loginUI .button').off ('click');
     }
 
     window.LoginScreen = LoginScreen;
-}) ( );
+}) (window);
