@@ -78,11 +78,11 @@
         </script>
     </head>
     <body>
-        <div id = 'game'>
+        <div id = 'game' class="flashcardsGame">
             <div id = 'container' 
-                 onmousedown='MouseManager.onMouseDown (event)'
-                 onmouseup='MouseManager.onMouseUp (event)' 
-                 onmousemove='MouseManager.onMouseMove (event)'>
+                 onmousedown='MouseManager.onMouseDown (event);'
+                 onmouseup='MouseManager.onMouseUp (event);' 
+                 onmousemove='MouseManager.onMouseMove (event);'>
                 <!-- canvas goes here -->
 
                 <div id = 'pageHeader'>
@@ -116,7 +116,7 @@
                             <div class = 'button blueButton' id = 'loginButton' data-logic = 'login'>
                                 Login
                             </div>
-                            <div id='loginMessage' class="hide">Invalid username/password</div>
+                            <span id='loginMessage' class="error hide">Invalid username/password</span><br/>
                             <span>Not a member?</span>
                             <a class='basicLink' data-logic='showCreate'>
                                 Create an account

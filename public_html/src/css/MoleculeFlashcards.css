@@ -2,19 +2,17 @@
 
 body
 {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     background-color: #F8F8FE;
     font-family: 'Times New Roman', Arial;
 }
 
-canvas
+.flashcardsGame canvas
 {
-    border-style: solid;
-    border-width: 2px;
-    border-color: #010120;
-    margin: 0px;
-    /*background: #E3E3FE;*/
+    border: 2px solid #010120;
+    margin: 0;
+    background: #E3E3FE;
 }
 
 div.button
@@ -61,14 +59,12 @@ a.headerLinks:hover {
 
 /* Parent Div Elements */
 
-#game
-{
+div.flashcardsGame {
     min-width: 804px;
     min-height: 64px;
 }
 
-#container
-{
+#container {
     max-width: 804px;
     max-height: 604px;
     margin: auto;
@@ -98,7 +94,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-h2.screen {
+.screen h1, .screen h2 {
     text-align: center;
 }
 
@@ -136,6 +132,7 @@ h2.screen {
     height: 600px;
     width: 800px;
     border: 2px solid #010120;
+    background-color: gray;
     position: absolute;
     display: none;
 }
