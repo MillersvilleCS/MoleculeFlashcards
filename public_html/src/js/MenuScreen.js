@@ -55,6 +55,7 @@
         $('#topicList').html('');
         topics = response.available_games;
         UserData.gameID = topics[0].id;
+        UserData.gameTimeLimit = topics[0].time_limit;
         for( var i = 0; i < topics.length; ++i ) {
             var keys = [
                 '$title', 
@@ -94,6 +95,7 @@
             this.insertInfo( keys, values, SCORES_HTML, '#highScores' );
         }
         UserData.gameID = topic.id;
+        UserData.gameTimeLimit = topic.time_limit;
     };
 
     function enableButtons (menuScreen) {

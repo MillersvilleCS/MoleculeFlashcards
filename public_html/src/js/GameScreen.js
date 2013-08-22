@@ -10,7 +10,6 @@
         this.QUESTION_ANSWERS = 3;
         this.WRONG_ANSWER_POINTS = -350;
         this.RIGHT_ANSWER_POINTS = 1000;
-        this.GAME_LENGTH = 120;
 
         //////////temporary/////////////
         this.modelList =
@@ -24,6 +23,7 @@
                     'res/models/5.pdb'
                 ];
         ////////////////////
+        this.gameLength = 120;
         this.timer = new Timer ( );
         this.scoreManager = new ScoreManager ( );
         this.gameData = undefined;
@@ -106,6 +106,7 @@
         $ ('#loadingUI').fadeOut (1);
         $ ('canvas').fadeIn (500);
 
+        this.gameLength = UserData.gameTimeLimit / 1000;
         this.questionIterator = new Iterator (this.questionList);
         if (this.questionIterator.hasNext ()) {
             this.currentQuestion = this.questionIterator.next ( );
@@ -222,7 +223,7 @@
     };
 
     GameScreen.prototype.getSecondsLeft = function () {
-        var time = this.GAME_LENGTH - this.timer.getElapsedSec ();
+        var time = this.gameLength - this.timer.getElapsedSec ();
 
         if (time > 0) {
             return time;
