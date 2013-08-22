@@ -1,6 +1,7 @@
 Timer = function () {
     this.startTime = 0;
     this.stopTime = 0;
+    this.totalTime = 0;
     this.running = false;
 };
 
@@ -15,20 +16,22 @@ Timer.prototype = {
         'use strict';
         this.running = false;
         this.stopTime = Date.now ();
+        this.totalTime += this.stopTime - this.startTime;
     },
     reset: function () {
         'use strict';
         var time = Date.now ();
         this.startTime = time;
         this.stopTime = time;
+        this.totalTime = 0;
     },
     getElapsedMs: function () {
         'use strict';
         if (this.running) {
-            return Date.now () - this.startTime;
+            return Date.now () - this.startTime + this.totalTime;
         }
 
-        return this.stopTime - this.startTime;
+        return this.totalTime;
     },
     getElapsedSec: function () {
         'use strict';
