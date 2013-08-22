@@ -1,5 +1,5 @@
 (function (window, $) {
-    'use strict'; /* Only need to 'use strict' once in new system*/
+    'use strict';
 
     var GameScreen = function ($element) {
         Screen.apply (this, [$element]);
@@ -11,18 +11,6 @@
         this.WRONG_ANSWER_POINTS = -350;
         this.RIGHT_ANSWER_POINTS = 1000;
 
-        //////////temporary/////////////
-        this.modelList =
-                [
-                    'res/models/first.pdb',
-                    'res/models/aspirin.pdb',
-                    'res/models/0.pdb',
-                    'res/models/1.pdb',
-                    'res/models/2.pdb',
-                    'res/models/4.pdb',
-                    'res/models/5.pdb'
-                ];
-        ////////////////////
         this.gameLength = 120;
         this.timer = new Timer ( );
         this.scoreManager = new ScoreManager ( );
@@ -62,7 +50,7 @@
         $ ('#score').html (this.scoreManager.score);
 
         //update the molecule
-        if (MouseManager.leftButton.isPressed) {
+        if (MouseManager.leftButton.isPressed && this.currentQuestion != undefined) {
             this.currentQuestion[this.QUESTION_MOLECULE].rotation.z -=
                     (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
 
@@ -88,7 +76,6 @@
     };
 
     GameScreen.prototype.onResume = function ( ) {
-        //start the loading screen
         $ ('#loadingUI').fadeIn (500);
         $ ('#rightPanel').fadeIn (500);
 
@@ -96,8 +83,6 @@
         this.questionList = [];
         this.loadingState = 0;
 
-        /* TextLoader.loadText (this.modelList[0],
-                this.loadAssets.bind (this)); */
         FCCommunicationManager.loadFlashcardGame( UserData.auth, UserData.gameID, this.receiveQuestionList.bind(this) );
     };
 
@@ -130,12 +115,11 @@
         300);
         FCCommunicationManager.endFlashcardGame( UserData.auth,
                                                  this.gameData.game_session_id,
-                                                 120,//temp!
+                                                 this.timer.getElapsedMs(),
                                                  this.allowExit.bind(this) );
     };
 
     GameScreen.prototype.allowExit = function ( response ) {
-        //console.log(response);
         $('#gameCompletedUI').fadeIn (500);
         $('#gameCompletedReturnButton').fadeIn (500);
     };
@@ -151,7 +135,6 @@
     };
 
     GameScreen.prototype.nextQuestion = function ( ) {
-        //TextLoader.loadText ( 'res/models/aspirin.pdb', this.createMolecule.bind ( this ) );
         this.userAnswers = new Map ( );
         if (this.questionIterator.hasNext ( )) {
             this.scene.remove (this.currentQuestion[ this.QUESTION_MOLECULE ]);
@@ -267,7 +250,7 @@
                                     this.gameData.game_session_id,
                                     this.currentQuestion[this.QUESTION_ID],
                                     userAnswer,
-                                    60, //temp
+                                    this.timer.getElapsedMs(),
                                     this.answerQuestion.bind(this) );
     };
 
