@@ -15,6 +15,7 @@
         this.timer = new Timer ( );
         this.scoreManager = new ScoreManager ( );
         this.gameData = undefined;
+        this.defaultHTML = $('#gameButtons').html();
         this.loadingState = -1;
         this.questionList = [];
         this.currentQuestion = undefined;
@@ -65,6 +66,7 @@
 
     GameScreen.prototype.onLeave = function ( ) {
         disableReturnButton( );
+        $ ('#gameButtons').html(this.defaultHTML);
         $ ('#gameCompletedUI').fadeOut (500);
         $ ('#rightPanel').fadeOut (500);
         $ ('#gameCompletedReturnButton').fadeOut (500);
