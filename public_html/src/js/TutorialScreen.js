@@ -34,18 +34,18 @@
         enableButtons(this);
     };
 
-    function enableButtons (menuScreen) {
-        $('#TutorialScreenUI.button[data-logic=\'menu\']').on('click', 
+    function enableButtons (tutorialScreen) {
+        $('#tutorialUI .button[data-logic=\'endTutorial\']').on('click', 
             function () {
-                var screenChangeEvent = jQuery.Event("screenChange");
-                screenChangeEvent.screenID = "menu";
-                tutorialScreen.getElement().trigger(screenChangeEvent);
+                var screenChangeEvent = jQuery.Event('screenChange');
+                screenChangeEvent.screenID = 'menu';
+                $('#container').trigger(screenChangeEvent);
             }
         );        
     }
 
     function disableButtons ( ) {
-        $('#TutorialScreenUI.button').off('click');
+        $('#tutorialUI .button').off('click');
     }
     
     window.TutorialScreen = TutorialScreen;
