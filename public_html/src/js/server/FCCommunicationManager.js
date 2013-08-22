@@ -76,6 +76,17 @@ FCCommunicationManager.submitFlashcardAnswer = function ( auth, gameSessionID, q
     CommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
 };
 
+FCCommunicationManager.getHighScores = function ( gameID, startingRank, range, callback ) {
+    'use strict';
+    var requestObject = {};
+    requestObject.request_type = 'get_high_scores';
+    requestObject.game_id = gameID;
+    requestObject.starting_rank = startingRank;
+    requestObject.range = range;
+
+    CommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
+};
+
 FCCommunicationManager.getMedia = function ( gameSessionID, mediaType, questionID, callback ) {
     'use strict';
     var requestObject = {};
