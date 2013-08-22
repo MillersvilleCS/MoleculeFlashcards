@@ -97,12 +97,6 @@
     };
 
     function enableButtons (menuScreen) {
-        $('#mainMenuUI .button[data-logic=\'play\']').on('click', function () {
-            var screenChangeEvent = jQuery.Event('screenChange');
-            screenChangeEvent.screenID = 'game';
-            $ ('#container').trigger(screenChangeEvent);
-        });
-        
         $('#mainMenuUI .button[data-logic=\'tutorial\']').on('click', function () {
             var screenChangeEvent = jQuery.Event('screenChange');
             screenChangeEvent.screenID = 'tutorial';
@@ -136,6 +130,7 @@
     function disableButtons ( ) {
         $('#mainMenuUI .button').off('click');
         $('#tutorialUI .button').off('click');
+        $('#topicList').off('click');
     }
     
     window.MenuScreen = MenuScreen;

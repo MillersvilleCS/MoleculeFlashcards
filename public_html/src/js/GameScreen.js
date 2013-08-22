@@ -274,7 +274,7 @@
         $('#gameUI .button[data-logic=\'return\']').on('click', function () {
             var screenChangeEvent = jQuery.Event('screenChange');
             screenChangeEvent.screenID = 'menu';
-            gameScreen.$element.trigger(screenChangeEvent);
+            $('#container').trigger(screenChangeEvent);
         });
 
         $('#gameButtons').on('click', '.button[data-logic]', function () {

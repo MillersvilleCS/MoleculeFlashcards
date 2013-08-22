@@ -46,6 +46,7 @@
     };
 
     LoginScreen.prototype.loginStart = function ( ) {
+        /* TODO - Loading Animation? */
     };
 
     LoginScreen.prototype.loginFinish = function ( response ) {
@@ -64,8 +65,8 @@
     };
 
     LoginScreen.prototype.createDivShow = function ( ) {
-//        $('#loginBox').slideUp (300);
-//        $ ('#registerBox').delay (300).slideDown (300);
+//      $('#loginBox').slideUp (300);
+//      $('#registerBox').delay (300).slideDown (300);
         $('#loginBox').addClass('up');
         setTimeout(function () {
             $('#registerBox').removeClass('up');
@@ -74,8 +75,8 @@
 
     LoginScreen.prototype.loginDivShow = function ( ) {
         
-//        $ ('#registerBox').slideUp (300);
-//        $ ('#loginBox').delay (300).slideDown (300);
+//      $ ('#registerBox').slideUp (300);
+//      $ ('#loginBox').delay (300).slideDown (300);
         $('#registerBox').addClass('up');
         setTimeout(function () {
             $('#loginBox').removeClass('up');
@@ -86,13 +87,6 @@
     /* Buttons */
 
     function enableButtons(loginScreen) {
-        $('#loginUI .button[data-logic=\'login\']').on ('click', function () {
-            $ ('#loginButton').addClass('hide');
-            FCCommunicationManager.login ($ ('#emailLogin')
-                    .val (), $ ('#passLogin').val (),
-                    loginScreen.loginFinish.bind (loginScreen));
-            loginScreen.loginStart ();
-        });
         $('#loginUI .button[data-logic=\'login\']').on('click', function () {
             $('#loginButton').addClass('hide');
             FCCommunicationManager.login ( $('#emailLogin').val(), $('#passLogin').val(), 
