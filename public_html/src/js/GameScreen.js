@@ -1,4 +1,4 @@
-(function () {
+(function (window, $) {
     'use strict'; /* Only need to 'use strict' once in new system*/
 
     var GameScreen = function ($element) {
@@ -128,9 +128,9 @@
             opacity: 0
         },
         300);
-        FCCommunicationManager.endFlashcardGame( UserData.auth, 
-                                                 this.gameData.game_session_id, 
-                                                 120,//temp! 
+        FCCommunicationManager.endFlashcardGame( UserData.auth,
+                                                 this.gameData.game_session_id,
+                                                 120,//temp!
                                                  this.allowExit.bind(this) );
     };
 
@@ -193,15 +193,15 @@
             molecule.position = new THREE.Vector3 (-2.5, -1, 0);
             molecule.scale = new THREE.Vector3 (0.5, 0.5, 0.5);
 
-            this.questionList.push ([ molecule, 
+            this.questionList.push ([ molecule,
                                       this.gameData.questions[this.loadingState].text,
                                       this.gameData.questions[this.loadingState].id,
                                       this.gameData.questions[this.loadingState].answers ]);
 
-            FCCommunicationManager.getMedia( this.gameData.game_session_id, 
-                                             FCCommunicationManager.MEDIA_PDB, 
+            FCCommunicationManager.getMedia( this.gameData.game_session_id,
+                                             FCCommunicationManager.MEDIA_PDB,
                                              this.gameData.questions[this.loadingState].id,
-                                             this.createPDB.bind(this) ); 
+                                             this.createPDB.bind(this) );
         } else {
             enableButtons( this );
             $ ('#loadingMessage').html ('Ready');
@@ -216,8 +216,8 @@
         this.gameData = data;
         this.loadingState = -1;
         /* Assumes at least 1 question */
-        FCCommunicationManager.getMedia( this.gameData.game_session_id, 
-                                         FCCommunicationManager.MEDIA_PDB, 
+        FCCommunicationManager.getMedia( this.gameData.game_session_id,
+                                         FCCommunicationManager.MEDIA_PDB,
                                          this.gameData.questions[this.loadingState + 1].id,
                                          this.createPDB.bind(this) );
     };
@@ -262,20 +262,18 @@
     };
 
     GameScreen.prototype.pollAnswer = function ( userAnswer, currentQuestion ) {
-        FCCommunicationManager.submitFlashcardAnswer( 
-                                    UserData.auth, 
-                                    this.gameData.game_session_id, 
+        FCCommunicationManager.submitFlashcardAnswer(
+                                    UserData.auth,
+                                    this.gameData.game_session_id,
                                     this.currentQuestion[this.QUESTION_ID],
-                                    userAnswer, 
+                                    userAnswer,
                                     60, //temp
                                     this.answerQuestion.bind(this) );
     };
 
     function enableButtons ( gameScreen ) {
         $('#gameUI .button[data-logic=\'return\']').on('click', function () {
-            var screenChangeEvent = jQuery.Event('screenChange');
-            screenChangeEvent.screenID = 'menu';
-            $('#container').trigger(screenChangeEvent);
+            $(this).trigger(new ScreenChangeEvent('menu'));
         });
 
         $('#gameButtons').on('click', '.button[data-logic]', function () {
@@ -289,7 +287,7 @@
         $('#loadingUI .button[data-logic=\'begin\']').on('click', function () {
             $('#loadingUI .button').off('click');
             gameScreen.startGame( );
-        });        
+        });
     }
 
     function disableButtons ( ) {
@@ -300,6 +298,6 @@
     function disableReturnButton ( ) {
         $('#gameUI .button').off('click');
     }
-    
+
     window.GameScreen = GameScreen;
-}) ();
+}) (window, jQuery);

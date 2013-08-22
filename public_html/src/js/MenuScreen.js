@@ -1,6 +1,6 @@
-( function () {
+( function (window, $) {
     'use strict';
-    
+
     var MenuScreen = function ( $element ) {
         Screen.apply (this, [$element]);
     };
@@ -18,11 +18,11 @@
     MenuScreen.prototype.constructor = MenuScreen;
 
     MenuScreen.prototype.onUpdate = function (delta) {
-        
+
     };
 
     MenuScreen.prototype.onPause = function ( ) {
-        
+
     };
 
     MenuScreen.prototype.onLeave = function ( ) {
@@ -58,13 +58,13 @@
         UserData.gameTimeLimit = topics[0].time_limit;
         for( var i = 0; i < topics.length; ++i ) {
             var keys = [
-                '$title', 
+                '$title',
                 '$description',
                 '$imageSrc',
                 '$uniqueID'
             ];
             var values = [
-                topics[i].name, 
+                topics[i].name,
                 topics[i].description,
                 this.tempImageChange ( topics[i].image ),
                 i
@@ -100,27 +100,25 @@
 
     function enableButtons (menuScreen) {
         $('#mainMenuUI .button[data-logic=\'tutorial\']').on('click', function () {
-            var screenChangeEvent = jQuery.Event('screenChange');
-            screenChangeEvent.screenID = 'tutorial';
-            $ ('#container').trigger(screenChangeEvent);
+            $ (this).trigger(new ScreenChangeEvent('tutorial'));
         });
-        
+
         $('#tutorialUI .button[data-logic=\'endTutorial\']').on('click', function () {
             menuScreen.endTutorial ( );
         });
-        
+
         $('#mainMenuUI .button[data-logic=\'scores\']').on('click', function () {
-            var screenChangeEvent = jQuery.Event('screenChange');
-            screenChangeEvent.screenID = 'score';
-            $ ('#container').trigger(screenChangeEvent);
+//            var screenChangeEvent = jQuery.Event('screenChange');
+//            screenChangeEvent.screenID = 'score';
+            $ (this).trigger(new ScreenChangeEvent('score'));
         });
 
         $('#mainMenuUI .button[data-logic=\'start\']').on('click', function () {
-            var screenChangeEvent = jQuery.Event('screenChange');
-            screenChangeEvent.screenID = 'game';
-            $ ('#container').trigger(screenChangeEvent);
+//            var screenChangeEvent = jQuery.Event('screenChange');
+//            screenChangeEvent.screenID = 'game';
+            $ (this).trigger(new ScreenChangeEvent('game'));
         });
-        
+
         $('#topicList').on('click', '.topic[data-id]' , function (e) {
             menuScreen.changeRightPanel ( topics[$(this).data('id')] );
             $lastTopicElement.css('background-color', 'transparent');
@@ -134,6 +132,6 @@
         $('#tutorialUI .button').off('click');
         $('#topicList').off('click');
     }
-    
+
     window.MenuScreen = MenuScreen;
-}) ( );
+}) (window, jQuery);

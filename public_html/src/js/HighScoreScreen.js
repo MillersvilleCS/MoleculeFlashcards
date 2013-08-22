@@ -1,22 +1,22 @@
-( function () {
+( function (window, $) {
     'use strict';
-    
+
     var HighScoreScreen = function ( $element ) {
-        
+
         Screen.apply (this, [$element]);
     };
-    
+
     var $element;
 
     HighScoreScreen.prototype = Object.create (Screen.prototype);
     HighScoreScreen.prototype.constructor = HighScoreScreen;
 
     HighScoreScreen.prototype.onUpdate = function (delta) {
-        
+
     };
 
     HighScoreScreen.prototype.onPause = function ( ) {
-        
+
     };
 
     HighScoreScreen.prototype.onLeave = function ( ) {
@@ -31,16 +31,14 @@
 
     function enableButtons (menuScreen) {
         $('#highScoreUI .button[data-logic=\'menu\']').on('click', function () {
-            var screenChangeEvent = jQuery.Event('screenChange');
-            screenChangeEvent.screenID = 'menu';
-            menuScreen.getElement().trigger(screenChangeEvent);
-        });        
+            $(this).trigger(new ScreenChangeEvent('menu'));
+        });
     }
 
     function disableButtons ( ) {
         $('#highScoreUI .button').off('click');
     }
-    
+
     // export HighScoreScreen
     window.HighScoreScreen = HighScoreScreen;
-}) ();
+}) (window, jQuery);

@@ -1,5 +1,5 @@
 
-( function () {
+( function (window, $) {
     'use strict';
 
     var LoginScreen = function ($element) {
@@ -10,11 +10,11 @@
     LoginScreen.prototype.constructor = LoginScreen;
 
     LoginScreen.prototype.onUpdate = function (delta) {
-        
+
     };
 
     LoginScreen.prototype.onPause = function ( ) {
-        
+
     };
 
     LoginScreen.prototype.onLeave = function ( ) {
@@ -29,10 +29,8 @@
         if (username !== null && auth !== null) {
             UserData.username = username;
             UserData.auth = auth;
-            
-            var screenChangeEvent = jQuery.Event ('screenChange');
-            screenChangeEvent.screenID = 'menu';
-            this.$element.trigger (screenChangeEvent);
+
+            this.nextScreen();
         } else {
             /* stay on this screen */
             $('#loginUI').addClass('in active');
@@ -40,9 +38,7 @@
     };
 
     LoginScreen.prototype.nextScreen = function ( ) {
-        var screenChangeEvent = jQuery.Event('screenChange');
-        screenChangeEvent.screenID = 'menu';
-        this.$element.trigger(screenChangeEvent);
+        this.$element.trigger(new ScreenChangeEvent('menu'));
     };
 
     LoginScreen.prototype.loginStart = function ( ) {
@@ -74,14 +70,14 @@
     };
 
     LoginScreen.prototype.loginDivShow = function ( ) {
-        
+
 //      $ ('#registerBox').slideUp (300);
 //      $ ('#loginBox').delay (300).slideDown (300);
         $('#registerBox').addClass('up');
         setTimeout(function () {
             $('#loginBox').removeClass('up');
         }, 300);
-        
+
     };
 
     /* Buttons */
@@ -89,18 +85,18 @@
     function enableButtons(loginScreen) {
         $('#loginUI .button[data-logic=\'login\']').on('click', function () {
             $('#loginButton').addClass('hide');
-            FCCommunicationManager.login ( $('#emailLogin').val(), $('#passLogin').val(), 
+            FCCommunicationManager.login ( $('#emailLogin').val(), $('#passLogin').val(),
                                             loginScreen.loginFinish.bind(loginScreen) );
             loginScreen.loginStart();
-        }); 
-        
-        $('#loginUI [data-logic=\'showCreate\']').on('click', loginScreen.createDivShow); 
-        
-        $('#loginUI [data-logic=\'showLogin\']').on('click', loginScreen.loginDivShow); 
-        
+        });
+
+        $('#loginUI [data-logic=\'showCreate\']').on('click', loginScreen.createDivShow);
+
+        $('#loginUI [data-logic=\'showLogin\']').on('click', loginScreen.loginDivShow);
+
         $('#loginUI .button[data-logic=\'register\']').on('click', function () {
             /** TODO: Needs Implementation */
-        }); 
+        });
     };
 
     function disableButtons ( ) {
@@ -108,4 +104,4 @@
     }
 
     window.LoginScreen = LoginScreen;
-}) (window);
+}) (window, jQuery);

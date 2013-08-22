@@ -143,5 +143,5 @@ a.headerLinks:hover {
 }
 
 .hide.active {
-    display: active;
+    display: block;
 }
