@@ -48,8 +48,6 @@
 
         <script>
 
-            var game; // temporary global?
-
             $ (document).ready (function ( ) {
 
                 var WIDTH = 800;
@@ -67,7 +65,7 @@
                 camera.position.z = 5;
                 camera.position.x = 3;
                 camera.lookAt (new THREE.Vector3 (0, 0, 0));
-                game = new MoleculeGame ( );
+                var game = new MoleculeGame ( );
                 var application = new Application (game, camera, 'Game Test', WIDTH, HEIGHT);
                 application.performGameLoop ( );
 
