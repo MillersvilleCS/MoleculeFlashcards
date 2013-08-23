@@ -96,12 +96,16 @@
                         <a class = 'headerLinks' href = ''> Molecule Flashcards </a> | 
                         <a class = 'headerLinks' href = 'http://docking.cis.udel.edu/about/project/staff.php'> Contributors </a> | 
                         <a class = 'headerLinks' href = 'http://docking.cis.udel.edu/'> Docking@Home </a>
+
+                        <a class = 'headerLinks' id = 'logoutButton' data-logic = 'logout'>
+                            <!-- User's Name -->
+                        </a>
                     </div>
                 </div>
 
-                <div id='loginUI' class='screen fade in'>
+                <div id = 'loginUI' class = 'screen fade in'>
                     <h1>Molecule Flashcards!</h1>
-                    <div id='loginUIContainer' class='inputContainer'>
+                    <div id = 'loginUIContainer' class = 'inputContainer'>
                         <div id='loginBox' class='slide inputBox'>
                             <h2>Login</h2>
                             <form>
@@ -115,13 +119,13 @@
                             <div class = 'button blueButton' id = 'loginButton' data-logic = 'login'>
                                 Login
                             </div>
-                            <span id='loginMessage' class="error hide">Invalid username/password</span><br/>
+                            <span id = 'loginMessage' class = 'error hide'> Invalid username/password </span><br/>
                             <span>Not a member?</span>
-                            <a class='basicLink' data-logic='showCreate'>
+                            <a class = 'basicLink' data-logic = 'showCreate'>
                                 Create an account
                             </a>
                         </div>
-                        <div id='registerBox' class='slide up inputBox'>
+                        <div id = 'registerBox' class = 'slide up inputBox'>
                             <h2>Register</h2>
                             <form>
                                 <label>Username:
@@ -133,15 +137,15 @@
                                 <label>Password:
                                     <input id = 'passRegister' type = 'password' name = 'passRegister'>
                                 </label>
-                                <label>Reenter Password:
+                                <label>Re-enter Password:
                                     <input id = 'passRepRegister' type = 'password' name = 'passRepRegister'>
                                 </label>
                             </form>
-                            <div id ='registerButton' class='button blueButton' data-logic='register'>
+                            <div id = 'registerButton' class = 'button blueButton' data-logic = 'register'>
                                 Register!
                             </div>
                             <span>Have an account?</span> 
-                            <a class='basicLink' data-logic='showLogin'>
+                            <a class = 'basicLink' data-logic = 'showLogin'>
                                 Login
                             </a>
                         </div>

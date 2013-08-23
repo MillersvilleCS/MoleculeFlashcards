@@ -96,12 +96,28 @@ a.headerLinks:link {
 a.headerLinks:visited {
     color: white;
     text-decoration: none;
-    transition: color 0.3s;
+    transition-property: color;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
 }
 
 a.headerLinks:hover {
     color: red;
     text-decoration: none;
+}
+
+#logoutButton {
+    position: absolute;
+    width: 150px;
+    margin-left: 20px;
+    text-align: right;
+    transition-property: color;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
+}
+
+#logoutButton:hover {
+    cursor: pointer;
 }
 
 /* Transition classes */

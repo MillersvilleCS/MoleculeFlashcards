@@ -18,6 +18,7 @@
     };
 
     LoginScreen.prototype.onLeave = function ( ) {
+        $('#logoutButton').html( 'Hi, ' + UserData.username + '!' );
         $('#loginUI').removeClass('in active');
         disableButtons( );
     };
@@ -96,6 +97,14 @@
 
         $('#loginUI .button[data-logic=\'register\']').on('click', function () {
             /** TODO: Needs Implementation */
+        });
+
+        $('#pageHeader [data-logic=\'logout\']').on('click', function () {
+            if ( confirm('Logout from Molecule Flashcards?') ) {
+                CookieManager.deleteCookie ('username', '/');
+                CookieManager.deleteCookie ('authenticator', '/');
+                window.location.replace('');
+            }
         });
     };
 
