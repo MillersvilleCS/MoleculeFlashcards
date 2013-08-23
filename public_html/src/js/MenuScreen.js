@@ -72,6 +72,7 @@
             this.insertInfo( keys, values, TOPIC_HTML, '#topicList' );
             topics[i].dataID = i;
         }
+        $('#topicList').scrollTop( 0 );
         $lastTopicElement = $($('#topicList').children()[0]);
         $lastTopicElement.css('background-color', 'grey');
         this.changeRightPanel ( topics[0] );
