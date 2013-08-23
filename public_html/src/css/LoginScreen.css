@@ -43,7 +43,7 @@ span.error {
 }
 
 .button.blueButton {
-    background-color: blue;
+    background-color: #002AA8;
 }
 
 .inputBox .button { 
@@ -52,7 +52,7 @@ span.error {
 }
 
 .button.blueButton:hover {
-    background-color: red;
+    background-color: #001D75;
 }
 
 .inputBox form {
@@ -67,7 +67,7 @@ span.error {
     clear: both;
     margin: 6px auto;
     text-align: right;
-    width: 85%;
+    width: 95%;
 }
 
 .inputBox label input {

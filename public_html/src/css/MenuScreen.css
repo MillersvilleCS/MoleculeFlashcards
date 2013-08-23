@@ -5,7 +5,7 @@
     max-width: 800px;
     max-height: 600px;
     z-index: 4;
-    background-color: #E3E3FE;
+    background-color: #CCCCCC;
     border: 2px;
     border-style: solid;
     border-color: #010120;
@@ -23,7 +23,7 @@
 }
 
 #mainMenuTitle {
-    color: #10011F;
+    color: black;
     font-size: 55px;
     margin-top: 34px;
     text-align: center;
@@ -40,6 +40,7 @@
 
 div.topic {
     height: 160px;
+    cursor: pointer;
 }
 
 img.topicImage {
@@ -48,14 +49,14 @@ img.topicImage {
 }
 
 div.topicDescription {
-    font-size: 16px;
+    font-size: 15px;
 }
 
 #mainMenuRight {
     float: right;
     text-align: center;
     padding-top: 70px;
-    font-size: 26px;
+    font-size: 24px;
 }
 
 /* High Scores */
@@ -90,8 +91,13 @@ div.topicDescription {
 */
 
 .button.startButton {
-    background-color: red;
+    background-color: #6BC026;
 }
+
+.button.startButton:hover {
+    background-color: #53951D;
+}
+
 
 /*
     Tutorial Button

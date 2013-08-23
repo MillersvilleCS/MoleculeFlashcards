@@ -15,7 +15,7 @@
     font-size: 34px;
     width: 266px;
     height: 600px;
-    background-color: #F2F2F2;
+    background-color: #CCCCCC;
     border: 0px;
     border-left: 2px;
     border-right: 2px;
@@ -29,7 +29,7 @@
 
 #questionPanel {
     float: left;
-    background-color: #F2F2F2;
+    background-color: #CCCCCC;
     display: none;
     width: 532px;
     height: 70px;

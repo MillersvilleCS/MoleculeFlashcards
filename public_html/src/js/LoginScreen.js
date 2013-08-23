@@ -103,7 +103,7 @@
             if ( confirm('Logout from Molecule Flashcards?') ) {
                 CookieManager.deleteCookie ('username', '/');
                 CookieManager.deleteCookie ('authenticator', '/');
-                window.location.replace('');
+                window.location.href = '';
             }
         });
     };

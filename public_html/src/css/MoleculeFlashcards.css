@@ -3,14 +3,14 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #F8F8FE;
-    font-family: 'Times New Roman', Arial;
+    background-color: #EBFBFF;
+    font-family: Tahoma, Geneva, sans-serif;
 }
 
 .flashcardsGame canvas {
     border: 2px solid #010120;
     margin: 0;
-    background: #E3E3FE;
+    background: #CCCCCC;
 }
 
 /* Parent Div Elements */
@@ -21,18 +21,20 @@ div.flashcardsGame {
 }
 
 #container {
-    max-width: 804px;
-    max-height: 604px;
+    width: 804px;
+    height: 604px;
     margin: auto;
 }
 
 #pageHeader {
-    background-color: blue;
+    background-color: #002AA8;
+    padding-bottom: 5px;
 }
 
 #exscitechLinks {
     color: white;
     text-align: center;
+    font-size: 14px;
 }
 
 #dockingLogo {
@@ -46,7 +48,7 @@ div.button {
     background-color: #4D4D62;
     margin: 20px;
     padding: 5px;
-    border-radius: 2px;
+    border-radius: 8px;
     cursor: pointer;
     transition-property: background-color;
     transition-duration: 0.3s;
@@ -54,18 +56,18 @@ div.button {
 }
 
 div.button:hover {
-    background-color: #E3E3FE;
+    background-color: #CCCCCC;
 }
 
 div.button:active {
-    background-color: #EFE1FE;
+    background-color: #CCCCCC;
 }
 
 .screen {
     height: 600px;
     width: 800px;
     border: 2px solid #010120;
-    background-color: gray;
+    background-color: #CCCCCC;
     position: absolute;
     display: none;
 }
