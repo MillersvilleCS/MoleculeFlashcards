@@ -124,7 +124,7 @@ a.headerLinks:hover {
 
 .fade {
     opacity: 0;
-    -webkit-transition: opacity 0.5s linear;
+    -webkit-transition: opacity 0.5s linear;/* TODO: Remove? all modern browsers should support 'transition' if they support GL */
        -moz-transition: opacity 0.5s linear;
          -o-transition: opacity 0.5s linear;
             transition: opacity 0.5s linear;

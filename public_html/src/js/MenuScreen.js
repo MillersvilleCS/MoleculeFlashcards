@@ -81,6 +81,7 @@
 
     MenuScreen.prototype.changeRightPanel = function ( topic ) {
         $('#timeLimit').html('Time Limit: ' + Timer.getDigitalRep( topic.time_limit / 1000 ) );
+        $('#questionCount').html('Number of Questions: ' + topic.q_count );
         $('#names').html('');
         $('#scores').html('');
         var currScores = topic.high_scores;
