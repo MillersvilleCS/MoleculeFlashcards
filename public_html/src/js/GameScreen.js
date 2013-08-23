@@ -99,6 +99,7 @@
             this.currentQuestion = this.questionIterator.next ( );
             this.scene.add (this.currentQuestion [this.QUESTION_MOLECULE]);
             this.setButtons ( );
+            this.setQuestionText ( );
             this.timer.start ( );
         } else {
             this.endGame ();
@@ -110,6 +111,7 @@
         this.scene.remove (this.currentQuestion[ this.QUESTION_MOLECULE ]);
         this.currentQuestion = undefined;
         this.timer.stop ( );
+        $('#questionPanel').fadeOut( 300 );
         $('#scoreChange').stop (true, true);
         $('#scoreChange').animate ({
             opacity: 0
@@ -142,6 +144,7 @@
             this.scene.remove (this.currentQuestion[ this.QUESTION_MOLECULE ]);
             this.currentQuestion = this.questionIterator.next ( );
             this.scene.add (this.currentQuestion[ this.QUESTION_MOLECULE ]);
+            this.setQuestionText( );
             this.setButtons( );
         } else {
             this.endGame ( );
@@ -160,6 +163,16 @@
                 this.currentQuestion[this.QUESTION_ANSWERS][i].text
             ];
             this.insertInfo( keys, values, BUTTON_HTML, '#gameButtons' );
+        }
+    };
+
+    GameScreen.prototype.setQuestionText = function ( ) {
+        if (this.currentQuestion[this.QUESTION_TEXT] != '') {
+            $('#questionPanel').html(this.currentQuestion[this.QUESTION_TEXT]);
+            $('#questionPanel').fadeIn( 300 );
+        } else {
+            $('#questionPanel').html('');
+            $('#questionPanel').fadeOut( 300 );
         }
     };
 

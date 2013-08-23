@@ -10,6 +10,7 @@
     display:none;
     float: right;
     margin: 2px;
+    margin-left: 0px;
     text-align: right;
     font-size: 34px;
     width: 266px;
@@ -24,6 +25,24 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+}
+
+#questionPanel {
+    float: left;
+    background-color: #F2F2F2;
+    display: none;
+    width: 532px;
+    height: 70px;
+    font-size: 22px;
+    text-align: center;
+    padding-top: 10px;
+    margin-top: 520px;
+    margin-left: 2px;
+    margin-right: 0px;
+    border: 0px;
+    border-top: 2px;
+    border-color: #010120;
+    border-style: solid;
 }
 
 #timeAndScore {
