@@ -33,7 +33,7 @@
                             'class = \'button\'' +
                             'data-logic = \'$id\'>' +
                             '$text' +
-                        '</div>'
+                        '</div>';
 
     GameScreen.prototype = Object.create (Screen.prototype);
     GameScreen.prototype.constructor = GameScreen;
