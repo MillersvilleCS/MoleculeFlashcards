@@ -105,6 +105,8 @@
     min-height: 610px;
     z-index: 4;
     display: none;
+    font-size: 36px;
+    text-align: center;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;

@@ -124,6 +124,8 @@
     };
 
     GameScreen.prototype.allowExit = function ( response ) {
+        $('#finalScore').html('Final Score: ' + response.final_score);
+        $('#rank').html('Rank: #' + response.rank);
         $('#gameCompletedUI').fadeIn (500);
         $('#gameCompletedReturnButton').fadeIn (500);
     };
