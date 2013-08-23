@@ -53,28 +53,44 @@ div.topicDescription {
 
 #mainMenuRight {
     float: right;
+    text-align: center;
+    padding-top: 70px;
+    font-size: 30px;
+}
+
+/* High Scores */
+
+#highScores{
+    white-space: nowrap;
+    height: 200px;
+    width: 266px;
+    font-size: 16px;
+}
+
+#names {
+    padding: 0px;
+    text-align: left;
+    float: left;
+    width: 120px;
+    height: 200px;
+    overflow: hidden;
+}
+
+#scores {
+    padding: 0px;
+    text-align: right;
+    float: right;
+    width: 70px;
+    height: 200px;
+    overflow: hidden;
 }
 
 /*
     Start Button
 */
 
-#mainMenuPlayButton {
-    background-color: #4D4D62;
-    color: #F8F8FE;
-    font-size: 50px;
-    margin-top: 89px;
-    margin-left: 144px;
-    margin-right: 144px;
-    margin-bottom: 34px;
-}
-
-#mainMenuPlayButton:hover {
-    background-color: #53495E;
-}
-
-#mainMenuPlayButton:active {
-    background-color: #EFE1FE;
+.button.startButton {
+    background-color: red;
 }
 
 /*

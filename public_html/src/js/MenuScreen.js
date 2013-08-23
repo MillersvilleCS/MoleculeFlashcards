@@ -12,7 +12,8 @@
                         '<b>$title</b>' + '<br />' +
                         '<div class = \'topicDescription\'>$description</div>' +
                      '</div>';
-    var SCORES_HTML = '$rank $name $score <br />';
+    var NAMES_HTML = '#$rank $name <br />';
+    var SCORES_HTML = '$score <br />';
 
     MenuScreen.prototype = Object.create (Screen.prototype);
     MenuScreen.prototype.constructor = MenuScreen;
@@ -80,20 +81,26 @@
 
     MenuScreen.prototype.changeRightPanel = function ( topic ) {
         $('#timeLimit').html('Time Limit: ' + Timer.getDigitalRep( topic.time_limit / 1000 ) );
-        $('#highScores').html('');
+        $('#names').html('');
+        $('#scores').html('');
         var currScores = topic.high_scores;
         for(var i = 0; i < currScores.length; ++i) {
             var keys = [
                 '$rank',
-                '$name',
-                '$score'
+                '$name'
             ];
             var values = [
                 currScores[i].rank,
-                currScores[i].username,
+                currScores[i].username
+            ];
+            var scoreKey = [
+                '$score'
+            ];
+            var scoreValue = [
                 currScores[i].score
             ];
-            this.insertInfo( keys, values, SCORES_HTML, '#highScores' );
+            this.insertInfo( keys, values, NAMES_HTML, '#names' );
+            this.insertInfo( scoreKey, scoreValue, SCORES_HTML, '#scores' );
         }
         UserData.gameID = topic.id;
         UserData.gameTimeLimit = topic.time_limit;
