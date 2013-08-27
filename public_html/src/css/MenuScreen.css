@@ -31,8 +31,8 @@
 
 #topicList {
     font-size: 22px;
-    max-height: 350px;
-    min-height: 350px;
+    max-height: 400px;
+    min-height: 400px;
     height: inherit;
     overflow: auto;
     margin: 25px;
@@ -90,11 +90,11 @@ div.topicDescription {
     Start Button
 */
 
-.button.startButton {
+.button.greenButton {
     background-color: #6BC026;
 }
 
-.button.startButton:hover {
+.button.greenButton:hover {
     background-color: #53951D;
 }
 
@@ -103,21 +103,15 @@ div.topicDescription {
     Tutorial Button
 */
 
-#mainMenuTutorialButton {
-    background-color: #4D4D62;
-    color: #F8F8FE;
-    font-size: 50px;
-    margin-top: 55px;
-    margin-left: 89px;
-    margin-right: 89px;
+.button.blueButtonMenu {
+    background-color: #002AA8;
+    font-size: 26px;
+    width: 170px;
+    margin: auto;
 }
 
-#mainMenuTutorialButton:hover {
-    background-color: #53495E;
-}
-
-#mainMenuTutorialButton:active {
-    background-color: #EFE1FE;
+.button.blueButtonMenu:hover {
+    background-color: #001D75;
 }
 
 /*

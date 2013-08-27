@@ -56,11 +56,11 @@ div.button {
 }
 
 div.button:hover {
-    background-color: #CCCCCC;
+    background-color: #363645;
 }
 
 div.button:active {
-    background-color: #CCCCCC;
+    background-color: #363645;
 }
 
 .screen {
