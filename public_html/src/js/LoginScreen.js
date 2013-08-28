@@ -48,7 +48,7 @@
 
     LoginScreen.prototype.loginFinish = function ( response ) {
         if( response.success === 'false' ) {
-            $('#loginMessage').html('Invalid username/password!');
+            // $('#loginMessage').html('Invalid username/password!'); - TODO: Remove?
             $('#loginButton, #loginMessage').removeClass('hide');
         } else {
             $('#loginMessage').addClass('hide');
@@ -81,6 +81,19 @@
 
     };
 
+    LoginScreen.prototype.registerComplete = function ( response ) {
+        console.log(response);
+        if( response.success == 'false' ) {
+            $('#registerFail').html( response.error );
+            $('#registerFail, #registerButton').removeClass('hide');
+        } else {
+            $('#registerMessage').removeClass('hide');
+            $('#registerForm').addClass('hide');
+            this.loginDivShow();
+            this.loginFinish( response );
+        }
+    };
+
     /* Buttons */
 
     function enableButtons(loginScreen) {
@@ -96,7 +109,18 @@
         $('#loginUI [data-logic=\'showLogin\']').on('click', loginScreen.loginDivShow);
 
         $('#loginUI .button[data-logic=\'register\']').on('click', function () {
-            /** TODO: Needs Implementation */
+            $('#registerMismatch').addClass('hide');
+            $('#registerFail').addClass('hide');
+
+            if( $('#passRegister').val() == $('#passRepRegister').val() ) {
+                $('#registerButton').addClass('hide');
+                FCCommunicationManager.register( $('#emailRegister').val(),
+                                                 $('#passRegister').val(), 
+                                                 $('#usernameRegister').val(), 
+                                                 loginScreen.registerComplete.bind(loginScreen) );
+            } else {
+                $('#registerMismatch').removeClass('hide');
+            }
         });
 
         $('#pageHeader [data-logic=\'logout\']').on('click', function () {

@@ -127,7 +127,7 @@
                         </div>
                         <div id = 'registerBox' class = 'slide up inputBox'>
                             <h2>Register</h2>
-                            <form>
+                            <form id = 'registerForm' >
                                 <label>Username:
                                     <input id = 'usernameRegister' type = 'text' name = 'usernameRegister'>
                                 </label>
@@ -144,6 +144,16 @@
                             <div id = 'registerButton' class = 'button blueButton' data-logic = 'register'>
                                 Register!
                             </div>
+                            <span id = 'registerMessage' class = 'good hide'> 
+                                Registration Complete! You may now log in.
+                            </span>
+                            <span id = 'registerMismatch' class = 'error hide'> 
+                                Passwords Do Not Match.
+                            </span>
+                            <span id = 'registerFail' class = 'error hide'> 
+
+                            </span>
+                            <br/>
                             <span>Have an account?</span> 
                             <a class = 'basicLink' data-logic = 'showLogin'>
                                 Login

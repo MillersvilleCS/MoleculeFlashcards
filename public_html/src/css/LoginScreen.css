@@ -42,6 +42,10 @@ span.error {
     color: red;
 }
 
+span.good {
+    color: green;
+}
+
 .button.blueButton {
     background-color: #002AA8;
 }
