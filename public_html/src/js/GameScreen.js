@@ -3,13 +3,6 @@
 
     var GameScreen = function ($element) {
         Screen.apply (this, [$element]);
-        //constants
-        this.QUESTION_MOLECULE = 0;
-        this.QUESTION_TEXT = 1;
-        this.QUESTION_ID = 2;
-        this.QUESTION_ANSWERS = 3;
-        this.WRONG_ANSWER_POINTS = -350;
-        this.RIGHT_ANSWER_POINTS = 1000;
 
         this.gameLength = 120;
         this.timer = new Timer ( );
@@ -29,17 +22,24 @@
         //this.scene.add ( new THREE.Mesh( new THREE.CubeGeometry( 200, 200, 200 ), new THREE.MeshNormalMaterial() ) );
     };
 
+    //constants
     var BUTTON_HTML = '<div ' +
                             'class = \'button\'' +
                             'data-logic = \'$id\'>' +
                             '$text' +
-                        '</div>';
+                      '</div>';
+    var QUESTION_MOLECULE = 0;
+    var QUESTION_TEXT = 1;
+    var QUESTION_ID = 2;
+    var QUESTION_ANSWERS = 3;
+    var WRONG_ANSWER_POINTS = -350;
+    var RIGHT_ANSWER_POINTS = 1000;
 
     GameScreen.prototype = Object.create (Screen.prototype);
     GameScreen.prototype.constructor = GameScreen;
 
     GameScreen.prototype.onUpdate = function (delta) {
-        //update the timer
+        //update the this.timer
         if (this.getSecondsLeft () === 0) {
             this.endGame ( );
         }
@@ -52,10 +52,10 @@
 
         //update the molecule
         if (MouseManager.leftButton.isPressed && this.currentQuestion != undefined) {
-            this.currentQuestion[this.QUESTION_MOLECULE].rotation.z -=
+            this.currentQuestion[QUESTION_MOLECULE].rotation.z -=
                     (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
 
-            this.currentQuestion[this.QUESTION_MOLECULE].rotation.x +=
+            this.currentQuestion[QUESTION_MOLECULE].rotation.x +=
                     (MouseManager.currentY - MouseManager.leftButton.pressedY) / 1000;
         }
     };
@@ -97,7 +97,7 @@
         this.questionIterator = new Iterator (this.questionList);
         if (this.questionIterator.hasNext ()) {
             this.currentQuestion = this.questionIterator.next ( );
-            this.scene.add (this.currentQuestion [this.QUESTION_MOLECULE]);
+            this.scene.add (this.currentQuestion [QUESTION_MOLECULE]);
             this.setButtons ( );
             this.setQuestionText ( );
             this.timer.start ( );
@@ -108,7 +108,7 @@
 
     GameScreen.prototype.endGame = function ( ) {
         disableButtons( );
-        this.scene.remove (this.currentQuestion[ this.QUESTION_MOLECULE ]);
+        this.scene.remove (this.currentQuestion[ QUESTION_MOLECULE ]);
         this.currentQuestion = undefined;
         this.timer.stop ( );
         $('#questionPanel').fadeOut( 300 );
@@ -143,9 +143,9 @@
     GameScreen.prototype.nextQuestion = function ( ) {
         this.userAnswers = new Map ( );
         if (this.questionIterator.hasNext ( )) {
-            this.scene.remove (this.currentQuestion[ this.QUESTION_MOLECULE ]);
+            this.scene.remove (this.currentQuestion[ QUESTION_MOLECULE ]);
             this.currentQuestion = this.questionIterator.next ( );
-            this.scene.add (this.currentQuestion[ this.QUESTION_MOLECULE ]);
+            this.scene.add (this.currentQuestion[ QUESTION_MOLECULE ]);
             this.setQuestionText( );
             this.setButtons( );
         } else {
@@ -155,22 +155,22 @@
 
     GameScreen.prototype.setButtons = function ( ) {
         $('#gameButtons').html('');
-        for(var i = 0; i < this.currentQuestion[this.QUESTION_ANSWERS].length; ++i) {
+        for(var i = 0; i < this.currentQuestion[QUESTION_ANSWERS].length; ++i) {
             var keys = [
                 '$id',
                 '$text'
             ];
             var values = [
-                this.currentQuestion[this.QUESTION_ANSWERS][i].id,
-                this.currentQuestion[this.QUESTION_ANSWERS][i].text
+                this.currentQuestion[QUESTION_ANSWERS][i].id,
+                this.currentQuestion[QUESTION_ANSWERS][i].text
             ];
             this.insertInfo( keys, values, BUTTON_HTML, '#gameButtons' );
         }
     };
 
     GameScreen.prototype.setQuestionText = function ( ) {
-        if (this.currentQuestion[this.QUESTION_TEXT] != '') {
-            $('#questionPanel').html(this.currentQuestion[this.QUESTION_TEXT]);
+        if (this.currentQuestion[QUESTION_TEXT] != '') {
+            $('#questionPanel').html(this.currentQuestion[QUESTION_TEXT]);
             $('#questionPanel').fadeIn( 300 );
         } else {
             $('#questionPanel').html('');
@@ -233,7 +233,7 @@
 
     GameScreen.prototype.answerQuestion = function ( data ) {
         if ( data.correct == 'true' ) {
-            this.scoreManager.correct (this.RIGHT_ANSWER_POINTS);
+            this.scoreManager.correct (RIGHT_ANSWER_POINTS);
             $ ('#scoreChange').html (this.scoreManager.text ());
             $ ('#scoreChange').css ('color', 'green');
             //Must use .animate, because .fadeIn/.fadeOut set display: none
@@ -247,7 +247,7 @@
             500);
             this.nextQuestion ();
         } else {
-            this.scoreManager.incorrect (this.WRONG_ANSWER_POINTS);
+            this.scoreManager.incorrect (WRONG_ANSWER_POINTS);
             $ ('#scoreChange').html (this.scoreManager.text ( ));
             $ ('#scoreChange').css ('color', 'red');
             $ ('#scoreChange').animate ({
@@ -265,7 +265,7 @@
         FCCommunicationManager.submitFlashcardAnswer(
                                     UserData.auth,
                                     this.gameData.game_session_id,
-                                    this.currentQuestion[this.QUESTION_ID],
+                                    this.currentQuestion[QUESTION_ID],
                                     userAnswer,
                                     this.timer.getElapsedMs(),
                                     this.answerQuestion.bind(this) );
