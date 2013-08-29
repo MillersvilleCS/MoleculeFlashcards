@@ -1,22 +1,23 @@
-Iterator = function (iterable) {
+(function (window) {
     'use strict';
-    this.data = iterable;
-    this.index = -1;
-};
+    
+    var Iterator = function (iterable) {
+        this.data = iterable;
+        this.index = -1;
+    };
 
-Iterator.prototype = {
-    constructor: Iterator,
-    hasNext: function ( ) {
-        'use strict';
-        return this.index < this.data.length - 1;
-    },
-    current: function ( ) {
-        'use strict';
-        return this.data [ this.index ];
-    },
-    next: function ( ) {
-        'use strict';
-        ++this.index;
-        return this.current ( );
-    }
-};
+    Iterator.prototype = {
+        constructor: Iterator,
+        hasNext: function ( ) {
+            return this.index < this.data.length - 1;
+        },
+        current: function ( ) {
+            return this.data [ this.index ];
+        },
+        next: function ( ) {
+            ++this.index;
+            return this.current ( );
+        }
+    };
+    window.Iterator = Iterator;
+}) (window);

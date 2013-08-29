@@ -182,8 +182,8 @@
             var z = parseFloat (line.substr (20, 10));
             var e = trim (line.substr (30, 2)).toLowerCase ();
 
-            atoms.push ([x, y, z, PDBLoader.atomColors[e],
-                PDBLoader.atomRadii[e], capitalize (e)]);
+            atoms.push ([x, y, z, atomColors[e],
+                atomRadii[e], capitalize (e)]);
         }
 
         for (i = 0; i < bondCount; i++) {
@@ -253,8 +253,8 @@
                             .toLowerCase ();
 
                 //add the element
-                atoms.push ([x, y, z, PDBLoader.atomColors[e],
-                    PDBLoader.atomRadii[e], capitalize (e)]);
+                atoms.push ([x, y, z, atomColors[e],
+                    atomRadii[e], capitalize (e)]);
 
                 //keep track of how many of this element were found
                 if (histogram[e] === undefined)

@@ -95,15 +95,7 @@
 
         this.gameLength = UserData.gameTimeLimit / 1000;
         this.questionIterator = new Iterator (this.questionList);
-        if (this.questionIterator.hasNext ()) {
-            this.currentQuestion = this.questionIterator.next ( );
-            this.scene.add (this.currentQuestion [QUESTION_MOLECULE]);
-            this.setButtons ( );
-            this.setQuestionText ( );
-            this.timer.start ( );
-        } else {
-            this.endGame ();
-        }
+        this.nextQuestion ( );
     };
 
     GameScreen.prototype.endGame = function ( ) {
@@ -141,40 +133,38 @@
     };
 
     GameScreen.prototype.nextQuestion = function ( ) {
+        function setQuestionText ( ) {
+            if (this.currentQuestion[QUESTION_TEXT] !== '') {
+                $('#questionPanel').html(this.currentQuestion[QUESTION_TEXT]);
+                $('#questionPanel').fadeIn( 300 );
+            } else {
+                $('#questionPanel').html('');
+                $('#questionPanel').fadeOut( 300 );
+            }
+        };
+        
+        function setButtons ( ) {
+            $('#gameButtons').html('');
+            for(var i = 0; i < this.currentQuestion[QUESTION_ANSWERS].length; ++i) {
+                var keys = ['$id', '$text'];
+                var values = [
+                    this.currentQuestion[QUESTION_ANSWERS][i].id,
+                    this.currentQuestion[QUESTION_ANSWERS][i].text
+                ];
+                this.insertInfo( keys, values, BUTTON_HTML, '#gameButtons' );
+            }
+        };
+        
         this.userAnswers = new Map ( );
         if (this.questionIterator.hasNext ( )) {
-            this.scene.remove (this.currentQuestion[ QUESTION_MOLECULE ]);
+            if (this.questionIterator.index !== -1)
+                this.scene.remove (this.currentQuestion[ QUESTION_MOLECULE ]);
             this.currentQuestion = this.questionIterator.next ( );
             this.scene.add (this.currentQuestion[ QUESTION_MOLECULE ]);
-            this.setQuestionText( );
-            this.setButtons( );
+            setQuestionText( );
+            setButtons( );
         } else {
             this.endGame ( );
-        }
-    };
-
-    GameScreen.prototype.setButtons = function ( ) {
-        $('#gameButtons').html('');
-        for(var i = 0; i < this.currentQuestion[QUESTION_ANSWERS].length; ++i) {
-            var keys = [
-                '$id',
-                '$text'
-            ];
-            var values = [
-                this.currentQuestion[QUESTION_ANSWERS][i].id,
-                this.currentQuestion[QUESTION_ANSWERS][i].text
-            ];
-            this.insertInfo( keys, values, BUTTON_HTML, '#gameButtons' );
-        }
-    };
-
-    GameScreen.prototype.setQuestionText = function ( ) {
-        if (this.currentQuestion[QUESTION_TEXT] != '') {
-            $('#questionPanel').html(this.currentQuestion[QUESTION_TEXT]);
-            $('#questionPanel').fadeIn( 300 );
-        } else {
-            $('#questionPanel').html('');
-            $('#questionPanel').fadeOut( 300 );
         }
     };
 
@@ -232,7 +222,7 @@
     };
 
     GameScreen.prototype.answerQuestion = function ( data ) {
-        if ( data.correct == 'true' ) {
+        if ( data.correct === 'true' ) {
             this.scoreManager.correct (RIGHT_ANSWER_POINTS);
             $ ('#scoreChange').html (this.scoreManager.text ());
             $ ('#scoreChange').css ('color', 'green');
