@@ -69,7 +69,7 @@ div.button:active {
     border: 2px solid #010120;
     background-color: #CCCCCC;
     position: absolute;
-    display: none;
+    display: block;
 }
 
 /* Text and Headings and Links */
@@ -126,10 +126,7 @@ a.headerLinks:hover {
 
 .fade {
     opacity: 0;
-    -webkit-transition: opacity 0.5s linear;/* TODO: Remove? all modern browsers should support 'transition' if they support GL */
-       -moz-transition: opacity 0.5s linear;
-         -o-transition: opacity 0.5s linear;
-            transition: opacity 0.5s linear;
+    transition: opacity 0.5s linear;
 }
 
 .fade.in {
@@ -153,7 +150,7 @@ a.headerLinks:hover {
 }
 
 .active {
-    display: block;
+    z-index: 1;
 }
 
 .hide {

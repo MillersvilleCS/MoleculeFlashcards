@@ -28,13 +28,13 @@
 
     MenuScreen.prototype.onLeave = function ( ) {
         disableButtons ( );
-        $('#mainMenuUI').fadeOut (500);
+        $('#mainMenuUI').removeClass('active in');
     };
 
     MenuScreen.prototype.onResume = function ( ) {
         enableButtons(this);
-        $('#gameUI').fadeIn (500);
-        $('#mainMenuUI').fadeIn (500);
+        //$('#gameUI').fadeIn (500); /* TODO: Is this still needed? */
+        $('#mainMenuUI').addClass ('active in');
         FCCommunicationManager.availableGames( UserData.auth, this.showAvailableTopics.bind( this ) );
     };
 
@@ -117,14 +117,10 @@
         });
 
         $('#mainMenuUI .button[data-logic=\'scores\']').on('click', function () {
-//            var screenChangeEvent = jQuery.Event('screenChange');
-//            screenChangeEvent.screenID = 'score';
             $ (this).trigger(new ScreenChangeEvent('score'));
         });
 
         $('#mainMenuUI .button[data-logic=\'start\']').on('click', function () {
-//            var screenChangeEvent = jQuery.Event('screenChange');
-//            screenChangeEvent.screenID = 'game';
             $ (this).trigger(new ScreenChangeEvent('game'));
         });
 

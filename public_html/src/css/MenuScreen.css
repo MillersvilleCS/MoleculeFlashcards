@@ -1,19 +1,9 @@
 #mainMenuUI {
-    position: absolute;
-    min-width: 800px;
-    min-height: 600px;
-    max-width: 800px;
-    max-height: 600px;
-    z-index: 4;
     background-color: #CCCCCC;
-    border: 2px;
-    border-style: solid;
-    border-color: #010120;
-    display: none;
-    user-select: none;
-    -moz-user-select: none;
+    /*user-select: none;*/ /* Note: If this ever gets spec, you can uncomment this */
     -webkit-user-select: none;
-    -ms-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
 }
 
 #mainMenuLeft {
