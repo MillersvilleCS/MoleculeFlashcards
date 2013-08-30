@@ -66,7 +66,7 @@
         disableReturnButton( );
         $ ('#gameButtons').html(this.defaultHTML);
         $ ('#gameCompletedUI').fadeOut (500);
-        $ ('#rightPanel').fadeOut (500);
+        $('#rightPanel').removeClass('in');
         $ ('#gameCompletedReturnButton').fadeOut (500);
         $ ('#time').css ('color', '#F8F8FE');
         $ ('#time').html ('2:00');
@@ -77,7 +77,7 @@
 
     GameScreen.prototype.onResume = function ( ) {
         $ ('#loadingUI').fadeIn (500);
-        $ ('#rightPanel').fadeIn (500);
+        $('#rightPanel').addClass('in');
 
         this.timer.reset ( );
         this.questionList = [];
