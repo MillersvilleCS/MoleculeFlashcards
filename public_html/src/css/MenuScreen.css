@@ -93,15 +93,3 @@ div.topicDescription {
 .button.blueButtonMenu:hover {
     background-color: #001D75;
 }
-
-/*
-    Tutorial UI - TODO Remove?
-*/
-
-#tutorialUI {
-    width: 500px;
-    display: none;
-    padding: 25px;
-    margin: 0px;
-    font-size: 28px;
-}

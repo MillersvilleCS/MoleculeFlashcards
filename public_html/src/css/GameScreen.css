@@ -110,16 +110,20 @@
     display: none;
     font-size: 36px;
     text-align: center;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
 }
 
 #gameCompletedReturnButton {
     display: none;
 }
 
-#topicListUI {
+/*
+    Tutorial UI - TODO Remove? Or move to TutorialScreen...make tutorial a screen?
+*/
+
+#tutorialUI {
+    width: 500px;
     display: none;
+    padding: 25px;
+    margin: 0px;
+    font-size: 28px;
 }
