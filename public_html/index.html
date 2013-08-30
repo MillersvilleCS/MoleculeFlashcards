@@ -33,18 +33,18 @@
         <script src='framework/Iterator.js'></script>
 
 
-        <script src="src/js/server/FCCommunicationManager.js"></script>
-        <script src="src/js/Events.js"></script>
-        <script src="src/js/GameScreen.js"></script>
-        <script src="src/js/UserData.js"></script>
-        <script src="src/js/LoginScreen.js"></script>
-        <script src="src/js/MenuScreen.js"></script>
-        <script src="src/js/HighScoreScreen.js"></script>
-        <script src="src/js/TutorialScreen.js"></script>
-        <script src="src/js/ScoreManager.js"></script> 
-        <script src="src/js/MoleculeGame.js"></script>  
-        <script src="src/js/PDBLoader.js"></script> 
-        <script src="src/js/MoleculeGeometryBuilder.js"></script> 
+        <script src='src/js/server/FCCommunicationManager.js'></script>
+        <script src='src/js/Events.js'></script>
+        <script src='src/js/GameScreen.js'></script>
+        <script src='src/js/UserData.js'></script>
+        <script src='src/js/LoginScreen.js'></script>
+        <script src='src/js/MenuScreen.js'></script>
+        <script src='src/js/HighScoreScreen.js'></script>
+        <script src='src/js/TutorialScreen.js'></script>
+        <script src='src/js/ScoreManager.js'></script> 
+        <script src='src/js/MoleculeGame.js'></script>  
+        <script src='src/js/PDBLoader.js'></script> 
+        <script src='src/js/MoleculeGeometryBuilder.js'></script> 
 
         <script>
 
@@ -77,7 +77,7 @@
         </script>
     </head>
     <body>
-        <div id = 'game' class="flashcardsGame">
+        <div id = 'game' class='flashcardsGame'>
             <div id = 'container' 
                  onmousedown='MouseManager.onMouseDown (event);'
                  onmouseup='MouseManager.onMouseUp (event);' 
@@ -162,26 +162,9 @@
                     </div>
                 </div>
 
-                <div id = 'mainMenuUI' class="screen fade">
-                    <!--
-                    <div id = 'options'>
-                        <div id = 'optionsButton'>
-                            ? <br />
-                            Anti-Aliasing <br />
-                            <div id = 'radioButtons'>
-                                ON<input type='radio' name='aaSet' value='ON' checked>
-                                OFF<input type='radio' name='aaSet' value='OFF'> <br />
-                            </div>
-
-                            Quality <br />
-                            <input type='range' min = '0' max = '10' value = '10' step = '1' />
-                        </div>
-                    </div>
-                    -->
+                <div id = 'mainMenuUI' class = 'screen fade'>
                     <div id = 'mainMenuLeft'>
-                        <div id = 'mainMenuTitle'>
-                            <b>Select a Topic!</b>
-                        </div>
+                        <h1 class = 'mainMenuTitle'>Select a Topic!</h1>
                         <div id = 'topicList'>
                             <!-- Topics added dynamically here -->
                         </div>
@@ -291,46 +274,6 @@
                     </div>
 
                 </div>
-                <!--
-                <div id = 'highScoreUI'>
-                    <div id = 'highScoreTitle'>
-                        High Scores!
-                    </div>
-                    <div id = 'highScoreContainer'>
-                        <div id = 'names'>
-                            John <br />
-                            Bobby <br />
-                            Zoltar <br />
-                            Katy <br />
-                            Zeus <br />
-                            God <br />
-                            Zoppetti <br />
-                            HAL 9000 <br />
-                            Billy <br />
-                            Homer Simpson <br />
-                        </div>
-
-                        <div id = 'scores'>
-                            1023874632874327 <br />
-                            9 <br />
-                            8 <br />
-                            7 <br />
-                            6 <br />
-                            5 <br />
-                            4 <br />
-                            3 <br />
-                            2 <br />
-                            1 <br />
-                        </div>
-                    </div>
-                    <div 
-                        class = 'button' 
-                        id = 'highScoreReturnButton' 
-                        data-logic='menu'>
-                        Main Menu
-                    </div>
-                </div>
-                -->
             </div>
         </div>
     </body>

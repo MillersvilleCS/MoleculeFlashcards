@@ -1,31 +1,12 @@
 #mainMenuUI {
     background-color: #CCCCCC;
-    /*user-select: none;*/ /* Note: If this ever gets spec, you can uncomment this */
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-}
-
-#mainMenuLeft {
-    max-width: 534px;
-    min-width: 534px;
-    float: left;
-}
-
-#mainMenuTitle {
-    color: black;
-    font-size: 55px;
-    margin-top: 34px;
-    text-align: center;
-}
-
-#topicList {
     font-size: 22px;
-    max-height: 400px;
-    min-height: 400px;
-    height: inherit;
-    overflow: auto;
-    margin: 25px;
+}
+
+h1.mainMenuTitle {
+    font-size: 55px;
+    margin: 0px;
+    margin-top: 34px;
 }
 
 div.topic {
@@ -42,11 +23,24 @@ div.topicDescription {
     font-size: 15px;
 }
 
+#mainMenuLeft {
+    max-width: 534px;
+    min-width: 534px;
+    float: left;
+}
+
 #mainMenuRight {
     float: right;
     text-align: center;
     padding-top: 70px;
-    font-size: 24px;
+}
+
+#topicList {
+    max-height: 400px;
+    min-height: 400px;
+    height: inherit;
+    overflow: auto;
+    margin: 25px;
 }
 
 /* High Scores */
@@ -56,24 +50,20 @@ div.topicDescription {
     height: 200px;
     width: 266px;
     font-size: 16px;
+    overflow: hidden;
+    padding: 0px;
 }
 
 #names {
-    padding: 0px;
     text-align: left;
     float: left;
-    width: 120px;
-    height: 200px;
-    overflow: hidden;
+    width: 170px;
 }
 
 #scores {
-    padding: 0px;
     text-align: right;
     float: right;
     width: 70px;
-    height: 200px;
-    overflow: hidden;
 }
 
 /*
@@ -105,7 +95,7 @@ div.topicDescription {
 }
 
 /*
-    Tutorial UI
+    Tutorial UI - TODO Remove?
 */
 
 #tutorialUI {
@@ -114,71 +104,4 @@ div.topicDescription {
     padding: 25px;
     margin: 0px;
     font-size: 28px;
-}
-
-/*
-    HighScore Button
-*/
-
-#mainMenuHighScoreButton {
-    background-color: #4D4D62;
-    color: #F8F8FE;
-    font-size: 40px;
-    margin-top: 34px;
-    margin-left: 89px;
-    margin-right: 89px;
-    height: 50px;
-}
-
-#mainMenuHighScoreButton:hover {
-    background-color: #53495E;
-}
-
-#mainMenuHighScoreButton:active {
-    background-color: #EFE1FE;
-}
-
-/*
-    Options pane - TODO: REMOVE?
-*/
-
-#options {
-    position: absolute;
-    float: left;
-    margin: 2px;
-    opacity: 0.95;
-    text-align: center;
-    font-size: 30px;
-    width: 300px;
-    height: 40px;
-}
-
-#optionsButton {
-    width: 35px;
-    height: 35px;
-    overflow: hidden;
-    background-color: white;
-    opacity: 0.2;
-    border: 0px;
-    border-right: 0px;
-    border-bottom: 0px;
-    border-color: black;
-    border-style: solid;
-    transition-property: width, height, opacity, border-right-width, border-bottom-width;
-    transition-duration: 0.5s, 0.5s, 0.5s, 0.5s, 0.5s;
-    transition-delay: 0s, 0s, 0s, 0s, 0s;
-}
-
-#optionsButton:hover {
-    opacity: 1.0;
-    height: 200px;
-    width: 300px;
-    border-right: 2px;
-    border-bottom: 2px;
-    border-color: black;
-    border-style: solid;
-}
-
-#radioButtons {
-    font-size: 14px;
 }

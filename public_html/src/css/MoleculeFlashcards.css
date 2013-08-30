@@ -5,6 +5,10 @@ body {
     padding: 0;
     background-color: #EBFBFF;
     font-family: Tahoma, Geneva, sans-serif;
+    /*user-select: none;*/ /* Note: If this ever gets spec, you can uncomment this */
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
 }
 
 .flashcardsGame canvas {
