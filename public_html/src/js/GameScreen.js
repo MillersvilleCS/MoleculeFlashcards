@@ -54,8 +54,8 @@
             $ ('#time').css ('color', 'red');
         }
 
-        $ ('#time').html (Timer.getDigitalRep (this.getSecondsLeft ( )));
-        $ ('#score').html (this.scoreManager.score);
+        $ ('#time').text (Timer.getDigitalRep (this.getSecondsLeft ( )));
+        $ ('#score').text (this.scoreManager.score);
 
         //update the molecule
         if (MouseManager.leftButton.isPressed && this.currentQuestion !== undefined) {
@@ -78,8 +78,8 @@
         $('#rightPanel').removeClass('in');
         $ ('#gameCompletedReturnButton').fadeOut (500);
         $ ('#time').css ('color', '#F8F8FE');
-        $ ('#time').html ('2:00');
-        $ ('#score').html ('0');
+        $ ('#time').text ('2:00');
+        $ ('#score').text ('0');
 
         this.scoreManager.reset ( );
     };
@@ -119,8 +119,8 @@
 
     GameScreen.prototype.endGame = function ( ) {
         function allowExit ( response ) {
-            $('#finalScore').html('Final Score: ' + response.final_score);
-            $('#rank').html('Rank: #' + response.rank);
+            $('#finalScore').text('Final Score: ' + response.final_score);
+            $('#rank').text('Rank: #' + response.rank);
             $('#gameCompletedUI').fadeIn (500);
             $('#gameCompletedReturnButton').fadeIn (500);
         };
@@ -153,16 +153,16 @@
         
         function setQuestionText ( screen ) {
             if (screen.currentQuestion[QUESTION_TEXT] !== '') {
-                $('#questionPanel').html(screen.currentQuestion[QUESTION_TEXT]);
+                $('#questionPanel').text(screen.currentQuestion[QUESTION_TEXT]);
                 $('#questionPanel').fadeIn( 300 );
             } else {
-                $('#questionPanel').html('');
+                $('#questionPanel').empty();
                 $('#questionPanel').fadeOut( 300 );
             }
         };
         
         function setButtons ( screen ) {
-            $('#gameButtons').html('');
+            $('#gameButtons').empty();
             for(var i = 0; i < screen.currentQuestion[QUESTION_ANSWERS].length; ++i) {
                 var keys = ['$id', '$text'];
                 var values = [
@@ -195,7 +195,7 @@
             for (var i = 0; i < (this.loadingState / 2) % 3; ++i) {
                 loadingString += '.';
             }
-            $('#loadingMessage').html (loadingString);
+            $('#loadingMessage').text (loadingString);
             /* Build Molecule */
             var molecule = MoleculeGeometryBuilder.load (data, 0.25, 5, 1, 0);
             molecule.position = new THREE.Vector3 (-2.5, -1, 0);
@@ -212,7 +212,7 @@
                                              this.createPDB.bind(this) );
         } else {
             enableButtons( this );
-            $ ('#loadingMessage').html ('Ready');
+            $ ('#loadingMessage').text ('Ready');
             $ ('#loadingMessage').css ('padding-left', '0px');
             $ ('#loadingMessage').css ('text-align', 'center');
             $ ('#beginButton').fadeIn (500);
@@ -233,7 +233,7 @@
     GameScreen.prototype.answerQuestion = function ( data ) {
         if ( data.correct === 'true' ) {
             this.scoreManager.correct (RIGHT_ANSWER_POINTS);
-            $ ('#scoreChange').html (this.scoreManager.text ());
+            $ ('#scoreChange').text (this.scoreManager.text ());
             $ ('#scoreChange').css ('color', 'green');
             //Must use .animate, because .fadeIn/.fadeOut set display: none
             $ ('#scoreChange').animate ({
@@ -247,7 +247,7 @@
             this.nextQuestion ();
         } else {
             this.scoreManager.incorrect (WRONG_ANSWER_POINTS);
-            $ ('#scoreChange').html (this.scoreManager.text ( ));
+            $ ('#scoreChange').text (this.scoreManager.text ( ));
             $ ('#scoreChange').css ('color', 'red');
             $ ('#scoreChange').animate ({
                 opacity: 1.0

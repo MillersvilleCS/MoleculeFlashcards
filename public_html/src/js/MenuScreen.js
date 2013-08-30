@@ -53,7 +53,7 @@
     };
 
     MenuScreen.prototype.showAvailableTopics = function ( response ) {
-        $('#topicList').html('');
+        $('#topicList').empty();
         topics = response.available_games;
         UserData.gameID = topics[0].id;
         UserData.gameTimeLimit = topics[0].time_limit;
@@ -80,10 +80,10 @@
     };
 
     MenuScreen.prototype.changeRightPanel = function ( topic ) {
-        $('#timeLimit').html('Time Limit: ' + Timer.getDigitalRep( topic.time_limit / 1000 ) );
-        $('#questionCount').html('Number of Questions: ' + topic.q_count );
-        $('#names').html('');
-        $('#scores').html('');
+        $('#timeLimit').text('Time Limit: ' + Timer.getDigitalRep( topic.time_limit / 1000 ) );
+        $('#questionCount').text('Number of Questions: ' + topic.q_count );
+        $('#names').empty();
+        $('#scores').empty();
         var currScores = topic.high_scores;
         for(var i = 0; i < currScores.length; ++i) {
             var keys = [

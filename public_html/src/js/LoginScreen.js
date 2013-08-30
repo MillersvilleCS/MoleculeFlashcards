@@ -18,7 +18,7 @@
     };
 
     LoginScreen.prototype.onLeave = function ( ) {
-        $('#logoutButton').html( 'Hi, ' + UserData.username + '!' );
+        $('#logoutButton').text( 'Hi, ' + UserData.username + '!' );
         $('#loginUI').removeClass('in active');
         disableButtons( );
     };
@@ -48,7 +48,7 @@
 
     LoginScreen.prototype.loginFinish = function ( response ) {
         if( response.success === 'false' ) {
-            // $('#loginMessage').html('Invalid username/password!'); - TODO: Remove?
+            // $('#loginMessage').text('Invalid username/password!'); - TODO: Remove?
             $('#loginButton, #loginMessage').removeClass('hide');
         } else {
             $('#loginMessage').addClass('hide');
@@ -84,7 +84,7 @@
     LoginScreen.prototype.registerComplete = function ( response ) {
         console.log(response);
         if( response.success == 'false' ) {
-            $('#registerFail').html( response.error );
+            $('#registerFail').text( response.error );
             $('#registerFail, #registerButton').removeClass('hide');
         } else {
             $('#registerMessage').removeClass('hide');
