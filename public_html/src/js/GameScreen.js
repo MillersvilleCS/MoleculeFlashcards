@@ -3,21 +3,29 @@
 
     var GameScreen = function ($element) {
         Screen.apply (this, [$element]);
-
-        this.gameLength = 120;
+        
         this.timer = new Timer ( );
+        this.userAnswers = new Map ( );
+        
+        this.gameLength = 120;
+       
         this.scoreManager = new ScoreManager ( );
-        this.gameData = undefined;
+        
         this.defaultHTML = $('#gameButtons').html();
-        this.loadingState = -1;
-        this.questionList = [];
+        
+        //variables redfined when the game starts
+        this.loadingState = undefined;
+        this.questionList = undefined;
+        this.gameData = undefined;
         this.currentQuestion = undefined;
         this.questionIterator = undefined;
-        this.userAnswers = new Map ( );
-
+        
+        //add light to the scene
         var pointLight = new THREE.PointLight (0xFFFFFF);
         pointLight.position.set (0, 0, 130);
         this.scene.add (pointLight);
+        
+        this.timer.start ( );
     };
 
     //constants
@@ -76,6 +84,18 @@
     };
 
     GameScreen.prototype.onResume = function ( ) {
+        function receiveQuestionList ( data ) {
+            /* Receives list of questions */
+            this.gameData = data;
+            this.loadingState = -1;
+            /* Assumes at least 1 question */
+            FCCommunicationManager.getMedia(
+                    this.gameData.game_session_id,
+                    FCCommunicationManager.MEDIA_PDB,
+                    this.gameData.questions[this.loadingState + 1].id,
+                    this.createPDB.bind(this) );
+        };
+        
         $ ('#loadingUI').fadeIn (500);
         $ ('#rightPanel').fadeIn (500);
 
@@ -83,7 +103,7 @@
         this.questionList = [];
         this.loadingState = 0;
 
-        FCCommunicationManager.loadFlashcardGame( UserData.auth, UserData.gameID, this.receiveQuestionList.bind(this) );
+        FCCommunicationManager.loadFlashcardGame( UserData.auth, UserData.gameID, receiveQuestionList.bind(this) );
     };
 
     GameScreen.prototype.startGame = function ( ) {
@@ -97,6 +117,12 @@
     };
 
     GameScreen.prototype.endGame = function ( ) {
+        function allowExit ( response ) {
+            $('#finalScore').html('Final Score: ' + response.final_score);
+            $('#rank').html('Rank: #' + response.rank);
+            $('#gameCompletedUI').fadeIn (500);
+            $('#gameCompletedReturnButton').fadeIn (500);
+        };
         disableButtons( );
         this.scene.remove (this.currentQuestion[ QUESTION_MOLECULE ]);
         this.currentQuestion = undefined;
@@ -110,27 +136,20 @@
         FCCommunicationManager.endFlashcardGame( UserData.auth,
                                                  this.gameData.game_session_id,
                                                  this.timer.getElapsedMs(),
-                                                 this.allowExit.bind(this) );
-    };
-
-    GameScreen.prototype.allowExit = function ( response ) {
-        $('#finalScore').html('Final Score: ' + response.final_score);
-        $('#rank').html('Rank: #' + response.rank);
-        $('#gameCompletedUI').fadeIn (500);
-        $('#gameCompletedReturnButton').fadeIn (500);
-    };
-
-    GameScreen.prototype.insertInfo = function ( keys, values, base, location ) {
-        /* Should be it's own class? Also used in MenuScreen */
-        var workingHTML = base;
-        for(var i = 0; i < keys.length; ++i) {
-            workingHTML = workingHTML.replace( keys[i], values[i] );
-        }
-
-        $( location ).append( workingHTML );
+                                                 allowExit.bind(this) );
     };
 
     GameScreen.prototype.nextQuestion = function ( ) {
+        function insertInfo ( keys, values, base, location ) {
+            /* Should be it's own class? Also used in MenuScreen */
+            var workingHTML = base;
+            for(var i = 0; i < keys.length; ++i) {
+                workingHTML = workingHTML.replace( keys[i], values[i] );
+            }
+
+            $( location ).append( workingHTML );
+        };
+        
         function setQuestionText ( screen ) {
             if (screen.currentQuestion[QUESTION_TEXT] !== '') {
                 $('#questionPanel').html(screen.currentQuestion[QUESTION_TEXT]);
@@ -149,7 +168,7 @@
                     screen.currentQuestion[QUESTION_ANSWERS][i].id,
                     screen.currentQuestion[QUESTION_ANSWERS][i].text
                 ];
-                screen.insertInfo( keys, values, BUTTON_HTML, '#gameButtons' );
+                insertInfo( keys, values, BUTTON_HTML, '#gameButtons' );
             }
         };
         
@@ -199,16 +218,7 @@
         }
     };
 
-    GameScreen.prototype.receiveQuestionList = function ( data ) {
-        /* Receives list of questions */
-        this.gameData = data;
-        this.loadingState = -1;
-        /* Assumes at least 1 question */
-        FCCommunicationManager.getMedia( this.gameData.game_session_id,
-                                         FCCommunicationManager.MEDIA_PDB,
-                                         this.gameData.questions[this.loadingState + 1].id,
-                                         this.createPDB.bind(this) );
-    };
+    
 
     GameScreen.prototype.getSecondsLeft = function () {
         var time = this.gameLength - this.timer.getElapsedSec ();
