@@ -6,7 +6,6 @@
 
 #rightPanel {
     position: relative;
-    display:none;
     float: right;
     margin: 2px;
     margin-left: 0px;
@@ -114,16 +113,4 @@
 
 #gameCompletedReturnButton {
     display: none;
-}
-
-/*
-    Tutorial UI - TODO Remove? Or move to TutorialScreen...make tutorial a screen?
-*/
-
-#tutorialUI {
-    width: 500px;
-    display: none;
-    padding: 25px;
-    margin: 0px;
-    font-size: 28px;
 }

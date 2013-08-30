@@ -17,19 +17,29 @@
     };
 
     TutorialScreen.prototype.onLeave = function ( ) {
+        $('#tutorialUI').removeClass('active in');
+        $('#rightPanel').removeClass('in');
+        /*
         $ ('#TutorialScreenUI').fadeOut (500);
         $ ('#rightPanel').fadeOut (300);
         $ ('#tutorialUI').fadeOut (300);
         $ ('#mainMenuUI').delay (300).fadeIn (300);
+        */
 
         disableButtons ( );
     };
 
     TutorialScreen.prototype.onResume = function ( ) {
+        $('#tutorialUI').addClass('active in');
+        setTimeout(function () {
+            $('#rightPanel').addClass('in');
+        }, 2000);
+        /*
         $ ('#TutorialScreenUI').fadeIn (500);
         $ ('#mainMenuUI').fadeOut (200);
         $ ('#tutorialUI').delay (200).fadeIn (300);
         $ ('#rightPanel').delay (2000).fadeIn (300);
+        */
 
         enableButtons(this);
     };
