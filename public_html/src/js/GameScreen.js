@@ -13,7 +13,7 @@
         
         this.defaultHTML = $('#gameButtons').html();
         
-        //variables redfined when the game starts
+        //variables redefined when the game starts
         this.loadingState = undefined;
         this.questionList = undefined;
         this.gameData = undefined;
@@ -49,6 +49,7 @@
         if (this.getSecondsLeft () === 0) {
             this.endGame ( );
         }
+        
         if (this.getSecondsLeft ( ) < 15) {
             $ ('#time').css ('color', 'red');
         }
