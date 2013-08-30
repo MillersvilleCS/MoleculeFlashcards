@@ -18,8 +18,6 @@
         var pointLight = new THREE.PointLight (0xFFFFFF);
         pointLight.position.set (0, 0, 130);
         this.scene.add (pointLight);
-
-        //this.scene.add ( new THREE.Mesh( new THREE.CubeGeometry( 200, 200, 200 ), new THREE.MeshNormalMaterial() ) );
     };
 
     //constants
@@ -51,7 +49,7 @@
         $ ('#score').html (this.scoreManager.score);
 
         //update the molecule
-        if (MouseManager.leftButton.isPressed && this.currentQuestion != undefined) {
+        if (MouseManager.leftButton.isPressed && this.currentQuestion !== undefined) {
             this.currentQuestion[QUESTION_MOLECULE].rotation.z -=
                     (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
 
@@ -133,9 +131,9 @@
     };
 
     GameScreen.prototype.nextQuestion = function ( ) {
-        function setQuestionText ( ) {
-            if (this.currentQuestion[QUESTION_TEXT] !== '') {
-                $('#questionPanel').html(this.currentQuestion[QUESTION_TEXT]);
+        function setQuestionText ( screen ) {
+            if (screen.currentQuestion[QUESTION_TEXT] !== '') {
+                $('#questionPanel').html(screen.currentQuestion[QUESTION_TEXT]);
                 $('#questionPanel').fadeIn( 300 );
             } else {
                 $('#questionPanel').html('');
@@ -143,15 +141,15 @@
             }
         };
         
-        function setButtons ( ) {
+        function setButtons ( screen ) {
             $('#gameButtons').html('');
-            for(var i = 0; i < this.currentQuestion[QUESTION_ANSWERS].length; ++i) {
+            for(var i = 0; i < screen.currentQuestion[QUESTION_ANSWERS].length; ++i) {
                 var keys = ['$id', '$text'];
                 var values = [
-                    this.currentQuestion[QUESTION_ANSWERS][i].id,
-                    this.currentQuestion[QUESTION_ANSWERS][i].text
+                    screen.currentQuestion[QUESTION_ANSWERS][i].id,
+                    screen.currentQuestion[QUESTION_ANSWERS][i].text
                 ];
-                this.insertInfo( keys, values, BUTTON_HTML, '#gameButtons' );
+                screen.insertInfo( keys, values, BUTTON_HTML, '#gameButtons' );
             }
         };
         
@@ -161,8 +159,8 @@
                 this.scene.remove (this.currentQuestion[ QUESTION_MOLECULE ]);
             this.currentQuestion = this.questionIterator.next ( );
             this.scene.add (this.currentQuestion[ QUESTION_MOLECULE ]);
-            setQuestionText( );
-            setButtons( );
+            setQuestionText( this );
+            setButtons( this );
         } else {
             this.endGame ( );
         }
