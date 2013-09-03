@@ -24,16 +24,10 @@
         var pointLight = new THREE.PointLight (0xFFFFFF);
         pointLight.position.set (0, 0, 130);
         this.scene.add (pointLight);
-        
-        this.timer.start ( );
     };
 
     //constants
-    var BUTTON_HTML = '<div ' +
-                            'class = \'button\'' +
-                            'data-logic = \'$id\'>' +
-                            '$text' +
-                      '</div>';
+    var BUTTON_HTML = '<div class="button" data-logic="$id">$text</div>';
     var QUESTION_MOLECULE = 0;
     var QUESTION_TEXT = 1;
     var QUESTION_ID = 2;
@@ -77,8 +71,9 @@
         $ ('#gameCompletedUI').fadeOut (500);
         $('#rightPanel').removeClass('in');
         $ ('#gameCompletedReturnButton').fadeOut (500);
-        $ ('#time').css ('color', '#F8F8FE');
-        $ ('#time').text ('2:00');
+        $ ('#time')
+            .css ('color', '#F8F8FE')
+            .text ('2:00');
         $ ('#score').text ('0');
 
         this.scoreManager.reset ( );
@@ -95,7 +90,7 @@
                     FCCommunicationManager.MEDIA_PDB,
                     this.gameData.questions[this.loadingState + 1].id,
                     this.createPDB.bind(this) );
-        };
+        }
         
         $ ('#loadingUI').fadeIn (500);
         $('#rightPanel').addClass('in');
@@ -114,6 +109,8 @@
 
         this.gameLength = UserData.gameTimeLimit / 1000;
         this.questionIterator = new Iterator (this.questionList);
+
+        this.timer.start();
         this.nextQuestion ( );
     };
 
@@ -123,17 +120,15 @@
             $('#rank').text('Rank: #' + response.rank);
             $('#gameCompletedUI').fadeIn (500);
             $('#gameCompletedReturnButton').fadeIn (500);
-        };
+        }
         disableButtons( );
         this.scene.remove (this.currentQuestion[ QUESTION_MOLECULE ]);
         this.currentQuestion = undefined;
         this.timer.stop ( );
         $('#questionPanel').fadeOut( 300 );
-        $('#scoreChange').stop (true, true);
-        $('#scoreChange').animate ({
-            opacity: 0
-        },
-        300);
+        $('#scoreChange')
+            .stop(true, true)
+            .animate ({ opacity: 0 }, 300);
         FCCommunicationManager.endFlashcardGame( UserData.auth,
                                                  this.gameData.game_session_id,
                                                  this.timer.getElapsedMs(),
@@ -141,46 +136,44 @@
     };
 
     GameScreen.prototype.nextQuestion = function ( ) {
-        function insertInfo ( keys, values, base, location ) {
+        function insertInfo ( replacements, templateString, selector ) {
             /* Should be it's own class? Also used in MenuScreen */
-            var workingHTML = base;
-            for(var i = 0; i < keys.length; ++i) {
-                workingHTML = workingHTML.replace( keys[i], values[i] );
+            var result = templateString;
+            for (var key in replacements) {
+                result = result.replace( key, replacements[key] );
             }
 
-            $( location ).append( workingHTML );
-        };
+            $( selector ).append( result );
+        }
         
-        function setQuestionText ( screen ) {
-            if (screen.currentQuestion[QUESTION_TEXT] !== '') {
-                $('#questionPanel').text(screen.currentQuestion[QUESTION_TEXT]);
-                $('#questionPanel').fadeIn( 300 );
+        function setQuestionText ( questionText ) {
+            if (questionText) {
+                $('#questionPanel')
+                    .text(questionText)
+                    .fadeIn( 300 );
             } else {
-                $('#questionPanel').empty();
-                $('#questionPanel').fadeOut( 300 );
+                $('#questionPanel')
+                    .empty()
+                    .fadeOut( 300 );
             }
-        };
+        }
         
-        function setButtons ( screen ) {
+        function setButtons ( answers ) {
             $('#gameButtons').empty();
-            for(var i = 0; i < screen.currentQuestion[QUESTION_ANSWERS].length; ++i) {
-                var keys = ['$id', '$text'];
-                var values = [
-                    screen.currentQuestion[QUESTION_ANSWERS][i].id,
-                    screen.currentQuestion[QUESTION_ANSWERS][i].text
-                ];
-                insertInfo( keys, values, BUTTON_HTML, '#gameButtons' );
-            }
-        };
+            answers.forEach(function (answer) {
+                insertInfo({'$id': answer.id, '$text': answer.text}, BUTTON_HTML, '#gameButtons');
+            });
+        }
         
         this.userAnswers = new Map ( );
         if (this.questionIterator.hasNext ( )) {
-            if (this.questionIterator.index !== -1)
+            if (this.questionIterator.index !== -1) {
                 this.scene.remove (this.currentQuestion[ QUESTION_MOLECULE ]);
+            }
             this.currentQuestion = this.questionIterator.next ( );
             this.scene.add (this.currentQuestion[ QUESTION_MOLECULE ]);
-            setQuestionText( this );
-            setButtons( this );
+            setQuestionText(this.currentQuestion[ QUESTION_TEXT ] );
+            setButtons(this.currentQuestion[ QUESTION_ANSWERS ]);
         } else {
             this.endGame ( );
         }
@@ -212,62 +205,50 @@
                                              this.createPDB.bind(this) );
         } else {
             enableButtons( this );
-            $ ('#loadingMessage').text ('Ready');
-            $ ('#loadingMessage').css ('padding-left', '0px');
-            $ ('#loadingMessage').css ('text-align', 'center');
+            $ ('#loadingMessage')
+                .text('Ready')
+                .css({
+                    'padding-left': '0px',
+                      'text-align': 'center'
+                });
             $ ('#beginButton').fadeIn (500);
         }
     };
 
-    
-
     GameScreen.prototype.getSecondsLeft = function () {
         var time = this.gameLength - this.timer.getElapsedSec ();
-
-        if (time > 0) {
-            return time;
-        }
-        return 0;
+        return (time > 0) ? time : 0;
     };
 
     GameScreen.prototype.answerQuestion = function ( data ) {
         if ( data.correct === 'true' ) {
             this.scoreManager.correct (RIGHT_ANSWER_POINTS);
-            $ ('#scoreChange').text (this.scoreManager.text ());
-            $ ('#scoreChange').css ('color', 'green');
-            //Must use .animate, because .fadeIn/.fadeOut set display: none
-            $ ('#scoreChange').animate ({
-                opacity: 1.0
-            },
-            300);
-            $ ('#scoreChange').delay (300).animate ({
-                opacity: 0
-            },
-            500);
+            $ ('#scoreChange')
+                .text (this.scoreManager.text ())
+                .css ('color', 'green')
+                //Must use .animate, because .fadeIn/.fadeOut set display: none
+                .animate({ opacity: 1.0 }, 300)
+                .delay(300).animate({ opacity: 0 }, 500);
             this.nextQuestion ();
         } else {
             this.scoreManager.incorrect (WRONG_ANSWER_POINTS);
-            $ ('#scoreChange').text (this.scoreManager.text ( ));
-            $ ('#scoreChange').css ('color', 'red');
-            $ ('#scoreChange').animate ({
-                opacity: 1.0
-            },
-            300);
-            $ ('#scoreChange').delay (300).animate ({
-                opacity: 0
-            },
-            500);
+            $ ('#scoreChange')
+                .text (this.scoreManager.text ( ))
+                .css ('color', 'red')
+                .animate({ opacity: 1.0 }, 300)
+                .delay(300).animate({ opacity: 0 }, 500);
         }
     };
 
     GameScreen.prototype.pollAnswer = function ( userAnswer, currentQuestion ) {
         FCCommunicationManager.submitFlashcardAnswer(
-                                    UserData.auth,
-                                    this.gameData.game_session_id,
-                                    this.currentQuestion[QUESTION_ID],
-                                    userAnswer,
-                                    this.timer.getElapsedMs(),
-                                    this.answerQuestion.bind(this) );
+            UserData.auth,
+            this.gameData.game_session_id,
+            this.currentQuestion[QUESTION_ID],
+            userAnswer,
+            this.timer.getElapsedMs(),
+            this.answerQuestion.bind(this)
+        );
     };
 
     function enableButtons ( gameScreen ) {
