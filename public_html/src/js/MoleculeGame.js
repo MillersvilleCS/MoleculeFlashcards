@@ -1,13 +1,13 @@
-( function (window, $) {
+(function (window, $) {
     'use strict';
 
     var MoleculeGame = function () {
 
-        var gameScreen = new GameScreen ($( '#gameUI, #loadingUI' ));
-        var tutorialScreen = new TutorialScreen ($( '#TutorialScreenUI' ));
-        var menuScreen = new MenuScreen ($('#mainMenuUI'));
-        var scoreScreen = new HighScoreScreen ($('#highScoreUI'));
-        var loginScreen = new LoginScreen ($('#loginUI'));
+        var gameScreen = new GameScreen ($ ('#gameUI, #loadingUI'));
+        var tutorialScreen = new TutorialScreen ($ ('#TutorialScreenUI'));
+        var menuScreen = new MenuScreen ($ ('#mainMenuUI'));
+        var scoreScreen = new HighScoreScreen ($ ('#highScoreUI'));
+        var loginScreen = new LoginScreen ($ ('#loginUI'));
 
         Game.apply (this, [loginScreen]);
 

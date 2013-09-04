@@ -16,16 +16,16 @@ ScoreManager.prototype = {
 
         this.change = addition;
         /*
-        ++this.streak;
-        if (this.streak === 4) {
-            this.multiplier = 2;
-        }
-        if (this.streak === 7) {
-            this.multiplier = 3;
-        }
-
-        this.score += addition * this.multiplier;
-        */
+         ++this.streak;
+         if (this.streak === 4) {
+         this.multiplier = 2;
+         }
+         if (this.streak === 7) {
+         this.multiplier = 3;
+         }
+         
+         this.score += addition * this.multiplier;
+         */
         this.score += addition;
         this.questionTimer.reset ( );
     },

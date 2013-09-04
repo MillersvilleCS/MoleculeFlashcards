@@ -409,5 +409,5 @@
         return model;
     }
     ;
-     window.MoleculeGeometryBuilder = MoleculeGeometryBuilder;
-})(window);
+    window.MoleculeGeometryBuilder = MoleculeGeometryBuilder;
+}) (window);
