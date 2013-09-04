@@ -18,6 +18,7 @@
         this.questionList = undefined;
         this.gameData = undefined;
         this.currentQuestion = undefined;
+        this.currentAnswer = undefined;
         this.questionIterator = undefined;
         
         //add light to the scene
@@ -27,7 +28,7 @@
     };
 
     //constants
-    var BUTTON_HTML = '<div class="button" data-logic="$id">$text</div>';
+    var BUTTON_HTML = '<div id="$refId" class="button" data-logic="$id">$text</div>';
     var QUESTION_MOLECULE = 0;
     var QUESTION_TEXT = 1;
     var QUESTION_ID = 2;
@@ -168,7 +169,7 @@
         function setButtons ( answers ) {
             $('#gameButtons').empty();
             answers.forEach(function (answer) {
-                insertInfo({'$id': answer.id, '$text': answer.text}, BUTTON_HTML, '#gameButtons');
+                insertInfo({'$refId': answer.id, '$id': answer.id, '$text': answer.text}, BUTTON_HTML, '#gameButtons');
             });
         }
         
@@ -238,6 +239,7 @@
                 .delay(300).animate({ opacity: 0 }, 500);
             this.nextQuestion ();
         } else {
+            $('#' + this.currentAnswer).css('background-color', 'red');
             this.scoreManager.incorrect (WRONG_ANSWER_POINTS);
             $ ('#scoreChange')
                 .text (this.scoreManager.text ( ))
@@ -248,6 +250,7 @@
     };
 
     GameScreen.prototype.pollAnswer = function ( userAnswer, currentQuestion ) {
+        this.currentAnswer = userAnswer;
         FCCommunicationManager.submitFlashcardAnswer(
             UserData.auth,
             this.gameData.game_session_id,
