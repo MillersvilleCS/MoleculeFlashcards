@@ -222,22 +222,12 @@
     GameScreen.prototype.answerQuestion = function ( data ) {
         if ( data.correct === 'true' ) {
             this.scoreManager.correct (RIGHT_ANSWER_POINTS);
-            $('#scoreChange')
-                .text (this.scoreManager.text ())
-                .css ('color', 'green')
-                //Must use .animate, because .fadeIn/.fadeOut set display: none
-                .animate({ opacity: 1.0 }, 300)
-                .delay(300).animate({ opacity: 0 }, 500);
             this.nextQuestion ();
         } else {
-            $('#' + this.currentAnswer).addClass('incorrect');
             this.scoreManager.incorrect (WRONG_ANSWER_POINTS);
-            $('#scoreChange')
-                .text (this.scoreManager.text ( ))
-                .css ('color', 'red')
-                .animate({ opacity: 1.0 }, 300)
-                .delay(300).animate({ opacity: 0 }, 500);
+            $('#scoreChange, #' + this.currentAnswer).addClass('incorrect');
         }
+        $('#scoreChange').text(this.scoreManager.text()).addClass('flashInOut')
     };
 
     GameScreen.prototype.pollAnswer = function ( userAnswer, currentQuestion ) {
@@ -268,6 +258,10 @@
         $('#loadingUI .button[data-logic=\'begin\']').on('click', function () {
             $('#loadingUI .button').off('click');
             gameScreen.startGame( );
+        });
+
+        $('#scoreChange').on('animationend webkitAnimationEnd ', function () {
+            $(this).removeClass('flashInOut incorrect');
         });
     }
 

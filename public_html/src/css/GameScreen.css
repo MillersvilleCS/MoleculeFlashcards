@@ -1,7 +1,3 @@
-div.incorrect {
-    background-color: red;
-}
-
 #gameUI {
     margin: 0px;
     text-align: center;
@@ -47,13 +43,15 @@ div.incorrect {
     border-radius: 2px;
 }
 
-#scoreChange {
+.scoreChange {
     padding: 0px;
     margin: 20px;
     margin-bottom: 40px;
     color: green;
     opacity: 0;
-    font-size: 28px;
+}
+.scoreChange.incorrect {
+    color: red;
 }
 
 #time {
@@ -96,4 +94,35 @@ div.incorrect {
     position: absolute;
     font-size: 36px;
     width: 530px;
+}
+
+.button.incorrect {
+    background-color: red !important;
+}
+
+@-moz-keyframes flashInOut {
+    0%   { opacity: 0; }
+    37%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@-webkit-keyframes flashInOut {
+    0%   { opacity: 0; }
+    37%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes flashInOut {
+    0%   { opacity: 0; }
+    37%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.flashInOut {
+    -webkit-animation-name: flashInOut;
+       -moz-animation-name: flashInOut;
+            animation-name: flashInOut;
+    -webkit-animation-duration: 800ms;
+       -moz-animation-duration: 800ms;
+            animation-duration: 800ms;
 }
