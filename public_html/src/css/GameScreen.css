@@ -1,3 +1,7 @@
+div.incorrect {
+    background-color: red;
+}
+
 #gameUI {
     margin: 0px;
     text-align: center;
@@ -31,7 +35,6 @@
     border-style: solid;
     padding-top: 10px;
     margin-top: 518px;
-    display: none;
 }
 
 #timeAndScore {
@@ -69,11 +72,9 @@
     position: absolute;
     min-width: 536px;
     min-height: 610px;
-    display: none;
 }
 
 #beginButton {
-    display: none;
     width: 150px;
     margin: auto;
     margin-top: 50px;
@@ -93,11 +94,6 @@
 
 #gameCompletedUI {
     position: absolute;
-    display: none;
     font-size: 36px;
     width: 530px;
-}
-
-#gameCompletedReturnButton {
-    display: none;
 }

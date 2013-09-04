@@ -46,11 +46,11 @@
         }
         
         if (this.getSecondsLeft ( ) < 15) {
-            $ ('#time').css ('color', 'red');
+            $('#time').css ('color', 'red');
         }
 
-        $ ('#time').text (Timer.getDigitalRep (this.getSecondsLeft ( )));
-        $ ('#score').text (this.scoreManager.score);
+        $('#time').text (Timer.getDigitalRep (this.getSecondsLeft ( )));
+        $('#score').text (this.scoreManager.score);
 
         //update the molecule
         if (MouseManager.leftButton.isPressed && this.currentQuestion !== undefined) {
@@ -69,11 +69,10 @@
     GameScreen.prototype.onLeave = function ( ) {
         disableReturnButton( );
         $('#gameButtons').html(this.defaultHTML);
-        $('#gameCompletedUI').removeClass('active');
-        $('#gameCompletedUI').fadeOut (500);
+        $('#gameCompletedUI').removeClass('in active');
         $('#rightPanel').removeClass('in');
-        $('#questionPanel').removeClass('active');
-        $('#gameCompletedReturnButton').fadeOut (500);
+        $('#questionPanel').removeClass('in active');
+        $('#questionPanel').empty();
         $('#time')
             .css ('color', '#F8F8FE')
             .text ('2:00');
@@ -87,6 +86,7 @@
             /* Receives list of questions */
             this.gameData = data;
             this.loadingState = -1;
+            $('#loadingMessage').text('Loading');
             /* Assumes at least 1 question */
             FCCommunicationManager.getMedia(
                     this.gameData.game_session_id,
@@ -95,8 +95,7 @@
                     this.createPDB.bind(this) );
         }
         
-        $('#loadingUI').fadeIn (500);
-        $('#loadingUI').addClass('active');
+        $('#loadingUI').addClass('in active');
         $('#rightPanel').addClass('in');
         $('#questionPanel').addClass('active');
 
@@ -108,11 +107,8 @@
     };
 
     GameScreen.prototype.startGame = function ( ) {
-        $('#beginButton').fadeOut (500);
-        $('#loadingUI').removeClass('active');
-        $('#loadingUI').css('display', 'none');
-        $('#loadingMessage').text('Loading');
-        $('canvas').fadeIn (500);
+        $('#beginButton').removeClass('in');
+        $('#loadingUI').removeClass('in active');
 
         this.gameLength = UserData.gameTimeLimit / 1000;
         this.questionIterator = new Iterator (this.questionList);
@@ -125,15 +121,12 @@
         function allowExit ( response ) {
             $('#finalScore').text('Final Score: ' + response.final_score);
             $('#rank').text('Rank: #' + response.rank);
-            $('#gameCompletedUI').fadeIn (500);
-            $('#gameCompletedUI').addClass('active');
-            $('#gameCompletedReturnButton').fadeIn (500);
+            $('#gameCompletedUI').addClass('in active');
         }
         disableButtons( );
         this.scene.remove (this.currentQuestion[ QUESTION_MOLECULE ]);
         this.currentQuestion = undefined;
         this.timer.stop ( );
-        $('#questionPanel').fadeOut( 300 );
         $('#scoreChange')
             .stop(true, true)
             .animate ({ opacity: 0 }, 300);
@@ -145,7 +138,6 @@
 
     GameScreen.prototype.nextQuestion = function ( ) {
         function insertInfo ( replacements, templateString, selector ) {
-            /* Should be it's own class? Also used in MenuScreen */
             var result = templateString;
             for (var key in replacements) {
                 result = result.replace( key, replacements[key] );
@@ -156,13 +148,11 @@
         
         function setQuestionText ( questionText ) {
             if (questionText) {
-                $('#questionPanel')
-                    .text(questionText)
-                    .fadeIn( 300 );
+                $('#questionPanel').text(questionText);
+                $('#questionPanel').addClass('in');
             } else {
-                $('#questionPanel')
-                    .empty()
-                    .fadeOut( 300 );
+                $('#questionPanel').empty();
+                $('#questionPanel').removeClass('in');
             }
         }
         
@@ -213,13 +203,13 @@
                                              this.createPDB.bind(this) );
         } else {
             enableButtons( this );
-            $ ('#loadingMessage')
+            $('#loadingMessage')
                 .text('Ready')
                 .css({
                     'padding-left': '0px',
                       'text-align': 'center'
                 });
-            $ ('#beginButton').fadeIn (500);
+            $('#beginButton').addClass('in');
         }
     };
 
@@ -231,7 +221,7 @@
     GameScreen.prototype.answerQuestion = function ( data ) {
         if ( data.correct === 'true' ) {
             this.scoreManager.correct (RIGHT_ANSWER_POINTS);
-            $ ('#scoreChange')
+            $('#scoreChange')
                 .text (this.scoreManager.text ())
                 .css ('color', 'green')
                 //Must use .animate, because .fadeIn/.fadeOut set display: none
@@ -239,9 +229,9 @@
                 .delay(300).animate({ opacity: 0 }, 500);
             this.nextQuestion ();
         } else {
-            $('#' + this.currentAnswer).css('background-color', 'red');
+            $('#' + this.currentAnswer).addClass('incorrect');
             this.scoreManager.incorrect (WRONG_ANSWER_POINTS);
-            $ ('#scoreChange')
+            $('#scoreChange')
                 .text (this.scoreManager.text ( ))
                 .css ('color', 'red')
                 .animate({ opacity: 1.0 }, 300)

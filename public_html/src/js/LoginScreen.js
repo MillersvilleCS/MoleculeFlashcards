@@ -18,8 +18,8 @@
     };
 
     LoginScreen.prototype.onLeave = function ( ) {
-        $ ('#logoutButton').text ('Hi, ' + UserData.username + '!');
-        $ ('#loginUI').removeClass ('in active');
+        $('#logoutButton').text ('Hi, ' + UserData.username + '!');
+        $('#loginUI').removeClass ('in active');
         disableButtons ( );
     };
 
@@ -34,7 +34,7 @@
             this.nextScreen ();
         } else {
             /* stay on this screen */
-            $ ('#loginUI').addClass ('in active');
+            $('#loginUI').addClass ('in active');
         }
     };
 
@@ -49,9 +49,9 @@
     LoginScreen.prototype.loginFinish = function (response) {
         if (response.success === 'false') {
             // $('#loginMessage').text('Invalid username/password!'); - TODO: Remove?
-            $ ('#loginButton, #loginMessage').removeClass ('hide');
+            $('#loginButton, #loginMessage').removeClass ('hide');
         } else {
-            $ ('#loginMessage').addClass ('hide');
+            $('#loginMessage').addClass ('hide');
             CookieManager.setCookie ('username', response.username, 1, '/');
             CookieManager.setCookie ('authenticator', response.auth, 1, '/');
             UserData.username = response.username;
@@ -64,9 +64,9 @@
     LoginScreen.prototype.createDivShow = function ( ) {
 //      $('#loginBox').slideUp (300);
 //      $('#registerBox').delay (300).slideDown (300);
-        $ ('#loginBox').addClass ('up');
+        $('#loginBox').addClass ('up');
         setTimeout (function () {
-            $ ('#registerBox').removeClass ('up');
+            $('#registerBox').removeClass ('up');
         }, 300);
     };
 
@@ -74,9 +74,9 @@
 
 //      $ ('#registerBox').slideUp (300);
 //      $ ('#loginBox').delay (300).slideDown (300);
-        $ ('#registerBox').addClass ('up');
+        $('#registerBox').addClass ('up');
         setTimeout (function () {
-            $ ('#loginBox').removeClass ('up');
+            $('#loginBox').removeClass ('up');
         }, 300);
 
     };
@@ -84,11 +84,11 @@
     LoginScreen.prototype.registerComplete = function (response) {
         console.log (response);
         if (response.success === 'false') {
-            $ ('#registerFail').text (response.error);
-            $ ('#registerFail, #registerButton').removeClass ('hide');
+            $('#registerFail').text (response.error);
+            $('#registerFail, #registerButton').removeClass ('hide');
         } else {
-            $ ('#registerMessage').removeClass ('hide');
-            $ ('#registerForm').addClass ('hide');
+            $('#registerMessage').removeClass ('hide');
+            $('#registerForm').addClass ('hide');
             this.loginDivShow ();
             this.loginFinish (response);
         }
@@ -97,37 +97,37 @@
     /* Buttons */
 
     function enableButtons (loginScreen) {
-        $ ('#loginUI .button[data-logic=\'login\']').on ('click', function () {
-            $ ('#loginButton').addClass ('hide');
-            FCCommunicationManager.login ($ ('#emailLogin')
-                    .val (), $ ('#passLogin').val (),
+        $('#loginUI .button[data-logic=\'login\']').on ('click', function () {
+            $('#loginButton').addClass ('hide');
+            FCCommunicationManager.login ($('#emailLogin')
+                    .val (), $('#passLogin').val (),
                     loginScreen.loginFinish.bind (loginScreen));
             loginScreen.loginStart ();
         });
 
-        $ ('#loginUI [data-logic=\'showCreate\']')
+        $('#loginUI [data-logic=\'showCreate\']')
                 .on ('click', loginScreen.createDivShow);
 
-        $ ('#loginUI [data-logic=\'showLogin\']')
+        $('#loginUI [data-logic=\'showLogin\']')
                 .on ('click', loginScreen.loginDivShow);
 
-        $ ('#loginUI .button[data-logic=\'register\']')
+        $('#loginUI .button[data-logic=\'register\']')
                 .on ('click', function () {
-            $ ('#registerMismatch').addClass ('hide');
-            $ ('#registerFail').addClass ('hide');
+            $('#registerMismatch').addClass ('hide');
+            $('#registerFail').addClass ('hide');
 
-            if ($ ('#passRegister').val () == $ ('#passRepRegister').val ()) {
-                $ ('#registerButton').addClass ('hide');
-                FCCommunicationManager.register ($ ('#emailRegister').val (),
-                        $ ('#passRegister').val (),
-                        $ ('#usernameRegister').val (),
+            if ($('#passRegister').val () == $('#passRepRegister').val ()) {
+                $('#registerButton').addClass ('hide');
+                FCCommunicationManager.register ($('#emailRegister').val (),
+                        $('#passRegister').val (),
+                        $('#usernameRegister').val (),
                         loginScreen.registerComplete.bind (loginScreen));
             } else {
-                $ ('#registerMismatch').removeClass ('hide');
+                $('#registerMismatch').removeClass ('hide');
             }
         });
 
-        $ ('#pageHeader [data-logic=\'logout\']').on ('click', function () {
+        $('#pageHeader [data-logic=\'logout\']').on ('click', function () {
             if (confirm ('Logout from Molecule Flashcards?')) {
                 CookieManager.deleteCookie ('username', '/');
                 CookieManager.deleteCookie ('authenticator', '/');
@@ -138,7 +138,7 @@
     ;
 
     function disableButtons ( ) {
-        $ ('#loginUI .button').off ('click');
+        $('#loginUI .button').off ('click');
     }
 
     window.LoginScreen = LoginScreen;
