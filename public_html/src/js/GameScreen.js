@@ -67,14 +67,16 @@
 
     GameScreen.prototype.onLeave = function ( ) {
         disableReturnButton( );
-        $ ('#gameButtons').html(this.defaultHTML);
-        $ ('#gameCompletedUI').fadeOut (500);
+        $('#gameButtons').html(this.defaultHTML);
+        $('#gameCompletedUI').removeClass('active');
+        $('#gameCompletedUI').fadeOut (500);
         $('#rightPanel').removeClass('in');
-        $ ('#gameCompletedReturnButton').fadeOut (500);
-        $ ('#time')
+        $('#questionPanel').removeClass('active');
+        $('#gameCompletedReturnButton').fadeOut (500);
+        $('#time')
             .css ('color', '#F8F8FE')
             .text ('2:00');
-        $ ('#score').text ('0');
+        $('#score').text ('0');
 
         this.scoreManager.reset ( );
     };
@@ -92,8 +94,10 @@
                     this.createPDB.bind(this) );
         }
         
-        $ ('#loadingUI').fadeIn (500);
+        $('#loadingUI').fadeIn (500);
+        $('#loadingUI').addClass('active');
         $('#rightPanel').addClass('in');
+        $('#questionPanel').addClass('active');
 
         this.timer.reset ( );
         this.questionList = [];
@@ -103,9 +107,11 @@
     };
 
     GameScreen.prototype.startGame = function ( ) {
-        $ ('#beginButton').fadeOut (500);
-        $ ('#loadingUI').fadeOut (1);
-        $ ('canvas').fadeIn (500);
+        $('#beginButton').fadeOut (500);
+        $('#loadingUI').removeClass('active');
+        $('#loadingUI').css('display', 'none');
+        $('#loadingMessage').text('Loading');
+        $('canvas').fadeIn (500);
 
         this.gameLength = UserData.gameTimeLimit / 1000;
         this.questionIterator = new Iterator (this.questionList);
@@ -119,6 +125,7 @@
             $('#finalScore').text('Final Score: ' + response.final_score);
             $('#rank').text('Rank: #' + response.rank);
             $('#gameCompletedUI').fadeIn (500);
+            $('#gameCompletedUI').addClass('active');
             $('#gameCompletedReturnButton').fadeIn (500);
         }
         disableButtons( );

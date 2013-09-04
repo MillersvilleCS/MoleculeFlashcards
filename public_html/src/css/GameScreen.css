@@ -1,46 +1,37 @@
 #gameUI {
-    position: absolute;
-    min-width: 806px;
-    min-height: 600px;
+    margin: 0px;
+    text-align: center;
+    background-color: transparent;
 }
 
 #rightPanel {
     position: relative;
     float: right;
-    margin: 2px;
-    margin-left: 0px;
-    text-align: right;
+    background-color: #CCCCCC;
     font-size: 28px;
     width: 266px;
     height: 600px;
-    background-color: #CCCCCC;
     border: 0px;
     border-left: 2px;
-    border-right: 2px;
     border-color: #010120;
     border-style: solid;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
+    text-align: right;
 }
 
 #questionPanel {
+    position: relative;
     float: left;
     background-color: #CCCCCC;
-    display: none;
+    font-size: 22px;
     width: 532px;
     height: 70px;
-    font-size: 22px;
-    text-align: center;
-    padding-top: 10px;
-    margin-top: 520px;
-    margin-left: 2px;
-    margin-right: 0px;
     border: 0px;
     border-top: 2px;
     border-color: #010120;
     border-style: solid;
+    padding-top: 10px;
+    margin-top: 518px;
+    display: none;
 }
 
 #timeAndScore {
@@ -78,7 +69,6 @@
     position: absolute;
     min-width: 536px;
     min-height: 610px;
-    z-index: 4;
     display: none;
 }
 
@@ -103,12 +93,9 @@
 
 #gameCompletedUI {
     position: absolute;
-    min-width: 536px;
-    min-height: 610px;
-    z-index: 4;
     display: none;
     font-size: 36px;
-    text-align: center;
+    width: 530px;
 }
 
 #gameCompletedReturnButton {
