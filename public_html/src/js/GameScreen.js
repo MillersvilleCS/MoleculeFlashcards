@@ -41,11 +41,11 @@
 
     GameScreen.prototype.onUpdate = function (delta) {
         //update the this.timer
-        if (this.getSecondsLeft () === 0) {
+        if (this.getSecondsLeft () === 0 && this.currentQuestion !== undefined) {
             this.endGame ( );
         }
         
-        if (this.getSecondsLeft ( ) < 15) {
+        if (this.getSecondsLeft ( ) <= 15) {
             $('#time').css ('color', 'red');
         }
 
@@ -119,6 +119,7 @@
 
     GameScreen.prototype.endGame = function ( ) {
         function allowExit ( response ) {
+            console.log(response);
             $('#finalScore').text('Final Score: ' + response.final_score);
             $('#rank').text('Rank: #' + response.rank);
             $('#gameCompletedUI').addClass('in active');
