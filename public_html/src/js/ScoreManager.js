@@ -1,8 +1,8 @@
-ScoreManager = function () {
+ScoreManager = function() {
     'use strict';
     /*@const*/
-    this.questionTimer = new Timer ();
-    this.questionTimer.start ();
+    this.questionTimer = new Timer();
+    this.questionTimer.start();
 };
 
 ScoreManager.prototype = {
@@ -11,7 +11,7 @@ ScoreManager.prototype = {
     streak: 0,
     multiplier: 1,
     change: 0,
-    correct: function (addition) {
+    correct: function(addition) {
         'use strict';
 
         this.change = addition;
@@ -27,9 +27,9 @@ ScoreManager.prototype = {
          this.score += addition * this.multiplier;
          */
         this.score += addition;
-        this.questionTimer.reset ( );
+        this.questionTimer.reset( );
     },
-    incorrect: function (deduction) {
+    incorrect: function(deduction) {
         'use strict';
         this.change = deduction;
         this.score += deduction;
@@ -37,36 +37,36 @@ ScoreManager.prototype = {
         this.streak = 0;
         this.multiplier = 1;
     },
-    reset: function ( ) {
+    reset: function( ) {
         'use strict';
         this.score = 0;
         this.streak = 0;
         this.multiplier = 1;
         this.change = 0;
-        this.questionTimer.reset ( );
+        this.questionTimer.reset( );
     },
-    text: function ( ) {
+    text: function( ) {
         'use strict';
         var response = this.change * this.multiplier;
 
-        if (this.change > 0)
+        if(this.change > 0)
         {
             response = '+' + response;
         }
 
-        if (this.multiplier === 2)
+        if(this.multiplier === 2)
         {
             response += ' x2 COMBO';
         }
-        else if (this.multiplier === 3)
+        else if(this.multiplier === 3)
         {
             response += ' x3 COMBO';
         }
 
         return response;
     },
-    getTimeMSOnQuestion: function ( ) {
+    getTimeMSOnQuestion: function( ) {
         'use strict';
-        return this.questionTimer.getElapsedMs ( );
+        return this.questionTimer.getElapsedMs( );
     }
 };

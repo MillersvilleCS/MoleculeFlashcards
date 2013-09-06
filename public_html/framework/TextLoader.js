@@ -1,16 +1,16 @@
-TextLoader = function ( ) {
+TextLoader = function( ) {
 
 };
 
-TextLoader.loadText = function (url, callback) {
-    var textFile = $.ajax (url)
-        .done (function () {
-            callback (textFile.responseText);
+TextLoader.loadText = function(url, callback) {
+    var textFile = $.ajax(url)
+            .done(function() {
+        callback(textFile.responseText);
     })
-        .fail (function () {
-            callback ('ERROR');
+            .fail(function() {
+        callback('ERROR');
     })
-        .always (function () {
-            //do nothing
+            .always(function() {
+        //do nothing
     });
 };

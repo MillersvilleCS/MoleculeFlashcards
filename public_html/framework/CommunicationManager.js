@@ -1,17 +1,17 @@
-CommunicationManager = function () {
+CommunicationManager = function() {
     'use strict';
 };
 
-CommunicationManager.parse = function (text) {
+CommunicationManager.parse = function(text) {
     'use strict';
     try {
-        return JSON.parse (text);
-    } catch (err) {
-        throw new Exception ('JSON syntax error, invalid server response');
+        return JSON.parse(text);
+    } catch(err) {
+        throw new Exception('JSON syntax error, invalid server response');
     }
 };
 
-CommunicationManager.post = function (requestUrl, requestObject, callback) {
+CommunicationManager.post = function(requestUrl, requestObject, callback) {
     'use strict';
     var response = $.ajax
             ({
@@ -19,23 +19,23 @@ CommunicationManager.post = function (requestUrl, requestObject, callback) {
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'html',
                 type: 'POST',
-                data: JSON.stringify (requestObject),
+                data: JSON.stringify(requestObject),
                 async: true
-            }).done (
-            function () {
-                callback (CommunicationManager.parse (response.responseText));
+            }).done(
+            function() {
+                callback(CommunicationManager.parse(response.responseText));
             }
-    ).fail (
-            function () {
+    ).fail(
+            function() {
                 var response = {
                 };
                 response.success = false;
-                callback (CommunicationManager.parse (response));
+                callback(CommunicationManager.parse(response));
             }
     );
 };
 
-CommunicationManager.get = function (requestUrl, requestObject, callback) {
+CommunicationManager.get = function(requestUrl, requestObject, callback) {
     'use strict';
     var response = $.ajax
             ({
@@ -45,16 +45,16 @@ CommunicationManager.get = function (requestUrl, requestObject, callback) {
                 type: 'GET',
                 data: requestObject,
                 async: true
-            }).done (
-            function () {
-                callback (response.responseText);
+            }).done(
+            function() {
+                callback(response.responseText);
             }
-    ).fail (
-            function () {
+    ).fail(
+            function() {
                 var response = {
                 };
                 response.success = false;
-                callback ('Ajax Failure');
+                callback('Ajax Failure');
             }
     );
 };

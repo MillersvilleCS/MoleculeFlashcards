@@ -1,11 +1,11 @@
-(function (window, $) {
+(function(window, $) {
     'use strict';
 
-    var ScreenChangeEvent = function (screenID) {
-        var event = $.Event ('screenChange');
+    var ScreenChangeEvent = function(screenID) {
+        var event = $.Event('screenChange');
         event.screenID = screenID;
         return event;
     };
 
     window.ScreenChangeEvent = ScreenChangeEvent;
-}) (window, jQuery);
+})(window, jQuery);

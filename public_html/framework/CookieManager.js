@@ -1,43 +1,43 @@
-CookieManager = function () {
+CookieManager = function() {
     'use strict';
 };
 
-CookieManager.getCookie = function (cookieName) {
+CookieManager.getCookie = function(cookieName) {
     'use strict';
     var cookieValue = document.cookie;
-    var cookieStart = cookieValue.indexOf (' ' + cookieName + '=');
-    if (cookieStart === -1) {
-        cookieStart = cookieValue.indexOf (cookieName + '=');
+    var cookieStart = cookieValue.indexOf(' ' + cookieName + '=');
+    if(cookieStart === -1) {
+        cookieStart = cookieValue.indexOf(cookieName + '=');
     }
 
-    if (cookieStart === -1) {
+    if(cookieStart === -1) {
         cookieValue = null;
     }
     else {
-        cookieStart = cookieValue.indexOf ('=', cookieStart) + 1;
-        var cookieEnd = cookieValue.indexOf (';', cookieStart);
-        if (cookieEnd === -1) {
+        cookieStart = cookieValue.indexOf('=', cookieStart) + 1;
+        var cookieEnd = cookieValue.indexOf(';', cookieStart);
+        if(cookieEnd === -1) {
             cookieEnd = cookieValue.length;
         }
-        cookieValue = unescape (cookieValue.substring (cookieStart, cookieEnd));
+        cookieValue = unescape(cookieValue.substring(cookieStart, cookieEnd));
     }
 
     return cookieValue;
 };
 
-CookieManager.setCookie = function (cookieName, cookieValue, cookieExpireDays, path) {
-    var expireDate = new Date ();
+CookieManager.setCookie = function(cookieName, cookieValue, cookieExpireDays, path) {
+    var expireDate = new Date();
 
-    expireDate.setDate (expireDate.getDate () + cookieExpireDays);
+    expireDate.setDate(expireDate.getDate() + cookieExpireDays);
 
-    var cookieValue = escape (cookieValue) + ((path) ? ';path=' + path : '') +
-            ((cookieExpireDays === null) ? '' : '; expires=' + expireDate.toUTCString ());
+    var cookieValue = escape(cookieValue) + ((path) ? ';path=' + path : '') +
+            ((cookieExpireDays === null) ? '' : '; expires=' + expireDate.toUTCString());
 
     document.cookie = cookieName + '=' + cookieValue;
 };
 
-CookieManager.deleteCookie = function (cookieName, path) {
-    if (CookieManager.getCookie (cookieName)) {
+CookieManager.deleteCookie = function(cookieName, path) {
+    if(CookieManager.getCookie(cookieName)) {
         document.cookie = cookieName + '=' + ((path) ? ';path=' + path : '') +
                 ';expires=Thu, 01 Jan 1970 00:00:01 GMT';
     }

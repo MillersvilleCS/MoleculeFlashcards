@@ -1,4 +1,4 @@
-(function (window) {
+(function(window) {
     'use strict';
 
     var atomColors = {
@@ -142,58 +142,58 @@
         'default': 1.5
     };
 
-    function trim (text) {
-        return text.replace (/^\s\s*/, '').replace (/\s\s*$/, '');
+    function trim(text) {
+        return text.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
     }
 
-    function capitalize (text) {
-        return text.charAt (0).toUpperCase () +
-                text.substr (1).toLowerCase ();
+    function capitalize(text) {
+        return text.charAt(0).toUpperCase() +
+                text.substr(1).toLowerCase();
     }
 
-    function hash (s, e) {
-        return 's' + Math.min (s, e) + 'e' + Math.max (s, e);
+    function hash(s, e) {
+        return 's' + Math.min(s, e) + 'e' + Math.max(s, e);
     }
 
-    function parseSDF (str) {
+    function parseSDF(str) {
 
         var atoms = [];
         var bonds = [];
 
-        var lines = str.split ("\n");
-        if (lines.length < 4)
+        var lines = str.split("\n");
+        if(lines.length < 4)
             return;
 
-        var atomCount = parseInt (lines[3].substr (0, 3));
-        if (isNaN (atomCount) || atomCount <= 0)
+        var atomCount = parseInt(lines[3].substr(0, 3));
+        if(isNaN(atomCount) || atomCount <= 0)
             return;
 
-        var bondCount = parseInt (lines[3].substr (3, 3));
-        if (lines.length < 4 + atomCount + bondCount)
+        var bondCount = parseInt(lines[3].substr(3, 3));
+        if(lines.length < 4 + atomCount + bondCount)
             return;
 
         var offset = 4;
 
-        for (var i = 0; i < atomCount; i++) {
+        for(var i = 0; i < atomCount; i++) {
             var line = lines[offset];
             offset++;
-            var x = parseFloat (line.substr (0, 10));
-            var y = parseFloat (line.substr (10, 10));
-            var z = parseFloat (line.substr (20, 10));
-            var e = trim (line.substr (30, 2)).toLowerCase ();
+            var x = parseFloat(line.substr(0, 10));
+            var y = parseFloat(line.substr(10, 10));
+            var z = parseFloat(line.substr(20, 10));
+            var e = trim(line.substr(30, 2)).toLowerCase();
 
-            atoms.push ([x, y, z, atomColors[e],
-                atomRadii[e], capitalize (e)]);
+            atoms.push([x, y, z, atomColors[e],
+                atomRadii[e], capitalize(e)]);
         }
 
-        for (i = 0; i < bondCount; i++) {
+        for(i = 0; i < bondCount; i++) {
             var line = lines[offset];
             offset++;
-            var from = parseInt (line.substr (0, 3));
-            var to = parseInt (line.substr (3, 3));
-            var order = parseInt (line.substr (6, 3));
+            var from = parseInt(line.substr(0, 3));
+            var to = parseInt(line.substr(3, 3));
+            var order = parseInt(line.substr(6, 3));
 
-            bonds.push ([from - 1, to - 1, 1]);
+            bonds.push([from - 1, to - 1, 1]);
         }
 
         return {
@@ -204,16 +204,16 @@
     }
     ;
 
-    function parsePDB (text) {
-        function parseBond (line, satom, start, length) {
+    function parsePDB(text) {
+        function parseBond(line, satom, start, length) {
 
-            var eatom = parseInt (line.substr (start, length));
+            var eatom = parseInt(line.substr(start, length));
 
-            if (eatom) {
-                var h = hash (satom, eatom);
+            if(eatom) {
+                var h = hash(satom, eatom);
 
-                if (bhash[ h ] === undefined) {
-                    bonds.push ([satom - 1, eatom - 1, 1]);
+                if(bhash[ h ] === undefined) {
+                    bonds.push([satom - 1, eatom - 1, 1]);
                     bhash[ h ] = bonds.length - 1;
                 } else {
 
@@ -234,42 +234,42 @@
         var bhash = {
         };
 
-        var lines = text.split ('\n');
+        var lines = text.split('\n');
 
-        for (var i = 0, il = lines.length; i < il; ++i) {
+        for(var i = 0, il = lines.length; i < il; ++i) {
 
-            if (lines[i].substr (0, 4) === 'ATOM' || lines[i].substr (0, 6) === 'HETATM') {
+            if(lines[i].substr(0, 4) === 'ATOM' || lines[i].substr(0, 6) === 'HETATM') {
 
                 //grab position
-                var x = parseFloat (lines[i].substr (30, 7));
-                var y = parseFloat (lines[i].substr (38, 7));
-                var z = parseFloat (lines[i].substr (46, 7));
+                var x = parseFloat(lines[i].substr(30, 7));
+                var y = parseFloat(lines[i].substr(38, 7));
+                var z = parseFloat(lines[i].substr(46, 7));
 
                 //grab element type
-                e = trim (lines[i].substr (76, 2)).toLowerCase ();
+                e = trim(lines[i].substr(76, 2)).toLowerCase();
 
-                if (e === '')
-                    e = trim (lines[i].substr (12, 2))
-                            .toLowerCase ();
+                if(e === '')
+                    e = trim(lines[i].substr(12, 2))
+                            .toLowerCase();
 
                 //add the element
-                atoms.push ([x, y, z, atomColors[e],
-                    atomRadii[e], capitalize (e)]);
+                atoms.push([x, y, z, atomColors[e],
+                    atomRadii[e], capitalize(e)]);
 
                 //keep track of how many of this element were found
-                if (histogram[e] === undefined)
+                if(histogram[e] === undefined)
                     histogram[e] = 1;
                 else
                     histogram[e] += 1;
 
-            } else if (lines[i].substr (0, 6) === 'CONECT') {
+            } else if(lines[i].substr(0, 6) === 'CONECT') {
 
-                var satom = parseInt (lines[i].substr (6, 5));
+                var satom = parseInt(lines[i].substr(6, 5));
 
-                parseBond (lines[i], satom, 11, 5);
-                parseBond (lines[i], satom, 16, 5);
-                parseBond (lines[i], satom, 21, 5);
-                parseBond (lines[i], satom, 26, 5);
+                parseBond(lines[i], satom, 11, 5);
+                parseBond(lines[i], satom, 16, 5);
+                parseBond(lines[i], satom, 21, 5);
+                parseBond(lines[i], satom, 26, 5);
             }
 
         }
@@ -283,7 +283,7 @@
     }
     ;
 
-    var MoleculeGeometryBuilder = function ( ) {
+    var MoleculeGeometryBuilder = function( ) {
 
     };
 
@@ -293,20 +293,20 @@
     //MoleculeGeometryBuilder.ATOMS_CIRCLES = 0;
     MoleculeGeometryBuilder.ATOMS_SPHERES = 1;
 
-    MoleculeGeometryBuilder.load = function (data, atomScale, bondThickness, atomRenderType, bondRenderType) {
+    MoleculeGeometryBuilder.load = function(data, atomScale, bondThickness, atomRenderType, bondRenderType) {
         //var pdbJson = MoleculeGeometryBuilder.pdbloader.parsePDB (data);
         //return MoleculeGeometryBuilder.createModel (pdbJson);
 
-        var pdbJson = parseSDF (data);
-        return createModel (pdbJson, atomScale, bondThickness, atomRenderType, bondRenderType);
+        var pdbJson = parseSDF(data);
+        return createModel(pdbJson, atomScale, bondThickness, atomRenderType, bondRenderType);
     };
 
-    function createModel (json, atomScale, bondThickness, atomRenderType, bondRenderType) {
+    function createModel(json, atomScale, bondThickness, atomRenderType, bondRenderType) {
 
-        function createAtomsAsSpheres (atoms, atomScale, quality, model) {
-            bondInfo = new THREE.Geometry ( );
-            var sphereGeometry = new THREE.SphereGeometry (1, quality, quality);
-            for (var i = 0; i < atoms.length; i++) {
+        function createAtomsAsSpheres(atoms, atomScale, quality, model) {
+            bondInfo = new THREE.Geometry( );
+            var sphereGeometry = new THREE.SphereGeometry(1, quality, quality);
+            for(var i = 0; i < atoms.length; i++) {
 
                 var atom = atoms[i];
 
@@ -314,19 +314,19 @@
                 var x = atom[0];
                 var y = atom[1];
                 var z = atom[2];
-                var position = new THREE.Vector3 (x, y, z);
+                var position = new THREE.Vector3(x, y, z);
 
                 //grab the atom's color
                 var r = atom[3][0] / 255;
                 var g = atom[3][1] / 255;
                 var b = atom[3][2] / 255;
-                var color = new THREE.Color ();
-                color.setRGB (r, g, b);
+                var color = new THREE.Color();
+                color.setRGB(r, g, b);
 
                 //grab the atom's radius
                 var radius = atom[4];
 
-                if (radius === undefined) {
+                if(radius === undefined) {
                     radius = PDBLoader.atomRadii["default"];
                 }
                 radius *= atomScale;
@@ -334,25 +334,25 @@
                 //create the atom
                 var atomMaterial = new THREE.MeshLambertMaterial
                         ({
-                            color: color.getHex ( )
+                            color: color.getHex( )
                         });
 
-                var atomMesh = new THREE.Mesh (sphereGeometry.clone ( ), atomMaterial);
+                var atomMesh = new THREE.Mesh(sphereGeometry.clone( ), atomMaterial);
                 atomMesh.scale.x *= radius;
                 atomMesh.scale.y *= radius;
                 atomMesh.scale.z *= radius;
                 atomMesh.position = position;
-                model.add (atomMesh);
+                model.add(atomMesh);
 
                 //build information needed by bonds
-                bondInfo.vertices.push (position);
-                bondInfo.colors.push (color);
+                bondInfo.vertices.push(position);
+                bondInfo.colors.push(color);
             }
         }
 
-        function createBondsAsLines (bonds, lineWidth, model) {
-            var bondGeometry = new THREE.Geometry ( );
-            for (var i = 0; i < bonds.length; i++) {
+        function createBondsAsLines(bonds, lineWidth, model) {
+            var bondGeometry = new THREE.Geometry( );
+            for(var i = 0; i < bonds.length; i++) {
                 var bond = bonds[ i ];
 
                 var start = bond[ 0 ];
@@ -365,49 +365,49 @@
                 var color1 = bondInfo.colors[ start ];
                 var color2 = bondInfo.colors[ end ];
 
-                bondGeometry.vertices.push (vertex1.clone ());
-                bondGeometry.vertices.push (vertex2.clone ());
+                bondGeometry.vertices.push(vertex1.clone());
+                bondGeometry.vertices.push(vertex2.clone());
 
-                bondGeometry.colors.push (color1.clone ());
-                bondGeometry.colors.push (color2.clone ());
+                bondGeometry.colors.push(color1.clone());
+                bondGeometry.colors.push(color2.clone());
 
             }
 
             //create the lines and add them to the model
-            var lineMaterial = new THREE.LineBasicMaterial ({
+            var lineMaterial = new THREE.LineBasicMaterial({
                 linewidth: lineWidth
             });
             lineMaterial.vertexColors = true;
 
-            var lineMesh = new THREE.Line (bondGeometry, lineMaterial);
+            var lineMesh = new THREE.Line(bondGeometry, lineMaterial);
             lineMesh.type = THREE.LinePieces;
 
-            model.add (lineMesh);
+            model.add(lineMesh);
         }
 
-        var model = new THREE.Object3D ( );
+        var model = new THREE.Object3D( );
         var atoms = json.atoms;
         var bonds = json.bonds;
         var bondInfo = undefined;
 
-        switch (atomRenderType) {
+        switch(atomRenderType) {
             case MoleculeGeometryBuilder.ATOMS_SPHERES:
-                createAtomsAsSpheres (atoms, atomScale, 16, model);
+                createAtomsAsSpheres(atoms, atomScale, 16, model);
                 break;
             default:
-                createAtomsAsSpheres (atoms, atomScale, 16, model);
+                createAtomsAsSpheres(atoms, atomScale, 16, model);
         }
 
-        switch (bondRenderType) {
+        switch(bondRenderType) {
             case MoleculeGeometryBuilder.BONDS_LINES:
-                createBondsAsLines (bonds, bondThickness, model);
+                createBondsAsLines(bonds, bondThickness, model);
                 break;
             default:
-                createBondsAsLines (bonds, bondThickness, model);
+                createBondsAsLines(bonds, bondThickness, model);
         }
 
         return model;
     }
     ;
     window.MoleculeGeometryBuilder = MoleculeGeometryBuilder;
-}) (window);
+})(window);

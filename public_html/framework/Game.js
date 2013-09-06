@@ -3,38 +3,38 @@
  *
  * - Modified.
  */
-var Game = function (screen) {
+var Game = function(screen) {
     'use strict';
-    this.screenMap = new Map ();
+    this.screenMap = new Map();
     this.currentScreen = screen;
 };
 
 Game.prototype = {
     constructor: Game,
-    update: function (delta)
+    update: function(delta)
     {
         'use strict';
-        throw new UnimplementedFunctionException ('update');
+        throw new UnimplementedFunctionException('update');
     },
-    getCurrentScene: function ()
+    getCurrentScene: function()
     {
         'use strict';
         return this.currentScreen.scene;
     },
-    addScreen: function (screenID, screen)
+    addScreen: function(screenID, screen)
     {
         'use strict';
-        this.screenMap.put (screenID, screen);
+        this.screenMap.put(screenID, screen);
     },
-    changeScreens: function (screenID)
+    changeScreens: function(screenID)
     {
         'use strict';
-        if (!this.screenMap.contains (screenID)) {
-            throw new UndefinedReferenceException (screenID);
+        if(!this.screenMap.contains(screenID)) {
+            throw new UndefinedReferenceException(screenID);
         }
 
-        this.currentScreen.onLeave ();
-        this.currentScreen = this.screenMap.get (screenID);
-        this.currentScreen.onResume ();
+        this.currentScreen.onLeave();
+        this.currentScreen = this.screenMap.get(screenID);
+        this.currentScreen.onResume();
     }
 };

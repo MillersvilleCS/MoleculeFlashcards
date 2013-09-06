@@ -1,18 +1,18 @@
-(function (window, $) {
+(function(window, $) {
     'use strict';
 
-    var GameScreen = function ($element) {
-        Screen.apply (this, [$element]);
-        
-        this.timer = new Timer ( );
-        this.userAnswers = new Map ( );
-        
+    var GameScreen = function($element) {
+        Screen.apply(this, [$element]);
+
+        this.timer = new Timer( );
+        this.userAnswers = new Map( );
+
         this.gameLength = 120;
-       
-        this.scoreManager = new ScoreManager ( );
-        
+
+        this.scoreManager = new ScoreManager( );
+
         this.defaultHTML = $('#gameButtons').html();
-        
+
         //variables redefined when the game starts
         this.loadingState = undefined;
         this.questionList = undefined;
@@ -20,11 +20,11 @@
         this.currentQuestion = undefined;
         this.currentAnswer = undefined;
         this.questionIterator = undefined;
-        
+
         //add light to the scene
-        var pointLight = new THREE.PointLight (0xFFFFFF);
-        pointLight.position.set (0, 0, 130);
-        this.scene.add (pointLight);
+        var pointLight = new THREE.PointLight(0xFFFFFF);
+        pointLight.position.set(0, 0, 130);
+        this.scene.add(pointLight);
     };
 
     //constants
@@ -36,24 +36,24 @@
     var WRONG_ANSWER_POINTS = -350;
     var RIGHT_ANSWER_POINTS = 1000;
 
-    GameScreen.prototype = Object.create (Screen.prototype);
+    GameScreen.prototype = Object.create(Screen.prototype);
     GameScreen.prototype.constructor = GameScreen;
 
-    GameScreen.prototype.onUpdate = function (delta) {
+    GameScreen.prototype.onUpdate = function(delta) {
         //update the this.timer
-        if (this.getSecondsLeft () === 0 && this.currentQuestion !== undefined) {
-            this.endGame ( );
-        }
-        
-        if (this.getSecondsLeft ( ) <= 15) {
-            $('#time').css ('color', 'red');
+        if(this.getSecondsLeft() === 0 && this.currentQuestion !== undefined) {
+            this.endGame( );
         }
 
-        $('#time').text (Timer.getDigitalRep (this.getSecondsLeft ( )));
-        $('#score').text (this.scoreManager.score);
+        if(this.getSecondsLeft( ) <= 15) {
+            $('#time').css('color', 'red');
+        }
+
+        $('#time').text(Timer.getDigitalRep(this.getSecondsLeft( )));
+        $('#score').text(this.scoreManager.score);
 
         //update the molecule
-        if (MouseManager.leftButton.isPressed && this.currentQuestion !== undefined) {
+        if(MouseManager.leftButton.isPressed && this.currentQuestion !== undefined) {
             this.currentQuestion[QUESTION_MOLECULE].rotation.z -=
                     (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
 
@@ -62,11 +62,11 @@
         }
     };
 
-    GameScreen.prototype.onPause = function ( ) {
+    GameScreen.prototype.onPause = function( ) {
 
     };
 
-    GameScreen.prototype.onLeave = function ( ) {
+    GameScreen.prototype.onLeave = function( ) {
         disableReturnButton( );
         $('#gameButtons').html(this.defaultHTML);
         $('#gameCompletedUI').removeClass('in active');
@@ -74,15 +74,15 @@
         $('#questionPanel').removeClass('in active');
         $('#questionPanel').empty();
         $('#time')
-            .css ('color', '#F8F8FE')
-            .text ('2:00');
-        $('#score').text ('0');
+                .css('color', '#F8F8FE')
+                .text('2:00');
+        $('#score').text('0');
 
-        this.scoreManager.reset ( );
+        this.scoreManager.reset( );
     };
 
-    GameScreen.prototype.onResume = function ( ) {
-        function receiveQuestionList ( data ) {
+    GameScreen.prototype.onResume = function( ) {
+        function receiveQuestionList(data) {
             /* Receives list of questions */
             this.gameData = data;
             this.loadingState = -1;
@@ -92,63 +92,66 @@
                     this.gameData.game_session_id,
                     FCCommunicationManager.MEDIA_PDB,
                     this.gameData.questions[this.loadingState + 1].id,
-                    this.createPDB.bind(this) );
+                    this.createPDB.bind(this));
         }
-        
+
         $('#loadingUI').addClass('in active');
         $('#rightPanel').addClass('in');
         $('#questionPanel').addClass('active');
 
-        this.timer.reset ( );
+        this.timer.reset( );
         this.questionList = [];
         this.loadingState = 0;
 
-        FCCommunicationManager.loadFlashcardGame( UserData.auth, UserData.gameID, receiveQuestionList.bind(this) );
+        FCCommunicationManager.loadFlashcardGame(UserData.auth, UserData.gameID, receiveQuestionList.bind(this));
     };
 
-    GameScreen.prototype.startGame = function ( ) {
+    GameScreen.prototype.startGame = function( ) {
         $('#beginButton').removeClass('in');
         $('#loadingUI').removeClass('in active');
 
         this.gameLength = UserData.gameTimeLimit / 1000;
-        this.questionIterator = new Iterator (this.questionList);
+        this.questionIterator = new Iterator(this.questionList);
 
         this.timer.start();
-        this.nextQuestion ( );
+        this.nextQuestion( );
     };
 
-    GameScreen.prototype.endGame = function ( ) {
-        function allowExit ( response ) {
+    GameScreen.prototype.endGame = function( ) {
+        function allowExit(response) {
             console.log(response);
             $('#finalScore').text('Final Score: ' + response.final_score);
             $('#rank').text('Rank: #' + response.rank);
             $('#gameCompletedUI').addClass('in active');
         }
         disableButtons( );
-        this.scene.remove (this.currentQuestion[ QUESTION_MOLECULE ]);
+        this.scene.remove(this.currentQuestion[ QUESTION_MOLECULE ]);
         this.currentQuestion = undefined;
-        this.timer.stop ( );
+        this.timer.stop( );
         $('#scoreChange')
-            .stop(true, true)
-            .animate ({ opacity: 0 }, 300);
-        FCCommunicationManager.endFlashcardGame( UserData.auth,
-                                                 this.gameData.game_session_id,
-                                                 this.timer.getElapsedMs(),
-                                                 allowExit.bind(this) );
+                .stop(true, true)
+                .animate({
+            opacity: 0
+        },
+        300);
+        FCCommunicationManager.endFlashcardGame(UserData.auth,
+                this.gameData.game_session_id,
+                this.timer.getElapsedMs(),
+                allowExit.bind(this));
     };
 
-    GameScreen.prototype.nextQuestion = function ( ) {
-        function insertInfo ( replacements, templateString, selector ) {
+    GameScreen.prototype.nextQuestion = function( ) {
+        function insertInfo(replacements, templateString, selector) {
             var result = templateString;
-            for (var key in replacements) {
-                result = result.replace( key, replacements[key] );
+            for(var key in replacements) {
+                result = result.replace(key, replacements[key]);
             }
 
-            $( selector ).append( result );
+            $(selector).append(result);
         }
-        
-        function setQuestionText ( questionText ) {
-            if (questionText) {
+
+        function setQuestionText(questionText) {
+            if(questionText) {
                 $('#questionPanel').text(questionText);
                 $('#questionPanel').addClass('in');
             } else {
@@ -156,123 +159,128 @@
                 $('#questionPanel').removeClass('in');
             }
         }
-        
-        function setButtons ( answers ) {
+
+        function setButtons(answers) {
             $('#gameButtons').empty();
-            answers.forEach(function (answer) {
-                insertInfo({'$refId': answer.id, '$id': answer.id, '$text': answer.text}, BUTTON_HTML, '#gameButtons');
+            answers.forEach(function(answer) {
+                insertInfo({
+                    '$refId': answer.id,
+                    '$id': answer.id,
+                    '$text': answer.text
+                },
+                BUTTON_HTML, '#gameButtons');
             });
         }
-        
-        this.userAnswers = new Map ( );
-        if (this.questionIterator.hasNext ( )) {
-            if (this.questionIterator.index !== -1) {
-                this.scene.remove (this.currentQuestion[ QUESTION_MOLECULE ]);
+
+        this.userAnswers = new Map( );
+        if(this.questionIterator.hasNext( )) {
+            if(this.questionIterator.index !== -1) {
+                this.scene.remove(this.currentQuestion[ QUESTION_MOLECULE ]);
             }
-            this.currentQuestion = this.questionIterator.next ( );
-            this.scene.add (this.currentQuestion[ QUESTION_MOLECULE ]);
-            setQuestionText(this.currentQuestion[ QUESTION_TEXT ] );
+            this.currentQuestion = this.questionIterator.next( );
+            this.scene.add(this.currentQuestion[ QUESTION_MOLECULE ]);
+            setQuestionText(this.currentQuestion[ QUESTION_TEXT ]);
             setButtons(this.currentQuestion[ QUESTION_ANSWERS ]);
         } else {
-            this.endGame ( );
+            this.endGame( );
         }
     };
 
-    GameScreen.prototype.createPDB = function ( data ) {
+    GameScreen.prototype.createPDB = function(data) {
         /* Pulls in PDB's for each question and builds them */
         this.loadingState++;
         if(this.loadingState < this.gameData.questions.length) {
             /* Update Loading Text */
             var loadingString = 'Loading';
-            for (var i = 0; i < (this.loadingState / 2) % 3; ++i) {
+            for(var i = 0; i < (this.loadingState / 2) % 3; ++i) {
                 loadingString += '.';
             }
-            $('#loadingMessage').text (loadingString);
+            $('#loadingMessage').text(loadingString);
             /* Build Molecule */
-            var molecule = MoleculeGeometryBuilder.load (data, 0.25, 5, 1, 0);
-            molecule.position = new THREE.Vector3 (-2.5, -1, 0);
-            molecule.scale = new THREE.Vector3 (0.5, 0.5, 0.5);
+            var molecule = MoleculeGeometryBuilder.load(data, 0.25, 5, 1, 0);
+            molecule.position = new THREE.Vector3(-2.5, -1, 0);
+            molecule.scale = new THREE.Vector3(0.5, 0.5, 0.5);
 
-            this.questionList.push ([ molecule,
-                                      this.gameData.questions[this.loadingState].text,
-                                      this.gameData.questions[this.loadingState].id,
-                                      this.gameData.questions[this.loadingState].answers ]);
+            this.questionList.push([molecule,
+                this.gameData.questions[this.loadingState].text,
+                this.gameData.questions[this.loadingState].id,
+                this.gameData.questions[this.loadingState].answers]);
 
-            FCCommunicationManager.getMedia( this.gameData.game_session_id,
-                                             FCCommunicationManager.MEDIA_PDB,
-                                             this.gameData.questions[this.loadingState].id,
-                                             this.createPDB.bind(this) );
+            FCCommunicationManager.getMedia(this.gameData.game_session_id,
+                    FCCommunicationManager.MEDIA_PDB,
+                    this.gameData.questions[this.loadingState].id,
+                    this.createPDB.bind(this));
         } else {
-            enableButtons( this );
+            enableButtons(this);
             $('#loadingMessage')
-                .text('Ready')
-                .css({
-                    'padding-left': '0px',
-                      'text-align': 'center'
-                });
+                    .text('Ready')
+                    .css({
+                'padding-left': '0px',
+                'text-align': 'center'
+            });
             $('#beginButton').addClass('in');
         }
     };
 
-    GameScreen.prototype.getSecondsLeft = function () {
-        var time = this.gameLength - this.timer.getElapsedSec ();
+    GameScreen.prototype.getSecondsLeft = function() {
+        var time = this.gameLength - this.timer.getElapsedSec();
         return (time > 0) ? time : 0;
     };
 
-    GameScreen.prototype.answerQuestion = function ( data ) {
-        if ( data.correct === 'true' ) {
-            this.scoreManager.correct (RIGHT_ANSWER_POINTS);
-            this.nextQuestion ();
+    GameScreen.prototype.answerQuestion = function(data) {
+        if(data.correct === 'true') {
+            this.scoreManager.correct(RIGHT_ANSWER_POINTS);
+            this.nextQuestion();
         } else {
-            this.scoreManager.incorrect (WRONG_ANSWER_POINTS);
+            this.scoreManager.incorrect(WRONG_ANSWER_POINTS);
             $('#scoreChange, #' + this.currentAnswer).addClass('incorrect');
         }
         $('#scoreChange').text(this.scoreManager.text()).addClass('flashInOut')
     };
 
-    GameScreen.prototype.pollAnswer = function ( userAnswer, currentQuestion ) {
+    GameScreen.prototype.pollAnswer = function(userAnswer, currentQuestion) {
         this.currentAnswer = userAnswer;
         FCCommunicationManager.submitFlashcardAnswer(
-            UserData.auth,
-            this.gameData.game_session_id,
-            this.currentQuestion[QUESTION_ID],
-            userAnswer,
-            this.timer.getElapsedMs(),
-            this.answerQuestion.bind(this)
-        );
+                UserData.auth,
+                this.gameData.game_session_id,
+                this.currentQuestion[QUESTION_ID],
+                userAnswer,
+                this.timer.getElapsedMs(),
+                this.answerQuestion.bind(this)
+                );
     };
 
-    function enableButtons ( gameScreen ) {
-        $('#gameUI .button[data-logic=\'return\']').on('click', function () {
+    function enableButtons(gameScreen) {
+        $('#gameUI .button[data-logic=\'return\']').on('click', function() {
             $(this).trigger(new ScreenChangeEvent('menu'));
         });
 
-        $('#gameButtons').on('click', '.button[data-logic]', function () {
+        $('#gameButtons').on('click', '.button[data-logic]', function() {
             var answer = $(this).data('logic');
-            if( !gameScreen.userAnswers.contains ( answer ) ) {
-                gameScreen.pollAnswer( answer );
-                gameScreen.userAnswers.put( answer );
+            if(!gameScreen.userAnswers.contains(answer)) {
+                gameScreen.pollAnswer(answer);
+                gameScreen.userAnswers.put(answer);
             }
         });
 
-        $('#loadingUI .button[data-logic=\'begin\']').on('click', function () {
+        $('#loadingUI .button[data-logic=\'begin\']').on('click', function() {
             $('#loadingUI .button').off('click');
             gameScreen.startGame( );
         });
 
-        $('#scoreChange').on('animationend webkitAnimationEnd ', function () {
+        $('#scoreChange').on('animationend webkitAnimationEnd ', function() {
             $(this).removeClass('flashInOut incorrect');
         });
     }
 
-    function disableButtons ( ) {
+    function disableButtons( ) {
         $('#gameButtons').off('click');
         $('#loadingUI .button').off('click');
     }
 
-    function disableReturnButton ( ) {
+    function disableReturnButton( ) {
         $('#gameUI .button').off('click');
     }
 
     window.GameScreen = GameScreen;
-}) (window, jQuery);
+})(window, jQuery);

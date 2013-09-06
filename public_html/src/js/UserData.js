@@ -1,6 +1,6 @@
 
-UserData = function () {
-    
+UserData = function() {
+
 };
 
 UserData.username = undefined;
