@@ -2,11 +2,15 @@ CommunicationManager = function() {
     'use strict';
 };
 
+CommunicationManager.lastRequest = {};
+CommunicationManager.retryCount = -1;
+CommunicationManager.errorCallback = undefined;
+
 CommunicationManager.parse = function(text) {
     'use strict';
     try {
         return JSON.parse(text);
-    } catch(err) {
+    } catch( err ) {
         throw new Exception('JSON syntax error, invalid server response');
     }
 };
@@ -23,15 +27,26 @@ CommunicationManager.post = function(requestUrl, requestObject, callback) {
                 async: true
             }).done(
             function() {
-                callback(CommunicationManager.parse(response.responseText));
+                /* 
+                    If you are not logged into the school wifi, the AJAX request will succeed,
+                    but of course you get garbage data (login html) and the parser throws an
+                    error. Catch this error if that occurs, and mark it as a 407 (TODO?)
+                    Error 407 = Proxy Authentication Required
+                */
+                try {
+                    var jData = CommunicationManager.parse( response.responseText );
+                    CommunicationManager.retryCount = -1;
+                    callback( jData );
+                } catch( err ) {
+                    var info = {};
+                    info.status = 407;
+                    CommunicationManager.error(info, 'post', requestUrl, requestObject, callback);
+                }
             }
     ).fail(
-            function() {
-                var response = {
-                };
-                response.success = false;
-                callback(CommunicationManager.parse(response));
-            }
+        function( info ) {
+            CommunicationManager.error(info, 'post', requestUrl, requestObject, callback);
+        }
     );
 };
 
@@ -47,14 +62,34 @@ CommunicationManager.get = function(requestUrl, requestObject, callback) {
                 async: true
             }).done(
             function() {
+                CommunicationManager.retryCount = -1;
                 callback(response.responseText);
             }
     ).fail(
-            function() {
-                var response = {
-                };
-                response.success = false;
-                callback('Ajax Failure');
-            }
+        function( info ) {
+            CommunicationManager.error(info, 'get', requestUrl, requestObject, callback);
+        }
     );
+};
+
+CommunicationManager.error = function( info, type, requestUrl, requestObject, callback ) {
+    CommunicationManager.retryCount++;
+    CommunicationManager.lastRequest = {};
+    CommunicationManager.lastRequest.type = type;
+    CommunicationManager.lastRequest.requestUrl = requestUrl;
+    CommunicationManager.lastRequest.requestObject = requestObject;
+    CommunicationManager.lastRequest.callback = callback;
+
+    if(CommunicationManager.errorCallback != undefined) {
+        CommunicationManager.errorCallback( info );
+    }
+};
+
+CommunicationManager.retry = function( ) {
+    var lastRequest = CommunicationManager.lastRequest;
+    if( lastRequest.type == 'post' ) {
+        CommunicationManager.post( lastRequest.requestUrl, lastRequest.requestObject, lastRequest.callback );
+    } else {
+        CommunicationManager.get( lastRequest.requestUrl, lastRequest.requestObject, lastRequest.callback );
+    }
 };

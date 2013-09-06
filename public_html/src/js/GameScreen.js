@@ -119,7 +119,6 @@
 
     GameScreen.prototype.endGame = function( ) {
         function allowExit(response) {
-            console.log(response);
             $('#finalScore').text('Final Score: ' + response.final_score);
             $('#rank').text('Rank: #' + response.rank);
             $('#gameCompletedUI').addClass('in active');

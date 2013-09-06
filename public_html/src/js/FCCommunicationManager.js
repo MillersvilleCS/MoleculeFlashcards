@@ -96,3 +96,15 @@ FCCommunicationManager.getMedia = function ( gameSessionID, mediaType, questionI
 
     CommunicationManager.get ( FCCommunicationManager.GET_MEDIA_URL, requestObject, callback );
 };
+
+FCCommunicationManager.error = function ( info ) {
+    if(CommunicationManager.retryCount > 0) {
+        $('#retryCount').text('Retry attempts: ' + CommunicationManager.retryCount);
+    } else {
+        $('#retryCount').empty();
+    }
+    $('#errorCode').text(info.status);
+    $('#errorMessage').addClass('in activeTop');
+};
+
+CommunicationManager.errorCallback = FCCommunicationManager.error;

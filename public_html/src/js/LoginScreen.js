@@ -127,6 +127,7 @@
             }
         });
 
+        /* TODO - Move these somewhere else? Both are buttons that can be pushed at any time. */
         $('#pageHeader [data-logic=\'logout\']').on('click', function() {
             if(confirm('Logout from Molecule Flashcards?')) {
                 CookieManager.deleteCookie('username', '/');
@@ -134,8 +135,13 @@
                 window.location.href = '';
             }
         });
-    }
-    ;
+
+        $('#errorMessage [data-logic=\'retry\']').on('click', function() {
+            CommunicationManager.retry();
+            $('#errorMessage').removeClass('in activeTop');
+        });
+
+    };
 
     function disableButtons( ) {
         $('#loginUI .button').off('click');

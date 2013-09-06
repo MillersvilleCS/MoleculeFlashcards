@@ -112,6 +112,12 @@ a.headerLinks:hover {
     text-decoration: none;
 }
 
+p.errorText {
+    font-size: 22px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
 #logoutButton {
     position: absolute;
     width: 150px;
@@ -155,6 +161,10 @@ a.headerLinks:hover {
 
 .active {
     z-index: 1;
+}
+
+.activeTop {
+    z-index: 2;
 }
 
 .hide {

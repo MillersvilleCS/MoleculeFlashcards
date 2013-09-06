@@ -102,6 +102,27 @@
                     </div>
                 </div>
 
+                <div id = 'errorMessage' class = 'screen fade'>
+                    <h1>Oops!</h1>
+                    <p class = 'errorText'>
+                        Looks like an error has occurred! Make sure you are
+                        connected to the internet, including logging in to
+                        the wifi (if necessary).
+                    </p>
+                    <!-- TODO contact who?-->
+                    <p class = 'errorText'>
+                        If this problem persists, contact IT, and let them know
+                        Error <span id = 'errorCode'>404</span> has occurred.
+                    </p>
+                    <p class = 'errorText'>
+                        Press the button below to try again. <span id = 'retryCount'></span>
+                    </p>
+                    <div class = 'button blueButtonMenu'
+                         data-logic = 'retry'>
+                        Retry Connection
+                    </div>
+                </div>
+
                 <div id = 'loginUI' class = 'screen fade'>
                     <h1>Molecule Flashcards!</h1>
                     <div id = 'loginUIContainer' class = 'inputContainer'>
