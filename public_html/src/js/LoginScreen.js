@@ -141,6 +141,18 @@
             $('#errorMessage').removeClass('in activeTop');
         });
 
+        $('#passLogin').keypress( function( e ) {
+            if( e.keyCode == 13 ) {
+                $('#loginButton').trigger('click');
+            }
+        });
+
+        $('#passRepRegister').keypress( function( e ) {
+            if( e.keyCode == 13 ) {
+                $('#registerButton').trigger('click');
+            }
+        });
+
     };
 
     function disableButtons( ) {
