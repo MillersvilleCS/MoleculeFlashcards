@@ -15,11 +15,12 @@
         <link rel = 'stylesheet' type = 'text/css' href = 'src/css/MenuScreen.css'>
         <link rel = 'stylesheet' type = 'text/css' href = 'src/css/TutorialScreen.css'>
         
-        <!-- js files -->
+        <!-- js lib files -->
         <script src='libs/three.js'></script>
         <script src='libs/jQuery.js'></script>
         <script src='libs/md5-min.js'></script>
 
+        <!--js framework files-->
         <script src='framework/Application.js'></script>
         <script src='framework/CommunicationManager.js'></script>
         <script src='framework/CookieManager.js'></script>
@@ -32,7 +33,7 @@
         <script src='framework/Screen.js'></script>
         <script src='framework/Iterator.js'></script>
 
-
+        <!--js Molecule Game files-->
         <script src='src/js/FCCommunicationManager.js'></script>
         <script src='src/js/Events.js'></script>
         <script src='src/js/GameScreen.js'></script>
@@ -46,41 +47,52 @@
         <script src='src/js/MoleculeGeometryBuilder.js'></script> 
 
         <script>
+            $(document).ready(
+                function( ) {
+                    /* Mouse Events */
+                    $('#container').mousedown(
+                        function( event ) {
+                            MouseManager.onMouseDown( event );
+                        }
+                    );
 
-            $ (document).ready (function ( ) {
+                    $('#container').mouseup(
+                        function( event ) {
+                            MouseManager.onMouseUp( event );
+                        }
+                    );
 
-                var WIDTH = 800;
-                var HEIGHT = 600;
-                var VIEW_ANGLE = 45,
-                        ASPECT = WIDTH / HEIGHT,
-                        NEAR = 0.1,
-                        FAR = 10000;
+                    $('#container').mousemove(
+                        function( event ) {
+                            MouseManager.onMouseMove( event );
+                        }
+                    );
+                    /* Initialize */
+                    var WIDTH = 800;
+                    var HEIGHT = 600;
+                    var VIEW_ANGLE = 45,
+                            ASPECT = WIDTH / HEIGHT,
+                            NEAR = 0.1,
+                            FAR = 10000;
 
-                var camera = new THREE.PerspectiveCamera (VIEW_ANGLE,
-                        ASPECT,
-                        NEAR,
-                        FAR);
-                camera.position.y = 7;
-                camera.position.z = 5;
-                camera.position.x = 3;
-                camera.lookAt (new THREE.Vector3 (0, 0, 0));
-                var game = new MoleculeGame ( );
-                var application = new Application (game, camera, 'Game Test', WIDTH, HEIGHT);
-                application.performGameLoop ( );
-
-                /* 
-                 Launch CSS Transition with JavaScript:
-                 http://www.impressivewebs.com/css3-transitions-javascript/ 
-                 */
-            });
+                    var camera = new THREE.PerspectiveCamera(VIEW_ANGLE,
+                            ASPECT,
+                            NEAR,
+                            FAR);
+                    camera.position.y = 7;
+                    camera.position.z = 5;
+                    camera.position.x = 3;
+                    camera.lookAt(new THREE.Vector3 (0, 0, 0));
+                    var game = new MoleculeGame( );
+                    var application = new Application(game, camera, 'Game Test', WIDTH, HEIGHT);
+                    application.performGameLoop( );
+                }
+            );
         </script>
     </head>
     <body>
         <div id = 'game' class='flashcardsGame'>
-            <div id = 'container' 
-                 onmousedown='MouseManager.onMouseDown (event);'
-                 onmouseup='MouseManager.onMouseUp (event);' 
-                 onmousemove='MouseManager.onMouseMove (event);'>
+            <div id = 'container'>
                 <!-- canvas goes here -->
 
                 <div id = 'pageHeader'>
@@ -290,7 +302,6 @@
                             Return
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
