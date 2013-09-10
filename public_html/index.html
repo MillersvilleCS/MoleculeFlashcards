@@ -49,23 +49,17 @@
         <script>
             $(document).ready(function( ) {
                 /* Mouse Events */
-                $('#container').mousedown(
-                    function( event ) {
-                        MouseManager.onMouseDown( event );
-                    }
-                );
+                $('#container').mousedown( function( event ) {
+                    MouseManager.onMouseDown( event );
+                });
 
-                $('#container').mouseup(
-                    function( event ) {
-                        MouseManager.onMouseUp( event );
-                    }
-                );
+                $('#container').mouseup( function( event ) {
+                    MouseManager.onMouseUp( event );
+                });
 
-                $('#container').mousemove(
-                    function( event ) {
-                        MouseManager.onMouseMove( event );
-                    }
-                );
+                $('#container').mousemove( function( event ) {
+                    MouseManager.onMouseMove( event );
+                });
                 /* Initialize */
                 var WIDTH = 800;
                 var HEIGHT = 600;
@@ -94,10 +88,10 @@
                 <!-- canvas goes here -->
 
                 <div id = 'pageHeader'>
-                    <a href = 'http://gcl.cis.udel.edu/mailman/listinfo/exscitech'>
+                    <a href = 'http://gcl.cis.udel.edu/mailman/listinfo/exscitech' target = '_blank'>
                         <img id = 'exscitechLogo' src = 'res/media/exscitech_logo.png'>
                     </a>
-                    <a href = 'http://docking.cis.udel.edu/'>
+                    <a href = 'http://docking.cis.udel.edu/' target = '_blank'>
                         <img id = 'dockingLogo' src = 'res/media/dh_logo.png'>
                     </a>
                     <div id = 'exscitechLinks'>
@@ -294,7 +288,7 @@
                         Select the correct answer from the panel on the right. <br /> <br />
                         Multiple correct answers in a row will grant combo bonuses, while
                         incorrect answers will cost you points, and end combos. <br /> <br />
-                        Answer as many as you can in the given time!
+                        Answer as many questions as you can in the given time!
                         <div class = 'button blueButtonMenu' 
                              data-logic = 'endTutorial'>
                             Return

@@ -108,8 +108,8 @@ a.headerLinks:visited {
 }
 
 a.headerLinks:hover {
-    color: red;
-    text-decoration: none;
+    color: #CCCCCC;
+    text-decoration: underline;
 }
 
 p.errorText {

@@ -43,13 +43,14 @@
     };
 
     LoginScreen.prototype.loginStart = function( ) {
-        /* TODO - Loading Animation? */
+        /* TODO animation? remove? */
     };
 
     LoginScreen.prototype.loginFinish = function(response) {
         if(response.success === 'false') {
             // $('#loginMessage').text('Invalid username/password!'); - TODO: Remove?
             $('#loginButton, #loginMessage').removeClass('hide');
+            $('#passLogin').val('');
         } else {
             $('#loginMessage').addClass('hide');
             CookieManager.setCookie('username', response.username, 1, '/');
