@@ -33,7 +33,6 @@
 
             this.nextScreen();
         } else {
-            /* stay on this screen */
             $('#loginUI').addClass('in active');
         }
     };
@@ -42,13 +41,22 @@
         this.$element.trigger(new ScreenChangeEvent('menu'));
     };
 
-    LoginScreen.prototype.loginStart = function( ) {
-        /* TODO animation? remove? */
+    LoginScreen.prototype.createDivShow = function( ) {
+        $('#loginBox').addClass('up');
+        setTimeout(function() {
+            $('#registerBox').removeClass('up');
+        }, 300);
     };
 
-    LoginScreen.prototype.loginFinish = function(response) {
+    LoginScreen.prototype.loginDivShow = function( ) {
+        $('#registerBox').addClass('up');
+        setTimeout(function() {
+            $('#loginBox').removeClass('up');
+        }, 300);
+    };
+
+    LoginScreen.prototype.loginComplete = function(response) {
         if(response.success === 'false') {
-            // $('#loginMessage').text('Invalid username/password!'); - TODO: Remove?
             $('#loginButton, #loginMessage').removeClass('hide');
             $('#passLogin').val('');
         } else {
@@ -57,29 +65,8 @@
             CookieManager.setCookie('authenticator', response.auth, 1, '/');
             UserData.username = response.username;
             UserData.auth = response.auth;
-            /* Swap Screens */
             this.nextScreen( );
         }
-    };
-
-    LoginScreen.prototype.createDivShow = function( ) {
-//      $('#loginBox').slideUp (300);
-//      $('#registerBox').delay (300).slideDown (300);
-        $('#loginBox').addClass('up');
-        setTimeout(function() {
-            $('#registerBox').removeClass('up');
-        }, 300);
-    };
-
-    LoginScreen.prototype.loginDivShow = function( ) {
-
-//      $ ('#registerBox').slideUp (300);
-//      $ ('#loginBox').delay (300).slideDown (300);
-        $('#registerBox').addClass('up');
-        setTimeout(function() {
-            $('#loginBox').removeClass('up');
-        }, 300);
-
     };
 
     LoginScreen.prototype.registerComplete = function(response) {
@@ -90,19 +77,16 @@
             $('#registerMessage').removeClass('hide');
             $('#registerForm').addClass('hide');
             this.loginDivShow();
-            this.loginFinish(response);
+            this.loginComplete(response);
         }
     };
-
-    /* Buttons */
 
     function enableButtons(loginScreen) {
         $('#loginUI .button[data-logic=\'login\']').on('click', function() {
             $('#loginButton').addClass('hide');
             FCCommunicationManager.login($('#emailLogin')
                     .val(), $('#passLogin').val(),
-                    loginScreen.loginFinish.bind(loginScreen));
-            loginScreen.loginStart();
+                    loginScreen.loginComplete.bind(loginScreen));
         });
 
         $('#loginUI [data-logic=\'showCreate\']')

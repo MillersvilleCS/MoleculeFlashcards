@@ -1,3 +1,5 @@
+/* Main Game UI */
+
 #gameUI {
     margin: 0px;
     text-align: center;
@@ -62,9 +64,7 @@
     float: right;
 }
 
-/*
-    Loading 
-*/
+/* Loading UI */
 
 #loadingUI {
     position: absolute;
@@ -86,19 +86,7 @@
     padding-left: 150px;
 }
 
-/*
-    completed
-*/
-
-#gameCompletedUI {
-    position: absolute;
-    font-size: 36px;
-    width: 530px;
-}
-
-.button.incorrect {
-    background-color: red !important;
-}
+/* Animation for score flash-in-out */
 
 @-moz-keyframes flashInOut {
     0%   { opacity: 0; }
@@ -125,4 +113,16 @@
     -webkit-animation-duration: 800ms;
        -moz-animation-duration: 800ms;
             animation-duration: 800ms;
+}
+
+/* Game Completed UI */
+
+#gameCompletedUI {
+    position: absolute;
+    font-size: 36px;
+    width: 530px;
+}
+
+.button.incorrect {
+    background-color: red !important;
 }

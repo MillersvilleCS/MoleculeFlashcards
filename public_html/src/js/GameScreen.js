@@ -13,7 +13,6 @@
 
         this.defaultHTML = $('#gameButtons').html();
 
-        //variables redefined when the game starts
         this.loadingState = undefined;
         this.questionList = undefined;
         this.gameData = undefined;
@@ -21,13 +20,11 @@
         this.currentAnswer = undefined;
         this.questionIterator = undefined;
 
-        //add light to the scene
         var pointLight = new THREE.PointLight(0xFFFFFF);
         pointLight.position.set(0, 0, 130);
         this.scene.add(pointLight);
     };
 
-    //constants
     var BUTTON_HTML = '<div id="$refId" class="button" data-logic="$id">$text</div>';
     var QUESTION_MOLECULE = 0;
     var QUESTION_TEXT = 1;
@@ -40,7 +37,6 @@
     GameScreen.prototype.constructor = GameScreen;
 
     GameScreen.prototype.onUpdate = function(delta) {
-        //update the this.timer
         if(this.getSecondsLeft() === 0 && this.currentQuestion !== undefined) {
             this.endGame( );
         }
@@ -52,7 +48,6 @@
         $('#time').text(Timer.getDigitalRep(this.getSecondsLeft( )));
         $('#score').text(this.scoreManager.score);
 
-        //update the molecule
         if(MouseManager.leftButton.isPressed && this.currentQuestion !== undefined) {
             this.currentQuestion[QUESTION_MOLECULE].rotation.z -=
                     (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
@@ -86,7 +81,6 @@
 
     GameScreen.prototype.onResume = function( ) {
         function receiveQuestionList(data) {
-            /* Receives list of questions */
             this.gameData = data;
             this.loadingState = -1;
             $('#loadingMessage').text('Loading');
@@ -110,6 +104,11 @@
         FCCommunicationManager.loadFlashcardGame(UserData.auth, UserData.gameID, receiveQuestionList.bind(this));
     };
 
+    GameScreen.prototype.getSecondsLeft = function() {
+        var time = this.gameLength - this.timer.getElapsedSec();
+        return (time > 0) ? time : 0;
+    };
+
     GameScreen.prototype.startGame = function( ) {
         $('#beginButton').removeClass('in');
         $('#loadingUI').removeClass('in active');
@@ -119,74 +118,6 @@
 
         this.timer.start();
         this.nextQuestion( );
-    };
-
-    GameScreen.prototype.endGame = function( ) {
-        function allowExit(response) {
-            $('#finalScore').text('Final Score: ' + response.final_score);
-            $('#rank').text('Rank: #' + response.rank);
-            $('#gameCompletedUI').addClass('in active');
-        }
-        disableButtons( );
-        this.scene.remove(this.currentQuestion[ QUESTION_MOLECULE ]);
-        this.currentQuestion = undefined;
-        this.timer.stop( );
-        $('#scoreChange')
-                .stop(true, true)
-                .animate({
-            opacity: 0
-        },
-        300);
-        FCCommunicationManager.endFlashcardGame(UserData.auth,
-                this.gameData.game_session_id,
-                this.timer.getElapsedMs(),
-                allowExit.bind(this));
-    };
-
-    GameScreen.prototype.nextQuestion = function( ) {
-        function insertInfo(replacements, templateString, selector) {
-            var result = templateString;
-            for(var key in replacements) {
-                result = result.replace(key, replacements[key]);
-            }
-
-            $(selector).append(result);
-        }
-
-        function setQuestionText(questionText) {
-            if(questionText) {
-                $('#questionPanel').text(questionText);
-                $('#questionPanel').addClass('in');
-            } else {
-                $('#questionPanel').empty();
-                $('#questionPanel').removeClass('in');
-            }
-        }
-
-        function setButtons(answers) {
-            $('#gameButtons').empty();
-            answers.forEach(function(answer) {
-                insertInfo({
-                    '$refId': answer.id,
-                    '$id': answer.id,
-                    '$text': answer.text
-                },
-                BUTTON_HTML, '#gameButtons');
-            });
-        }
-
-        this.userAnswers = new Map( );
-        if(this.questionIterator.hasNext( )) {
-            if(this.questionIterator.index !== -1) {
-                this.scene.remove(this.currentQuestion[ QUESTION_MOLECULE ]);
-            }
-            this.currentQuestion = this.questionIterator.next( );
-            this.scene.add(this.currentQuestion[ QUESTION_MOLECULE ]);
-            setQuestionText(this.currentQuestion[ QUESTION_TEXT ]);
-            setButtons(this.currentQuestion[ QUESTION_ANSWERS ]);
-        } else {
-            this.endGame( );
-        }
     };
 
     GameScreen.prototype.createPDB = function(data) {
@@ -247,9 +178,50 @@
         }
     };
 
-    GameScreen.prototype.getSecondsLeft = function() {
-        var time = this.gameLength - this.timer.getElapsedSec();
-        return (time > 0) ? time : 0;
+    GameScreen.prototype.nextQuestion = function( ) {
+        function insertInfo(replacements, templateString, selector) {
+            var result = templateString;
+            for(var key in replacements) {
+                result = result.replace(key, replacements[key]);
+            }
+
+            $(selector).append(result);
+        }
+
+        function setQuestionText(questionText) {
+            if(questionText) {
+                $('#questionPanel').text(questionText);
+                $('#questionPanel').addClass('in');
+            } else {
+                $('#questionPanel').empty();
+                $('#questionPanel').removeClass('in');
+            }
+        }
+
+        function setButtons(answers) {
+            $('#gameButtons').empty();
+            answers.forEach(function(answer) {
+                insertInfo({
+                    '$refId': answer.id,
+                    '$id': answer.id,
+                    '$text': answer.text
+                },
+                BUTTON_HTML, '#gameButtons');
+            });
+        }
+
+        this.userAnswers = new Map( );
+        if(this.questionIterator.hasNext( )) {
+            if(this.questionIterator.index !== -1) {
+                this.scene.remove(this.currentQuestion[ QUESTION_MOLECULE ]);
+            }
+            this.currentQuestion = this.questionIterator.next( );
+            this.scene.add(this.currentQuestion[ QUESTION_MOLECULE ]);
+            setQuestionText(this.currentQuestion[ QUESTION_TEXT ]);
+            setButtons(this.currentQuestion[ QUESTION_ANSWERS ]);
+        } else {
+            this.endGame( );
+        }
     };
 
     GameScreen.prototype.answerQuestion = function(data) {
@@ -277,6 +249,28 @@
                 this.timer.getElapsedMs(),
                 this.answerQuestion.bind(this)
                 );
+    };
+
+    GameScreen.prototype.endGame = function( ) {
+        function allowExit(response) {
+            $('#finalScore').text('Final Score: ' + response.final_score);
+            $('#rank').text('Rank: #' + response.rank);
+            $('#gameCompletedUI').addClass('in active');
+        }
+        disableButtons( );
+        this.scene.remove(this.currentQuestion[ QUESTION_MOLECULE ]);
+        this.currentQuestion = undefined;
+        this.timer.stop( );
+        $('#scoreChange')
+                .stop(true, true)
+                .animate({
+            opacity: 0
+        },
+        300);
+        FCCommunicationManager.endFlashcardGame(UserData.auth,
+                this.gameData.game_session_id,
+                this.timer.getElapsedMs(),
+                allowExit.bind(this));
     };
 
     function enableButtons(gameScreen) {

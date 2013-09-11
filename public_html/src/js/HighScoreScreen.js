@@ -1,3 +1,5 @@
+/* TODO Remove class?! */
+
 (function(window, $) {
     'use strict';
 
@@ -39,6 +41,5 @@
         $('#highScoreUI .button').off('click');
     }
 
-    // export HighScoreScreen
     window.HighScoreScreen = HighScoreScreen;
 })(window, jQuery);

@@ -4,6 +4,7 @@
     var MenuScreen = function($element) {
         Screen.apply(this, [$element]);
     };
+    
     var topics;
     var $lastTopicElement;
 
@@ -33,13 +34,12 @@
 
     MenuScreen.prototype.onResume = function( ) {
         enableButtons(this);
-        //$('#gameUI').fadeIn (500); /* TODO: Is this still needed? */
         $('#mainMenuUI').addClass('active in');
         FCCommunicationManager.availableGames(UserData.auth, this.showAvailableTopics.bind(this));
     };
 
     MenuScreen.prototype.tempImageChange = function(imageSrc) {
-        /* Until this is running on the exscitech server, we need to give an absolute path */
+        /* TODO Until this is running on the exscitech server, we need to give an absolute path */
         return 'http://exscitech.gcl.cis.udel.edu/' + imageSrc.substr(2, imageSrc.length - 2);
     };
 
