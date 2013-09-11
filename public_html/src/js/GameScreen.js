@@ -201,18 +201,40 @@
             $('#loadingMessage').text(loadingString);
             /* Build Molecule */
             var molecule = MoleculeGeometryBuilder.load(data, 0.25, 5, 1, 0);
-            molecule.position = new THREE.Vector3(-2.5, -1, 0);
-            molecule.scale = new THREE.Vector3(0.5, 0.5, 0.5);
+            if( molecule != undefined ) {
+                molecule.position = new THREE.Vector3(-2.5, -1, 0);
+                molecule.scale = new THREE.Vector3(0.5, 0.5, 0.5);
 
-            this.questionList.push([molecule,
-                this.gameData.questions[this.loadingState].text,
-                this.gameData.questions[this.loadingState].id,
-                this.gameData.questions[this.loadingState].answers]);
-
-            FCCommunicationManager.getMedia(this.gameData.game_session_id,
-                    FCCommunicationManager.MEDIA_PDB,
+                this.questionList.push([molecule,
+                    this.gameData.questions[this.loadingState].text,
                     this.gameData.questions[this.loadingState].id,
-                    this.createPDB.bind(this));
+                    this.gameData.questions[this.loadingState].answers]);
+
+                FCCommunicationManager.getMedia(this.gameData.game_session_id,
+                        FCCommunicationManager.MEDIA_PDB,
+                        this.gameData.questions[this.loadingState].id,
+                        this.createPDB.bind(this));
+            } else {
+                /* 
+                    Cannot do a proper error here (easily).
+                    The Last-request was not set because the get request
+                    technically "succeeded" but pulled the school's wifi
+                    login instead. MoleculeGeometryBuilder will return an
+                    undefined when it crashes parsing. This will handle it
+                    "gracefully". The likelyhood of this error is incredibly
+                    low. The only causes are if the school wifi logs you out
+                    while the loading screen is up (< 10 seconds) or if there
+                    is a corrupted file.
+                */
+                /* TODO Contact? Hack in error message? */
+                alert('A fatal error has occurred. Please log-in to the wifi! Error 407.\n\n' +
+                      'Please Contact IT if this problem persists.');
+                this.loadingState--;
+                FCCommunicationManager.getMedia(this.gameData.game_session_id,
+                        FCCommunicationManager.MEDIA_PDB,
+                        this.gameData.questions[this.loadingState].id,
+                        this.createPDB.bind(this));
+            }
         } else {
             enableButtons(this);
             $('#loadingMessage')

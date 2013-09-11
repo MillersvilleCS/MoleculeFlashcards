@@ -298,7 +298,11 @@
         //return MoleculeGeometryBuilder.createModel (pdbJson);
 
         var pdbJson = parseSDF(data);
-        return createModel(pdbJson, atomScale, bondThickness, atomRenderType, bondRenderType);
+        try {
+            return createModel(pdbJson, atomScale, bondThickness, atomRenderType, bondRenderType);
+        } catch ( err ) {
+            return undefined;
+        }
     };
 
     function createModel(json, atomScale, bondThickness, atomRenderType, bondRenderType) {

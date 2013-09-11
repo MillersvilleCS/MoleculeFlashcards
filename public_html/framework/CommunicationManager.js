@@ -61,15 +61,15 @@ CommunicationManager.get = function(requestUrl, requestObject, callback) {
                 data: requestObject,
                 async: true
             }).done(
-            function() {
-                CommunicationManager.retryCount = -1;
-                callback(response.responseText);
-            }
-    ).fail(
-        function( info ) {
-            CommunicationManager.error(info, 'get', requestUrl, requestObject, callback);
-        }
-    );
+                function() {
+                    CommunicationManager.retryCount = -1;
+                    callback(response.responseText);
+                }
+            ).fail(
+                function( info ) {
+                    CommunicationManager.error(info, 'get', requestUrl, requestObject, callback);
+                }
+            );
 };
 
 CommunicationManager.error = function( info, type, requestUrl, requestObject, callback ) {
