@@ -6,6 +6,7 @@ FCCommunicationManager.REQUEST_HANDLER_URL = 'http://exscitech.gcl.cis.udel.edu/
 FCCommunicationManager.GET_MEDIA_URL = 'http://exscitech.gcl.cis.udel.edu/get_media.php';
 FCCommunicationManager.MEDIA_PDB = 0;
 FCCommunicationManager.MEDIA_IMAGE = 1;
+FCCommunicationManager.errorCallback = undefined;
 
 FCCommunicationManager.login = function ( email, password , callback) {
     'use strict';
@@ -105,6 +106,10 @@ FCCommunicationManager.error = function ( info ) {
     }
     $('#errorCode').text(info.status);
     $('#errorMessage').addClass('in activeTop');
+
+    if( FCCommunicationManager.errorCallback != undefined ) {
+        FCCommunicationManager.errorCallback();
+    }
 };
 
 CommunicationManager.errorCallback = FCCommunicationManager.error;

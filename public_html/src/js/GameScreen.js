@@ -63,10 +63,13 @@
     };
 
     GameScreen.prototype.onPause = function( ) {
-
+        if( this.timer.running ) {
+            this.timer.stop();
+        }
     };
 
     GameScreen.prototype.onLeave = function( ) {
+        FCCommunicationManager.errorCallback = undefined;
         disableReturnButton( );
         $('#gameButtons').html(this.defaultHTML);
         $('#gameCompletedUI').removeClass('in active');
@@ -99,7 +102,8 @@
         $('#rightPanel').addClass('in');
         $('#questionPanel').addClass('active');
 
-        this.timer.reset( );
+        FCCommunicationManager.errorCallback = this.onPause.bind(this);
+        this.timer.reset();
         this.questionList = [];
         this.loadingState = 0;
 
@@ -227,6 +231,10 @@
     };
 
     GameScreen.prototype.answerQuestion = function(data) {
+        if( !this.timer.running ) {
+            this.timer.start();
+        }
+
         if(data.correct === 'true') {
             this.scoreManager.correct(RIGHT_ANSWER_POINTS);
             this.nextQuestion();

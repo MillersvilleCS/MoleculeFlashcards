@@ -26,28 +26,28 @@ CommunicationManager.post = function(requestUrl, requestObject, callback) {
                 data: JSON.stringify(requestObject),
                 async: true
             }).done(
-            function() {
-                /* 
-                    If you are not logged into the school wifi, the AJAX request will succeed,
-                    but of course you get garbage data (login html) and the parser throws an
-                    error. Catch this error if that occurs, and mark it as a 407 (TODO?)
-                    Error 407 = Proxy Authentication Required
-                */
-                try {
-                    var jData = CommunicationManager.parse( response.responseText );
-                    CommunicationManager.retryCount = -1;
-                    callback( jData );
-                } catch( err ) {
-                    var info = {};
-                    info.status = 407;
+                function() {
+                    /* 
+                        If you are not logged into the school wifi, the AJAX request will succeed,
+                        but of course you get garbage data (login html) and the parser throws an
+                        error. Catch this error if that occurs, and mark it as a 407 (TODO?)
+                        Error 407 = Proxy Authentication Required
+                    */
+                    try {
+                        var jData = CommunicationManager.parse( response.responseText );
+                        CommunicationManager.retryCount = -1;
+                        callback( jData );
+                    } catch( err ) {
+                        var info = {};
+                        info.status = 407;
+                        CommunicationManager.error(info, 'post', requestUrl, requestObject, callback);
+                    }
+                }
+            ).fail(
+                function( info ) {
                     CommunicationManager.error(info, 'post', requestUrl, requestObject, callback);
                 }
-            }
-    ).fail(
-        function( info ) {
-            CommunicationManager.error(info, 'post', requestUrl, requestObject, callback);
-        }
-    );
+            );
 };
 
 CommunicationManager.get = function(requestUrl, requestObject, callback) {

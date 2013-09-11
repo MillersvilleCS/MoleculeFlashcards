@@ -83,7 +83,6 @@
     };
 
     LoginScreen.prototype.registerComplete = function(response) {
-        console.log(response);
         if(response.success === 'false') {
             $('#registerFail').text(response.error);
             $('#registerFail, #registerButton').removeClass('hide');
