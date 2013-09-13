@@ -3,9 +3,9 @@
 
     var MenuScreen = function($element) {
         Screen.apply(this, [$element]);
+        this.topics = undefined;
     };
     
-    var topics;
     var $lastTopicElement;
 
     var TOPIC_HTML = '<div class = \'topic\' data-id = \'$uniqueID\' >' +
@@ -54,10 +54,10 @@
 
     MenuScreen.prototype.showAvailableTopics = function(response) {
         $('#topicList').empty();
-        topics = response.available_games;
-        UserData.gameID = topics[0].id;
-        UserData.gameTimeLimit = topics[0].time_limit;
-        for(var i = 0; i < topics.length; ++i) {
+        this.topics = response.available_games;
+        UserData.gameID = this.topics[0].id;
+        UserData.gameTimeLimit = this.topics[0].time_limit;
+        for(var i = 0; i < this.topics.length; ++i) {
             var keys = [
                 '$title',
                 '$description',
@@ -65,18 +65,18 @@
                 '$uniqueID'
             ];
             var values = [
-                topics[i].name,
-                topics[i].description,
-                this.tempImageChange(topics[i].image),
+                this.topics[i].name,
+                this.topics[i].description,
+                this.tempImageChange(this.topics[i].image),
                 i
             ];
             this.insertInfo(keys, values, TOPIC_HTML, '#topicList');
-            topics[i].dataID = i;
+            this.topics[i].dataID = i;
         }
         $('#topicList').scrollTop(0);
         $lastTopicElement = $($('#topicList').children()[0]);
         $lastTopicElement.css('background-color', 'grey');
-        this.changeRightPanel(topics[0]);
+        this.changeRightPanel(this.topics[0]);
     };
 
     MenuScreen.prototype.changeRightPanel = function(topic) {
