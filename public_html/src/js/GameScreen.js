@@ -223,7 +223,22 @@
 
     GameScreen.prototype.answerQuestion = function(data) {
         if( !this.timer.running ) {
-            this.timer.start();
+            //this.timer.start();
+            /* This code is executed if there was a connection error mid-game, kick to menu on reload */
+            /* Must call change event async */
+            setTimeout(
+                function( ref, QUESTION_MOLECULE ) {
+                    FCCommunicationManager.errorCallback = undefined;
+                    disableButtons( );
+                    ref.scene.remove(ref.currentQuestion[ QUESTION_MOLECULE ]);
+                    ref.currentQuestion = undefined;
+                    ref.timer.stop( );
+                    $('#gameUI').trigger(new ScreenChangeEvent('menu'));
+                },
+                1, this, QUESTION_MOLECULE
+            );
+
+            return;
         }
 
         if(data.correct === 'true') {
