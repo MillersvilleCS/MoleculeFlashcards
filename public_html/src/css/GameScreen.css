@@ -116,6 +116,15 @@
             animation-duration: 800ms;
 }
 
+.flashInOut.long {
+    -webkit-animation-name: flashInOut;
+       -moz-animation-name: flashInOut;
+            animation-name: flashInOut;
+    -webkit-animation-duration: 3000ms;
+       -moz-animation-duration: 3000ms;
+            animation-duration: 3000ms;
+}
+
 /* Game Completed UI */
 
 #gameCompletedUI {

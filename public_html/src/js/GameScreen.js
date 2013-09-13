@@ -157,7 +157,6 @@
                     while the loading screen is up (< 10 seconds) or if there
                     is a corrupted file.
                 */
-                /* TODO Contact? Hack in error message? */
                 alert('A fatal error has occurred. Please log-in to the wifi! Error 407.\n\n' +
                       'Please contact ' + 'saschlac' + '@udel' + '.edu' + ' if this problem persists.');
                 this.loadingState--;
@@ -230,13 +229,13 @@
         }
 
         if(data.correct === 'true') {
-            this.scoreManager.correct(RIGHT_ANSWER_POINTS);
+            this.scoreManager.correct(data.score - this.scoreManager.score);
             this.nextQuestion();
         } else {
-            this.scoreManager.incorrect(WRONG_ANSWER_POINTS);
+            this.scoreManager.incorrect(data.score - this.scoreManager.score);
             $('#scoreChange, #' + this.currentAnswer).addClass('incorrect');
         }
-        $('#scoreChange').text(this.scoreManager.text()).addClass('flashInOut')
+        $('#scoreChange').text(this.scoreManager.text()).addClass('flashInOut');
     };
 
     GameScreen.prototype.pollAnswer = function(userAnswer, currentQuestion) {
@@ -256,17 +255,18 @@
             $('#finalScore').text('Final Score: ' + response.final_score);
             $('#rank').text('Rank: #' + response.rank);
             $('#gameCompletedUI').addClass('in active');
+
+            this.scoreManager.correct(response.final_score - this.scoreManager.score);
+            setTimeout(
+                function( ref ) {
+                    $('#scoreChange').text('+Time: ' + ref.scoreManager.text()).addClass('flashInOut long');
+                },
+            1000, this);
         }
         disableButtons( );
         this.scene.remove(this.currentQuestion[ QUESTION_MOLECULE ]);
         this.currentQuestion = undefined;
         this.timer.stop( );
-        $('#scoreChange')
-                .stop(true, true)
-                .animate({
-            opacity: 0
-        },
-        300);
         FCCommunicationManager.endFlashcardGame(UserData.auth,
                 this.gameData.game_session_id,
                 this.timer.getElapsedMs(),
@@ -292,7 +292,7 @@
         });
 
         $('#scoreChange').on('animationend webkitAnimationEnd ', function() {
-            $(this).removeClass('flashInOut incorrect');
+            $(this).removeClass('flashInOut incorrect long');
         });
     }
 
