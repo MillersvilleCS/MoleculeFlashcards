@@ -30,8 +30,6 @@
     var QUESTION_TEXT = 1;
     var QUESTION_ID = 2;
     var QUESTION_ANSWERS = 3;
-    var WRONG_ANSWER_POINTS = -350;
-    var RIGHT_ANSWER_POINTS = 1000;
 
     GameScreen.prototype = Object.create(Screen.prototype);
     GameScreen.prototype.constructor = GameScreen;
