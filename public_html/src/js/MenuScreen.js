@@ -6,6 +6,8 @@
             '<b>$title</b>' + '<br />' +
             '<div class = \'topicDescription\'>$description</div>' +
             '</div>';
+    var NAMES_HTML = '#$rank $name <br />';
+    var SCORES_HTML = '$score <br />';
     
     var MenuScreen = function($element) {
         Screen.apply(this, [$element]);
@@ -13,11 +15,6 @@
         this.$currentTopic = undefined;
     };
  
-
-    
-    var NAMES_HTML = '#$rank $name <br />';
-    var SCORES_HTML = '$score <br />';
-
     MenuScreen.prototype = Object.create(Screen.prototype);
     MenuScreen.prototype.constructor = MenuScreen;
 
@@ -78,10 +75,10 @@
         $('#topicList').scrollTop(0);
         this.$currentTopic = $($('#topicList').children()[0]);
         this.$currentTopic.css('background-color', 'grey');
-        this.changeRightPanel(this.topics[0]);
+        this.updateRightPanel(this.topics[0]);
     };
 
-    MenuScreen.prototype.changeRightPanel = function(topic) {
+    MenuScreen.prototype.updateRightPanel = function(topic) {
         $('#timeLimit')
                 .text('Time Limit: ' + Timer.getDigitalRep(topic.time_limit / 1000));
         $('#questionCount').text('Number of Questions: ' + topic.q_count);
@@ -109,6 +106,15 @@
         UserData.gameID = topic.id;
         UserData.gameTimeLimit = topic.time_limit;
     };
+    
+    MenuScreen.prototype.selectTopic = function(topic) {
+        
+        
+        (function updateRightPanel()
+        {
+
+        })();
+    };
 
     function enableButtons(menuScreen) {
         $('#mainMenuUI .button[data-logic=\'tutorial\']')
@@ -132,7 +138,7 @@
         });
 
         $('#topicList').on('click', '.topic[data-id]', function(e) {
-            menuScreen.changeRightPanel(menuScreen.topics[$(this).data('id')]);
+            menuScreen.updateRightPanel(menuScreen.topics[$(this).data('id')]);
             menuScreen.$currentTopic.css('background-color', 'transparent');
             $(this).css('background-color', 'grey');
             menuScreen.$currentTopic = $(this);
