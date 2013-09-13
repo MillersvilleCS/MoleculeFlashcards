@@ -60,6 +60,8 @@
                 $('#container').mousemove( function( event ) {
                     MouseManager.onMouseMove( event );
                 });
+                /* Anti-Bot-Spam Measure */
+                $('#contact').text('saschlac' + '@udel' + '.edu');
                 /* Initialize */
                 var WIDTH = 800;
                 var HEIGHT = 600;
@@ -113,10 +115,9 @@
                         connected to the internet, including logging in to
                         the wifi (if necessary).
                     </p>
-                    <!-- TODO contact who?-->
                     <p class = 'errorText'>
-                        If this problem persists, contact IT, and let them know
-                        Error <span id = 'errorCode'>404</span> has occurred.
+                        If this problem persists, contact <span id = 'contact'></span>, 
+                        and let them know Error <span id = 'errorCode'>404</span> has occurred.
                     </p>
                     <p class = 'errorText'>
                         Press the button below to try again. <span id = 'retryCount'></span>

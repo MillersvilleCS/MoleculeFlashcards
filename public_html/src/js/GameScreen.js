@@ -159,7 +159,7 @@
                 */
                 /* TODO Contact? Hack in error message? */
                 alert('A fatal error has occurred. Please log-in to the wifi! Error 407.\n\n' +
-                      'Please Contact IT if this problem persists.');
+                      'Please contact ' + 'saschlac' + '@udel' + '.edu' + ' if this problem persists.');
                 this.loadingState--;
                 FCCommunicationManager.getMedia(this.gameData.game_session_id,
                         FCCommunicationManager.MEDIA_PDB,
