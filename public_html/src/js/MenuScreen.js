@@ -1,18 +1,20 @@
 (function(window, $) {
     'use strict';
 
-    var MenuScreen = function($element) {
-        Screen.apply(this, [$element]);
-        this.topics = undefined;
-    };
-    
-    var $lastTopicElement;
-
     var TOPIC_HTML = '<div class = \'topic\' data-id = \'$uniqueID\' >' +
             '<img class = \'topicImage\' src = \'$imageSrc\' width = \'114\' height = \'94\' >' +
             '<b>$title</b>' + '<br />' +
             '<div class = \'topicDescription\'>$description</div>' +
             '</div>';
+    
+    var MenuScreen = function($element) {
+        Screen.apply(this, [$element]);
+        this.topics = undefined;
+        this.$currentTopic = undefined;
+    };
+ 
+
+    
     var NAMES_HTML = '#$rank $name <br />';
     var SCORES_HTML = '$score <br />';
 
@@ -74,8 +76,8 @@
             this.topics[i].dataID = i;
         }
         $('#topicList').scrollTop(0);
-        $lastTopicElement = $($('#topicList').children()[0]);
-        $lastTopicElement.css('background-color', 'grey');
+        this.$currentTopic = $($('#topicList').children()[0]);
+        this.$currentTopic.css('background-color', 'grey');
         this.changeRightPanel(this.topics[0]);
     };
 
@@ -130,10 +132,10 @@
         });
 
         $('#topicList').on('click', '.topic[data-id]', function(e) {
-            menuScreen.changeRightPanel(topics[$(this).data('id')]);
-            $lastTopicElement.css('background-color', 'transparent');
+            menuScreen.changeRightPanel(menuScreen.topics[$(this).data('id')]);
+            menuScreen.$currentTopic.css('background-color', 'transparent');
             $(this).css('background-color', 'grey');
-            $lastTopicElement = $(this);
+            menuScreen.$currentTopic = $(this);
         });
     }
 
