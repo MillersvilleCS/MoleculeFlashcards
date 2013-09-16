@@ -2,8 +2,8 @@ FCCommunicationManager = function () {
     
 };
 
-FCCommunicationManager.REQUEST_HANDLER_URL = 'http://exscitech.gcl.cis.udel.edu/request_handler.php';
-FCCommunicationManager.GET_MEDIA_URL = 'http://exscitech.gcl.cis.udel.edu/get_media.php';
+FCCommunicationManager.REQUEST_HANDLER_URL = 'http://docktest.gcl.cis.udel.edu/exscitech_sam/request_handler.php';
+FCCommunicationManager.GET_MEDIA_URL = 'http://docktest.gcl.cis.udel.edu/exscitech_sam/get_media.php';
 FCCommunicationManager.MEDIA_PDB = 0;
 FCCommunicationManager.MEDIA_IMAGE = 1;
 FCCommunicationManager.errorCallback = undefined;
