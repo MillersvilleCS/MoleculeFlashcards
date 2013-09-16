@@ -1,5 +1,5 @@
 /*! jQuery v2.0.3 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
- //@ sourceMappingURL=jquery-2.0.3.min.map
+ @ sourceMappingURL=jquery-2.0.3.min.map
  */
 (function (e, undefined) {
     var t, n, r = typeof undefined, i = e.location, o = e.document, s = o.documentElement, a = e.jQuery, u = e.$, l = {
