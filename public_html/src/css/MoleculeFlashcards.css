@@ -46,6 +46,10 @@ div.flashcardsGame {
     float: right;
 }
 
+.headerLogo{
+	height: 100px;
+}
+
 /* Component Classes */
 
 div.button {
