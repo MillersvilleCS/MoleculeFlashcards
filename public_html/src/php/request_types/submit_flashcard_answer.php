@@ -71,7 +71,7 @@
 		
 		while($row = $result->fetch_array()){
 			if($row[0]=="0")
-				$score = $row[1]*(-450);
+				$score = $row[1]*(-550);
 			else
 				$score = $score + $row[1]*(1000);
 		}
