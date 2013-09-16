@@ -32,6 +32,7 @@ div.flashcardsGame {
 
 #pageHeader {
     background-color: #002AA8;
+    background: linear-gradient( to bottom, #29368C 5%, #37C1F0 );
     padding-bottom: 5px;
 }
 
