@@ -20,12 +20,12 @@ body {
 /* Parent Div Elements */
 
 div.flashcardsGame {
-    min-width: 804px;
+    min-width: 1004px;
     min-height: 64px;
 }
 
 #container {
-    width: 804px;
+    width: 1004px;
     height: 604px;
     margin: auto;
 }
@@ -70,7 +70,7 @@ div.button:active {
 
 .screen {
     height: 600px;
-    width: 800px;
+    width: 1000px;
     border: 2px solid #010120;
     background-color: #CCCCCC;
     position: absolute;
@@ -109,7 +109,7 @@ a.headerLinks:visited {
 }
 
 a.headerLinks:hover {
-    color: #CCCCCC;
+    color: #262626;
     text-decoration: underline;
 }
 
@@ -121,7 +121,7 @@ p.errorText {
 
 #logoutButton {
     position: absolute;
-    width: 150px;
+    width: 250px;
     margin-left: 20px;
     text-align: right;
     transition-property: color;

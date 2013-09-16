@@ -131,7 +131,7 @@
             /* Build Molecule */
             var molecule = MoleculeGeometryBuilder.load(data, 0.25, 5, 1, 0);
             if( molecule != undefined ) {
-                molecule.position = new THREE.Vector3(-2.5, -1, 0);
+                molecule.position = new THREE.Vector3(-1, -1, 0);
                 molecule.scale = new THREE.Vector3(0.5, 0.5, 0.5);
 
                 this.questionList.push([molecule,

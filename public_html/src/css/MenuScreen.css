@@ -24,8 +24,8 @@ div.topicDescription {
 }
 
 #mainMenuLeft {
-    max-width: 534px;
-    min-width: 534px;
+    max-width: 634px;
+    min-width: 634px;
     float: left;
 }
 
@@ -48,7 +48,7 @@ div.topicDescription {
 #highScores{
     white-space: nowrap;
     height: 200px;
-    width: 266px;
+    width: 366px;
     font-size: 16px;
     overflow: hidden;
     padding: 0px;
@@ -57,13 +57,14 @@ div.topicDescription {
 #names {
     text-align: left;
     float: left;
-    width: 170px;
+    width: 200px;
 }
 
 #scores {
     text-align: right;
     float: right;
-    width: 70px;
+    width: 100px;
+    padding-right: 15px;
 }
 
 /*
@@ -72,6 +73,8 @@ div.topicDescription {
 
 .button.greenButton {
     background-color: #6BC026;
+    width: 200px;
+    margin: auto;
 }
 
 .button.greenButton:hover {
@@ -88,6 +91,7 @@ div.topicDescription {
     font-size: 26px;
     width: 170px;
     margin: auto;
+    margin-top: 25px;
 }
 
 .button.blueButtonMenu:hover {
