@@ -32,13 +32,13 @@
     };
 
     function enableButtons(menuScreen) {
-        $('#highScoreUI .button[data-logic=\'menu\']').on('click', function() {
+        $('#highScoreUI').find('.button[data-logic=\'menu\']').on('click', function() {
             $(this).trigger(new ScreenChangeEvent('menu'));
         });
     }
 
     function disableButtons( ) {
-        $('#highScoreUI .button').off('click');
+        $('#highScoreUI').find('.button').off('click');
     }
 
     window.HighScoreScreen = HighScoreScreen;

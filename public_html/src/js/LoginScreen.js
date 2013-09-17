@@ -82,37 +82,45 @@
     };
 
     function enableButtons(loginScreen) {
-        $('#loginUI .button[data-logic=\'login\']').on('click', function() {
-            $('#loginButton').addClass('hide');
-            FCCommunicationManager.login($('#emailLogin')
-                    .val(), $('#passLogin').val(),
-                    loginScreen.loginComplete.bind(loginScreen));
-        });
+        $('#loginUI')
+            .find('.button[data-logic=\'login\']')
+            .on('click', function() {
+                $('#loginButton').addClass('hide');
+                FCCommunicationManager.login(
+                    $('#emailLogin').val(),
+                    $('#passLogin').val(),
+                    loginScreen.loginComplete.bind(loginScreen)
+                );
+            })
+            .end()
 
-        $('#loginUI [data-logic=\'showCreate\']')
-                .on('click', loginScreen.createDivShow);
+            .find('[data-logic=\'showCreate\']')
+            .on('click', loginScreen.createDivShow)
+            .end()
 
-        $('#loginUI [data-logic=\'showLogin\']')
-                .on('click', loginScreen.loginDivShow);
+            .find('[data-logic=\'showLogin\']')
+            .on('click', loginScreen.loginDivShow)
+            .end()
 
-        $('#loginUI .button[data-logic=\'register\']')
-                .on('click', function() {
-            $('#registerMismatch').addClass('hide');
-            $('#registerFail').addClass('hide');
+            .find('.button[data-logic=\'register\']')
+            .on('click', function() {
+                $('#registerMismatch, #registerFail').addClass('hide');
 
-            if($('#passRegister').val() == $('#passRepRegister').val()) {
-                $('#registerButton').addClass('hide');
-                FCCommunicationManager.register($('#emailRegister').val(),
+                if($('#passRegister').val() == $('#passRepRegister').val()) {
+                    $('#registerButton').addClass('hide');
+                    FCCommunicationManager.register(
+                        $('#emailRegister').val(),
                         $('#passRegister').val(),
                         $('#usernameRegister').val(),
-                        loginScreen.registerComplete.bind(loginScreen));
-            } else {
-                $('#registerMismatch').removeClass('hide');
-            }
-        });
+                        loginScreen.registerComplete.bind(loginScreen)
+                    );
+                } else {
+                    $('#registerMismatch').removeClass('hide');
+                }
+            });
 
         /* TODO - Move these somewhere else? Both are buttons that can be pushed at any time. */
-        $('#pageHeader [data-logic=\'logout\']').on('click', function() {
+        $('#pageHeader').find('[data-logic=\'logout\']').on('click', function() {
             if(confirm('Logout from Molecule Flashcards?')) {
                 CookieManager.deleteCookie('username', '/');
                 CookieManager.deleteCookie('authenticator', '/');
@@ -120,7 +128,7 @@
             }
         });
 
-        $('#errorMessage [data-logic=\'retry\']').on('click', function() {
+        $('#errorMessage').find('[data-logic=\'retry\']').on('click', function() {
             CommunicationManager.retry();
             $('#errorMessage').removeClass('in activeTop');
         });
@@ -137,10 +145,10 @@
             }
         });
 
-    };
+    }
 
     function disableButtons( ) {
-        $('#loginUI .button').off('click');
+        $('#loginUI').find('.button').off('click');
     }
 
     window.LoginScreen = LoginScreen;

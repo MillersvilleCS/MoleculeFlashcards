@@ -47,19 +47,13 @@
         <script src='src/js/MoleculeGeometryBuilder.js'></script> 
 
         <script>
-            $(document).ready(function( ) {
+            $(function( ) {
                 /* Mouse Events */
-                $('#container').mousedown( function( event ) {
-                    MouseManager.onMouseDown( event );
-                });
+                $('#container')
+                    .mousedown( MouseManager.onMouseDown )
+                    .mouseup( MouseManager.onMouseUp )
+                    .mousemove( MouseManager.onMouseMove );
 
-                $('#container').mouseup( function( event ) {
-                    MouseManager.onMouseUp( event );
-                });
-
-                $('#container').mousemove( function( event ) {
-                    MouseManager.onMouseMove( event );
-                });
                 /* Anti-Bot-Spam Measure */
                 $('#contact').text('saschlac' + '@udel' + '.edu');
                 /* Initialize */

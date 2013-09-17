@@ -67,8 +67,9 @@
         $('#gameButtons').html(this.defaultHTML);
         $('#gameCompletedUI').removeClass('in active');
         $('#rightPanel').removeClass('in');
-        $('#questionPanel').removeClass('in active');
-        $('#questionPanel').empty();
+        $('#questionPanel')
+            .removeClass('in active')
+            .empty();
         $('#time')
                 .css('color', '#F8F8FE')
                 .text('2:00');
@@ -187,11 +188,13 @@
 
         function setQuestionText(questionText) {
             if(questionText) {
-                $('#questionPanel').text(questionText);
-                $('#questionPanel').addClass('in');
+                $('#questionPanel')
+                    .text(questionText)
+                    .addClass('in');
             } else {
-                $('#questionPanel').empty();
-                $('#questionPanel').removeClass('in');
+                $('#questionPanel')
+                    .empty()
+                    .removeClass('in');
             }
         }
 
@@ -287,7 +290,7 @@
     };
 
     function enableButtons(gameScreen) {
-        $('#gameUI .button[data-logic=\'return\']').on('click', function() {
+        $('#gameUI').find('.button[data-logic=\'return\']').on('click', function() {
             $(this).trigger(new ScreenChangeEvent('menu'));
         });
 
@@ -299,8 +302,8 @@
             }
         });
 
-        $('#loadingUI .button[data-logic=\'begin\']').on('click', function() {
-            $('#loadingUI .button').off('click');
+        $('#loadingUI').find('.button[data-logic=\'begin\']').on('click', function() {
+            $('#loadingUI').find('.button').off('click');
             gameScreen.startGame( );
         });
 
@@ -311,11 +314,11 @@
 
     function disableButtons( ) {
         $('#gameButtons').off('click');
-        $('#loadingUI .button').off('click');
+        $('#loadingUI').find('.button').off('click');
     }
 
     function disableReturnButton( ) {
-        $('#gameUI .button').off('click');
+        $('#gameUI').find('.button').off('click');
     }
 
     window.GameScreen = GameScreen;

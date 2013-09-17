@@ -52,7 +52,7 @@
     };
 
     MenuScreen.prototype.showAvailableTopics = function(response) {
-        $('#topicList').empty();
+        var $topicList = $('#topicList').empty();
         this.topics = response.available_games;
         UserData.gameID = this.topics[0].id;
         UserData.gameTimeLimit = this.topics[0].time_limit;
@@ -72,8 +72,8 @@
             this.insertInfo(keys, values, TOPIC_HTML, '#topicList');
             this.topics[i].dataID = i;
         }
-        $('#topicList').scrollTop(0);
-        this.$currentTopic = $($('#topicList').children()[0]);
+        $topicList.scrollTop(0);
+        this.$currentTopic = $topicList.children(':first');
         this.$currentTopic.addClass("selected");
         this.updateRightPanel(this.topics[0]);
     };
@@ -117,24 +117,28 @@
     };
 
     function enableButtons(menuScreen) {
-        $('#mainMenuUI .button[data-logic=\'tutorial\']')
-                .on('click', function() {
-            $(this).trigger(new ScreenChangeEvent('tutorial'));
-        });
 
-        $('#tutorialUI .button[data-logic=\'endTutorial\']')
+        $('#mainMenuUI')
+            .find('.button[data-logic=\'tutorial\']')
+            .on('click', function() {
+                $(this).trigger(new ScreenChangeEvent('tutorial'));
+            })
+            .end()
+
+            .find('.button[data-logic=\'scores\']')
+            .on('click', function() {
+                $(this).trigger(new ScreenChangeEvent('score'));
+            })
+            .end()
+
+            .find('.button[data-logic=\'start\']')
+            .on('click', function() {
+                $(this).trigger(new ScreenChangeEvent('game'));
+            });
+
+        $('#tutorialUI').find('.button[data-logic=\'endTutorial\']')
                 .on('click', function() {
             menuScreen.endTutorial( );
-        });
-
-        $('#mainMenuUI .button[data-logic=\'scores\']')
-                .on('click', function() {
-            $(this).trigger(new ScreenChangeEvent('score'));
-        });
-
-        $('#mainMenuUI .button[data-logic=\'start\']')
-                .on('click', function() {
-            $(this).trigger(new ScreenChangeEvent('game'));
         });
 
         $('#topicList').on('click', '.topic[data-id]', function(e) {
@@ -146,8 +150,7 @@
     }
 
     function disableButtons( ) {
-        $('#mainMenuUI .button').off('click');
-        $('#tutorialUI .button').off('click');
+        $('#mainMenuUI, #tutorialUI').find('.button').off('click');
         $('#topicList').off('click');
     }
 
