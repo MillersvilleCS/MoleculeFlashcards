@@ -2,6 +2,7 @@ MoleculeFlashcards
 ==================
 
 Setting up a project
+----------------------------------------------
 1.create a git repository
 git init
 git remote add origin https://github.com/MillersvilleCS/MoleculeFlashcards.git
