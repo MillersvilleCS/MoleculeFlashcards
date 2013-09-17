@@ -1,0 +1,3 @@
+[submodule "public_html/framework"]
+	path = public_html/framework
+	url = https://github.com/MillersvilleCS/JSFramework.git
