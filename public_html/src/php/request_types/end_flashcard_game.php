@@ -25,7 +25,7 @@
 		
 		//if the player finished the game 
 		// ie if num_questions_answered == num_questions or time == time_limit 		
-		if(are_all_questions_answered($game_session_id) || $remaining_time == $max_time){
+		if(are_all_questions_answered($game_session_id) || $remaining_time <= 0){
 			//store score
 			store_score($user, $game_session_id,$final_score);
 		
@@ -37,7 +37,8 @@
 		}
 		//else purge the game session from the database
 		else{
-			
+			$response_object["remaining_time"] = $remaining_time;
+			$response_object["max_time"] = $max_time;
 		}
 		
 		$response_object["success"] = "true";
