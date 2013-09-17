@@ -15,3 +15,7 @@ Setting up a project
 
   ~git submodule add https://github.com/MillersvilleCS/JSFramework.git public_html/framework 
   
+  
+Updateing subdirectories
+git submodule foreach git pull origin master
+  
