@@ -37,44 +37,30 @@
         FCCommunicationManager.availableGames(UserData.auth, this.showAvailableTopics.bind(this));
     };
 
-    MenuScreen.prototype.tempImageChange = function(imageSrc) {
-        /* TODO Until this is running on the exscitech server, we need to give an absolute path */
-        return 'http://exscitech.gcl.cis.udel.edu/' + imageSrc.substr(2, imageSrc.length - 2);
-    };
-
-    MenuScreen.prototype.insertInfo = function(keys, values, base, location) {
-        var workingHTML = base;
-        for(var i = 0; i < keys.length; ++i) {
-            workingHTML = workingHTML.replace(keys[i], values[i]);
-        }
-
-        $(location).append(workingHTML);
-    };
-
     MenuScreen.prototype.showAvailableTopics = function(response) {
         var $topicList = $('#topicList').empty();
         this.topics = response.available_games;
         UserData.gameID = this.topics[0].id;
         UserData.gameTimeLimit = this.topics[0].time_limit;
-        for(var i = 0; i < this.topics.length; ++i) {
-            var keys = [
-                '$title',
-                '$description',
-                '$imageSrc',
-                '$uniqueID'
-            ];
-            var values = [
-                this.topics[i].name,
-                this.topics[i].description,
-                this.tempImageChange(this.topics[i].image),
-                i
-            ];
-            this.insertInfo(keys, values, TOPIC_HTML, '#topicList');
-            this.topics[i].dataID = i;
-        }
+
+        this.topics.forEach(function (topic, i) {
+            insertInfo(
+                {
+                    '$title': topic.name,
+                    '$description': topic.description,
+                    '$imageSrc': absoluteUrl(topic.image), // TODO: remove in production
+                    //'$imageSrc': topic.image,
+                    '$uniqueID': i
+                },
+                TOPIC_HTML,
+                '#topicList'
+            );
+            topic.dataID = i;
+        });
+
         $topicList.scrollTop(0);
         this.$currentTopic = $topicList.children(':first');
-        this.$currentTopic.addClass("selected");
+        this.$currentTopic.addClass('selected');
         this.updateRightPanel(this.topics[0]);
     };
 
@@ -82,27 +68,12 @@
         $('#timeLimit')
                 .text('Time Limit: ' + Timer.getDigitalRep(topic.time_limit / 1000));
         $('#questionCount').text('Number of Questions: ' + topic.q_count);
-        $('#names').empty();
-        $('#scores').empty();
-        var currScores = topic.high_scores;
-        for(var i = 0; i < currScores.length; ++i) {
-            var keys = [
-                '$rank',
-                '$name'
-            ];
-            var values = [
-                currScores[i].rank,
-                currScores[i].username
-            ];
-            var scoreKey = [
-                '$score'
-            ];
-            var scoreValue = [
-                currScores[i].score
-            ];
-            this.insertInfo(keys, values, NAMES_HTML, '#names');
-            this.insertInfo(scoreKey, scoreValue, SCORES_HTML, '#scores');
-        }
+        $('#names, #scores').empty();
+
+        topic.high_scores.forEach(function (entry) {
+            insertInfo({'$rank': entry.rank, '$name': entry.username}, NAMES_HTML, '#names');
+            insertInfo({'$score': entry.score }, SCORES_HTML, '#scores');
+        });
         UserData.gameID = topic.id;
         UserData.gameTimeLimit = topic.time_limit;
     };
@@ -115,6 +86,20 @@
 
         })();
     };
+
+    function insertInfo(replacements, templateString, selector) {
+        var result = templateString;
+        for(var key in replacements) {
+            result = result.replace(key, replacements[key]);
+        }
+
+        $(selector).append(result);
+    }
+
+    function absoluteUrl (imageSrc) {
+        /* TODO Until this is running on the exscitech server, we need to give an absolute path */
+        return 'http://exscitech.gcl.cis.udel.edu/' + imageSrc.substr(2, imageSrc.length - 2);
+    }
 
     function enableButtons(menuScreen) {
 
@@ -142,10 +127,10 @@
         });
 
         $('#topicList').on('click', '.topic[data-id]', function(e) {
-            menuScreen.updateRightPanel(menuScreen.topics[$(this).data('id')]);
-            $('#topicList').children().removeClass("selected");
-            $(this).addClass("selected");
-            menuScreen.$currentTopic = $(this);
+            var $topic = $(this);
+            menuScreen.updateRightPanel(menuScreen.topics[$topic.data('id')]);
+            menuScreen.$currentTopic.removeClass('selected');
+            menuScreen.$currentTopic = $topic.addClass('selected');
         });
     }
 
