@@ -1,23 +1,21 @@
 MoleculeFlashcards
 ==================
 
-Setting up a project
+Setting up the project
 ----------------------------------------------
-1.create a git repository 
 
-  ~git init 
-  
-  ~git remote add origin https://github.com/MillersvilleCS/MoleculeFlashcards.git 
-  
-  ~git pull
+Clone the git repository 
 
-2.create a subrepository for the framework 
+    git clone https://github.com/MillersvilleCS/MoleculeFlashcards.git
+    
+then initialize and load the submodules
 
-  ~git submodule add https://github.com/MillersvilleCS/JSFramework.git public_html/framework 
-  
-  
-Updateing subdirectories
---------------------
+    git submodule update --init
 
-git submodule foreach git pull origin master
-  
+Updating submodules
+-------------------
+
+Upstream updates to submodules can be pulled using:
+
+    git submodule update
+
