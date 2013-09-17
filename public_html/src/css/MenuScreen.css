@@ -14,6 +14,10 @@ div.topic {
     cursor: pointer;
 }
 
+div.topic.selected{
+	background-color: grey;
+}
+
 img.topicImage {
     float: left;
     margin: 15px;

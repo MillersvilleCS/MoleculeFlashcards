@@ -74,7 +74,7 @@
         }
         $('#topicList').scrollTop(0);
         this.$currentTopic = $($('#topicList').children()[0]);
-        this.$currentTopic.css('background-color', 'grey');
+        this.$currentTopic.addClass("selected");
         this.updateRightPanel(this.topics[0]);
     };
 
@@ -139,8 +139,8 @@
 
         $('#topicList').on('click', '.topic[data-id]', function(e) {
             menuScreen.updateRightPanel(menuScreen.topics[$(this).data('id')]);
-            menuScreen.$currentTopic.css('background-color', 'transparent');
-            $(this).css('background-color', 'grey');
+            $('#topicList').children().removeClass("selected");
+            $(this).addClass("selected");
             menuScreen.$currentTopic = $(this);
         });
     }
