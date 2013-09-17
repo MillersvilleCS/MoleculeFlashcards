@@ -59,7 +59,7 @@ div.button {
     padding: 5px;
     border-radius: 8px;
     cursor: pointer;
-    transition-property: background-color;
+    transition-property: background-color, color;
     transition-duration: 0.3s;
     transition-delay: 0s;
 }
@@ -70,6 +70,16 @@ div.button:hover {
 
 div.button:active {
     background-color: #363645;
+}
+
+.button.blueButton {
+    color: #EEE;
+    background-color: #002AA8;
+}
+
+.button.blueButton:hover {
+    color: #CCC;
+    background-color: #001D75;
 }
 
 .screen {

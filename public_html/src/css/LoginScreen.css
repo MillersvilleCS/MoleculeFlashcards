@@ -42,14 +42,6 @@ span.good {
     color: green;
 }
 
-.button.blueButton {
-    background-color: #002AA8;
-}
-
-.button.blueButton:hover {
-    background-color: #001D75;
-}
-
 .inputBox .button { 
     margin: 10px auto;
     max-width: 100px;

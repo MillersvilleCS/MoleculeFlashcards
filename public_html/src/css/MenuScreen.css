@@ -85,19 +85,12 @@ div.topicDescription {
     background-color: #53951D;
 }
 
-
 /*
     Tutorial Button
 */
 
-.button.blueButtonMenu {
-    background-color: #002AA8;
+#tutorialButton {
     font-size: 26px;
     width: 170px;
-    margin: auto;
-    margin-top: 25px;
-}
-
-.button.blueButtonMenu:hover {
-    background-color: #001D75;
+    margin: 25px auto 0;
 }
