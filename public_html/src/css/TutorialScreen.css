@@ -6,3 +6,10 @@
     font-size: 28px;
     border: 0px;
 }
+
+.returnMenuButton {
+    font-size: 28px;
+    width: 150px;
+    margin: auto !important;
+    margin-top: 60px !important;
+}

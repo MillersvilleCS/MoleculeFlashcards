@@ -129,6 +129,7 @@
                 loadingString += '.';
             }
             $('#loadingMessage').text(loadingString);
+            $('#loadingMessage').removeClass('readyText');
             /* Build Molecule */
             var molecule = MoleculeGeometryBuilder.load(data, 0.25, 5, 1, 0);
             if( molecule != undefined ) {
@@ -166,12 +167,16 @@
             }
         } else {
             enableButtons(this);
+            /*
             $('#loadingMessage')
                     .text('Ready')
                     .css({
                 'padding-left': '0px',
                 'text-align': 'center'
             });
+*/
+            $('#loadingMessage').text('Ready');
+            $('#loadingMessage').addClass('readyText');
             $('#beginButton').addClass('in');
         }
     };

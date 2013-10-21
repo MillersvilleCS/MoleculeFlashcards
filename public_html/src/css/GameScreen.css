@@ -84,7 +84,12 @@
     font-size: 60px;
     text-align: left;
     padding-top: 200px;
-    padding-left: 250px;
+    padding-left: 230px;
+}
+
+.readyText {
+    padding-left: 0px !important;
+    text-align: center !important;
 }
 
 /* Animation for score flash-in-out */
@@ -136,4 +141,10 @@
 
 .button.incorrect {
     background-color: red !important;
+}
+
+.returnButton {
+    font-size: 28px;
+    width: 150px;
+    margin: auto !important;
 }
