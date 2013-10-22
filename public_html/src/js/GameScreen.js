@@ -81,13 +81,13 @@
     GameScreen.prototype.onResume = function( ) {
         function receiveQuestionList(data) {
             this.gameData = data;
-            this.loadingState = -1;
+            this.loadingState = 0;
             $('#loadingMessage').text('Loading');
             /* Assumes at least 1 question */
             FCCommunicationManager.getMedia(
                     this.gameData.game_session_id,
                     FCCommunicationManager.MEDIA_PDB,
-                    this.gameData.questions[this.loadingState + 1].id,
+                    this.gameData.questions[this.loadingState].id,
                     this.createPDB.bind(this));
         }
 
@@ -121,8 +121,7 @@
 
     GameScreen.prototype.createPDB = function(data) {
         /* Pulls in PDB's for each question and builds them */
-        this.loadingState++;
-        if(this.loadingState < this.gameData.questions.length) {
+        if(this.loadingState < this.gameData.questions.length - 1) {
             /* Update Loading Text */
             var loadingString = 'Loading';
             for(var i = 0; i < (this.loadingState / 2) % 3; ++i) {
@@ -139,7 +138,9 @@
                 this.questionList.push([molecule,
                     this.gameData.questions[this.loadingState].text,
                     this.gameData.questions[this.loadingState].id,
-                    this.gameData.questions[this.loadingState].answers]);
+                    this.gameData.questions[this.loadingState].answers]);   
+
+                this.loadingState++;             
 
                 FCCommunicationManager.getMedia(this.gameData.game_session_id,
                         FCCommunicationManager.MEDIA_PDB,
