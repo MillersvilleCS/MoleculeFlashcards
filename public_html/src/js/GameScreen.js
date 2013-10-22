@@ -121,64 +121,64 @@
 
     GameScreen.prototype.createPDB = function(data) {
         /* Pulls in PDB's for each question and builds them */
-        if(this.loadingState < this.gameData.questions.length - 1) {
-            /* Update Loading Text */
-            var loadingString = 'Loading';
-            for(var i = 0; i < (this.loadingState / 2) % 3; ++i) {
-                loadingString += '.';
-            }
-            $('#loadingMessage').text(loadingString);
-            $('#loadingMessage').removeClass('readyText');
-            /* Build Molecule */
-            var molecule = MoleculeGeometryBuilder.load(data, 0.25, 5, 1, 0);
-            if( molecule != undefined ) {
-                molecule.position = new THREE.Vector3(-1, -1, 0);
-                molecule.scale = new THREE.Vector3(0.5, 0.5, 0.5);
+        /* Update Loading Text */
+        var loadingString = 'Loading';
+        for(var i = 0; i < (this.loadingState / 2) % 3; ++i) {
+            loadingString += '.';
+        }
+        $('#loadingMessage').text(loadingString);
+        $('#loadingMessage').removeClass('readyText');
+        /* Build Molecule */
+        var molecule = MoleculeGeometryBuilder.load(data, 0.25, 5, 1, 0);
+        if( molecule != undefined ) {
+            molecule.position = new THREE.Vector3(-1, -1, 0);
+            molecule.scale = new THREE.Vector3(0.5, 0.5, 0.5);
 
-                this.questionList.push([molecule,
-                    this.gameData.questions[this.loadingState].text,
-                    this.gameData.questions[this.loadingState].id,
-                    this.gameData.questions[this.loadingState].answers]);   
+            this.questionList.push([molecule,
+                this.gameData.questions[this.loadingState].text,
+                this.gameData.questions[this.loadingState].id,
+                this.gameData.questions[this.loadingState].answers]);   
 
-                this.loadingState++;             
+            this.loadingState++;
+            if(this.loadingState < this.gameData.questions.length) {          
 
                 FCCommunicationManager.getMedia(this.gameData.game_session_id,
                         FCCommunicationManager.MEDIA_PDB,
                         this.gameData.questions[this.loadingState].id,
                         this.createPDB.bind(this));
             } else {
-                /* 
-                    Cannot do a proper error here (easily).
-                    The Last-request was not set because the get request
-                    technically "succeeded" but pulled the school's wifi
-                    login instead. MoleculeGeometryBuilder will return an
-                    undefined when it crashes parsing. This will handle it
-                    "gracefully". The likelyhood of this error is incredibly
-                    low. The only causes are if the school wifi logs you out
-                    while the loading screen is up (< 10 seconds) or if there
-                    is a corrupted file.
-                */
-                alert('A fatal error has occurred. Please log-in to the wifi! Error 407.\n\n' +
-                      'Please contact ' + 'saschlac' + '@udel' + '.edu' + ' if this problem persists.');
-                this.loadingState--;
-                FCCommunicationManager.getMedia(this.gameData.game_session_id,
-                        FCCommunicationManager.MEDIA_PDB,
-                        this.gameData.questions[this.loadingState].id,
-                        this.createPDB.bind(this));
+                enableButtons(this);
+                /*
+                $('#loadingMessage')
+                        .text('Ready')
+                        .css({
+                    'padding-left': '0px',
+                    'text-align': 'center'
+                });
+    */
+                $('#loadingMessage').text('Ready');
+                $('#loadingMessage').addClass('readyText');
+                $('#beginButton').addClass('in');
             }
         } else {
-            enableButtons(this);
-            /*
-            $('#loadingMessage')
-                    .text('Ready')
-                    .css({
-                'padding-left': '0px',
-                'text-align': 'center'
-            });
-*/
-            $('#loadingMessage').text('Ready');
-            $('#loadingMessage').addClass('readyText');
-            $('#beginButton').addClass('in');
+            /* 
+                Cannot do a proper error here (easily).
+                The Last-request was not set because the get request
+                technically "succeeded" but pulled the school's wifi
+                login instead. MoleculeGeometryBuilder will return an
+                undefined when it crashes parsing. This will handle it
+                "gracefully". The likelyhood of this error is incredibly
+                low. The only causes are if the school wifi logs you out
+                while the loading screen is up (< 10 seconds) or if there
+                is a corrupted file.
+            */
+            alert('A fatal error has occurred. Please log-in to the wifi! Error 407.\n\n' +
+                  'Please contact ' + 'saschlac' + '@udel' + '.edu' + ' if this problem persists.');
+            this.loadingState--;
+            FCCommunicationManager.getMedia(this.gameData.game_session_id,
+                    FCCommunicationManager.MEDIA_PDB,
+                    this.gameData.questions[this.loadingState].id,
+                    this.createPDB.bind(this));
         }
     };
 
