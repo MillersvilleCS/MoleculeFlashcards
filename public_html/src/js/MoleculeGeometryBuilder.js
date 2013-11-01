@@ -191,9 +191,9 @@
             offset++;
             var from = parseInt(line.substr(0, 3));
             var to = parseInt(line.substr(3, 3));
-            var order = parseInt(line.substr(6, 3));
+            var count = parseInt(line.substr(6, 3));
 
-            bonds.push([from - 1, to - 1, 1]);
+            bonds.push([from - 1, to - 1, count]);
         }
 
         return {
@@ -298,6 +298,7 @@
         //return MoleculeGeometryBuilder.createModel (pdbJson);
 
         var pdbJson = parseSDF(data);
+        
         try {
             return createModel(pdbJson, atomScale, bondThickness, atomRenderType, bondRenderType);
         } catch ( err ) {
@@ -354,13 +355,14 @@
             }
         }
 
-        function createBondsAsLines(bonds, lineWidth, model) {
+        function createBondsAsLines(bonds, lineWidth, distanceApart, model) {
             var bondGeometry = new THREE.Geometry( );
             for(var i = 0; i < bonds.length; i++) {
                 var bond = bonds[ i ];
 
                 var start = bond[ 0 ];
                 var end = bond[ 1 ];
+                var num = bond[ 2 ];
 
 
                 var vertex1 = bondInfo.vertices[ start ];
@@ -369,11 +371,41 @@
                 var color1 = bondInfo.colors[ start ];
                 var color2 = bondInfo.colors[ end ];
 
-                bondGeometry.vertices.push(vertex1.clone());
-                bondGeometry.vertices.push(vertex2.clone());
-
-                bondGeometry.colors.push(color1.clone());
-                bondGeometry.colors.push(color2.clone());
+                var distVec = new THREE.Vector3(distanceApart,distanceApart,distanceApart);
+                switch(num) {
+                    case 3:
+                        bondGeometry.vertices.push(vertex1.clone().sub(distVec));
+                        bondGeometry.vertices.push(vertex2.clone().sub(distVec));//sub
+                        bondGeometry.vertices.push(vertex1.clone());
+                        bondGeometry.vertices.push(vertex2.clone());
+                        bondGeometry.vertices.push(vertex1.clone().add(distVec));//add
+                        bondGeometry.vertices.push(vertex2.clone().add(distVec));//add
+        
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                        break;
+                    case 2:
+                        bondGeometry.vertices.push(vertex1.clone().sub(distVec));
+                        bondGeometry.vertices.push(vertex2.clone().sub(distVec));//sub
+                        bondGeometry.vertices.push(vertex1.clone().add(distVec));//add
+                        bondGeometry.vertices.push(vertex2.clone().add(distVec));//add
+        
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                        break;
+                    default:
+                        bondGeometry.vertices.push(vertex1.clone());
+                        bondGeometry.vertices.push(vertex2.clone());
+        
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                    }
 
             }
 
@@ -404,10 +436,10 @@
 
         switch(bondRenderType) {
             case MoleculeGeometryBuilder.BONDS_LINES:
-                createBondsAsLines(bonds, bondThickness, model);
+                createBondsAsLines(bonds, bondThickness,.1, model);
                 break;
             default:
-                createBondsAsLines(bonds, bondThickness, model);
+                createBondsAsLines(bonds, bondThickness,.1, model);
         }
 
         return model;
