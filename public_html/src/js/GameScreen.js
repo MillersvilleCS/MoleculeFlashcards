@@ -94,6 +94,7 @@
         $('#loadingUI').addClass('in active');
         $('#rightPanel').addClass('in');
         $('#questionPanel').addClass('active');
+        this.gameLength = UserData.gameTimeLimit / 1000;
 
         FCCommunicationManager.errorCallback = this.onPause.bind(this);
         this.timer.reset();
@@ -112,7 +113,6 @@
         $('#beginButton').removeClass('in');
         $('#loadingUI').removeClass('in active');
 
-        this.gameLength = UserData.gameTimeLimit / 1000;
         this.questionIterator = new Iterator(this.questionList);
 
         this.timer.start();
