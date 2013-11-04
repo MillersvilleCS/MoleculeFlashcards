@@ -54,6 +54,28 @@
                     .mouseup( MouseManager.onMouseUp )
                     .mousemove( MouseManager.onMouseMove );
 
+                /* Temporary touch events for demo */
+                $('#container').on('touchstart',function(e){
+                    e.button = MouseManager.LEFT_STD_BUTTON;
+                    e.screenX = e.originalEvent.touches[0].screenX;
+                    e.screenY = e.originalEvent.touches[0].screenY;
+                    e.preventDefault();
+                    MouseManager.onMouseDown(e);
+                });
+                $('#container').on('touchmove',function(e){
+                    e.screenX = e.originalEvent.touches[0].screenX;
+                    e.screenY = e.originalEvent.touches[0].screenY;
+                    e.preventDefault();
+                    MouseManager.onMouseMove(e);
+                });
+                $('#container').on('touchend',function(e){
+                    e.button = MouseManager.LEFT_STD_BUTTON;
+                    e.screenX = 400;//garbage
+                    e.screenY = 400;//garbage
+                    e.preventDefault();
+                    MouseManager.onMouseUp(e);
+                });
+
                 /* Anti-Bot-Spam Measure */
                 $('#contact').text('saschlac' + '@udel' + '.edu');
                 /* Initialize */
