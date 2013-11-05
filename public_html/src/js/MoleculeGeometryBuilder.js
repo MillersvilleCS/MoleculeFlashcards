@@ -142,6 +142,8 @@
         'default': 1.5
     };
 
+    var nucleotides = ['  G', '  A', '  T', '  C', '  U', ' DG', ' DA', ' DT', ' DC', ' DU'];
+
     function trim(text) {
         return text.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
     }
@@ -155,6 +157,7 @@
         return 's' + Math.min(s, e) + 'e' + Math.max(s, e);
     }
 
+    //note proteins cannot be rendered with sdf files
     function parseSDF(str) {
 
         var atoms = [];
@@ -172,8 +175,10 @@
         if(lines.length < 4 + atomCount + bondCount)
             return;
 
+        //atoms start on line 4
         var offset = 4;
 
+        //parse atoms
         for(var i = 0; i < atomCount; i++) {
             var line = lines[offset];
             offset++;
@@ -186,6 +191,7 @@
                 atomRadii[e], capitalize(e)]);
         }
 
+        //parse bonds
         for(i = 0; i < bondCount; i++) {
             var line = lines[offset];
             offset++;
@@ -228,6 +234,8 @@
 
         var atoms = [];
         var bonds = [];
+        protein = {sheet: [], helix: [], biomtChains: '', biomtMatrices: [], symMat: [], pdbID: '', title: ''};
+        
         var histogram = {
         };
 
@@ -246,7 +254,7 @@
                 var z = parseFloat(lines[i].substr(46, 7));
 
                 //grab element type
-                e = trim(lines[i].substr(76, 2)).toLowerCase();
+                var e = trim(lines[i].substr(76, 2)).toLowerCase(); 
 
                 if(e === '')
                     e = trim(lines[i].substr(12, 2))
