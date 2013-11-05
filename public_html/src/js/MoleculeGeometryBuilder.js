@@ -356,6 +356,26 @@
         }
 
         function createBondsAsLines(bonds, lineWidth, distanceApart, model) {
+            
+            function createCylinder(point1, point2, color1, color2) {
+                var direction = new THREE.Vector3().subVectors(point2, point1);
+                var arrow = new THREE.ArrowHelper(direction.clone().normalize(), point1);
+                var rotation = new THREE.Vector3().setEulerFromQuaternion(arrow.quaternion);
+
+                var edgeGeometry = new THREE.CylinderGeometry( 0.07, 0.07, direction.length(), 10, 4 );
+                edgeGeometry.colors.push(color1);
+                edgeGeometry.colors.push(color2);
+
+                var material = new THREE.MeshLambertMaterial();
+                material.vertexColors = true;
+
+                var cylinder = new THREE.Mesh(edgeGeometry, material);
+                cylinder.rotation = rotation.clone();
+                cylinder.position = new THREE.Vector3().addVectors(point1, direction.multiplyScalar(0.5));
+
+                return cylinder;
+            }
+
             var bondGeometry = new THREE.Geometry( );
             for(var i = 0; i < bonds.length; i++) {
                 var bond = bonds[ i ];
@@ -371,54 +391,30 @@
                 var color1 = bondInfo.colors[ start ];
                 var color2 = bondInfo.colors[ end ];
 
-                var distVec = new THREE.Vector3(distanceApart,distanceApart,distanceApart);
+                var distVec = new THREE.Vector3(distanceApart, distanceApart, distanceApart);
                 switch(num) {
                     case 3:
-                        bondGeometry.vertices.push(vertex1.clone().sub(distVec));
-                        bondGeometry.vertices.push(vertex2.clone().sub(distVec));//sub
-                        bondGeometry.vertices.push(vertex1.clone());
-                        bondGeometry.vertices.push(vertex2.clone());
-                        bondGeometry.vertices.push(vertex1.clone().add(distVec));//add
-                        bondGeometry.vertices.push(vertex2.clone().add(distVec));//add
-        
-                        bondGeometry.colors.push(color1.clone());
-                        bondGeometry.colors.push(color2.clone());
-                        bondGeometry.colors.push(color1.clone());
-                        bondGeometry.colors.push(color2.clone());
-                        bondGeometry.colors.push(color1.clone());
-                        bondGeometry.colors.push(color2.clone());
+                        model.add(createCylinder(vertex1.clone().sub(distVec), vertex2.clone().sub(distVec), 
+                                                 color1.clone(), color2.clone())
+                                 );
+                        model.add(createCylinder(vertex1.clone(), vertex2.clone(), color1.clone(), color2.clone()));
+                        model.add(createCylinder(vertex1.clone().add(distVec), vertex2.clone().add(distVec), 
+                                                 color1.clone(), color2.clone())
+                                 );
                         break;
                     case 2:
-                        bondGeometry.vertices.push(vertex1.clone().sub(distVec));
-                        bondGeometry.vertices.push(vertex2.clone().sub(distVec));//sub
-                        bondGeometry.vertices.push(vertex1.clone().add(distVec));//add
-                        bondGeometry.vertices.push(vertex2.clone().add(distVec));//add
-        
-                        bondGeometry.colors.push(color1.clone());
-                        bondGeometry.colors.push(color2.clone());
-                        bondGeometry.colors.push(color1.clone());
-                        bondGeometry.colors.push(color2.clone());
+                        model.add(createCylinder(vertex1.clone().sub(distVec), vertex2.clone().sub(distVec), 
+                                                 color1.clone(), color2.clone())
+                                 );
+                        model.add(createCylinder(vertex1.clone().add(distVec), vertex2.clone().add(distVec), 
+                                                 color1.clone(), color2.clone())
+                                 );
                         break;
                     default:
-                        bondGeometry.vertices.push(vertex1.clone());
-                        bondGeometry.vertices.push(vertex2.clone());
-        
-                        bondGeometry.colors.push(color1.clone());
-                        bondGeometry.colors.push(color2.clone());
+                        model.add(createCylinder(vertex1.clone(), vertex2.clone(), color1.clone(), color2.clone()));
                     }
 
             }
-
-            //create the lines and add them to the model
-            var lineMaterial = new THREE.LineBasicMaterial({
-                linewidth: lineWidth
-            });
-            lineMaterial.vertexColors = true;
-
-            var lineMesh = new THREE.Line(bondGeometry, lineMaterial);
-            lineMesh.type = THREE.LinePieces;
-
-            model.add(lineMesh);
         }
 
         var model = new THREE.Object3D( );
@@ -436,10 +432,10 @@
 
         switch(bondRenderType) {
             case MoleculeGeometryBuilder.BONDS_LINES:
-                createBondsAsLines(bonds, bondThickness,.1, model);
+                createBondsAsLines(bonds, bondThickness,.15, model);
                 break;
             default:
-                createBondsAsLines(bonds, bondThickness,.1, model);
+                createBondsAsLines(bonds, bondThickness,.15, model);
         }
 
         return model;
